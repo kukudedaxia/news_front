@@ -1,0 +1,185 @@
+html[lang='ar'] .text-right {
+    text-align: right;
+}
+html[lang='ar'] .text-left {
+    text-align: left;
+}
+
+html[data-theme='dark'] .swiper-pagination-bullet {
+    background: #fff;
+}
+
+@font-face {
+    font-family: 'SF-UI-Text-Regular';
+    src: url('../assets/fonts/SF-UI-Text-Regular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'SF-UI-Text-Heavy';
+    src: url('../assets/fonts/SF-UI-Text-Heavy.otf') format('opentype');
+}
+@font-face {
+    font-family: 'SF-UI-Text-Bold';
+    src: url('../assets/fonts/SF-UI-Text-Bold.otf') format('opentype');
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #F9F9FB;;
+  height: 100%;
+  overflow: auto;
+  min-width: 1068px;
+}
+* {
+  box-sizing: border-box;
+}
+ol,
+ul {
+  list-style: none;
+}
+a,
+abbr,
+address,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+u,
+ul,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+// 适配
+// @media screen and (min-width: 1900px) and (max-width: 1920px){
+//     .slide {
+//         height: 900px;
+//     }
+// }
+// @media screen and (min-height: 1900px) and (max-width: 1920px){
+//     .slide {
+//         height: 900px;
+//     }
+// }
+
+
+// 针对文档
+.docs {
+    width: 900px;
+    text-align: left;
+    margin: 41px auto 0;
+    font-size: 18px;
+    color: #666666;
+    letter-spacing: -0.38px;
+    h1 {
+      font-family: SF-UI-Text-Bold;
+      font-size: 30px;
+      color: #333333;
+      margin: 20px 0;
+    }
+    > p {
+      line-height: 30px;
+    }
+    li {
+      margin-bottom: 10px;
+      span {
+        margin-right: 10px;
+      }
+    }
+    .normal li::before {
+      content: '\2022';
+      box-sizing: border-box;
+      display: inline-block;
+      width: 0;
+      font-size: 18px;
+      -webkit-transform: scale(1.25);
+      -ms-transform: scale(1.25);
+      transform: scale(1.25);
+      text-align: right;
+      color: #3370ff;
+      margin-right: 20px;
+    }
+  }
+  html[lang='ar'] h1 {
+    text-align: right;
+  }
+  html[lang='ar'] p {
+    text-align: right;
+  }
+  html[lang='ar'] li {
+    text-align: right;
+  }
+  html[lang='ar'] .wrap li span {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+  html[lang='ar'] .normal li::before {
+    margin-left: 20px;
+    margin-right: 0;
+  }

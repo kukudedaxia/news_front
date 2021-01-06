@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="top">
+      <swiper-box v-if="lang == 'en'" />
+      <ar-swiper-box v-if="lang == 'ar'" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import swiperBox from '@/components/swiperBox';
+import arSwiperBox from '@/components/arSwiperBox';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld
-  }
+    'swiper-box': swiperBox,
+    'ar-swiper-box': arSwiperBox,
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
+    },
+  },
 };
 </script>
+<style lang="less" scoped>
+.home {
+  margin-top: -56px;
+}
+</style>
