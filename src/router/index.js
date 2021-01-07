@@ -20,6 +20,21 @@ const routes = [
     name: 'Concat',
     component: () => import('../views/Concat.vue'),
   },
+  {
+    path: '/community',
+    name: 'Community',
+    component: () => import('../views/Community.vue'),
+  },
+  {
+    path: '/terms',
+    name: 'Term',
+    component: () => import('../views/Term.vue'),
+  },
+  {
+    path: '/policy',
+    name: 'Policy',
+    component: () => import('../views/Policy.vue'),
+  },
 ];
 
 const router = new VueRouter({

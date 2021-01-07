@@ -26,5 +26,6 @@ export default {
 <style lang="less" scoped>
 .home {
   margin-top: -56px;
+  min-width: 1068px;
 }
 </style>

@@ -13,7 +13,7 @@
 }
 </i18n>
 <template>
-  <div class="wrap docs" id="docs">
+  <div class="wrap docs ardocs" id="docs">
     <h1>{{ $t('title') }}</h1>
     <p>{{ $t('p1') }}</p>
     <div class="text-right">
@@ -38,6 +38,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .wrap {
-//   min-height: 770px;
+  //   min-height: 770px;
 }
 </style>

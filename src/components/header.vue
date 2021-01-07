@@ -43,7 +43,7 @@ export default {
 <style lang="less">
 .header {
   display: flex;
-  width: 900px;
+  max-width: 900px;
   justify-content: space-between;
   position: relative;
   padding-top: 23px;

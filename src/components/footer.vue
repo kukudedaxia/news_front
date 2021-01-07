@@ -2,11 +2,21 @@
   <div class="bottom">
     <div class="bottom-info">
       <span class="power">Powered by Weibo</span>
-      <router-link to="/about">{{ $t('desc.about') }}</router-link>
-      <router-link to="/concat">{{ $t('desc.concat') }}</router-link>
-      <a>{{ $t('desc.community') }}</a>
-      <a>{{ $t('desc.terms') }}</a>
-      <a>{{ $t('desc.policy') }}</a>
+      <router-link to="/about"
+        ><span>{{ $t('desc.about') }}</span></router-link
+      >
+      <router-link to="/concat"
+        ><span>{{ $t('desc.concat') }}</span></router-link
+      >
+      <router-link to="/community"
+        ><span>{{ $t('desc.community') }}</span></router-link
+      >
+      <router-link to="/terms"
+        ><span>{{ $t('desc.terms') }}</span></router-link
+      >
+      <router-link to="/policy"
+        ><span>{{ $t('desc.policy') }}</span></router-link
+      >
     </div>
   </div>
 </template>
@@ -27,6 +37,9 @@
     color: #333333;
     cursor: pointer;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    line-height: 12px;
   }
   a:hover {
     color: #00a1d6;
@@ -36,6 +49,9 @@
     font-size: 12px;
     color: #999;
     cursor: default;
+    display: flex;
+    align-items: center;
+    line-height: 12px;
   }
 }
 

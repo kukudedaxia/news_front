@@ -29,13 +29,15 @@ body {
   background: #F9F9FB;;
   height: 100%;
   overflow: auto;
-  min-width: 1068px;
+//   min-width: 1068px;
+    height: 100%;
+    width: 100%;
 }
 * {
   box-sizing: border-box;
 }
 ol,
-ul {
+ul ,li{
   list-style: none;
 }
 a,
@@ -122,9 +124,29 @@ video {
 //         height: 900px;
 //     }
 // }
-// @media screen and (min-height: 1900px) and (max-width: 1920px){
-//     .slide {
-//         height: 900px;
+@media screen and (max-width: 1440px) {
+    html {
+        zoom: 1;
+      }
+    //   .slide {
+    //       height: calc(100vh - 100px) !important;
+    //   }
+}
+@media screen and(min-width: 1441px) {
+    html {
+        zoom: 1;
+    }
+}
+
+
+// @media (max-width: 1023px){
+// .page {
+//     width: 802px;
+// }
+// }
+// @media (max-width: 1119px) {
+//     .page {
+//         width: 842px;
 //     }
 // }
 
@@ -163,23 +185,39 @@ video {
       transform: scale(1.25);
       text-align: right;
       color: #3370ff;
-      margin-right: 20px;
+      margin-right: 18px;
     }
-  }
-  html[lang='ar'] h1 {
+    .indent-li {
+        margin-left: 2em;
+    }
+    .normal .indent-li::before {
+        content: '\25E6';
+        box-sizing: border-box;
+        display: inline-block;
+        width: 0;
+        font-size: 20px;
+        transform: scale(1.25);
+        font-weight: 700;
+        text-align: right;
+        color: #3370ff;
+        margin-right: 18px;
+    }
+}
+// 部分文档支持阿语
+html[lang='ar'] .ardocs  h1 {
     text-align: right;
-  }
-  html[lang='ar'] p {
+}
+html[lang='ar'] .ardocs p {
     text-align: right;
-  }
-  html[lang='ar'] li {
+}
+html[lang='ar'] .ardocs li {
     text-align: right;
-  }
-  html[lang='ar'] .wrap li span {
+}
+html[lang='ar'] .ardocs li span {
     margin-left: 10px;
     margin-right: 0;
-  }
-  html[lang='ar'] .normal li::before {
+}
+html[lang='ar'] .ardocs li::before {
     margin-left: 20px;
     margin-right: 0;
-  }
+}

@@ -51,7 +51,7 @@
 }
 </i18n>
 <template>
-  <div class="wrap docs">
+  <div class="wrap docs ardocs">
     <h1>{{ $t('title') }}</h1>
     <h1>{{ $t('title-1') }}</h1>
     <p>

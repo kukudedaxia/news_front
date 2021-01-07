@@ -1,0 +1,560 @@
+<template>
+  <div class="wrap docs" id="docs">
+    <h1>Terms of Use</h1>
+    <h2>Beeto</h2>
+    <div>
+      <div>Welcome to Beeto!</div>
+      <p>
+        These terms of use (the “
+        <span class="bold">Terms of Use</span>
+        ”) govern your use of Beeto and provide information about the Beeto service (the “
+        <span class="bold">Service</span>”), outlined below. When you use Beeto, including creating
+        a Beeto account or using the Service, which includes any of its products, features, apps,
+        websites, services, technologies, and software, you agree to these Terms of Use unless we
+        expressly state that different or additional terms apply.
+      </p>
+      <p class="letter">
+        PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
+        DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS OF USE,
+        OR THE PRIVACY POLICY, PLEASE DO NOT USE THE SERVICE . YOUR COMMENCEMENT OF, OR CONTINUED
+        USE OF THE SERVICE, OR REGISTRATION OF YOUR OWN ACCOUNT ON BETOO MEANS THAT YOU, RECEIPT AND
+        SUFFICIENCY OF THE FOLLOWING TERMS AND CONDITIONS IS WELL ACKNOWLEDGED, AGREE TO BECOME A
+        PARTY TO AND TO BE BOUND BY THIS TERMS OF USE.
+      </p>
+      <p class="letter">
+        PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
+        DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS AND
+        CONDITIONS, BY SELECTING NOT CLICKING THE “AGREE” BUTTON, THEN YOU MAY NOT BE ABLE TO
+        REGISTER OR LOG IN YOUR ACCOUNT ON BETOO OR ACCESS THE SERVICE IN FURTHERANCE IN ANY WAY. BY
+        CLICKING “AGREE” BUTTON AND LOGING IN, YOU CONSENT TO BE BOUND BY THE HEREUNDER TERMS AND
+        CONDITIONS. THIS ACTION CREATES AN ACKNOWLEDGE AND CONSENT THAT YOU BECOME A PARTY TO THIS
+        TERMS OF USE AND AGREE TO BE BOUND BY THE FOLLOWING TERMS AND CONDITIONS. YOUR CONTINUED USE
+        OF THE SERVICE MEANS THAT YOU ARE OF FULL AWARENESS, SUFFICIENT KNOWLEDGE AND ACCEPTED AND
+        AGREED TO ALL OF THE FOLLOWING TERMS AND CONDITIONS.
+      </p>
+      <h2>The Beeto Service</h2>
+      <p>
+        We agree to provide you with the Beeto Service. The Service includes all of the Beeto
+        products, features, applications, services, technologies, and software that we provide to
+        advance Beeto's mission: To bring you closer to the people and things you love. The Service
+        is made up of the following aspects (the Service):
+      </p>
+      <div class="oil">
+        Offering personalized opportunities to create, connect, communicate, discover, and share
+      </div>
+      <p>
+        People are different. We want to strengthen your relationships through shared experiences
+        you actually care about. So we build systems that try to understand who and what you and
+        others care about, and use that information to help you create, find, join, and share in
+        experiences that matter to you. Part of that is highlighting content, features, offers, and
+        accounts you might be interested in, and offering ways for you to experience Beeto, based on
+        things you and others do on and off Beeto.
+      </p>
+      <div class="oil">Fostering a positive, inclusive, and safe environment</div>
+      <p>
+        We develop and use tools and offer resources to our community members that help to make
+        their experiences positive and inclusive, including when we think they might need help. We
+        also have teams and systems that work to combat abuse and violations of our Terms of Use and
+        policies, as well as harmful and deceptive behavior. We use all the information we have -
+        including your information - to try to keep our platform secure. We also may share
+        information about misuse or harmful content with other WEO Technology Limited Companies or
+        law enforcement. Also, we may take additional or alternative appropriate actions, which may
+        include removal of content, disabling of accounts, offering assistance if needed, or
+        restricting access to certain features of the Beeto Service. Learn more in the Data Policy.
+      </p>
+      <div class="oil">
+        Developing and using technologies that help us consistently serve our growing community
+      </div>
+      <p>
+        Providing consistent and seamless experiences across other WEO Technology Limited Company
+        Products
+      </p>
+      <div class="oil">
+        Providing consistent and seamless experiences across other WEO Technology Limited Company
+        Products
+      </div>
+      <p>
+        Beeto is part of the WEO Technology Limited Companies, which share technology, systems,
+        insights, and information-including the information we have about you (learn more in the
+        Data Policy) in order to provide services that are better, safer, and more secure. We also
+        provide ways to interact across the WEO Technology Limited Company Products that you use,
+        and designed systems to achieve a seamless and consistent experience across the WEO
+        Technology Limited Company Products.
+      </p>
+      <div class="oil">Ensuring a stable global infrastructure for our Service</div>
+      <p>
+        To provide our global Service, we must store and transfer data across our systems around the
+        world, including outside of your country of residence. This infrastructure may be owned or
+        operated by WEO Technology Limited, or their affiliates. (Learn more in the Data Policy)
+      </p>
+
+      <div class="oil">
+        Connecting you with brands, products, and services in ways you care about
+      </div>
+      <p>
+        To provide our global Service, we must store and transfer data across our systems around the
+        world, including outside of your country of residence. This infrastructure may be owned or
+        operated by WEO Technology Limited, or their affiliates. (Learn more in the Data Policy)
+      </p>
+      <div class="oil">Research and innovation</div>
+      <p>
+        We use the information we have obtained to study our Service and collaborate with others on
+        research to make our Service better and contribute to the well-being of our community.
+      </p>
+      <div class="bold">The Data Policy</div>
+      <p>
+        Providing our Service requires collecting and using your information. The Data Policy
+        explains how we collect, use, and share information across the WEO Technology Limited
+        Company Products. It also explains the many ways you can control your information, including
+        in the Beeto Privacy and Security Settings. You must agree to the Data Policy to use Beeto
+        including creating a Beeto account or using the Beeto Service.
+      </p>
+
+      <div class="bold">Your Commitments</div>
+      <p>
+        In return for our commitment to provide the Service, we require you to make the below
+        commitments to us.
+      </p>
+      <div class="oil">Who Can Use Beeto</div>
+      <p>
+        We want our Service to be as open and inclusive as possible, but we also want it to be safe,
+        secure, and in accordance with the law. So, we need you to commit to the below few
+        restrictions in order to be part of the Beeto community:
+      </p>
+      <ul class="normal">
+        <li>
+          You must be at least 13 years old or the minimum legal age in your country to use Beeto.
+          However, if you are under 18 years of age, you are to obtain the prior consent of your
+          guardian prior to using Beeto and its Services;
+        </li>
+        <li>
+          You must not be prohibited from receiving any aspect of our Service under applicable laws
+          or engaging in payments related to the Services if you are on an applicable denied party
+          listing;
+        </li>
+        <li>
+          We must not have previously disabled your account for violation of law or any of our
+          policies;
+        </li>
+        <li>
+          You must be an eligible person. For the purposes of these Terms of Use, an eligible person
+          shall mean a person that
+        </li>
+        <li class="indent-li">
+          has not been convicted, indicted or subjected to any similar criminal sanction, by any
+          court or governmental body of competentjurisdiction, for engaging in money laundering or
+          financing of terrorism or any Objectionable Practice;
+        </li>
+        <li class="indent-li">
+          is not included in any list (as updated from time to time) of sanctioned Persons
+          promulgated by, among others
+        </li>
+        <li>
+          The United Nations Security Council or its committees pursuant to Security Council
+          Resolutions 1267 (1999), 1373 (2001) or related or successor resolutions in connection
+          with money laundering or financing of terrorism matters (reference being made to
+          <span style="text-decoration: underline;margin-right:0">www.un.org/terrorism</span>);
+        </li>
+        <li>
+          The World Bank (including the World Bank Listing of Ineligible Firms & Individuals from
+          time to time);
+        </li>
+        <li>
+          Persons, groups and entities to which the Council of the European Union Common Position
+          2001/931/CFSP on the application of specific measures to combat terrorism applies;
+        </li>
+        <li>
+          The European Union consolidated list of persons, groups and entities subject to financial
+          sanctions issued pursuant to the Common Foreign and Security Policy of the European Union;
+          or SDN lists of the Office of Foreign Assets Control (OFAC).
+        </li>
+        <li>You must not be a convicted sex offender.</li>
+      </ul>
+      <div class="bold">How You May Not Use Beeto</div>
+      <p>
+        Providing a safe and open Service for a broad community requires that we all do our part. As
+        such, you must take into consideration the following:
+      </p>
+      <ul class="normal">
+        <li>
+          While you do not have to disclose your identity on Beeto, you must provide us with
+          accurate and up to date information (including registration information). Additionally,
+          you may not create an account for someone else unless you have their express permission;
+        </li>
+        <li>
+          You agree that the sole purpose of registering on or using Service is to be a user to
+          enjoy the Service provided by Beeto or any of our products, and you shall not use Service
+          in any manner for any illegal purpose under the applicable law;
+        </li>
+        <li>You shall not engage in any of the following activities:</li>
+        <li class="indent-li">Impersonate others or provide inaccurate information;</li>
+        <li class="indent-li">
+          Do anything unlawful, misleading, or fraudulent or for an illegal or unauthorized purpose
+          or assist anyone else to do any of the foregoing;
+        </li>
+        <li class="indent-li">
+          Violate (or help or encourage others to violate) these Terms of Use or any of our
+          policies, including, but limited to, the Beeto Community Guidelines, Beeto Platform
+          Policy, and Music Guidelines;
+        </li>
+        <li class="indent-li">
+          Do anything to interfere with or impair the intended operation of the Service;
+        </li>
+        <li class="indent-li">
+          Attempt to create accounts or access or collect information in unauthorized ways. This
+          includes creating accounts or collecting information in an automated way without our
+          express permission;
+        </li>
+        <li class="indent-li">
+          Attempt to buy, sell, or transfer any aspect of your account (including your username) or
+          solicit, collect, or use login credentials or badges of other users;
+        </li>
+        <li class="indent-li">
+          Post private or confidential information of others or do anything that violates someone
+          else’s rights, including any intellectual property rights. Learn more, including how to
+          report content that you think infringes on your intellectual property rights, here;
+        </li>
+        <li class="indent-li">
+          Violate the generally acceptable moral and religious conduct of any jurisdiction;
+        </li>
+        <li class="indent-li">
+          Engage in Objectionable Practice. For the purposes of these Terms of Use, the following
+          definitions shall apply:
+        </li>
+      </ul>
+      <div>
+        <p class="no-indent">
+          <span class="bold">Corrupt Practice</span> means (a) the promising, offering, giving,
+          making, authorizing, insisting on, receiving, accepting or soliciting, directly or
+          indirectly, of any illegal or undue payment or advantage of any nature, to or by any
+          person, with the intention to, or the knowledge that such payment or advantage may,
+          directly or indirectly influence, whether as inducement or reward, the actions or
+          decisions of any person, including causing any person to refrain from any action or
+          decision; or (b) any action or omission which is prohibited in any applicable jurisdiction
+          by law or regulation relating to bribery or corruption;
+        </p>
+        <p class="no-indent">
+          <span class="bold">Illicit Origin</span> means any origin which is illicit, criminal or
+          fraudulent, including without limitation, corruption, Terrorist Financing, and tax
+          evasion;
+        </p>
+        <p class="no-indent">
+          <span class="bold">Money Laundering Activities</span> means process of moving funds of
+          Illicit Origin through a cycle of transformation in order to create the end appearance of
+          legitimately earned funds. The process of moving funds consists of providing, receiving or
+          assisting in transfer of funds;
+        </p>
+        <p class="no-indent">
+          <span class="bold">Objectionable Practice</span> means any Corrupt Practice, Fraudulent
+          Practice, Money Laundering Activities, Terrorist Financing, Sanctionable Practice or
+          Obstructive Practice;
+        </p>
+        <p class="no-indent">
+          <span class="bold">Obstructive Practice</span> means (i) deliberately destroying,
+          falsifying, altering or concealing evidence material to the assessment or the making of
+          false statements to those performing the assessment, in order to materially impede an
+          assessment of allegations of a Corrupt Practice, Fraudulent Practice, Money Laundering
+          Activities, or Terrorist Financing and/or threatening, harassing or intimidating any party
+          to prevent it from disclosing its knowledge of matters relevant to the assessment or from
+          pursuing the assessment, or (ii) acts intended to materially impede the exercise of
+          Beeto’s access to contractually required information in connection with an assessment of
+          allegations of a Corrupt Practice, Fraudulent Practice, Money Laundering Activities, or
+          Terrorist Financing;
+        </p>
+        <p class="no-indent">
+          <span class="bold">Sanctionable Practice</span> means any business activity or transaction
+          with any entity, individual or country which at or during the time of such business
+          activity or transaction is included on the lists of sanctioned entities, individuals or
+          countries published and updated from time to time by the Office of Foreign Assets Control
+          of the US Department of Treasury (OFAC), the European Union or the United Nations; and
+        </p>
+        <p class="no-indent">
+          <span class="bold">Terrorist Financing</span> means financing terrorists, terrorist acts
+          and terrorist organizations.
+        </p>
+      </div>
+      <ul class="normal">
+        <li>Promote indecency, pornography, terrorism, and any form of radicalization;</li>
+        <li>Use a domain name or URL in your username without our prior written consent</li>
+      </ul>
+
+      <div class="bold">Permissions You Give to Us</div>
+      <p>
+        As part of our agreement, you also give us the permissions that we need to provide our
+        Service. As such, By using our service and agreeing to the Terms of Service, you agree and
+        accept the following:
+      </p>
+      <ul class="normal">
+        <li>
+          We do not claim ownership of your content, but you grant us a license to use such content
+        </li>
+        <li>
+          Nothing is changing about your rights in your content. We do not claim ownership of your
+          content that you post on or through the Service. However, when you share, post, or upload
+          content that is covered by intellectual property rights (like photos or videos) on or in
+          connection with our Service, you hereby grant to us a non-exclusive, royalty-free,
+          transferable, sub-licensable, worldwide license to host, use, distribute, modify, run,
+          copy, publicly perform or display, translate, and create derivative works of your content
+          (consistent with your privacy and application settings). You can end this license anytime
+          by deleting your content or account. However, content will continue to appear if you
+          shared it with others and they have not deleted it. For purposes of clarity, the license
+          that you have granted us above shall continue in force for a certain content until such
+          content has been completely deleted by all users that have previously had permission to
+          use it by you or in accordance with the Data Policy. To learn more about how we use
+          information, and how to control or delete your content, review the Data Policy;
+        </li>
+        <li>
+          You give us permission to use your username, profile picture, and information about your
+          relationships and actions with accounts, ads, and sponsored content;
+        </li>
+        <li>
+          You give us permission to grant access to any person who has obtained your username, phone
+          number, and password in the same manner as it would have granted access to you; and you
+          shall be responsible for all activities conducted through your account in the name of you.
+          You are solely responsible for maintaining secrecy and confidentiality of your account
+          details including your username, mobile phone number, password and other information, if
+          any; and, you are full aware that you are also sole responsible for the consequences of
+          granting use by a third-party of your account, directly or indirectly;
+        </li>
+        <li>
+          You give us permission to show your username, profile picture, and information about your
+          actions (such as likes) or relationships (such as the following) next to or in connection
+          with accounts, ads, offers, and other sponsored content that you follow or engage with
+          that are displayed on WEO Technology Limited Company Products, without any compensation to
+          you. For example, we may show that you liked a sponsored post created by a brand that has
+          paid us to display its ads on Beeto. As with actions on other content and follows of other
+          accounts, actions on sponsored content and follows of sponsored accounts can be seen only
+          by people who have permission to see that content or follow. We will also respect your ad
+          settings.
+        </li>
+        <li>You agree that we can download and install updates to the Service on your device.</li>
+      </ul>
+      <div class="bold">Additional Rights We Retain</div>
+      <p>
+        By using our service and agreeing to the Terms of Service, you agree and accept the
+        following: <br />
+        if you select a username or similar identifier for your account, we may change it if we
+        believe it is appropriate or necessary (for example, if it infringes someone's intellectual
+        property or impersonates another user);
+      </p>
+      <ul class="normal">
+        <li>
+          If you use content covered by intellectual property rights that we have and make available
+          in our Service (for example, images, designs, videos, or sounds we provide that you add to
+          content you create or share), we retain all rights to our content but not your content;
+        </li>
+        <li>
+          You can only use our intellectual property and trademarks or similar marks as expressly
+          permitted by our Brand Guidelines or with our prior written permission;
+        </li>
+        <li>
+          You must obtain written permission from us or under an open source license to modify,
+          create derivative works of, decompile, or otherwise attempt to extract source code from
+          us.
+        </li>
+      </ul>
+      <div class="bold">Content Removal and Disabling or Terminating Your Account</div>
+      <p>
+        By using our service and agreeing to the Terms of Service, you agree and accept the
+        following: we can remove any content or information you share on the Service if we believe
+        that it violates these Terms of Use, our policies (including our Beeto Community
+        Guidelines), or if we are permitted or required to do so by law;
+      </p>
+      <ul class="normal">
+        <li>
+          We can refuse to provide or stop providing all or part of the Service to you (including
+          terminating or disabling your account) immediately to protect our community or services,
+          or if you create risk or legal exposure for us, violate these Terms of Use or our policies
+          (including our Beeto Community Guidelines), if you repeatedly infringe other people’s
+          intellectual property rights, or where we are permitted or required to do so by law. If we
+          take actions to disable or terminate your account, we will notify you where appropriate.
+          If you believe your account has been terminated in error, or you want to disable or
+          permanently delete your account, you may inquire us using our Contact Us feedback channel;
+        </li>
+        <li>
+          Content you delete may persist for a limited period of time in backup copies and will
+          still be visible where others have shared it. This paragraph, and the section below called
+          “Our Agreement and What Happens if We Disagree,” will still apply even after your account
+          is terminated or deleted.
+        </li>
+      </ul>
+      <div class="bold">Our Agreement and What Happens if We Disagree Our Agreement</div>
+      <p>
+        By using our service and agreeing to the Terms of Service, you agree and accept the
+        following: your use of music on the Service is also subject to our Music Guidelines, and
+        your use of our API is subject to our Platform Policy. If you use certain other features or
+        related services, additional terms will be made available and will also become a part of our
+        agreement. For example, if you use payment features, you will be asked to agree to the
+        Community Payment Terms. If any of those terms conflict with this agreement, those other
+        terms will govern;
+      </p>
+      <ul class="normal">
+        <li>If any aspect of this agreement is unenforceable, the rest will remain in effect;</li>
+        <li>
+          Any amendment or waiver to our agreement must be in writing and signed by us. If we fail
+          to enforce any aspect of this agreement, it will not be a waive;
+        </li>
+        <li>We reserve all rights not expressly granted to you.</li>
+      </ul>
+      <div class="oil">Who Has Rights Under this Agreement</div>
+      <p>
+        By using our service and agreeing to the Terms of Service, you agree and accept the
+        following:
+      </p>
+      <ul class="normal">
+        <li>The Terms of Use does not give rights to any third parties;</li>
+        <li>
+          You cannot transfer your rights or obligations under this agreement without our consent;
+        </li>
+        <li>
+          Our rights and obligations can be assigned to others. For example, this could occur if our
+          ownership changes (as in a merger, acquisition, or sale of assets) or by law.
+        </li>
+      </ul>
+      <div class="oil">Who Is Responsible if Something Happens</div>
+      <p>
+        By using our service and agreeing to the Terms of Service, you agree and accept the
+        following:
+      </p>
+      <ul class="normal">
+        <li>
+          Our Service is provided “as is,” and we can’t guarantee it will be safe and secure or will
+          work perfectly all the time. TO THE EXTENT PERMITTED BY LAW, WE ALSO DISCLAIM ALL
+          WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING THE IMPLIED WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT;
+        </li>
+        <li>
+          We do not control what people and others do or say, and we are not responsible for their
+          (or your) actions or conduct (whether online or offline) or content (including unlawful or
+          objectionable content);
+        </li>
+        <li>
+          We are not responsible for services and features offered by other people or companies,
+          even if you access them through our Service;
+        </li>
+        <li>
+          Our responsibility for anything that happens on the Service (also called “liability”) is
+          limited as much as the law will allow. If there is an issue with our Service, we may not
+          know what all the possible impacts might be. You agree that we shall not be responsible or
+          liable for any lost profits, revenues, information, or data, or consequential, special,
+          indirect, exemplary, punitive, or incidental damages arising out of or related to these
+          Terms, even if we know they are possible. This includes when we delete your content,
+          information, or account;
+        </li>
+        <li>
+          In no event shall Beeto, its officers, directors, employees, or agencies, affiliates,
+          service providers and internal service providers be liable for any direct, indirect,
+          incidental, punitive, special, consequential or exemplary damages, including but not
+          limited to, damages for loss of profits, goodwill, use, data or other intangible losses
+          arising (in any manner whatsoever) out of or in connection with (i) errors, mistakes,
+          omissions, or inaccuracies in the Service; (ii) personal injury or property damage, of any
+          nature whatsoever, resulting from your access to and use of the Service; (iii) any
+          unauthorized access to your secure servers and/or all personal information therein; (iv)
+          any interruption or cessation of use or Service; (v) any bugs, virus, trojan horses, or
+          the like, which may transmitted to or through our servers by any third party; (vi) any
+          loss or damage incurred as a result of your use of the Services; or (vii) any delay,
+          failure, interruption or errors in connection with the Service, whether based on
+          warranties, contracts, torts, or any other legal theory, and whether or not we are advised
+          of the possibility of such damages. The limitation of liability under this provision shall
+          apply to the full extent permitted by the applicable laws in any jurisdiction.
+        </li>
+      </ul>
+      <!--  -->
+      <div class="bold">How We Will Handle Disputes</div>
+      <p>This Terms of Use is governed by English law.</p>
+      <ul class="normal">
+        <li>
+          Any dispute arising out of or in connection with this Terms of Use including a dispute
+          regarding the existence, validity or termination or relating to any non-contractual or
+          other obligation or matter arising out of or in connection with this Terms of Use or the
+          consequences of its nullity (a “Dispute”) shall be referred to arbitration in accordance
+          with the arbitration rules of the London Court of International Arbitration (“LCIA”). The
+          seat and venue of the arbitration shall be London.
+        </li>
+        <li>
+          The arbitration shall be conducted by one arbitrator to be appointed by agreement between
+          the parties or, if no agreement is reached within 10 Business Days of a party proposing an
+          arbitrator to the other party in writing, such arbitrator as shall be determined by the
+          LCIA on written request by either party.
+        </li>
+      </ul>
+      <div class="bold">Unsolicited Material</div>
+      <p>
+        We always appreciate feedback or other suggestions. However, we may use them without any
+        restrictions or obligation to compensate you for them and are under no obligation to keep
+        them confidential.
+      </p>
+      <div class="bold">User Indemnity</div>
+      <p>
+        You agree to defend, indemnify, and hold harmless, Beeto, its parents, subsidiaries, and
+        affiliates, and each of their respective officers, directors, attorneys and employees from
+        any and all claims, liabilities, costs, and expenses, including, but not limited to,
+        attorneys’ fees and expenses, arising out or relating to:
+      </p>
+      <ul class="normal">
+        <li>
+          Failure to comply or breach by you or any user of your account of these Terms of Use, the
+          Privacy Policy, or any other policies or guidelines related to the Services or arising out
+          of a breach of your obligations, representation and warranties under these Terms of Use;
+        </li>
+        <li>
+          The determination by in any jurisdiction that you have improperly utilized the Services to
+          violate the laws and regulations of such jurisdiction;
+        </li>
+        <li>
+          Your supplying inaccurate, out of date, errors or omissions, or otherwise incorrect
+          information in relation to your use of the Service;
+        </li>
+        <li>
+          Claims made by any third party due to or arising out of the user’s acts or omissions,
+          including claims arising out of that user’s use of the Services or the user’s submission,
+          posting or transmission of content or his or her violation of the Terms of Use;
+        </li>
+        <li>
+          The violation of any rights of any third party, including intellectual property, privacy,
+          publicity, or other proprietary rights by you or anyone using your account. Beeto reserves
+          the right, at its own expense, to assume the exclusive defense and control of any matter
+          otherwise subject to indemnification by the user. If we do assume the defense of such a
+          matter, you will reasonably cooperate with Beeto in such defense.
+        </li>
+      </ul>
+      <div class="bold">Updating These Terms</div>
+      <p>
+        We may change our Service and policies, and we may need to make changes to these Terms of
+        Use so that they accurately reflect our Service and policies. Unless otherwise required by
+        law, we will notify you (for example, through our Service) before we make changes to these
+        Terms of Use and give you an opportunity to review them before they go into effect. Then, if
+        you continue to use the Service, you will be bound by the updated Terms of Use. If you do
+        not want to agree to these or any updated Terms of Use, you can delete your account, here.
+      </p>
+    </div>
+  </div>
+</template>
+<style lang="less" scoped>
+.docs {
+  direction: ltr;
+}
+h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  font-family: SF-UI-Text-Bold;
+  color: #333333;
+}
+.bold {
+  font-weight: bold;
+  color: #333333;
+}
+p {
+  line-height: 1.68;
+  margin: 8px 0;
+  text-indent: 2em;
+}
+.oil {
+  font-style: italic;
+  font-weight: bold;
+  color: #333333;
+}
+.no-indent {
+  text-indent: 0;
+}
+</style>

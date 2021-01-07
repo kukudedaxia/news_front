@@ -27,7 +27,7 @@
         </p>
       </template>
       <div class="page-btngroup">
-        <el-popover width="114" trigger="hover" :close-delay="100">
+        <el-popover width="114" trigger="hover"  placement="bottom" :close-delay="100">
           <img
             src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
             alt="code"
@@ -36,7 +36,7 @@
           />
           <a class="page-btn apple" data-item="apple" slot="reference" @click="goApple"></a>
         </el-popover>
-        <el-popover width="114" trigger="hover" :close-delay="100">
+        <el-popover width="114" trigger="hover"  placement="bottom" :close-delay="100">
           <img
             src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
             alt="code"
@@ -45,7 +45,7 @@
           />
           <div class="page-btn google" data-item="google" slot="reference"></div>
         </el-popover>
-        <el-popover width="114" trigger="hover" :close-delay="100">
+        <el-popover width="114" trigger="hover"  placement="bottom" :close-delay="100">
           <img
             src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
             alt="code"
