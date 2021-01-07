@@ -35,6 +35,10 @@ const routes = [
     name: 'Policy',
     component: () => import('../views/Policy.vue'),
   },
+  {
+    path: '*',
+    redirect: { name: 'Home' },
+  },
 ];
 
 const router = new VueRouter({

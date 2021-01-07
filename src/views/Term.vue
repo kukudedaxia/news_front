@@ -1,37 +1,41 @@
 <template>
   <div class="wrap docs" id="docs">
     <h1>Terms of Use</h1>
-    <h2>Beeto</h2>
-    <div>
-      <div>Welcome to Beeto!</div>
-      <p>
-        These terms of use (the “
-        <span class="bold">Terms of Use</span>
-        ”) govern your use of Beeto and provide information about the Beeto service (the “
-        <span class="bold">Service</span>”), outlined below. When you use Beeto, including creating
-        a Beeto account or using the Service, which includes any of its products, features, apps,
-        websites, services, technologies, and software, you agree to these Terms of Use unless we
-        expressly state that different or additional terms apply.
-      </p>
-      <p class="letter">
-        PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
-        DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS OF USE,
-        OR THE PRIVACY POLICY, PLEASE DO NOT USE THE SERVICE . YOUR COMMENCEMENT OF, OR CONTINUED
-        USE OF THE SERVICE, OR REGISTRATION OF YOUR OWN ACCOUNT ON BETOO MEANS THAT YOU, RECEIPT AND
-        SUFFICIENCY OF THE FOLLOWING TERMS AND CONDITIONS IS WELL ACKNOWLEDGED, AGREE TO BECOME A
-        PARTY TO AND TO BE BOUND BY THIS TERMS OF USE.
-      </p>
-      <p class="letter">
-        PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
-        DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS AND
-        CONDITIONS, BY SELECTING NOT CLICKING THE “AGREE” BUTTON, THEN YOU MAY NOT BE ABLE TO
-        REGISTER OR LOG IN YOUR ACCOUNT ON BETOO OR ACCESS THE SERVICE IN FURTHERANCE IN ANY WAY. BY
-        CLICKING “AGREE” BUTTON AND LOGING IN, YOU CONSENT TO BE BOUND BY THE HEREUNDER TERMS AND
-        CONDITIONS. THIS ACTION CREATES AN ACKNOWLEDGE AND CONSENT THAT YOU BECOME A PARTY TO THIS
-        TERMS OF USE AND AGREE TO BE BOUND BY THE FOLLOWING TERMS AND CONDITIONS. YOUR CONTINUED USE
-        OF THE SERVICE MEANS THAT YOU ARE OF FULL AWARENESS, SUFFICIENT KNOWLEDGE AND ACCEPTED AND
-        AGREED TO ALL OF THE FOLLOWING TERMS AND CONDITIONS.
-      </p>
+    <div id="term_1">
+      <h2>Beeto</h2>
+      <div>
+        <div>Welcome to Beeto!</div>
+        <p>
+          These terms of use (the “
+          <span class="bold">Terms of Use</span>
+          ”) govern your use of Beeto and provide information about the Beeto service (the “
+          <span class="bold">Service</span>”), outlined below. When you use Beeto, including
+          creating a Beeto account or using the Service, which includes any of its products,
+          features, apps, websites, services, technologies, and software, you agree to these Terms
+          of Use unless we expressly state that different or additional terms apply.
+        </p>
+        <p class="letter">
+          PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
+          DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS OF
+          USE, OR THE PRIVACY POLICY, PLEASE DO NOT USE THE SERVICE . YOUR COMMENCEMENT OF, OR
+          CONTINUED USE OF THE SERVICE, OR REGISTRATION OF YOUR OWN ACCOUNT ON BETOO MEANS THAT YOU,
+          RECEIPT AND SUFFICIENCY OF THE FOLLOWING TERMS AND CONDITIONS IS WELL ACKNOWLEDGED, AGREE
+          TO BECOME A PARTY TO AND TO BE BOUND BY THIS TERMS OF USE.
+        </p>
+        <p class="letter">
+          PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY AND DO PAY ATTENTION TO THE RESPECTIVE
+          DEFINITIONS; IF YOU DO NOT FULLY UNDERSTAND AND AGREE TO ALL OF THE FOLLOWING TERMS AND
+          CONDITIONS, BY SELECTING NOT CLICKING THE “AGREE” BUTTON, THEN YOU MAY NOT BE ABLE TO
+          REGISTER OR LOG IN YOUR ACCOUNT ON BETOO OR ACCESS THE SERVICE IN FURTHERANCE IN ANY WAY.
+          BY CLICKING “AGREE” BUTTON AND LOGING IN, YOU CONSENT TO BE BOUND BY THE HEREUNDER TERMS
+          AND CONDITIONS. THIS ACTION CREATES AN ACKNOWLEDGE AND CONSENT THAT YOU BECOME A PARTY TO
+          THIS TERMS OF USE AND AGREE TO BE BOUND BY THE FOLLOWING TERMS AND CONDITIONS. YOUR
+          CONTINUED USE OF THE SERVICE MEANS THAT YOU ARE OF FULL AWARENESS, SUFFICIENT KNOWLEDGE
+          AND ACCEPTED AND AGREED TO ALL OF THE FOLLOWING TERMS AND CONDITIONS.
+        </p>
+      </div>
+    </div>
+    <div id="term_2">
       <h2>The Beeto Service</h2>
       <p>
         We agree to provide you with the Beeto Service. The Service includes all of the Beeto
@@ -528,8 +532,31 @@
         not want to agree to these or any updated Terms of Use, you can delete your account, here.
       </p>
     </div>
+    <Section :list="list" />
   </div>
 </template>
+<script>
+import Section from '@/components/section';
+export default {
+  components: {
+    Section,
+  },
+  data() {
+    return {
+      list: [
+        {
+          name: 'Beeto',
+          link: '#term_1',
+        },
+        {
+          name: 'The Beeto Service',
+          link: '#term_2',
+        },
+      ],
+    };
+  },
+};
+</script>
 <style lang="less" scoped>
 .docs {
   direction: ltr;

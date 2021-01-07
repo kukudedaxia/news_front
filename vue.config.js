@@ -1,4 +1,6 @@
-// const path = require("path");
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const entryGenerator = require('./generator/entryGenerator');
+
 module.exports = {
   publicPath: process.env.PUBLIC_PATH,
   outputDir: 'beeto',
@@ -8,22 +10,42 @@ module.exports = {
   filenameHashing: true,
   productionSourceMap: false,
   pages: {
-    index: {
-      // page 的入口
+    web: {
       entry: './src/main.js',
-      // 模板来源
       template: 'public/index.html',
-      // 在 dist/index.html 的输出
       filename: 'index.html',
-      // 当使用 title 选项时，
-      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'Index Page',
-      // 在这个页面中包含的块，默认情况下会包含
-      // 提取出来的通用 chunk 和 vendor chunk。
-      chunks: ['chunk-vendors', 'chunk-common', 'index'],
+      title: 'Beeto',
     },
   },
-
+  configureWebpack: config => {
+    config.plugins = config.plugins.concat(
+      new WebpackManifestPlugin({
+        fileName: 'asset-manifest.json',
+        publicPath: process.env.PUBLIC_PATH,
+        writeToFileEmit: true,
+        generate: (seed, files, entrypoints) => {
+          const manifestFiles = files.reduce((manifest, file) => {
+            manifest[file.name] = file.path;
+            return manifest;
+          }, seed);
+          const entrypointFiles = [];
+          entrypoints.web.forEach(fileName => {
+            if (!fileName.endsWith('.map')) {
+              entrypointFiles.push(process.env.PUBLIC_PATH + fileName);
+            }
+          });
+          let res = {
+            files: manifestFiles,
+            entrypoints: entrypointFiles,
+          };
+          entryGenerator(res);
+          return {
+            web: res,
+          };
+        },
+      }),
+    );
+  },
   chainWebpack: config => {
     // i18单文件组件
     config.module
