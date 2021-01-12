@@ -1,18 +1,18 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import messages from '@/language/en';
+import messages from '@/language/ar';
 import store from '../store/index';
 
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-  locale: 'en', // 设置默认语言环境
+  locale: 'ar', // 设置默认语言环境
   fallbackLocale: 'en',
   messages,
 });
 
 export default i18n;
-const loadedLanguages = ['en']; // 我们的默认语言
+const loadedLanguages = ['ar']; // 我们的默认语言
 
 export function setI18nLanguage(lang) {
   i18n.locale = lang;

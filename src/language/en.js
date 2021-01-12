@@ -22,7 +22,7 @@ export default {
     slide4: {
       be: 'Be a beeter,',
       gift: 'be gifted with',
-      features: 'exceptional features',  
+      features: 'exceptional features',
       info: 'As a beeter, use our special features to get a better experience.',
     },
     desc: {

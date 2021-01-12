@@ -2,12 +2,12 @@
 {
 "en": {
     "title": "About",
-    "title-1": "1. What's beeto?",
+    "title-1": "What's beeto?",
     "paragraph-1":"Beeto is a multi-diverse content social media platform where Arabs can express themselves freely and speak their minds. Here, you can start creating, reading, sharing, discussing top trending hashtags and find the latest social media, celebrities and breaking news.",
     "paragraph-2": "The experience on Beeto is unlike any other social media platform; it's more engaging, fun, inspiring and helps you discover what the people around you are really thinking of and doing",
-    "title-2": "2. On Beeto you can find:",
+    "title-2": "On Beeto you can find:",
     "paragraph-3":"Trendings, creative and exclusive campaigns every day, exclusive videos, top influencers and celebrities, giveaways, official accounts of different categories such as Entertainment, Fashion & Beauty, Games, Sports, Funny, Lifestyle, News & Politics. In Beeto, challenges happen everyday! You can create your daily life beets with your friends, you can express your opinions with a variety of communities sharing different interests, take part in outstanding campaigns, challenges, and activities using funny beet tools, you can also create, share and download engaging content.",
-    "title-3": "3. What kind of native features does Beeto have?",
+    "title-3": "What kind of native features does Beeto have?",
     "li-1": "More localization innovation for Arabic friends.",
     "li-2": "Download and share high quality videos to your WhatsApp, Facebook, Instagram, etc.",
     "li-3": "Publish up to more than 15 photos and texts with a maximum of 10000 characters in one beet.",

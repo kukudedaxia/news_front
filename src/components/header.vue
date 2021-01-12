@@ -29,12 +29,11 @@ export default {
       this.lang == 'en' ? loadLanguageAsync('ar') : loadLanguageAsync('en');
     },
     goHome() {
-      this.$router.push({ path: '/' });
+      this.$router.push({ name: 'Home' });
     },
   },
   computed: {
     lang() {
-      console.log(this.$store.state);
       return this.$store.state.language;
     },
   },

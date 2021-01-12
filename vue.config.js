@@ -17,6 +17,7 @@ module.exports = {
       title: 'Beeto',
     },
   },
+  //可以修改配置并不返回任何东西，也可以返回一个被克隆或合并过的配置版本。
   configureWebpack: config => {
     config.plugins = config.plugins.concat(
       new WebpackManifestPlugin({
@@ -46,6 +47,7 @@ module.exports = {
       }),
     );
   },
+  //允许对内部的 webpack 配置进行更细粒度的修改。
   chainWebpack: config => {
     // i18单文件组件
     config.module
@@ -75,10 +77,23 @@ module.exports = {
         },
       },
     });
+
+    // 构建体积分析工具
+    if (process.env.use_analyzer) {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+    }
   },
   devServer: {
-    hot: false,
+    hot: true,
     port: 8081,
     disableHostCheck: true,
+    proxy: {
+      '/api': {
+        target: 'http://m.whale.weibo.com/',
+        // target: 'http://m.bee.to/',
+      },
+    },
   },
 };

@@ -2,11 +2,11 @@
   <swiper
     class="swiper"
     ref="mySwiper"
+    id="swiper"
     :options="swiperOptions"
     :slides-per-view="3"
     :space-between="50"
     @swiper="onSwiper"
-    @slideChange="onSlideChange"
   >
     <swiper-slide class="slide slide-bg-1"><Slides index="1"/></swiper-slide>
     <swiper-slide class="slide slide-bg-2"><Slides index="2"/></swiper-slide>
@@ -67,13 +67,24 @@ export default {
   mounted() {
     this.swiper = this.$refs.mySwiper.$swiper;
     this.swiper.slideTo(3, 0, false);
+    const container = document.getElementById('swiper');
+    container.addEventListener('mouseenter', this.stop);
+    container.addEventListener('mouseleave', this.start);
+  },
+  destroyed() {
+    const container = document.getElementById('swiper');
+    container.removeEventListener('mouseenter', this.stop);
+    container.removeEventListener('mouseleave', this.start);
   },
   methods: {
     onSwiper(swiper) {
       console.log(swiper);
     },
-    onSlideChange() {
-      console.log('slide change');
+    start() {
+      this.swiper.autoplay.start();
+    },
+    stop() {
+      this.swiper.autoplay.stop();
     },
   },
 };
@@ -88,6 +99,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 980px;
 }
 .custom-prev,
 .custom-next {
@@ -107,23 +119,23 @@ export default {
 }
 // 背景
 .slide-bg-1 {
-  background: url('../assets/images/bcakground_web_1.png') no-repeat;
-  height: 788px;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv1z6t63j21hc0u0azp.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju7k2bhbj21hc0oo7pk.jpg') no-repeat; //webp720
   background-size: 100% 100%;
 }
 .slide-bg-2 {
-  background: url('../assets/images/bcakground_web_2.png') no-repeat;
-  height: 788px;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv54s5xkj21hc0u0e81.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9x4tg8j21hc0oo7wh.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .slide-bg-3 {
-  background: url('../assets/images/bcakground_web_3.png') no-repeat;
-  height: 788px;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv4jo235j21hc0u04qp.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9hsro1j21hc0oo1kx.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .slide-bg-4 {
-  background: url('../assets/images/bcakground_web_4.png') no-repeat;
-  height: 788px;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv4vjse3j21hc0u01kx.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>

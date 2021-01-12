@@ -34,7 +34,14 @@
             class="code"
             loading="lazy"
           />
-          <a class="page-btn apple" data-item="apple" slot="reference" @click="goApple"></a>
+          <a
+            class="page-btn apple"
+            href="https://apps.apple.com/sa/app/beeto/id1532750093"
+            target="_blank"
+            @click="goApple"
+            data-item="apple"
+            slot="reference"
+          ></a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
           <img
@@ -43,7 +50,7 @@
             class="code"
             loading="lazy"
           />
-          <div class="page-btn google" data-item="google" slot="reference"></div>
+          <a class="page-btn google" @click="goDownload" data-item="google" slot="reference"></a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
           <img
@@ -52,7 +59,14 @@
             class="code"
             loading="lazy"
           />
-          <div class="page-btn huawei" id="huawei" data-item="huawei" slot="reference"></div>
+          <a
+            class="page-btn huawei"
+            target=""
+            @click="goDownload"
+            id="huawei"
+            data-item="huawei"
+            slot="reference"
+          ></a>
         </el-popover>
       </div>
     </div>
@@ -70,7 +84,16 @@ export default {
   },
   methods: {
     goApple() {
-      console.log('苹果' + this.index);
+      this.$store.dispatch('send', { action: '5335' });
+    },
+    goDownload() {
+      this.$store.dispatch('send', { action: '5336', from: 90276_00001 });
+      const form = document.createElement('form');
+      form.method = 'get';
+      form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/beeto.apk');
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
     },
   },
 };
@@ -146,15 +169,15 @@ export default {
 }
 
 .apple {
-  background: url('../../assets/images/apple.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmf5ufj2036012743.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .google {
-  background: url('../../assets/images/google.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuwpbf9qj203k012t8j.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .huawei {
-  background: url('../../assets/images/huawei.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuwvwlcpj203i012wec.jpg') no-repeat;
   background-size: 100% 100%;
 }
 // 手机图
@@ -164,19 +187,19 @@ export default {
   // margin-top: 30px;
 }
 .web-phone-1 {
-  background: url('../../assets/images/web_phone_english_1.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjusxywovj207o0epad2.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-2 {
-  background: url('../../assets/images/web_phone_english_2.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjutqirp5j207o0epadu.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-3 {
-  background: url('../../assets/images/web_phone_english_3.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjut36f11j207o0epada.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-4 {
-  background: url('../../assets/images/web_phone_english_4.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuu6r61nj207o0ept9h.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .code {
@@ -184,28 +207,25 @@ export default {
   height: 100%;
 }
 
-.apple::before {
-  content: '/';
-}
 // 阿语特殊处理
 html[lang='ar'] .page-btngroup {
   direction: ltr;
   justify-content: flex-end;
 }
 html[lang='ar'] .web-phone-1 {
-  background: url('../../assets/images/web_phone_1.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvc1xi5j207o0epgoi.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-2 {
-  background: url('../../assets/images/web_phone_2.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmfbndj207o0epadu.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-3 {
-  background: url('../../assets/images/web_phone_3.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvz791xj207o0epada.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-4 {
-  background: url('../../assets/images/web_phone_4.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>
