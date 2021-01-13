@@ -41,7 +41,8 @@
             @click="goApple"
             data-item="apple"
             slot="reference"
-          ></a>
+          >
+          </a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
           <img
@@ -57,7 +58,8 @@
             @click="goApple"
             data-item="google"
             slot="reference"
-          ></a>
+          >
+          </a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
           <img
@@ -73,12 +75,23 @@
             id="huawei"
             data-item="huawei"
             slot="reference"
-          ></a>
+          >
+          </a>
         </el-popover>
       </div>
     </div>
     <div>
-      <div :class="['page-image', `web-phone-${index}`]" />
+      <div :class="['page-image', `web-phone-${index}`]">
+        <!-- <img
+          v-if="index < 2"
+          :src="lang == 'ar' ? imgList[index - 1].small_ar : imgList[index - 1].small"
+          style="width:100%;height:100%;"
+        />
+        <img
+          :src="lang == 'ar' ? imgList[index - 1].normal_ar : imgList[index - 1].normal"
+          style="width:100%;height:100%;position:absolute;top:0px;left:0px;"
+        /> -->
+      </div>
     </div>
   </div>
 </template>
@@ -89,12 +102,41 @@ export default {
   props: {
     index: [String, Number],
   },
+  data() {
+    return {
+      imgList: [
+        {
+          small: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gmm520bk93j20n01837al.jpg',
+          small_ar: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gmm51gyqmzj20n0183jxf.jpg',
+          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm2ii672fj20n01837al.jpg',
+          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1n5dc2jj20n0183jxf.jpg',
+        },
+        {
+          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1q1bh2nj20n0183dky.jpg',
+          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1okq2uhj20n018378w.jpg',
+        },
+        {
+          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1r6610cj20n018343l.jpg',
+          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1ovuoi5j20n018379c.jpg',
+        },
+        {
+          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1qmszswj20n0183agd.jpg',
+          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1q27eruj20n0183n3d.jpg',
+        },
+      ],
+    };
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
+    },
+  },
   methods: {
     goApple() {
       this.$store.dispatch('send', { action: '5335' });
     },
     goDownload() {
-      this.$store.dispatch('send', { action: '5336', from: 90276_00001 });
+      this.$store.dispatch('send', { action: '5336', from: '90276_90001' });
       const form = document.createElement('form');
       form.method = 'get';
       form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/beeto.apk');
@@ -163,55 +205,57 @@ export default {
 
 .page-btngroup {
   display: flex;
-  .page-btn {
-    width: 114px;
-    height: 38px;
-    margin-right: 22px;
-    cursor: pointer;
-    display: block;
-  }
-  .page-btn:hover {
-    opacity: 0.8;
-  }
+}
+.page-btn {
+  width: 114px;
+  height: 38px;
+  margin-right: 22px;
+  cursor: pointer;
+  display: block;
+}
+.page-btn:hover {
+  opacity: 0.8;
 }
 
 .apple {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmf5ufj2036012743.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1870y3oj209i036a9x.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .google {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuwpbf9qj203k012t8j.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm5aunitej20ao036q35.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .huawei {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuwvwlcpj203i012wec.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm19pjt2zj20ai036dfq.jpg') no-repeat;
   background-size: 100% 100%;
 }
 // 手机图
 .page-image {
   width: 276px;
   height: 530px;
+  position: relative;
   // margin-top: 30px;
 }
 .web-phone-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjusxywovj207o0epad2.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm2ii672fj20n01837al.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-2 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjutqirp5j207o0epadu.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1q1bh2nj20n0183dky.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-3 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjut36f11j207o0epada.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1r6610cj20n018343l.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-4 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuu6r61nj207o0ept9h.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1qmszswj20n0183agd.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .code {
   width: 100%;
   height: 100%;
+  vertical-align: middle;
 }
 
 // 阿语特殊处理
@@ -219,20 +263,29 @@ html[lang='ar'] .page-btngroup {
   direction: ltr;
   justify-content: flex-end;
 }
+html[lang='ar'] .page-btn {
+  margin-right: 0;
+  margin-left: 22px;
+}
+
 html[lang='ar'] .web-phone-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvc1xi5j207o0epgoi.jpg') no-repeat;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvc1xi5j207o0epgoi.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1n5dc2jj20n0183jxf.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-2 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmfbndj207o0epadu.jpg') no-repeat;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmfbndj207o0epadu.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1okq2uhj20n018378w.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-3 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvz791xj207o0epada.jpg') no-repeat;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvz791xj207o0epada.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1ovuoi5j20n018379c.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-4 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm1q27eruj20n0183n3d.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>

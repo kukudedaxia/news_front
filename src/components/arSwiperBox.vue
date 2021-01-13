@@ -39,13 +39,14 @@ export default {
           nextEl: '.swiper-button-prev',
           prevEl: '.swiper-button-next',
         },
+        preloadImages:false,
         loop: true,
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // },
         on: {
           transitionEnd: () => {
             if (this.swiper) {
@@ -67,14 +68,14 @@ export default {
   mounted() {
     this.swiper = this.$refs.mySwiper.$swiper;
     this.swiper.slideTo(3, 0, false);
-    const container = document.getElementById('swiper');
-    container.addEventListener('mouseenter', this.stop);
-    container.addEventListener('mouseleave', this.start);
+    // const container = document.getElementById('swiper');
+    // container.addEventListener('mouseenter', this.stop);
+    // container.addEventListener('mouseleave', this.start);
   },
   destroyed() {
-    const container = document.getElementById('swiper');
-    container.removeEventListener('mouseenter', this.stop);
-    container.removeEventListener('mouseleave', this.start);
+    // const container = document.getElementById('swiper');
+    // container.removeEventListener('mouseenter', this.stop);
+    // container.removeEventListener('mouseleave', this.start);
   },
   methods: {
     onSwiper(swiper) {

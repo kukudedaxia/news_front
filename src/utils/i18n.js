@@ -23,9 +23,7 @@ export function setI18nLanguage(lang) {
   } else {
     document.querySelector('html').removeAttribute('dir');
   }
-  // console.log(store.state)
-  // const title = store.state.topage.meta.title;
-  document.title = i18n.t('title');
+  appendMeta();
   return lang;
 }
 
@@ -46,3 +44,23 @@ export function loadLanguageAsync(lang) {
   }
   return Promise.resolve();
 }
+
+const appendMeta = () => {
+  const metas = document.getElementsByTagName('meta');
+  let flag = false;
+  let oldMeta;
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === 'description') {
+      flag = true;
+      oldMeta = metas[i];
+    }
+  }
+  if (flag) {
+    document.getElementsByTagName('head')[0].removeChild(oldMeta);
+  }
+  const meta = document.createElement('meta');
+  meta.name = 'description';
+  meta.content = i18n.t('content');
+  const lastMeta = document.getElementsByTagName('link')[0];
+  document.head.insertBefore(meta, lastMeta);
+};

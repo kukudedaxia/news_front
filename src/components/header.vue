@@ -64,24 +64,31 @@ export default {
   cursor: pointer;
 }
 .ar-logo-icon {
-  background: url('../assets/images/logo_arabic.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm2z2o377j209602rt8m.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .logo-icon {
-  background: url('../assets/images/logo_english.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm2xst0yhj209602r0sn.jpg') no-repeat;
   background-size: 100% 100%;
 }
 
-.header-right {
-  .lanuage {
-    color: var(--text);
-    color: #fff;
-    font-size: 10px;
-    padding: 3px 7px;
-    background: #333333;
-    border-radius: 9px;
-    line-height: 33px;
-    cursor: pointer;
-  }
+.lanuage {
+  color: #fff;
+  font-size: 12px;
+  background: #333;
+  border-radius: 12px;
+  line-height: 22px;
+  cursor: pointer;
+  width: 36px;
+  height: 22px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  transform: scale(0.83);
+  -webkit-text-size-adjust: none;
+  -webkit-transform: scale(0.83, 0.83);
+}
+html[lang='ar'] .lanuage {
+  line-height: 20px;
 }
 </style>

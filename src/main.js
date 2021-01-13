@@ -13,6 +13,7 @@ Vue.use(VueWechatTitle);
 import './APP.less';
 
 Vue.config.productionTip = false;
+Vue.$i18n = i18n;
 
 setI18nLanguage(i18n.locale);
 
