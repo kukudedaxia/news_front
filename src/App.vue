@@ -1,11 +1,10 @@
-
 <template>
   <div id="app">
     <div id="nav">
       <Header />
     </div>
     <router-view v-wechat-title="$i18n.t($route.meta.title)" />
-    <Footer />
+    <Footer v-if="footerShow" />
   </div>
 </template>
 
@@ -18,6 +17,16 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  data() {
+    return {
+      footerShow: false,
+    };
+  },
+  created() {
+    this.$router.onReady(() => {
+      this.footerShow = true;
+    });
   },
   // beforeRouteEnter(to, from, next) {
   //   // 不能直接获取组件实例 `this`，需通过vm访问组件实例;

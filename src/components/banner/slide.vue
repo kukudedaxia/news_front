@@ -28,12 +28,7 @@
       </template>
       <div class="page-btngroup">
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
-          <img
-            src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
-            alt="code"
-            class="code"
-            loading="lazy"
-          />
+          <img :src="lang == 'ar' ? code.ar : code.en" alt="code" class="code" loading="lazy" />
           <a
             class="page-btn apple"
             href="https://apps.apple.com/sa/app/beeto/id1532750093"
@@ -45,12 +40,7 @@
           </a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
-          <img
-            src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
-            alt="code"
-            class="code"
-            loading="lazy"
-          />
+          <img :src="lang == 'ar' ? code.ar : code.en" alt="code" class="code" loading="lazy" />
           <a
             class="page-btn google"
             href="https://play.google.com/store/apps/details?id=com.weo.beeto"
@@ -62,12 +52,7 @@
           </a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
-          <img
-            src="https://img.bee-cdn.com/large/3b9ae203lz1gmcys74d08j2078078a9t.jpg"
-            alt="code"
-            class="code"
-            loading="lazy"
-          />
+          <img :src="lang == 'ar' ? code.ar : code.en" alt="code" class="code" loading="lazy" />
           <a
             class="page-btn huawei"
             target=""
@@ -104,6 +89,10 @@ export default {
   },
   data() {
     return {
+      code: {
+        ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg',
+        en: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6b6zrwij203v03v3y9.jpg',
+      },
       imgList: [
         {
           small: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gmm520bk93j20n01837al.jpg',
