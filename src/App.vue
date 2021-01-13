@@ -3,7 +3,7 @@
     <div id="nav">
       <Header />
     </div>
-    <router-view />
+    <router-view v-wechat-title="$i18n.t($route.meta.title)" />
     <Footer />
   </div>
 </template>

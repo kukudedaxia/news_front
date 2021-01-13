@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '../store';
+import { loadLanguageAsync } from '../utils/i18n';
 
 Vue.use(VueRouter);
 
@@ -18,26 +19,41 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),
+    meta: {
+      title: 'beeto',
+    },
   },
   {
     path: '/concat',
     name: 'Concat',
     component: () => import('../views/Concat.vue'),
+    meta: {
+      title: 'beeto',
+    },
   },
   {
     path: '/community',
     name: 'Community',
     component: () => import('../views/Community.vue'),
+    meta: {
+      title: 'beeto',
+    },
   },
   {
     path: '/terms',
     name: 'Term',
     component: () => import('../views/Term.vue'),
+    meta: {
+      title: 'beeto',
+    },
   },
   {
     path: '/policy',
     name: 'Policy',
     component: () => import('../views/Policy.vue'),
+    meta: {
+      title: 'beeto',
+    },
   },
   {
     path: '*',
@@ -68,6 +84,14 @@ router.beforeEach((to, from, next) => {
   // 离开行为
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
+  // 持续保持语言
+  if (localStorage.getItem('lanuage')) {
+    const lang = localStorage.getItem('lanuage');
+    loadLanguageAsync(lang).then(() => {
+      next();
+    });
+  }
+  //埋点
   if (to.meta.uicode) {
     store.dispatch('send', { action: '5141', extend: { source: 1 } });
   }

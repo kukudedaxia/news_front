@@ -2,21 +2,11 @@
   <div class="bottom">
     <div class="bottom-info">
       <span class="power">Powered by Weibo</span>
-      <router-link to="/about"
-        ><span>{{ $t('desc.about') }}</span></router-link
-      >
-      <router-link to="/concat"
-        ><span>{{ $t('desc.concat') }}</span></router-link
-      >
-      <router-link to="/community"
-        ><span>{{ $t('desc.community') }}</span></router-link
-      >
-      <router-link to="/terms"
-        ><span>{{ $t('desc.terms') }}</span></router-link
-      >
-      <router-link to="/policy"
-        ><span>{{ $t('desc.policy') }}</span></router-link
-      >
+      <a href="/about" target="_blank">{{ $t('desc.about') }}</a>
+      <a href="/concat" target="_blank">{{ $t('desc.concat') }}</a>
+      <a href="/community" target="_blank">{{ $t('desc.community') }}</a>
+      <a href="/terms" target="_blank">{{ $t('desc.terms') }}</a>
+      <a href="/policy" target="_blank">{{ $t('desc.policy') }}</a>
     </div>
   </div>
 </template>

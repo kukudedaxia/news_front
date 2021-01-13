@@ -26,7 +26,13 @@ export default {
   },
   methods: {
     changeLanuage() {
-      this.lang == 'en' ? loadLanguageAsync('ar') : loadLanguageAsync('en');
+      this.lang == 'en'
+        ? loadLanguageAsync('ar').then(() => {
+            localStorage.setItem('lanuage', 'ar');
+          })
+        : loadLanguageAsync('en').then(() => {
+            localStorage.setItem('lanuage', 'en');
+          });
     },
     goHome() {
       this.$router.push({ name: 'Home' });

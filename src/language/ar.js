@@ -1,6 +1,7 @@
 export default {
   ar: {
     ar: 'عربى',
+    beeto: 'Beeto - عبر براحتك',
     slide1: {
       beeto: 'محتوى يقدم لك كل ',
       born: 'ما هو جديد حولك على الطريقة ',

@@ -14,7 +14,6 @@ module.exports = {
       entry: './src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
-      title: 'Beeto',
     },
   },
   //可以修改配置并不返回任何东西，也可以返回一个被克隆或合并过的配置版本。

@@ -1,18 +1,19 @@
 export default {
   en: {
     en: 'EN',
+    beeto: 'Beeto-Express freely',
     slide1: {
       beeto: 'Freshly delivered',
       born: 'content with',
       for: 'personalized ingredients',
       info:
-        'Explore your interest in different categories, Receive the latest news timely fit your personality and region.',
+        'Explore your interest in different categories, receive the latest news timely fit your personality and region.',
     },
     slide2: {
       borowse: 'Browse widely,',
       express: 'Express freely',
       info:
-        'Search news and friends anywhere, Express your ideas with multiple pictures and thousands of words',
+        'Search news and friends anywhere, express your ideas with multiple pictures and thousands of words',
     },
     slide3: {
       beet: 'Beet with your buddies,',
@@ -29,7 +30,7 @@ export default {
       about: 'About',
       concat: 'Contact Us',
       community: 'Community Guidelines',
-      terms: 'Terms of Us',
+      terms: 'Terms of Use',
       policy: 'Privacy Policy',
     },
   },

@@ -50,7 +50,14 @@
             class="code"
             loading="lazy"
           />
-          <a class="page-btn google" @click="goDownload" data-item="google" slot="reference"></a>
+          <a
+            class="page-btn google"
+            href="https://play.google.com/store/apps/details?id=com.weo.beeto"
+            target="_blank"
+            @click="goApple"
+            data-item="google"
+            slot="reference"
+          ></a>
         </el-popover>
         <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
           <img
@@ -100,7 +107,7 @@ export default {
 </script>
 <style lang="less">
 .page {
-  width: 902px;
+  width: 900px;
   color: var(--text);
   display: flex;
   align-items: center;

@@ -336,15 +336,15 @@
         contact us by email, at our Contact Us feedback channel.
       </p>
     </div>
-    <Section :list="list" />
+    <!-- <Section :list="list" /> -->
   </div>
 </template>
 <script>
-import Section from '@/components/section';
+// import Section from '@/components/section';
 export default {
-  components: {
-    Section,
-  },
+  // components: {
+  //   Section,
+  // },
   data() {
     return {
       list: [
@@ -434,7 +434,7 @@ h2 {
 p {
   line-height: 1.68;
   margin: 8px 0;
-  text-indent: 2em;
+  text-indent: 0;
 }
 .no-indent {
   text-indent: 0;

@@ -23,6 +23,9 @@ export function setI18nLanguage(lang) {
   } else {
     document.querySelector('html').removeAttribute('dir');
   }
+  // console.log(store.state)
+  // const title = store.state.topage.meta.title;
+  document.title = i18n.t('title');
   return lang;
 }
 

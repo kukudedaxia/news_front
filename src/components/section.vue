@@ -1,5 +1,5 @@
 <template>
-  <div class="section-nav" :style="{ maxWidth: maxWidth + 'px' }">
+  <div class="section-nav text-right" :style="{ maxWidth: maxWidth + 'px' }">
     <ul class="section-nav-container">
       <li v-for="(item, index) in list" :key="index" @click="changeActive(index)">
         <a :href="item.link" :class="{ active: index == active }">{{ item.name }}</a>
@@ -188,5 +188,9 @@ li {
   a.active {
     color: #3370ff;
   }
+}
+html[lang='ar'] .section-nav {
+  right: 0;
+  left: initial;
 }
 </style>

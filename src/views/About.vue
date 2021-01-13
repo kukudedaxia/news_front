@@ -53,18 +53,18 @@
 <template>
   <div class="wrap docs ardocs">
     <h1>{{ $t('title') }}</h1>
-    <h1>{{ $t('title-1') }}</h1>
+    <h2>{{ $t('title-1') }}</h2>
     <p>
       {{ $t('paragraph-1') }}
     </p>
     <p>
       {{ $t('paragraph-2') }}
     </p>
-    <h1>{{ $t('title-2') }}</h1>
+    <h2>{{ $t('title-2') }}</h2>
     <p>
       {{ $t('paragraph-3') }}
     </p>
-    <h1>{{ $t('title-3') }}</h1>
+    <h2>{{ $t('title-3') }}</h2>
     <ul>
       <li><span>📍</span> {{ $t('li-1') }}</li>
       <li><span>🎥</span>{{ $t('li-2') }}</li>
@@ -76,11 +76,11 @@
       <li><span>👁‍🗨</span>{{ $t('li-8') }}</li>
       <li><span>#️⃣</span>{{ $t('li-9') }}</li>
     </ul>
-    <h1>{{ $t('title-4') }}</h1>
+    <h2>{{ $t('title-4') }}</h2>
     <p>
       {{ $t('paragraph-4') }}
     </p>
-    <h1>{{ $t('title-5') }}</h1>
+    <h2>{{ $t('title-5') }}</h2>
     <ul class="normal">
       <li>{{ $t('li-10') }}</li>
       <li>{{ $t('li-11') }}</li>
@@ -88,3 +88,11 @@
     </ul>
   </div>
 </template>
+<style lang="less" scoped>
+h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  font-family: SF-UI-Text-Bold;
+  color: #333333;
+}
+</style>
