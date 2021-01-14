@@ -125,7 +125,8 @@ export default {
       this.$store.dispatch('send', { action: '5335' });
     },
     goDownload() {
-      this.$store.dispatch('send', { action: '5336', from: '90276_90001' });
+      this.$store.dispatch('send', { action: '5335' });
+      this.$store.dispatch('send', { action: '5336', wm: '90276_90001' });
       const form = document.createElement('form');
       form.method = 'get';
       form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/beeto.apk');

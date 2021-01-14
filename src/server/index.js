@@ -15,7 +15,7 @@ export const sendReport = (params, callbacks) => {
     lfid: '',
     cardid: '',
     lcardid: '',
-    from_val: '',
+    from_val: 'BT11192010',
     wm: '',
     oldwm: '',
     ip: '',
