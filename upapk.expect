@@ -18,7 +18,8 @@ expect {
     send "$password\n"
   }
 }
-#
+expect 100%
+expect eof
 spawn ssh $username@$host
 expect {
  "*assword:"
@@ -27,7 +28,9 @@ expect {
   }
 }
 expect "#"
-send "cd /root/www/htdocs/apk\r"
-send "touch a.js\r"
+send "cd /usr/local/ossutil/\r"
+expect "\r"
+send "sh upload_APK.sh\r"
 send "exit\r"
 expect eof
+interact

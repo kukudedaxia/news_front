@@ -30,7 +30,7 @@ const ajax = payload => {
     return false;
   }
   let req = {
-    baseURL: process.env.VUE_APP_API_URL,
+    baseURL: `//${window.location.host}/api/`,
     method: 'get',
     headers: {
       'content-type': 'application/json',

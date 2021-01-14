@@ -1,6 +1,5 @@
-#!/bin/bash
 version=$1  # 版本
-projectPath=/Users/lenghui/Desktop/personal/data
+projectPath=/root/www/htdocs/www.bee.to/
 webTar=$2   # 压缩包
 webName=$3  # cdn包
 

@@ -22,9 +22,7 @@ export const sendReport = (params, callbacks) => {
     version: '',
     aid: '',
     ua: '',
-    extend: {
-      source: 1, //pc
-    },
+    extend: 'source:1', //pc
     ...params,
   };
   let req = {

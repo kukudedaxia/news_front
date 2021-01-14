@@ -94,7 +94,7 @@ router.beforeEach((to, from, next) => {
   }
   //埋点
   if (to.meta.uicode) {
-    store.dispatch('send', { action: '5141', extend: { source: 1 } });
+    store.dispatch('send', { action: '5141'});
   }
   next();
 });

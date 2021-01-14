@@ -17,7 +17,8 @@
       "index.html": "/index.html"
     },
     "entrypoints": [
-      "/dev-assets/js/web.js"
+      "/dev-assets/js/web.js",
+      "/web.58a4c2c37043422ca423.hot-update.js"
     ]
   }
 }
