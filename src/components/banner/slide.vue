@@ -90,8 +90,14 @@ export default {
   data() {
     return {
       code: {
-        ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg',
-        en: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6b6zrwij203v03v3y9.jpg',
+        ar:
+          process.env.NODE_ENV == 'production'
+            ? 'https://img.bee-cdn.com/large/3b9ae203lz1gmnd0s373nj2078078q2u.jpg'
+            : 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg',
+        en:
+          process.env.NODE_ENV == 'production'
+            ? 'https://img.bee-cdn.com/large/3b9ae203lz1gmnd1dw083j20780780sm.jpg'
+            : 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6b6zrwij203v03v3y9.jpg',
       },
       imgList: [
         {
@@ -120,6 +126,9 @@ export default {
       return this.$store.state.language;
     },
   },
+  created() {
+    console.log(process.env.NODE_ENV);
+  },
   methods: {
     goApple() {
       this.$store.dispatch('send', { action: '5335' });
@@ -129,7 +138,7 @@ export default {
       this.$store.dispatch('send', { action: '5336', wm: '90276_90001' });
       const form = document.createElement('form');
       form.method = 'get';
-      form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/beeto.apk');
+      form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/Beeto.apk');
       document.body.appendChild(form);
       form.submit();
       document.body.removeChild(form);

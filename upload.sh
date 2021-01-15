@@ -26,7 +26,7 @@ if [ ! -n "${webName}" ]; then
 time_echo "start to deploy "
 
 # 查看上一个版本
-result=`curl -s 'm.bee.to/api/help/js/v/get' | grep data`
+result=`curl -s 'http://10.138.1.101:8080/help/js/official/v/get' | grep data`
 echo "current js version : ${result}"
 
 # 打包之前的资源
@@ -69,12 +69,12 @@ echo "执行oss命令"
 
 cd /usr/local/ossutil/
 
-sh upload_H5.sh
+sh upload_PC.sh
 
-curl -s www.bee.to/api/help/js/official/v/set -G -d 'v='${version}
+curl -s http://10.138.1.101:8080/help/js/official/v/set -G -d 'v='${version}
 
 time_echo "update version finished."
 
-result=`curl -s 'www.bee.to/api/help/js/official/v/get' |grep data`
+result=`curl -s 'http://10.138.1.101:8080/help/js/official/v/get' |grep data`
 
 echo "current js version : ${result}"
