@@ -126,9 +126,6 @@ export default {
       return this.$store.state.language;
     },
   },
-  created() {
-    console.log(process.env.NODE_ENV);
-  },
   methods: {
     goApple() {
       this.$store.dispatch('send', { action: '5335' });
@@ -138,7 +135,10 @@ export default {
       this.$store.dispatch('send', { action: '5336', wm: '90276_90001' });
       const form = document.createElement('form');
       form.method = 'get';
-      form.setAttribute('action', 'https://static.bee-cdn.com/static-resource/apk/Beeto.apk');
+      form.setAttribute(
+        'action',
+        `https://static.bee-cdn.com/static-resource/apk/Beeto.apk?time=${new Date().getTime()}`,
+      );
       document.body.appendChild(form);
       form.submit();
       document.body.removeChild(form);

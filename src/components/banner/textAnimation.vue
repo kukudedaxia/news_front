@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     animation() {
-      console.log(this);
       var element = document.getElementById('text');
       var arr = this.value.split('');
       var i = 0;

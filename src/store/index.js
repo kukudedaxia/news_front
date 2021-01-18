@@ -33,14 +33,14 @@ export default new Vuex.Store({
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
       sendReport(param, {
-        onSuccess: res => {
-          console.log(res, 'res');
+        onSuccess: () => {
+          // console.log(res, 'res');
         },
         onFail: () => {
-          console.log('error');
+          // console.log('error');
         },
         onComplete: () => {
-          console.log('完成');
+          // console.log('完成');
         },
       });
     },

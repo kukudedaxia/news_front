@@ -7,7 +7,7 @@ export default {
       born: 'content with',
       for: 'personalized ingredients',
       info:
-        'Explore your interest in different categories, receive the latest news timely fit your personality and region.',
+        'Explore your interest in different categories, receive the latest news on time fit your personality and region.',
     },
     slide2: {
       borowse: 'Browse widely,',
@@ -27,7 +27,7 @@ export default {
       info: 'As a beeter, use our special features to get a better experience.',
     },
     desc: {
-      about: 'About',
+      about: 'About Us',
       concat: 'Contact Us',
       community: 'Community Guidelines',
       terms: 'Terms of Use',

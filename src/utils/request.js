@@ -25,7 +25,7 @@ const emptyFunc = () => {};
  * @return {boolean} 成功true 失败false
  */
 const ajax = payload => {
-  console.log(payload, 'payload');
+  // console.log(payload, 'payload');
   if (!payload) {
     return false;
   }

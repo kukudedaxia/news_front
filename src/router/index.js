@@ -88,7 +88,6 @@ router.beforeEach((to, from, next) => {
   if (localStorage.getItem('lanuage')) {
     const lang = localStorage.getItem('lanuage');
     loadLanguageAsync(lang).then(() => {
-      console.log(2)
       next();
     });
   }

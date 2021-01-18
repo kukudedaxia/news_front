@@ -1,7 +1,7 @@
 <i18n>
 {
 "en": {
-    "title": "About",
+    "title": "About Us",
     "title-1": "What's beeto?",
     "paragraph-1":"Beeto is a multi-diverse content social media platform where Arabs can express themselves freely and speak their minds. Here, you can start creating, reading, sharing, discussing top trending hashtags and find the latest social media, celebrities and breaking news.",
     "paragraph-2": "The experience on Beeto is unlike any other social media platform; it's more engaging, fun, inspiring and helps you discover what the people around you are really thinking of and doing",
