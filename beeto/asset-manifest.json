@@ -14,7 +14,8 @@
       "dev-assets/fonts/SF-UI-Text-Regular.otf": "/dev-assets/fonts/SF-UI-Text-Regular.e9d00fbc.otf",
       "dev-assets/fonts/element-icons.woff": "/dev-assets/fonts/element-icons.535877f5.woff",
       "dev-assets/fonts/element-icons.ttf": "/dev-assets/fonts/element-icons.732389de.ttf",
-      "index.html": "/index.html"
+      "index.html": "/index.html",
+      "manifest.json": "/manifest.json"
     },
     "entrypoints": [
       "/dev-assets/js/web.js"

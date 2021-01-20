@@ -10,6 +10,7 @@ export default new Vuex.Store({
     topage: {},
     uicode: '',
     luicode: '',
+    slideIndex: 1,
   },
   mutations: {
     setLanguage(state, lang) {
@@ -23,10 +24,16 @@ export default new Vuex.Store({
       state.uicode = page.meta.uicode || '';
       state.toPage = page;
     },
+    setSlide(state, index) {
+      state.slideIndex = index;
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
       commit('setLanguage', lang);
+    },
+    changeSlide({ commit }, lang) {
+      commit('setSlide', lang);
     },
     // 埋点
     // eslint-disable-next-line no-empty-pattern

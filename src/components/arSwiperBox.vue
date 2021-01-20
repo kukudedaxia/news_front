@@ -39,7 +39,7 @@ export default {
           nextEl: '.swiper-button-prev',
           prevEl: '.swiper-button-next',
         },
-        preloadImages:false,
+        preloadImages: false,
         loop: true,
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
         observeParents: true, //修改swiper的父元素时，自动初始化swiper
@@ -66,8 +66,9 @@ export default {
   },
 
   mounted() {
+    console.log(111);
     this.swiper = this.$refs.mySwiper.$swiper;
-    this.swiper.slideTo(3, 0, false);
+    this.swiper.slideTo(1, 0, false);
     // const container = document.getElementById('swiper');
     // container.addEventListener('mouseenter', this.stop);
     // container.addEventListener('mouseleave', this.start);
