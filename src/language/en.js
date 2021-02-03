@@ -26,6 +26,11 @@ export default {
       features: 'exceptional features',
       info: 'As a beeter, use our special features to get a better experience.',
     },
+    slide5: {
+      let: 'Let it be and talk free!',
+      info:
+        'In Beeto chat and connect privately \n with various communities and countless number of people.',
+    },
     desc: {
       about: 'About Us',
       concat: 'Contact Us',

@@ -20,6 +20,9 @@
           <span data-swiper-parallax="-200">{{ $t('slide4.gift') }}</span>
           <span data-swiper-parallax="-300">{{ $t('slide4.features') }}</span>
         </template>
+        <template v-if="index == 5">
+          <span data-swiper-parallax="-100">{{ $t('slide5.let') }}</span>
+        </template>
       </p>
       <template>
         <p :class="['page-info', 'text-right', `page-info-${index}`]">
@@ -89,26 +92,6 @@ export default {
             ? 'https://img.bee-cdn.com/large/3b9ae203lz1gmnd1dw083j20780780sm.jpg'
             : 'https://img.bee-cdn.com/large/3b9ae203lz1gmm6b6zrwij203v03v3y9.jpg',
       },
-      imgList: [
-        {
-          small: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gmm520bk93j20n01837al.jpg',
-          small_ar: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gmm51gyqmzj20n0183jxf.jpg',
-          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm2ii672fj20n01837al.jpg',
-          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1n5dc2jj20n0183jxf.jpg',
-        },
-        {
-          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1q1bh2nj20n0183dky.jpg',
-          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1okq2uhj20n018378w.jpg',
-        },
-        {
-          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1r6610cj20n018343l.jpg',
-          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1ovuoi5j20n018379c.jpg',
-        },
-        {
-          normal: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1qmszswj20n0183agd.jpg',
-          normal_ar: 'https://img.bee-cdn.com/large/3b9ae203lz1gmm1q27eruj20n0183n3d.jpg',
-        },
-      ],
     };
   },
   computed: {
@@ -127,7 +110,7 @@ export default {
       form.method = 'get';
       form.setAttribute(
         'action',
-        `https://static.bee-cdn.com/static-resource/apk/Beeto.apk?time=${new Date().getTime()}`,
+        `https://static.bee-cdn.com/static-resource/apk/${window.$CONFIG.apkVersion}`,
       );
       document.body.appendChild(form);
       form.submit();
@@ -241,6 +224,10 @@ export default {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxmngexj20n0183dmf.jpg') no-repeat;
   background-size: 100% 100%;
 }
+.web-phone-5 {
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahjuoeexj20n0183dhf.jpg') no-repeat;
+  background-size: 100% 100%;
+}
 .code {
   width: 100%;
   height: 100%;
@@ -275,6 +262,11 @@ html[lang='ar'] .web-phone-3 {
 html[lang='ar'] .web-phone-4 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxyycdyj20n0183q9j.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+html[lang='ar'] .web-phone-5 {
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahncawh5j20n0183q4a.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>

@@ -1,24 +1,32 @@
 {
   "web": {
     "files": {
-      "dev-assets/js/0.js": "/dev-assets/js/0.js",
-      "dev-assets/js/1.js": "/dev-assets/js/1.js",
-      "dev-assets/js/2.js": "/dev-assets/js/2.js",
-      "dev-assets/js/3.js": "/dev-assets/js/3.js",
-      "dev-assets/js/4.js": "/dev-assets/js/4.js",
-      "dev-assets/js/5.js": "/dev-assets/js/5.js",
-      "lang-ar.js": "/dev-assets/js/lang-ar.js",
-      "web.js": "/dev-assets/js/web.js",
-      "dev-assets/fonts/SF-UI-Text-Bold.otf": "/dev-assets/fonts/SF-UI-Text-Bold.89d0374d.otf",
-      "dev-assets/fonts/SF-UI-Text-Heavy.otf": "/dev-assets/fonts/SF-UI-Text-Heavy.183dbf47.otf",
-      "dev-assets/fonts/SF-UI-Text-Regular.otf": "/dev-assets/fonts/SF-UI-Text-Regular.e9d00fbc.otf",
-      "dev-assets/fonts/element-icons.woff": "/dev-assets/fonts/element-icons.535877f5.woff",
-      "dev-assets/fonts/element-icons.ttf": "/dev-assets/fonts/element-icons.732389de.ttf",
-      "index.html": "/index.html",
-      "manifest.json": "/manifest.json"
+      "assets/css/chunk-07275dfb.5085996e.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-07275dfb.5085996e.css",
+      "assets/js/chunk-07275dfb.a23089e1.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-07275dfb.a23089e1.js",
+      "assets/css/chunk-0f85b10c.0e433876.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-0f85b10c.0e433876.css",
+      "assets/js/chunk-0f85b10c.6d075946.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-0f85b10c.6d075946.js",
+      "assets/css/chunk-23eb6b1a.4399229a.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-23eb6b1a.4399229a.css",
+      "assets/js/chunk-23eb6b1a.97ba6a25.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-23eb6b1a.97ba6a25.js",
+      "assets/css/chunk-27f702a0.0b83cd64.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-27f702a0.0b83cd64.css",
+      "assets/js/chunk-27f702a0.264d618d.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-27f702a0.264d618d.js",
+      "assets/css/chunk-2de472bf.cef16b9b.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-2de472bf.cef16b9b.css",
+      "assets/js/chunk-2de472bf.a845d4b9.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-2de472bf.a845d4b9.js",
+      "assets/css/chunk-62c97de8.9a9e8f83.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/chunk-62c97de8.9a9e8f83.css",
+      "assets/js/chunk-62c97de8.c7e91a3d.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/chunk-62c97de8.c7e91a3d.js",
+      "lang-ar.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/lang-ar.975c24c4.js",
+      "web.css": "//static.bee-cdn.com/static-resource/beeto/assets/css/web.f6801b07.css",
+      "web.js": "//static.bee-cdn.com/static-resource/beeto/assets/js/web.2c4a14ee.js",
+      "assets/fonts/SF-UI-Text-Bold.otf": "//static.bee-cdn.com/static-resource/beeto/assets/fonts/SF-UI-Text-Bold.89d0374d.otf",
+      "assets/fonts/SF-UI-Text-Heavy.otf": "//static.bee-cdn.com/static-resource/beeto/assets/fonts/SF-UI-Text-Heavy.183dbf47.otf",
+      "assets/fonts/SF-UI-Text-Regular.otf": "//static.bee-cdn.com/static-resource/beeto/assets/fonts/SF-UI-Text-Regular.e9d00fbc.otf",
+      "assets/fonts/element-icons.woff": "//static.bee-cdn.com/static-resource/beeto/assets/fonts/element-icons.535877f5.woff",
+      "assets/fonts/element-icons.ttf": "//static.bee-cdn.com/static-resource/beeto/assets/fonts/element-icons.732389de.ttf",
+      "favicon.ico": "//static.bee-cdn.com/static-resource/beeto/favicon.ico",
+      "index.html": "//static.bee-cdn.com/static-resource/beeto/index.html"
     },
     "entrypoints": [
-      "/dev-assets/js/web.js"
+      "//static.bee-cdn.com/static-resource/beeto/assets/css/web.f6801b07.css",
+      "//static.bee-cdn.com/static-resource/beeto/assets/js/web.2c4a14ee.js"
     ]
   }
 }

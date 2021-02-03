@@ -16,6 +16,7 @@
     </swiper-slide>
     <swiper-slide class="slide slide-bg-3"> <Slides index="3"/></swiper-slide>
     <swiper-slide class="slide slide-bg-4"> <Slides index="4"/></swiper-slide>
+    <!-- <swiper-slide class="slide slide-bg-5"> <Slides index="5"/></swiper-slide> -->
     <div class="swiper-button-prev custom-prev" slot="button-prev"></div>
     <div class="swiper-button-next custom-next" slot="button-next"></div>
   </swiper>
@@ -51,8 +52,13 @@ export default {
         on: {
           transitionEnd: () => {
             if (this.swiper) {
-              // console.log(this.swiper.activeIndex);
               const index = this.swiper.activeIndex;
+              // if (index == 0) {
+              //   this.swiper.slideTo(5, 0);
+              // }
+              // if (index == 6) {
+              //   this.swiper.slideTo(1, 0);
+              // }
               if (index == 0) {
                 this.swiper.slideTo(4, 0);
               }
@@ -122,23 +128,23 @@ export default {
 }
 // 背景
 .slide-bg-1 {
-  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv1z6t63j21hc0u0azp.jpg') no-repeat;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju7k2bhbj21hc0oo7pk.jpg') no-repeat; //webp720
   background-size: 100% 100%;
 }
 .slide-bg-2 {
-  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv54s5xkj21hc0u0e81.jpg') no-repeat;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9x4tg8j21hc0oo7wh.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .slide-bg-3 {
-  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv4jo235j21hc0u04qp.jpg') no-repeat;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9hsro1j21hc0oo1kx.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .slide-bg-4 {
-  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjv4vjse3j21hc0u01kx.jpg') no-repeat;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.slide-bg-5 {
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahq5pdkhj21hc0u0wod.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>

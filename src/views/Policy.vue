@@ -93,7 +93,7 @@
         Import tools.
       </p>
     </div>
-    <div id="policy_4">
+    <!-- <div id="policy_4">
       <h2>Sharing your personal information</h2>
       <p>
         We may share personal information about you with service providers which provide services to
@@ -135,7 +135,7 @@
         </li>
         <li>5) In other circumstances as required by law.</li>
       </ul>
-    </div>
+    </div> -->
     <div id="policy_5">
       <h2>Personal Information Protection</h2>
       <p>
@@ -254,7 +254,7 @@
         on the website and enforce our Agreements.
       </p>
     </div>
-    <div id="policy_11">
+    <!-- <div id="policy_11">
       <h2>Where do we operate?</h2>
       <p>
         The data we collect, including Personal Information, may be transferred internationally to
@@ -268,7 +268,7 @@
         Services, you understand and consent to the collection, storage, processing, and transfers
         or disclosures of your Personal Information as described in this policy.
       </p>
-    </div>
+    </div> -->
     <div id="policy_12">
       <h2>Use of cookies and web beacons</h2>
       <p>
@@ -428,7 +428,7 @@
         ديناميكي جديد، أو استخدام أدوات "بيتو Beeto" لاستيراد جهات الاتصال.
       </p>
     </div>
-    <div id="policy_4">
+    <!-- <div id="policy_4">
       <h2>مشاركة معلوماتك الشخصية</h2>
       <p>
         قد نشارك المعلومات الشخصية الخاصة بك مع مزودي الخدمة الذين يقدمون خدمات لنا. تشارك "بيتو
@@ -465,7 +465,7 @@
         </li>
         <li>5. في أية ظروف أخرى بمقتضى القانون.</li>
       </ul>
-    </div>
+    </div> -->
     <div id="policy_5">
       <h2>حماية المعلومات الشخصية</h2>
       <p>
@@ -573,7 +573,7 @@
         القانونية وحل النزاعات ومنع إساءة الاستخدام على الموقع الإلكتروني وإنفاذ اتفاقياتنا.
       </p>
     </div>
-    <div id="policy_11">
+    <!-- <div id="policy_11">
       <h2>مقر عملنا</h2>
       <p>
         يتم نقل البيانات التي نجمعها، بما في ذلك المعلومات الشخصية، دوليًا إلى مقرنا الرئيسي حيث قد
@@ -586,7 +586,7 @@
         استخدامك للخدمات، فأنت تفهم وتوافق على جمع معلوماتك الشخصية وتخزينها ومعالجتها ونقلها أو
         الكشف عنها كما هو موضح في هذه السياسة.
       </p>
-    </div>
+    </div> -->
     <div id="policy_12">
       <h2>ملفات تعريف الارتباط (Cookies) وإشارات الويب (web beacons)</h2>
       <p>
