@@ -16,7 +16,7 @@
     </swiper-slide>
     <swiper-slide class="slide slide-bg-3"> <Slides index="3"/></swiper-slide>
     <swiper-slide class="slide slide-bg-4"> <Slides index="4"/></swiper-slide>
-    <!-- <swiper-slide class="slide slide-bg-5"> <Slides index="5"/></swiper-slide> -->
+    <swiper-slide class="slide slide-bg-5"> <Slides index="5"/></swiper-slide>
     <div class="swiper-button-prev custom-prev" slot="button-prev"></div>
     <div class="swiper-button-next custom-next" slot="button-next"></div>
   </swiper>
@@ -53,18 +53,18 @@ export default {
           transitionEnd: () => {
             if (this.swiper) {
               const index = this.swiper.activeIndex;
-              // if (index == 0) {
-              //   this.swiper.slideTo(5, 0);
-              // }
-              // if (index == 6) {
-              //   this.swiper.slideTo(1, 0);
-              // }
               if (index == 0) {
-                this.swiper.slideTo(4, 0);
+                this.swiper.slideTo(5, 0);
               }
-              if (index == 5) {
+              if (index == 6) {
                 this.swiper.slideTo(1, 0);
               }
+              // if (index == 0) {
+              //   this.swiper.slideTo(4, 0);
+              // }
+              // if (index == 5) {
+              //   this.swiper.slideTo(1, 0);
+              // }
             }
           },
         },

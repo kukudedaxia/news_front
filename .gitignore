@@ -1,9 +1,10 @@
 .DS_Store
 node_modules
 /dist
-/beeto
-/beeto.tar
+/beeto/*
+beeto.tar
 .uploadTest.sh
+beeto
 
 
 # local env files
