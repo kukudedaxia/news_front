@@ -225,7 +225,7 @@ export default {
   background-size: 100% 100%;
 }
 .web-phone-5 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahjuoeexj20n0183dhf.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneyd8xce1j20n0183dhf.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .code {
@@ -266,7 +266,7 @@ html[lang='ar'] .web-phone-4 {
 }
 html[lang='ar'] .web-phone-5 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahncawh5j20n0183q4a.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneycilbekj20n0183dhk.jpg') no-repeat;
   background-size: 100% 100%;
 }
 </style>
