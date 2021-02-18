@@ -78,8 +78,8 @@
       <p class="no-indent">1) is required by law or regulations;</p>
       <p class="no-indent">2) is authorized by you (by your consent in clear terms);</p>
       <p class="no-indent">
-        3) complies with Beeto's Terms of Service, and the provisions set forth in the licensing
-        agreement.
+        3) complies with <a href="/terms" target="_blank">Beeto's Terms of Service</a>, and the provisions set forth
+        in the licensing agreement.
       </p>
       <p>
         In addition, you acknowledge and agree that to the extent permitted by current laws and
@@ -416,7 +416,7 @@
       <p class="no-indent">1. مطلوب بموجب القانون أو اللوائح التنظيمية؛</p>
       <p class="no-indent">2. مخول بواسطتك (بموافقتك بشروط واضحة)؛</p>
       <p class="no-indent">
-        3. متوافق مع شروط خدمة "بيتو Beeto"، والأحكام المنصوص عليها في اتفاقية الترخيص.
+        3. متوافق مع <a href="terms" target="_blank"> شروط خدمة "بيتو Beeto"</a>، والأحكام المنصوص عليها في اتفاقية الترخيص.
       </p>
       <p>
         بالإضافة إلى ذلك، فإنك تقر وتوافق على أنه إلى الحد الذي تسمح به القوانين واللوائح الحالية،
