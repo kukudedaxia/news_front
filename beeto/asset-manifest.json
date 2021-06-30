@@ -7,6 +7,7 @@
       "dev-assets/js/3.js": "/dev-assets/js/3.js",
       "dev-assets/js/4.js": "/dev-assets/js/4.js",
       "dev-assets/js/5.js": "/dev-assets/js/5.js",
+      "dev-assets/js/6.js": "/dev-assets/js/6.js",
       "lang-ar.js": "/dev-assets/js/lang-ar.js",
       "web.js": "/dev-assets/js/web.js",
       "dev-assets/fonts/SF-UI-Text-Bold.otf": "/dev-assets/fonts/SF-UI-Text-Bold.89d0374d.otf",
@@ -17,8 +18,7 @@
       "index.html": "/index.html"
     },
     "entrypoints": [
-      "/dev-assets/js/web.js",
-      "/web.fb753ae136f12340fce0.hot-update.js"
+      "/dev-assets/js/web.js"
     ]
   }
 }

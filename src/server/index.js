@@ -1,4 +1,4 @@
-import ajax from '../utils/request';
+import {ajax} from '../utils/request';
 import moment from 'moment';
 // 上报埋点
 export const sendReport = (params, callbacks) => {
@@ -30,5 +30,6 @@ export const sendReport = (params, callbacks) => {
     url: 'log/r?enc=0',
     data: data,
   };
+  console.log(req)
   return ajax({ req, ...callbacks });
 };

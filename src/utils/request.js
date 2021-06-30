@@ -15,7 +15,7 @@ request.interceptors.response.use(response => {
 
 const emptyFunc = () => {};
 /**
- * @description: 单次ajax请求，回调方式
+ * @description: 单次ajax请求，回调方式 后期同意放入vuex 删掉
  * @param {object} payload
  * @param {object} payload.req axios请求配置
  * @param {function} payload.onSuccess 成功回调
@@ -24,8 +24,8 @@ const emptyFunc = () => {};
  * @param {function} payload.onComplete 完成回调。
  * @return {boolean} 成功true 失败false
  */
-const ajax = payload => {
-  // console.log(payload, 'payload');
+export const ajax = payload => {
+  console.log(payload, 'payload');
   if (!payload) {
     return false;
   }
@@ -57,4 +57,4 @@ const ajax = payload => {
   return true;
 };
 
-export default ajax;
+export default request;
