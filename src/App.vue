@@ -4,7 +4,7 @@
       <Header />
     </div>
     <router-view v-wechat-title="$i18n.t($route.meta.title)" />
-    <Footer v-if="footerShow" />
+    <!-- <Footer v-if="footerShow" /> -->
   </div>
 </template>
 

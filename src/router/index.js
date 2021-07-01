@@ -63,6 +63,15 @@ const routes = [
       title: 'beeto',
     },
   },
+  // ---- 直播 ----
+  {
+    path: '/live',
+    name: 'Live',
+    component: () => import('../views/live/Index.vue'),
+    meta: {
+      title: 'beeto',
+    },
+  },
   {
     path: '*',
     redirect: { name: 'Home' },
