@@ -10,6 +10,8 @@
     "build:test": "vue-cli-service build --mode test"
   },
   "dependencies": {
+    "@rongcloud/imlib-v2": "^2.9.2",
+    "@rongcloud/plugin-rtc": "^5.1.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "css-vars-ponyfill": "^2.4.2",

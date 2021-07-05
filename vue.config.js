@@ -90,8 +90,8 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'http://m.whale.weibo.com/',
-        // target: 'http://m.bee.to/',
+        target: 'http://10.92.160.246:8080/',
+        pathRewrite: { '^/api': '' },
       },
     },
   },

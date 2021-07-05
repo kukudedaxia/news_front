@@ -5,6 +5,7 @@ import i18n, { setI18nLanguage } from './utils/i18n';
 import store from './store';
 
 import ElementUI from 'element-ui';
+import './theme/element/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
@@ -19,12 +20,11 @@ Vue.$i18n = i18n;
 
 setI18nLanguage(i18n.locale);
 
-
 // eslint-disable-next-line no-unused-vars
 function init() {
   // eslint-disable-next-line no-undef
   gapi.load('auth2', function() {
-     console.log(2222)
+    console.log(2222);
   });
 }
 

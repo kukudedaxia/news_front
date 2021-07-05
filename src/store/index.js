@@ -40,7 +40,7 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-empty-pattern
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
-      console.log(param,222)
+      console.log(param, 222);
       sendReport(param, {
         onSuccess: () => {
           // console.log(res, 'res');
@@ -69,10 +69,11 @@ export default new Vuex.Store({
         return false;
       }
       let req = {
-        baseURL: `//${window.location.host}/api/`,
+        baseURL: `/api`,
         method: 'get',
         headers: {
           'content-type': 'application/json',
+          auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -92,7 +93,7 @@ export default new Vuex.Store({
       request(reqConf)
         .then(res => {
           if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
-            payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
+            payload.onSuccess && payload.onSuccess(res.data.data, reqConf, res);
           } else {
             payload.onFail && payload.onFail(res.data, reqConf, res);
           }

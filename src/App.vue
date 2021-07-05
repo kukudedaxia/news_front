@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Header />
+      <!-- <Header /> -->
     </div>
     <router-view v-wechat-title="$i18n.t($route.meta.title)" />
     <!-- <Footer v-if="footerShow" /> -->
