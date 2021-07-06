@@ -3,12 +3,13 @@ import App from './App.vue';
 import router from './router';
 import i18n, { setI18nLanguage } from './utils/i18n';
 import store from './store';
+import VueClipboard from 'vue-clipboard2';
 
 import ElementUI from 'element-ui';
 import './theme/element/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(ElementUI);
+Vue.use(ElementUI).use(VueClipboard);
 // 动态title库
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);

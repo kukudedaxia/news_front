@@ -6,40 +6,59 @@
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.1)"
   >
-    <p>Video</p>
-    <!-- 连接超时 -->
-    <div class="timeout" v-if="timeout">
-      <p>Signal connection timed out</p>
-      <el-button type="primary" round size="small">Reload</el-button>
-    </div>
-    <!-- 未连接 -->
-    <div class="no_connect" v-if="noConnect">
-      <p>
-        Connect strearming software to go live
-      </p>
-    </div>
-    <!-- 直播结束 -->
-    <div class="finished" v-if="finished">
-      <p>
-        Your Beeto live has ended
-      </p>
-      <el-button type="primary" class="btn">
-        Allow Replay Live
-      </el-button>
-      <el-button plain class="btn">Refresh And Start A New Live</el-button>
-    </div>
+    <span class="video_msg">
+      <!-- 连接超时 -->
+      <div class="timeout" v-if="timeout">
+        <p>Signal connection timed out</p>
+        <el-button type="primary" round size="small">Reload</el-button>
+      </div>
+      <!-- 未连接 -->
+      <div class="no_connect" v-if="liveState === 0">
+        <p>
+          Connect strearming software to go live
+        </p>
+      </div>
+      <!-- 直播结束 -->
+      <div class="finished" v-if="liveState === 2">
+        <p>
+          Your Beeto live has ended
+        </p>
+        <el-button type="primary" class="btn" :disabled="saveReplay" @click="onSaveReplay">
+          Allow Replay Live
+        </el-button>
+        <el-button plain class="btn" @click="onRefresh">Refresh And Start A New Live</el-button>
+      </div>
+    </span>
+    <video id="videoNode" class="video" v-show="liveState === 1"></video>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    // 直播状态：0 未直播 1 直播中 2 已结束
+    liveState: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       timeout: false,
       loading: false,
       noConnect: false,
-      finished: false,
+      saveReplay: false, // 是否缓存直播视频
     };
+  },
+  methods: {
+    // 缓存本次直播视频
+    onSaveReplay() {
+      this.saveReplay = true;
+    },
+    // 重置信息
+    onRefresh() {
+      this.$emit('refresh');
+    },
   },
 };
 </script>
@@ -53,28 +72,47 @@ export default {
   height: 500px;
   width: 100%;
   color: #ffffff;
-  .timeout {
-    p {
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
+  position: relative;
+  .video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
   }
-  .no_connect {
-    color: #ffffff;
-  }
-  .finished {
-    color: #ffffff;
+  .video_msg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    p {
-      font-size: 24px;
-      margin-bottom: 20px;
+    z-index: 1;
+    .timeout {
+      p {
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
     }
-    .btn {
-      width: 250px;
-      margin-top: 15px;
-      margin-left: 0;
+    .no_connect {
+      color: #ffffff;
+    }
+    .finished {
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .btn {
+        width: 250px;
+        margin-top: 15px;
+        margin-left: 0;
+      }
     }
   }
 }

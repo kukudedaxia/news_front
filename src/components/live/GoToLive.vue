@@ -15,7 +15,12 @@
       </div>
       <div class="title-box">
         <p class="title">Beeto Live Title</p>
-        <el-input v-model="title" placeholder="Gigi`s Live"></el-input>
+        <el-input
+          v-model="title"
+          placeholder="Gigi`s Live"
+          maxlength="50"
+          :clearable="true"
+        ></el-input>
       </div>
     </div>
     <el-divider></el-divider>
@@ -23,7 +28,14 @@
       <p class="title">Server URL</p>
       <div class="flex">
         <el-input v-model="url"></el-input>
-        <el-button type="primary" style="margin-left:10px">Copy</el-button>
+        <el-button
+          type="primary"
+          style="margin-left:10px"
+          v-clipboard:copy="url"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+          >Copy</el-button
+        >
       </div>
       <span class="desc">
         1. This may be referred to as "URL" or "Address" in your streaming software
@@ -34,7 +46,14 @@
       <p class="title">Stream Key</p>
       <div class="flex">
         <el-input v-model="key"></el-input>
-        <el-button type="primary" style="margin-left:10px">Copy</el-button>
+        <el-button
+          type="primary"
+          style="margin-left:10px"
+          v-clipboard:copy="key"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+          >Copy</el-button
+        >
       </div>
       <span class="desc">
         2. This stream key is valid until you log out of Beeto
@@ -43,20 +62,42 @@
         3. Link source
       </span>
     </div>
-    <el-button type="primary" style="width: 200px">Start Live</el-button>
+    <el-button type="primary" style="width: 200px" :disabled="btnDisabled" @click="onLiveClick">{{
+      btnTextObj[liveState]
+    }}</el-button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    // 直播状态：0 未直播 1 直播中 2 已结束
+    liveState: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       title: '',
       url: '',
       key: '',
+      btnTextObj: {
+        0: 'Start Live',
+        1: 'End Live',
+        2: 'Live Ended',
+      },
       imageUrl:
         'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F08%2F20210608103243_1e19d.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627729841&t=981c92fd4308f515b003935cc114a26c',
     };
+  },
+  computed: {
+    btnDisabled() {
+      if (this.title && this.url && this.key && this.imageUrl && this.liveState !== 2) {
+        return false;
+      }
+      return true;
+    },
   },
   methods: {
     handleAvatarSuccess(res, file) {
@@ -73,6 +114,29 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
       return isJPG && isLt2M;
+    },
+    onLiveClick() {
+      this.$emit('liveState');
+    },
+    onClearData() {
+      this.title = '';
+      this.url = '';
+      this.key = '';
+      this.imageUrl = '';
+    },
+    // ----- copy ----- //
+    onCopy(e) {
+      this.$message({
+        message: '复制成功！',
+        type: 'success',
+      });
+    },
+    onError(e) {
+      // 复制失败
+      this.$message({
+        message: '复制失败！',
+        type: 'error',
+      });
     },
   },
 };
@@ -91,6 +155,7 @@ export default {
       display: block;
       font-size: 14px;
       margin-top: 10px;
+      color: #909399;
     }
   }
   .title_img {
