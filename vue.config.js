@@ -91,7 +91,7 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://m.whale.weibo.com/',
-        // target: 'http://m.bee.to/',
+        // pathRewrite: { '^/api': '' },
       },
     },
   },

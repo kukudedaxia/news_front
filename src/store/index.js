@@ -12,6 +12,7 @@ export default new Vuex.Store({
     uicode: '',
     luicode: '',
     slideIndex: 1,
+    userInfo: {},
   },
   mutations: {
     setLanguage(state, lang) {
@@ -28,13 +29,19 @@ export default new Vuex.Store({
     setSlide(state, index) {
       state.slideIndex = index;
     },
+    setUser(state, data) {
+      state.userInfo = data;
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
       commit('setLanguage', lang);
     },
-    changeSlide({ commit }, lang) {
-      commit('setSlide', lang);
+    changeSlide({ commit }, index) {
+      commit('setSlide', index);
+    },
+    changeUser({ commit }, data) {
+      commit('setUser', data);
     },
     // 埋点
     // eslint-disable-next-line no-empty-pattern
@@ -69,7 +76,7 @@ export default new Vuex.Store({
         return false;
       }
       let req = {
-        baseURL: `//${window.location.host}/api/`,
+        baseURL: '/',
         method: 'get',
         headers: {
           'content-type': 'application/json',
@@ -103,6 +110,31 @@ export default new Vuex.Store({
           payload.onComplete && payload.onComplete(err, null, reqConf, null);
         });
       return true;
+    },
+    // 获取用户信息 校验用户是否存在
+    async getUser(ctx) {
+      return new Promise(resolve => {
+        ctx.dispatch('ajax', {
+          req: {
+            method: 'get',
+            url: '/api/dispatch/to',
+            params: {
+              direct: 'user_profile_header',
+            },
+          },
+          onSuccess: res => {
+            console.log(res);
+            resolve(res.data);
+          },
+          onFail: () => {
+            resolve(false);
+          },
+          onComplete: () => {},
+          onError: () => {
+            resolve(false);
+          },
+        });
+      });
     },
   },
   modules: {},

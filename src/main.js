@@ -6,27 +6,27 @@ import store from './store';
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 Vue.use(ElementUI);
 // 动态title库
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
 
+import './directive';
+import tools from './utils/tools';
 import './APP.less';
 
 Vue.config.productionTip = false;
 Vue.$i18n = i18n;
+Vue.prototype.tools = tools;
 
 setI18nLanguage(i18n.locale);
 
+// if (process.env.NODE_ENV === 'development') {
+//   document.cookie =
+//     'SUB=_2Aijyav0qurQ7DaonC0fcSpHvzEeuX30mZK4OT4L6nawzs3Wy53M7lZLLGMyvWxwVt5IxwGkZ5ARsM_H5eFItG5g-dhDg;path=/;';
 
-// eslint-disable-next-line no-unused-vars
-function init() {
-  // eslint-disable-next-line no-undef
-  gapi.load('auth2', function() {
-     console.log(2222)
-  });
-}
+//   Vue.config.detools = true;
+// }
 
 new Vue({
   router,
