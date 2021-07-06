@@ -14,20 +14,22 @@ Vue.use(ElementUI).use(VueClipboard);
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
 
+import './directive';
+import tools from './utils/tools';
 import './APP.less';
 
 Vue.config.productionTip = false;
 Vue.$i18n = i18n;
+Vue.prototype.tools = tools;
 
 setI18nLanguage(i18n.locale);
 
-// eslint-disable-next-line no-unused-vars
-function init() {
-  // eslint-disable-next-line no-undef
-  gapi.load('auth2', function() {
-    console.log(2222);
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   document.cookie =
+//     'SUB=_2Aijyav0qurQ7DaonC0fcSpHvzEeuX30mZK4OT4L6nawzs3Wy53M7lZLLGMyvWxwVt5IxwGkZ5ARsM_H5eFItG5g-dhDg;path=/;';
+
+//   Vue.config.detools = true;
+// }
 
 new Vue({
   router,

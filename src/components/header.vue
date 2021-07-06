@@ -11,6 +11,18 @@
       @click="goHome"
     ></div>
     <div class="header-right">
+      <router-link to="/login" class="menu-item">Live</router-link>
+      <router-link to="/" class="menu-item">Home</router-link>
+      <div class="user">
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">
+            用户名
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="logout">logout</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
     </div>
   </div>
@@ -23,6 +35,17 @@ export default {
     return {
       theme: 'light',
     };
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
+    },
+    user() {
+      return this.$store.state.userInfo;
+    },
+    path() {
+      return this.$store.state.toPage.path;
+    },
   },
   methods: {
     changeLanuage() {
@@ -37,10 +60,30 @@ export default {
     goHome() {
       this.$router.push({ name: 'Home' });
     },
-  },
-  computed: {
-    lang() {
-      return this.$store.state.language;
+    handleCommand(command) {
+      this.logoutLoading = true;
+      if (command == 'logout') {
+        this.$message('用户退出登录 ' + command);
+        this.$store.dispatch('ajax', {
+          req: {
+            method: 'post',
+            url: `/sign/api/logout`,
+            data: {
+              entry: 'sinbad',
+              uid: '12341234',
+              sub: '23412341243',
+            },
+          },
+          onSuccess: (res) => {
+            console.log(res)
+            this.logoutLoading = false;
+          },
+          onFail: res => {
+            console.log(res);
+            this.logoutLoading = false;
+          },
+        });
+      }
     },
   },
 };
@@ -88,7 +131,16 @@ export default {
   -webkit-text-size-adjust: none;
   -webkit-transform: scale(0.83, 0.83);
 }
+.header-right {
+  display: flex;
+}
+.user {
+  margin: 0 20px;
+}
 html[lang='ar'] .lanuage {
   line-height: 20px;
+}
+.menu-item {
+  margin: 0 20px;
 }
 </style>

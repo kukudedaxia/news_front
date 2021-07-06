@@ -137,7 +137,7 @@ export default {
         this.$store.dispatch('ajax', {
           req: {
             method: 'post',
-            url: '/2/video/live/pre_check.json',
+            url: 'liveApi/2/video/live/pre_check.json',
             params: {
               live_type: 1,
               language: 0, // 0 英语  1 阿语

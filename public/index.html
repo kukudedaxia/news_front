@@ -7,18 +7,37 @@
     <link rel="icon" href="https://img.bee-cdn.com/large/3b9ae203lz1gmm3apev4kj200w00wq2p.jpg">
     <title><%= htmlWebpackPlugin.options.title %></title>
   
-
+   <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
     <!-- <meta name="google-signin-client_id" content="295411335410-rfpoqls277s5t104b6i1088o9d6rdadu.apps.googleusercontent.com"> -->
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <!-- <button id="sign-in-with-apple-button"> Sign In with Apple </button> -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
 
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"> -->
-<!-- <script src="https://apis.google.com/js/api:client.js"></script> -->
-<!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<script  async defer src="https://apis.google.com/js/api:client.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<!-- <script async defer type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script> -->
+
+
+<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+<!-- <script type="text/javascript">
+ 
+    AppleID.auth.init({
+        clientId: 'to.bee.m',
+        scope: 'name email',
+        redirectURI: 'https://m.bee.to',
+        state: 'initial',
+      });
+
+    const buttonElement = document.getElementById('sign-in-with-apple-button');
+    buttonElement.addEventListener('click', () => {
+        AppleID.auth.signIn();
+    });
+</script> -->
