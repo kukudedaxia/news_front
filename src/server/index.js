@@ -1,5 +1,5 @@
-import ajax from '../utils/request';
 import moment from 'moment';
+import store from '../store';
 // 上报埋点
 export const sendReport = (params, callbacks) => {
   let data = {
@@ -30,5 +30,6 @@ export const sendReport = (params, callbacks) => {
     url: 'log/r?enc=0',
     data: data,
   };
-  return ajax({ req, ...callbacks });
+  return store.dispatch('ajax', { req, ...callbacks });
 };
+
