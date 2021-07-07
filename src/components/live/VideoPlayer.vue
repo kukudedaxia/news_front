@@ -41,6 +41,7 @@ export default {
       type: Number,
       default: 0,
     },
+    lid: Number, // 直播id
   },
   data() {
     return {
@@ -53,7 +54,26 @@ export default {
   methods: {
     // 缓存本次直播视频
     onSaveReplay() {
-      this.saveReplay = true;
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/live/replay.json',
+          params: {
+            lid: this.lid, // 直播id, sdk获取
+            replay: 1,
+          },
+        },
+        onSuccess: () => {
+          this.$message({
+            message: 'replay success!',
+            type: 'success',
+          });
+          this.saveReplay = true;
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+      });
     },
     // 重置信息
     onRefresh() {

@@ -9,7 +9,7 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <img v-if="imgPid" :src="`https://img.bee-cdn.com/orj360/${imgPid}.jpg`" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>
@@ -62,9 +62,14 @@
         3. Link source
       </span>
     </div>
-    <el-button type="primary" style="width: 200px" :disabled="btnDisabled" @click="onLiveClick">{{
-      btnTextObj[liveState]
-    }}</el-button>
+    <el-button
+      type="primary"
+      style="width: 200px"
+      :loading="btnLoading"
+      :disabled="btnDisabled"
+      @click="onLiveClick"
+      >{{ btnTextObj[liveState] }}</el-button
+    >
   </div>
 </template>
 
@@ -75,6 +80,18 @@ export default {
     liveState: {
       type: Number,
       default: 0,
+    },
+    btnLoading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    btnDisabled() {
+      if (this.title && this.url && this.key && this.imgPid && this.liveState !== 2) {
+        return false;
+      }
+      return true;
     },
   },
   data() {
@@ -87,21 +104,12 @@ export default {
         1: 'End Live',
         2: 'Live Ended',
       },
-      imageUrl:
-        'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F08%2F20210608103243_1e19d.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627729841&t=981c92fd4308f515b003935cc114a26c',
+      imgPid: '3ba012bblz1grwynbdh5cj20u015u42h',
     };
-  },
-  computed: {
-    btnDisabled() {
-      if (this.title && this.url && this.key && this.imageUrl && this.liveState !== 2) {
-        return false;
-      }
-      return true;
-    },
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.imgPid = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
@@ -116,13 +124,18 @@ export default {
       return isJPG && isLt2M;
     },
     onLiveClick() {
-      this.$emit('liveState');
+      const param = {
+        live_type: 1, // 0:预约feed开播 1:直接开播
+        title: this.title,
+        cover_img: this.imgPid,
+      };
+      this.$emit('liveState', param);
     },
     onClearData() {
       this.title = '';
       this.url = '';
       this.key = '';
-      this.imageUrl = '';
+      this.imgPid = '';
     },
     // ----- copy ----- //
     onCopy(e) {

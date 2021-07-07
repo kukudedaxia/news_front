@@ -100,7 +100,7 @@ export default new Vuex.Store({
       request(reqConf)
         .then(res => {
           if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
-            payload.onSuccess && payload.onSuccess(res.data.data, reqConf, res);
+            payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
           } else {
             payload.onFail && payload.onFail(res.data, reqConf, res);
           }
