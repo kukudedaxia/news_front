@@ -14,7 +14,7 @@
               <input
                 placeholder="请输入内容"
                 v-model="phone"
-                @focus="phoneInputFocus"
+                @focus="errorHide"
                 @input="checkInputRules('phone', 11)"
                 class="input"
                 v-arInput
@@ -59,13 +59,14 @@
         <el-tab-pane label="Account Login" name="account">
           <div class="con">
             <div class="line">
-              <input placeholder="请输入密码" v-model="account" class="input" />
+              <input placeholder="请输入密码" v-model="account" class="input" @focus="errorHide" />
             </div>
             <div class="line">
               <input
                 placeholder="请输入密码"
                 v-model="password"
                 class="input"
+                @focus="errorHide"
                 :type="showPwd ? 'text' : 'password'"
               />
               <img
@@ -213,7 +214,7 @@ export default {
       // 限制长度
       this.tools.limitInputLength(this, ref, len);
     },
-    phoneInputFocus() {
+    errorHide() {
       this.errorMsg = '';
     },
     login() {

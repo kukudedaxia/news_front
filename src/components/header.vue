@@ -113,6 +113,21 @@ export default {
         },
       });
     },
+    signOutGoogle() {
+      if (window.google) {
+        window.google.accounts.id.cancel();
+        window.google.accounts.id.disableAutoSelect();
+        console.log('logoutgoogle');
+      }
+    },
+    signOutFaceBook() {
+      if (window.FB) {
+        window.FB.logout(function(response) {
+          console.log(response, 'logoutFacebook');
+          // user is now logged out
+        });
+      }
+    },
   },
 };
 </script>

@@ -21,28 +21,8 @@
         <span>FaceBook</span>
       </el-col>
       <el-col :span="8">
-        <img :src="require('../assets/images/apple2.png')" />
         <span>Apple</span>
       </el-col>
-      <!-- <el-col :span="8" class="item">
-        <div
-          id="g_id_onload"
-          data-client_id="323627425448-i3697bcdimd39k3qrdqcp85iju447s1v.apps.googleusercontent.com"
-          data-context="signin"
-          data-ux_mode="popup"
-          data-callback="loginGoogle"
-          data-auto_prompt="false"
-        ></div>
-        <div
-          class="g_id_signin"
-          data-type="standard"
-          data-shape="rectangular"
-          data-theme="outline"
-          data-text="signin_with"
-          data-size="large"
-          data-logo_alignment="left"
-        ></div>
-      </el-col> -->
     </el-row>
     <div class="g_id_signout">Sign Out</div>
     <div>
@@ -60,25 +40,25 @@ export default {
   },
   created() {},
   mounted() {
+    this.initNewgoogle();
+    // console.log(window.google);
     setTimeout(() => {
-      this.loadGoogle();
+      // this.loadGoogle();
       this.initFB();
-    }, 200);
+    }, 3000);
   },
   methods: {
-    // google
-    loadGoogle() {
-      const that = this;
-      console.log(window.gapi);
-      window.gapi.load('auth2', function() {
-        // Retrieve the singleton for the GoogleAuth library and set up the client.
-        window.auth2 = window.gapi.auth2.init({
-          client_id: '295411335410-rfpoqls277s5t104b6i1088o9d6rdadu.apps.googleusercontent.com',
-          scope: 'profile email',
-          // Request scopes in addition to 'profile' and 'email'
-          // scope: 'additional_scope'
-        });
-        that.attachSignin(document.getElementById('customBtn'));
+    initNewgoogle() {
+      window.google.accounts.id.initialize({
+        client_id: '323627425448-i3697bcdimd39k3qrdqcp85iju447s1v.apps.googleusercontent.com',
+        // client_id: '295411335410-rfpoqls277s5t104b6i1088o9d6rdadu.apps.googleusercontent.com',
+        context: 'signin',
+        ux_mode: 'popup',
+        skip_prompt_cookie: 'sid',
+        callback: response => {
+          console.log(response);
+          this.thirdLogin('2', response);
+        },
       });
       var em = document.getElementById('customBtn');
       window.google.accounts.id.renderButton(em, {
