@@ -12,6 +12,8 @@ export default new Vuex.Store({
     uicode: '',
     luicode: '',
     slideIndex: 1,
+    uid: '',
+    userInfo: {},
   },
   mutations: {
     setLanguage(state, lang) {
@@ -28,19 +30,27 @@ export default new Vuex.Store({
     setSlide(state, index) {
       state.slideIndex = index;
     },
+    setUid(state, data) {
+      state.uid = data;
+    },
+    setUser(state, data) {
+      state.userInfo = data;
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
       commit('setLanguage', lang);
     },
-    changeSlide({ commit }, lang) {
-      commit('setSlide', lang);
+    changeSlide({ commit }, index) {
+      commit('setSlide', index);
+    },
+    changeUid({ commit }, data) {
+      commit('setUid', data);
     },
     // 埋点
     // eslint-disable-next-line no-empty-pattern
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
-      console.log(param,222)
       sendReport(param, {
         onSuccess: () => {
           // console.log(res, 'res');
@@ -73,6 +83,7 @@ export default new Vuex.Store({
         method: 'get',
         headers: {
           'content-type': 'application/json',
+          // auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -103,6 +114,32 @@ export default new Vuex.Store({
           payload.onComplete && payload.onComplete(err, null, reqConf, null);
         });
       return true;
+    },
+    // 获取用户信息 校验用户是否存在
+    async getUser(ctx) {
+      return new Promise(resolve => {
+        ctx.dispatch('ajax', {
+          req: {
+            method: 'get',
+            url: '/api/dispatch/to',
+            params: {
+              direct: 'user_profile_header',
+              uid: ctx.state.uid
+            },
+          },
+          onSuccess: res => {
+            ctx.state.userInfo = res.data.user;
+            resolve(res.data);
+          },
+          onFail: () => {
+            resolve(false);
+          },
+          onComplete: () => {},
+          onError: () => {
+            resolve(false);
+          },
+        });
+      });
     },
   },
   modules: {},

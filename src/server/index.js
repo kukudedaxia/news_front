@@ -27,7 +27,7 @@ export const sendReport = (params, callbacks) => {
   };
   let req = {
     method: 'post',
-    url: 'log/r?enc=0',
+    url: 'api/log/r?enc=0',
     data: data,
   };
   console.log(req)

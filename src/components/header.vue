@@ -11,11 +11,22 @@
       @click="goHome"
     ></div>
     <div class="header-right">
+      <router-link to="/live" class="menu-item">Live</router-link>
+      <router-link to="/" class="menu-item">Home</router-link>
+      <div class="user" v-if="Object.keys(user).length > 0">
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link"> 用户名:{{ user.nickname }} </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="logout">logout</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
     </div>
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie';
 import { loadLanguageAsync } from '@/utils/i18n';
 export default {
   name: 'Header',
@@ -23,6 +34,29 @@ export default {
     return {
       theme: 'light',
     };
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
+    },
+    user() {
+      return this.$store.state.userInfo;
+    },
+    path() {
+      return this.$store.state.toPage.path;
+    },
+    uid() {
+      return this.$store.state.uid;
+    },
+  },
+  watch: {
+    uid(v) {
+      if (v) {
+        this.$store.dispatch('getUser');
+      } else {
+        this.$store.commit('setUser', {});
+      }
+    },
   },
   methods: {
     changeLanuage() {
@@ -37,14 +71,56 @@ export default {
     goHome() {
       this.$router.push({ name: 'Home' });
     },
-  },
-  computed: {
-    lang() {
-      return this.$store.state.language;
+    handleCommand(command) {
+      this.logoutLoading = true;
+      if (command == 'logout') {
+        this.$confirm(
+          '<strong>Are you sure want to log outof the current login</strong>',
+          'SignOut',
+          {
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cancel',
+            cancelButtonClass: 'cancel-btn',
+            confirmButtonClass: 'confirm-btn',
+            type: '',
+            customClass: 'custom-message',
+            dangerouslyUseHTMLString: true,
+          },
+        )
+          .then(() => {
+            this.logout();
+          })
+          .catch(() => {});
+      }
+    },
+    logout() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: `/sign/api/logout`,
+          data: {
+            entry: 'sinbad',
+            sub: Cookies.get('SUB'),
+          },
+        },
+        onSuccess: res => {
+          console.log(res);
+          Cookies.remove('uid');
+          this.$router.push('/');
+        },
+        onFail: res => {
+          console.log(res);
+        },
+      });
     },
   },
 };
 </script>
+<style lang="less">
+.custom-message {
+  vertical-align: inherit;
+}
+</style>
 <style lang="less">
 .header {
   display: flex;

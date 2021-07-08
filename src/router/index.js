@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '../store';
+import Cookies from 'js-cookie';
 import { loadLanguageAsync } from '../utils/i18n';
 
 Vue.use(VueRouter);
@@ -63,6 +64,24 @@ const routes = [
       title: 'beeto',
     },
   },
+  // ---- 直播 ----
+  {
+    path: '/live',
+    name: 'Live',
+    component: () => import('../views/live/Index.vue'),
+    meta: {
+      title: 'beeto',
+      auth: true,
+    },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+    meta: {
+      title: 'Login',
+    },
+  },
   {
     path: '*',
     redirect: { name: 'Home' },
@@ -103,7 +122,30 @@ router.beforeEach((to, from, next) => {
   if (to.meta.uicode) {
     store.dispatch('send', { action: '5141' });
   }
-  next();
+  console.log(to, 'to');
+  store.commit('changeFromPage', from);
+  store.commit('changeToPage', to);
+  store.dispatch('changeUid', Cookies.get('uid'));
+  if (to.meta.auth) {
+    if (Cookies.get('uid')) {
+      // 离开行为 如果用户此时登录成功去登录页 自动跳回首页
+      if (to.path === '/login') {
+        next('/');
+      } else {
+        next();
+      }
+    } else {
+      if (to.path === '/login') {
+        console.log(2);
+        next();
+      } else {
+        console.log(3);
+        next(`/login?redirect=${to.path}`);
+      }
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
