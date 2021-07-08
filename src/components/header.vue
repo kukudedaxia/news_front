@@ -164,7 +164,16 @@ export default {
   -webkit-text-size-adjust: none;
   -webkit-transform: scale(0.83, 0.83);
 }
+.header-right {
+  display: flex;
+}
+.user {
+  margin: 0 20px;
+}
 html[lang='ar'] .lanuage {
   line-height: 20px;
+}
+.menu-item {
+  margin: 0 20px;
 }
 </style>

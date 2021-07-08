@@ -21,12 +21,27 @@
               />
             </div>
             <div class="line">
-              <el-input placeholder="请输入验证码" v-model="verifyCode">
-                <template slot="append">
-                  <span>get verification Code</span>
-                </template>
-              </el-input>
+              <input
+                placeholder="请输入验证码"
+                v-model="verifyCode"
+                class="input"
+                @input="checkInputRules('verifyCode', 6)"
+              />
+              <template>
+                <span
+                  class="send"
+                  v-if="!codeLoading"
+                  @click="phoneLengthCorrect ? sendCode() : ''"
+                >
+                  {{ codeTimes > 0 ? `${codeTimes}s` : 'get verification Code' }}
+                </span>
+                <loading :isComplete="false" v-else style="width: 20px" />
+              </template>
             </div>
+            <p class="tip_info" v-if="errorMsg">
+              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <span class="no-flip-over">{{ errorMsg }}</span>
+            </p>
           </div>
           <el-button
             class="login-btn"
@@ -44,10 +59,24 @@
         <el-tab-pane label="Account Login" name="account">
           <div class="con">
             <div class="line">
-              <el-input placeholder="请输入内容" v-model="account"> </el-input>
+              <input placeholder="请输入密码" v-model="account" class="input" />
             </div>
             <div class="line">
-              <el-input placeholder="请输入密码" v-model="password"> </el-input>
+              <input
+                placeholder="请输入密码"
+                v-model="password"
+                class="input"
+                :type="showPwd ? 'text' : 'password'"
+              />
+              <img
+                :src="
+                  showPwd
+                    ? require('@/assets/images/pwd_open.png')
+                    : require('@/assets/images/pwd_close.png')
+                "
+                class="icon-pwd"
+                @click="showPwd = !showPwd"
+              />
             </div>
           </div>
           <p class="tip_info" v-if="errorMsg">
@@ -79,6 +108,7 @@ import ThirdLogin from '@/components/thirdLogin';
 export default {
   name: 'Login',
   components: {
+    Loading,
     ThirdLogin,
   },
   data() {
@@ -101,6 +131,27 @@ export default {
   created() {
     this.getArea();
   },
+  computed: {
+    // 手机号位数是否输入正确
+    phoneLengthCorrect() {
+      if (this.phone.length > 6 && this.phone.length < 12) {
+        return true;
+      }
+      return false;
+    },
+    disabled() {
+      if (this.activeName == 'phone') {
+        if (this.verifyCode != '' && this.verifyCode.length === 6 && this.phoneLengthCorrect) {
+          return false;
+        }
+      } else {
+        if (this.account && this.password) {
+          return false;
+        }
+      }
+      return true;
+    },
+  },
   methods: {
     changeTab() {
       this.errorMsg = '';
@@ -109,7 +160,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: '/web/country/list',
+          url: '/api/web/country/list',
         },
         onSuccess: res => {
           this.areaList = res.data;
@@ -223,5 +274,44 @@ export default {
 .info {
   font-size: 12px;
   margin-top: 10px;
+}
+.send {
+  cursor: pointer;
+}
+.tip_info {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin-top: 12px;
+  color: #ee3b23;
+  display: flex;
+  align-items: center;
+  .icon_warn {
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    margin-top: 1px;
+    // vertical-align: -2px;
+  }
+}
+
+.input {
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  flex: 1;
+  &:focus {
+    outline: 0;
+  }
+  &::placeholder {
+    color: #c9cdd8;
+  }
+}
+.icon-pwd {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }
 </style>

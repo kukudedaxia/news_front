@@ -79,7 +79,7 @@ export default new Vuex.Store({
         return false;
       }
       let req = {
-        baseURL: `//${window.location.host}/api/`,
+        baseURL: '/',
         method: 'get',
         headers: {
           'content-type': 'application/json',

@@ -4,7 +4,7 @@ node_modules
 /beeto/*
 beeto.tar
 .uploadTest.sh
-beeto
+beeto/
 
 
 # local env files

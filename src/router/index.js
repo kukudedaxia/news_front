@@ -104,19 +104,15 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err);
 };
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   window.scrollTo(0, 0);
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
-  // 离开行为
-  store.commit('changeFromPage', from);
-  store.commit('changeToPage', to);
+
   // 持续保持语言
   if (localStorage.getItem('lanuage')) {
     const lang = localStorage.getItem('lanuage');
-    loadLanguageAsync(lang).then(() => {
-      next();
-    });
+    await loadLanguageAsync(lang);
   }
   //埋点
   if (to.meta.uicode) {
