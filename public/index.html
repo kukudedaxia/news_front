@@ -8,6 +8,8 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   
    <script src="https://accounts.google.com/gsi/client" async defer></script>
+   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script async defer type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
     <!-- <meta name="google-signin-client_id" content="295411335410-rfpoqls277s5t104b6i1088o9d6rdadu.apps.googleusercontent.com"> -->
   </head>
   <body>
@@ -24,41 +26,4 @@
   </body>
 </html>
 
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" async defer> -->
-<!-- <script  async defer src="https://apis.google.com/js/api:client.js"></script> -->
-<!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<!-- <script async defer type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script> -->
 
-
-<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
-<!-- <script type="text/javascript">
- 
-    AppleID.auth.init({
-        clientId: 'to.bee.m',
-        scope: 'name email',
-        redirectURI: 'https://m.bee.to',
-        state: 'initial',
-      });
-
-    const buttonElement = document.getElementById('sign-in-with-apple-button');
-    buttonElement.addEventListener('click', () => {
-        AppleID.auth.signIn();
-    });
-</script> -->
-
-
-<script>
-  // window.onload = function () {
-  //   console.log(window.google)
-  //   window.google.accounts.id.initialize({
-  //     client_id: '323627425448-i3697bcdimd39k3qrdqcp85iju447s1v.apps.googleusercontent.com',
-  //     callback: () => {}
-  //   });
-  //   window.google.accounts.id.prompt((notification) => {
-  //       if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-  //           // try next provider if OneTap is not displayed or skipped
-  //       }
-  //   });
-  // }
-</script>

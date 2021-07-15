@@ -10,7 +10,7 @@
         </div>
       </el-col>
       <el-col :span="8" class="item">
-        <div class="item" @click="initApple">
+        <div class="item" @click="loginInApple">
           <img :src="require('../assets/images/apple2.png')" />
         </div>
       </el-col>
@@ -28,9 +28,18 @@
     <div>
       <span @click="signOutGoogle">Exit Google</span>
     </div>
+    <!-- <div
+      id="appleid-signin"
+      class="signin-button"
+      data-mode="logo-only"
+      data-color="black"
+      data-border="true"
+      data-type="sign-in"
+    ></div> -->
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie';
 export default {
   name: 'ThirdLogin',
   data() {
@@ -43,9 +52,9 @@ export default {
     this.initNewgoogle();
     // console.log(window.google);
     setTimeout(() => {
-      // this.loadGoogle();
+      this.initApple();
       this.initFB();
-    }, 3000);
+    }, 10);
   },
   methods: {
     initNewgoogle() {
@@ -76,9 +85,14 @@ export default {
       // });
     },
     thirdLogin(type, data) {
+      const that = this;
       let accesstoken = '';
+      let thirduid = '123';
       if (type == '2') {
         accesstoken = data.credential;
+      } else {
+        accesstoken = data.authResponse.accessToken;
+        thirduid = data.authResponse.userID;
       }
       this.$store.dispatch('ajax', {
         req: {
@@ -88,12 +102,17 @@ export default {
             entry: 'sinbad',
             site: type,
             accesstoken,
-            thirduid: '123',
+            thirduid: thirduid,
             vid: window.$CONFIG ? window.$CONFIG.user : '',
           },
         },
         onSuccess: res => {
           console.log(res, 'thirdLogin');
+          const uid = res.data.user.id;
+          const replaceUrl = that.$route.query.redirect || '/';
+          Cookies.set('uid', uid);
+          Cookies.set('SUB', res.data.gsid);
+          this.$router.push({ path: replaceUrl });
         },
         onFail: res => {
           console.log(res);
@@ -168,10 +187,10 @@ export default {
       });
     },
     FBlogin() {
-      console.log(222);
       window.FB.login(function(response) {
         console.log(response, 'respingse');
         if (response.authResponse) {
+          this.thirdLogin('2', response);
           console.log('Welcome!  Fetching your information.... ');
           window.FB.api('/me', function(response) {
             console.log('Good to see you, ' + response.name + '.');
@@ -185,6 +204,7 @@ export default {
       // Called when a person is finished with the Login Button.
       window.FB.getLoginStatus(function(response) {
         // See the onlogin handler
+        
         if (response.status === 'connected') {
           // The user is logged in and has authenticated your
           // app, and response.authResponse supplies
@@ -208,7 +228,7 @@ export default {
     // apple
     async initApple() {
       console.log(window.AppleID);
-      this.loginInApple();
+      this.listenApple();
       window.AppleID.auth.init({
         clientId: 'to.bee.m',
         scope: 'name email',
@@ -218,6 +238,8 @@ export default {
         // nonce: '[NONCE]',
         usePopup: true, //or false defaults to false
       });
+    },
+    async loginInApple() {
       try {
         const data = await window.AppleID.auth.signIn();
         console.log(data);
@@ -226,7 +248,7 @@ export default {
         console.log(error);
       }
     },
-    loginInApple() {
+    listenApple() {
       //Listen for authorization success
       document.addEventListener('AppleIDSignInOnSuccess', data => {
         console.log(data);
@@ -242,6 +264,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.wrap {
+  min-height: 200px;
+}
 .icons {
   max-width: 300px;
   margin: 0 auto;
