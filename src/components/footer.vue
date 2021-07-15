@@ -25,7 +25,7 @@
 .bottom-info {
   height: 100px;
   display: flex;
-  width: 900px;
+  width: 1130px;
   justify-content: space-around;
   line-height: 100px;
   a {

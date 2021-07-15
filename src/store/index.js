@@ -83,7 +83,7 @@ export default new Vuex.Store({
         method: 'get',
         headers: {
           'content-type': 'application/json',
-          // auth_uid: 1000003338,
+          auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -124,7 +124,7 @@ export default new Vuex.Store({
             url: '/api/dispatch/to',
             params: {
               direct: 'user_profile_header',
-              uid: ctx.state.uid
+              uid: ctx.state.uid,
             },
           },
           onSuccess: res => {

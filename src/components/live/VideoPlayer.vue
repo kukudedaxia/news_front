@@ -89,16 +89,18 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #535c63;
-  height: 500px;
+  // height: 500px;
+  height: 100%;
   width: 100%;
   color: #ffffff;
   position: relative;
   .video {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    left: 20px;
+    top: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 4px;
   }
   .video_msg {
     position: absolute;
