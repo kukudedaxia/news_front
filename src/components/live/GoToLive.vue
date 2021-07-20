@@ -5,8 +5,10 @@
         <el-upload
           class="avatar-uploader"
           action="#"
+          ref="upload"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
+          v-loading="uploadLoading"
         >
           <img v-if="imgPid" :src="`https://img.bee-cdn.com/orj360/${imgPid}.jpg`" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -26,11 +28,11 @@
     <div class="item-box">
       <p class="title">Server URL</p>
       <div class="flex">
-        <el-input v-model="url"></el-input>
+        <el-input v-model="pushUrl"></el-input>
         <el-button
           type="primary"
           style="margin-left:10px"
-          v-clipboard:copy="url"
+          v-clipboard:copy="pushUrl"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
           >Copy</el-button
@@ -44,11 +46,11 @@
     <div class="item-box">
       <p class="title">Stream Key</p>
       <div class="flex">
-        <el-input v-model="key"></el-input>
+        <el-input v-model="streamKey"></el-input>
         <el-button
           type="primary"
           style="margin-left:10px"
-          v-clipboard:copy="key"
+          v-clipboard:copy="streamKey"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
           >Copy</el-button
@@ -87,10 +89,12 @@ export default {
       type: Boolean,
       default: false,
     },
+    streamKey: String,
+    pushUrl: String,
   },
   computed: {
     btnDisabled() {
-      if (this.title && this.url && this.key && this.imgPid && this.liveState !== 2) {
+      if (this.title && this.pushUrl && this.streamKey && this.imgPid && this.liveState !== 2) {
         return false;
       }
       return true;
@@ -99,8 +103,6 @@ export default {
   data() {
     return {
       title: '',
-      url: '',
-      key: '',
       btnTextObj: {
         0: 'Start Live',
         1: 'End Live',
@@ -108,10 +110,19 @@ export default {
       },
       imgPid: '3ba012bblz1grwynbdh5cj20u015u42h',
       file: '',
+      uploadLoading: false,
     };
   },
+  created() {},
   methods: {
-    async beforeAvatarUpload(file) {
+    // 图片上传前拦截函数
+    beforeAvatarUpload(file) {
+      this.uploadLoading = true;
+      this.uploadImg(file);
+      return false;
+    },
+    // 图片上传
+    async uploadImg(file) {
       try {
         this.file = file;
         const base64 = await fileByBase64(file);
@@ -124,25 +135,27 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `/sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=7268104713&raw_md5=${md5}`,
-          async: false,
+              url: `/sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
+          async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
           headers: {
             Accept: 'application/json',
           },
           success: res => {
+            this.uploadLoading = false;
             this.imgPid = res.pic.pid;
           },
           error: err => {
-            console.log(err);
+            this.uploadLoading = false;
+            this.$message.error(err);
           },
         });
       } catch (error) {
         console.error(error);
       }
-      return false;
     },
+    // 按钮点击
     onLiveClick() {
       const param = {
         live_type: 1, // 0:预约feed开播 1:直接开播
@@ -151,10 +164,11 @@ export default {
       };
       this.$emit('liveState', param);
     },
+    // 清空数据
     onClearData() {
       this.title = '';
-      this.url = '';
-      this.key = '';
+      this.pushUrl = '';
+      this.streamKey = '';
       this.imgPid = '';
     },
     // ----- copy ----- //

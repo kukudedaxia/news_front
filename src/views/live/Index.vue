@@ -6,6 +6,8 @@
           <go-live
             :liveState="liveState"
             :btnLoading="goLiveBtnLoading"
+            :pushUrl="pushUrl"
+            :streamKey="streamKey"
             @liveState="onLiveClick"
             ref="goLiveRef"
           ></go-live>
@@ -27,7 +29,15 @@
       <p class="dialog-title">Edit live beeto,let more people see</p>
       <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="blobText"> </el-input>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" size="small" @click="dialogVisible = false">Release</el-button>
+        <el-button
+          type="primary"
+          size="small"
+          :disabled="blobText == ''"
+          :loading="releaseLoading"
+          @click="startLive()"
+        >
+          Release
+        </el-button>
       </span>
     </el-dialog>
   </div>
@@ -62,19 +72,30 @@ export default {
       activeName: '1',
       scheduledTabDisabled: false, // 预约开播tab是否可点击
       liveState: 0, // 0 未直播 1 直播中 2 已结束
-      blobText: '', // 博文
       blobTextDialogShow: false, // 博文dialog显示
       goLiveBtnLoading: false,
       // 直播参数
       room: null, // 房间实例
       audioTrack: null,
       videoTrack: null,
-      lid: null, // 房间号/直播id
       liveUrl: null, // 直播订阅地址
+      // ------ new ------ //
+      releaseLoading: false,
+      uid: 1000005298,
+      pushUrl: null, // 推流地址
+      pullUrl: null, // 拉流地址
+      streamKey: null, // 密钥
+      lid: null, // 直播间id
+      title: '', // 标题
+      cover_img: '', // 封面id
+      live_type: 1, // 0:预约feed开播 1:直接开播
+      blobText: '', // 博文内容
     };
   },
+  created() {},
   mounted() {
-    this.liveHandler();
+    this.init();
+    // this.liveHandler();
   },
   methods: {
     liveHandler() {
@@ -85,10 +106,13 @@ export default {
       try {
         this.goLiveBtnLoading = true;
         if (this.liveState === 0) {
-          // 开播
-          this.startLive(param);
+          // 应该走开播前校验接口，但是后端未完成，现在直接弹出博文输入框
+          this.live_type = param.live_type;
+          this.title = param.title;
+          this.cover_img = param.cover_img;
+          // this.startLive(param);
+          this.blobTextDialogShow = true;
         } else if (this.liveState === 1) {
-          this.goLiveBtnLoading = false;
           // 下播
           this.$confirm(
             'People are still watching your Beeto Live. Do you want to continue and end Beeto Live?',
@@ -104,52 +128,74 @@ export default {
             })
             .catch(() => {});
         }
+        this.goLiveBtnLoading = false;
       } catch (error) {
         console.error(error);
       }
     },
     // 开播
-    async startLive(param) {
-      try {
-        const _this = this;
-        const [audioTrack, videoTrack] = await createMicrophoneAndCameraTracks();
-        this.audioTrack = audioTrack;
-        this.videoTrack = videoTrack;
-        // 获取roomId
-        const { lid } = await this.preCheck();
-        this.lid = lid;
-        // 加入房间
-        const room = (this.room = await joinLivingRoom(lid));
-
-        // 设置音视频参数
-        await createCameraVideoTrack();
-        // 推流
-        const liveUrl = (this.liveUrl = await publish(room, audioTrack, videoTrack));
-        await setLayoutMode(room);
-        // 走后端开播接口
-        await this.startLiveApi(param);
-        // 获取观众实例
-        const audience = (this.audience = getAudienceClient());
-        // 订阅直播地址
-        await subscribe(audience, liveUrl);
-        this.goLiveBtnLoading = false;
-
-        // 注册流数据监听
-        audience.registerTrackEventListener({
-          /**
-           * 订阅的音视频流通道已建立, track 已可以进行播放
-           * @param track RCRemoteTrack 类实例
-           */
-          onTrackReady(track) {
-            const videoNode = document.querySelector('#videoNode');
-            // const videoNode = _this.$refs.videoRef.$el.querySelector('#videoNode');
-            track.play(videoNode);
-            _this.liveState = 1; // 设置为直播中
+    startLive() {
+      this.releaseLoading = true;
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/pc/start.json',
+          params: {
+            uid: this.uid,
+            lid: this.lid,
+            pushUrl: this.pushUrl,
+            title: this.title,
+            coverPid: this.cover_img,
+            statusContent: this.blobText,
+            liveUrl: 'test',
           },
-        });
-      } catch (error) {
-        this.$message.error(error);
-      }
+        },
+        onSuccess: ({ data }) => {
+          console.log(data);
+        },
+        onComplete: () => {
+          this.blobTextDialogShow = false;
+          this.releaseLoading = false;
+        },
+      });
+      // try {
+      // const _this = this;
+      // const [audioTrack, videoTrack] = await createMicrophoneAndCameraTracks();
+      // this.audioTrack = audioTrack;
+      // this.videoTrack = videoTrack;
+      // // 获取roomId
+      // const { lid } = await this.preCheck();
+      // this.lid = lid;
+      // // 加入房间
+      // const room = (this.room = await joinLivingRoom(lid));
+      // // 设置音视频参数
+      // await createCameraVideoTrack();
+      // // 推流
+      // const liveUrl = (this.liveUrl = await publish(room, audioTrack, videoTrack));
+      // await setLayoutMode(room);
+      // // 走后端开播接口
+      // await this.startLiveApi(param);
+      // // 获取观众实例
+      // const audience = (this.audience = getAudienceClient());
+      // // 订阅直播地址
+      // await subscribe(audience, liveUrl);
+      // this.goLiveBtnLoading = false;
+      // // 注册流数据监听
+      // audience.registerTrackEventListener({
+      //   /**
+      //    * 订阅的音视频流通道已建立, track 已可以进行播放
+      //    * @param track RCRemoteTrack 类实例
+      //    */
+      //   onTrackReady(track) {
+      //     const videoNode = document.querySelector('#videoNode');
+      //     // const videoNode = _this.$refs.videoRef.$el.querySelector('#videoNode');
+      //     track.play(videoNode);
+      //     _this.liveState = 1; // 设置为直播中
+      //   },
+      // });
+      // } catch (error) {
+      //   this.$message.error(error);
+      // }
     },
     // 下播
     async stopLive() {
@@ -238,6 +284,120 @@ export default {
     onRefresh() {
       this.liveState = 0;
       this.$refs.goLiveRef.onClearData();
+    },
+    // ------- 新的逻辑 ------ //
+    init() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/pc/init.json',
+          params: {
+            uid: this.uid,
+          },
+        },
+        onSuccess: ({ data }) => {
+          this.pushUrl = data.pushUrl;
+          this.streamKey = data.streamKey;
+          this.lid = data.lid;
+          this.pullUrl = data.pullUrl;
+          this.initSdk();
+        },
+      });
+    },
+    async initSdk() {
+      const _this = this;
+      await initMain();
+      const room = await joinLivingRoom(this.lid);
+      // 注册房间事件监听器，重复注册时，仅最后一次注册有效
+      room.registerRoomEventListener({
+        /**
+         * 当本端被剔出房间
+         * @description 被踢出房间可能是由于服务端超出一定时间未能收到 rtcPing 消息，所以认为己方离线。
+         * 另一种可能是己方 rtcPing 失败次数超出上限，故而主动断线
+         * @param byServer
+         * 当值为 false 时，说明本端 rtcPing 超时
+         * 当值为 true 时，说明本端收到被踢出房间通知
+         */
+        onKickOff(byServer) {
+          console.log(byServer);
+        },
+        /**
+         * 接收到房间信令时回调，用户可通过房间实例的 `sendMessage(name, content)` 接口发送信令
+         * @param name 信令名
+         * @param content 信令内容
+         * @param senderUserId 发送者 Id
+         * @param messageUId 消息唯一标识
+         */
+        onMessageReceive(name, content, senderUserId, messageUId) {
+          console.log(name, content, senderUserId, messageUId);
+        },
+        /**
+         * 监听房间属性变更通知
+         * @param name
+         * @param content
+         */
+        onRoomAttributeChange(name, content) {
+          console.log(name, content);
+        },
+        /**
+         * 房间用户禁用/启用音频
+         * @param audioTrack RCRemoteAudioTrack 类实例
+         */
+        onAudioMuteChange(audioTrack) {
+          console.log(audioTrack);
+        },
+        /**
+         * 房间用户禁用/启用视频
+         * @param videoTrack RCRemoteVideoTrack 类实例对象
+         */
+        onVideoMuteChange(videoTrack) {
+          console.log(videoTrack);
+        },
+        /**
+         * 房间内用户发布资源
+         * @param tracks 新发布的音轨与视轨数据列表，包含新发布的 RCRemoteAudioTrack 与 RCRemoteVideoTrack 实例
+         */
+        async onTrackPublish(tracks) {
+          console.log(tracks);
+          // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
+          const { code } = await room.subscribe(tracks);
+          // if (code !== RCRTCCode.SUCCESS) {
+          //   console.log('资源订阅失败 ->', code);
+          // }
+        },
+        /**
+         * 房间用户取消发布资源
+         * @param tracks 被取消发布的音轨与视轨数据列表
+         * @description 当资源被取消发布时，SDK 内部会取消对相关资源的订阅，业务层仅需处理 UI 业务
+         */
+        onTrackUnpublish(tracks) {
+          console.log(tracks);
+        },
+        /**
+         * 订阅的音视频流通道已建立, track 已可以进行播放
+         * @param track RCRemoteTrack 类实例
+         */
+        onTrackReady(track) {
+          console.log(track);
+          const videoNode = document.querySelector('#videoNode');
+          track.play(videoNode);
+          _this.liveState = 1; // 设置为直播中
+        },
+        /**
+         * 人员加入
+         * @param userIds 加入的人员 id 列表
+         */
+        onUserJoin(userIds) {
+          console.log(userIds);
+        },
+        /**
+         * 人员退出
+         * @param userIds
+         */
+        onUserLeave(userIds) {
+          console.log(userIds);
+        },
+      });
     },
   },
 };

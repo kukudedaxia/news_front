@@ -118,7 +118,6 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.uicode) {
     store.dispatch('send', { action: '5141' });
   }
-  console.log(to, 'to');
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
   store.dispatch('changeUid', Cookies.get('uid'));
