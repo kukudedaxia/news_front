@@ -4,20 +4,48 @@
       Appointment List
     </p>
     <ul>
-      <li v-for="item in 5" :key="item">
-        <img
-          src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F08%2F20210608103243_1e19d.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627729841&t=981c92fd4308f515b003935cc114a26c"
-        />
+      <li v-for="item in liveList" :key="item.streamKey">
+        <img :src="`https://img.bee-cdn.com/orj360/${item.liveInfoBean.coverPid}.jpg`" />
         <div class="right-box">
           <div>
-            <p>Title: XXXXX</p>
-            <p>Time: XXXXXX</p>
-            <p>Permission: XXXXX</p>
+            <p>Title: {{ item.liveInfoBean.title }}</p>
+            <p>Time: {{ item.liveInfoBean.apptTime }}</p>
+            <p>Permission: {{ item.liveInfoBean.visible }}</p>
           </div>
           <div class="btn-operation">
-            <el-button type="primary" size="small">Start Live</el-button>
-            <el-button type="primary" plain size="small">Copy URL</el-button>
-            <el-button type="primary" plain size="small">Copy Key</el-button>
+            <el-button
+              type="primary"
+              size="small"
+              :disabled="item.liveState === 2"
+              :loading="item.loading"
+              @click="onLiveClick(item)"
+            >
+              {{
+                item.liveState === 0
+                  ? 'start Live'
+                  : item.liveState === 1
+                  ? 'End Live'
+                  : 'Live Ended'
+              }}
+            </el-button>
+            <el-button
+              type="primary"
+              plain
+              size="small"
+              v-clipboard:copy="item.pushUrl"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onError"
+              >Copy URL</el-button
+            >
+            <el-button
+              type="primary"
+              plain
+              size="small"
+              v-clipboard:copy="item.streamKey"
+              v-clipboard:success="onCopy"
+              v-clipboard:error="onError"
+              >Copy Key</el-button
+            >
           </div>
         </div>
       </li>
@@ -27,8 +55,75 @@
 
 <script>
 export default {
+  props: {
+    uid: Number,
+  },
   data() {
-    return {};
+    return {
+      liveList: [],
+    };
+  },
+  created() {
+    this.getSubLiveList();
+  },
+  methods: {
+    // 获取预约直播列表
+    getSubLiveList() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/pc/subLiveList.json',
+          params: {
+            uid: this.uid,
+          },
+        },
+        onSuccess: ({ data }) => {
+          data.forEach(item => {
+            item.loading = false;
+            item.liveState = 0; // 0 未直播 1 直播中 2 已结束
+          });
+          this.liveList = data;
+        },
+        onComplete: () => {},
+      });
+    },
+    // 按钮点击
+    onLiveClick(item) {
+      item.loading = true;
+      const param = {
+        live_type: 0, // 0:预约feed开播 1:直接开播
+        uid: item.liveInfoBean.uid,
+        lid: item.liveInfoBean.lid,
+        pullUrl: item.pullUrl,
+        streamKey: item.streamKey,
+        title: item.liveInfoBean.title,
+        coverPid: item.liveInfoBean.coverPid,
+      };
+      this.$emit('liveState', param);
+    },
+    // 改变直播状态
+    changeLiveState(lid, state) {
+      this.liveList.forEach(item => {
+        if (item.liveInfoBean.lid === lid) {
+          item.loading = false;
+          item.liveState = state;
+        }
+      });
+    },
+    // ----- copy ----- //
+    onCopy(e) {
+      this.$message({
+        message: '复制成功！',
+        type: 'success',
+      });
+    },
+    onError(e) {
+      // 复制失败
+      this.$message({
+        message: '复制失败！',
+        type: 'error',
+      });
+    },
   },
 };
 </script>
