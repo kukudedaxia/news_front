@@ -1,43 +1,58 @@
 html[lang='ar'] .text-right {
-    text-align: right;
+  text-align: right !important;
 }
 html[lang='ar'] .text-left {
-    text-align: left;
+  text-align: left !important;
+}
+
+html[lang='ar'] {
+  .el-message__icon {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .el-message-box {
+    text-align: right;
+  }
+  .el-message-box__btns button:nth-child(2) {
+    margin-right: 10px;
+    margin-left: 0;
+  }
 }
 
 html[data-theme='dark'] .swiper-pagination-bullet {
-    background: #fff;
+  background: #fff;
 }
 
 @font-face {
-    font-family: 'SF-UI-Text-Regular';
-    src: url('../assets/fonts/SF-UI-Text-Regular.otf') format('opentype');
+  font-family: 'SF-UI-Text-Regular';
+  src: url('../assets/fonts/SF-UI-Text-Regular.otf') format('opentype');
 }
 @font-face {
-    font-family: 'SF-UI-Text-Heavy';
-    src: url('../assets/fonts/SF-UI-Text-Heavy.otf') format('opentype');
+  font-family: 'SF-UI-Text-Heavy';
+  src: url('../assets/fonts/SF-UI-Text-Heavy.otf') format('opentype');
 }
 @font-face {
-    font-family: 'SF-UI-Text-Bold';
-    src: url('../assets/fonts/SF-UI-Text-Bold.otf') format('opentype');
+  font-family: 'SF-UI-Text-Bold';
+  src: url('../assets/fonts/SF-UI-Text-Bold.otf') format('opentype');
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #F9F9FB;;
+  background: #f9f9fb;
   height: 100%;
-//   overflow: auto;
-//   min-width: 1068px;
-    height: 100%;
-    width: 100%;
+  //   overflow: auto;
+  //   min-width: 1068px;
+  height: 100%;
+  width: 100%;
 }
 * {
   box-sizing: border-box;
 }
 ol,
-ul ,li{
+ul,
+li {
   list-style: none;
 }
 a,
@@ -125,103 +140,102 @@ video {
 //     }
 // }
 @media screen and (max-width: 1440px) {
-    html {
-        zoom: 1;
-    }
-    .slide {
-        height: 735px !important;
-      
-    }
-    .page {
-        margin-top: inherit !important;
-    }
+  html {
+    zoom: 1;
+  }
+  .slide {
+    height: 735px !important;
+  }
+  .page {
+    margin-top: inherit !important;
+  }
 }
 @media screen and(min-width: 1441px) {
-    html {
-        zoom: 1;
-    }
+  html {
+    zoom: 1;
+  }
 }
-
 
 // 针对文档
 .docs {
-    width: 900px;
-    text-align: left;
-    margin: 41px auto 0;
+  width: 900px;
+  text-align: left;
+  margin: 41px auto 0;
+  font-size: 18px;
+  color: #666666;
+  letter-spacing: -0.38px;
+  h1 {
+    font-family: SF-UI-Text-Bold;
+    font-size: 30px;
+    color: #333333;
+    margin: 20px 0;
+  }
+  > p {
+    line-height: 30px;
+  }
+  li {
+    margin-bottom: 10px;
+    span {
+      margin-right: 10px;
+    }
+  }
+  .normal li::before {
+    content: '\2022';
+    box-sizing: border-box;
+    display: inline-block;
+    width: 0;
     font-size: 18px;
-    color: #666666;
-    letter-spacing: -0.38px;
-    h1 {
-      font-family: SF-UI-Text-Bold;
-      font-size: 30px;
-      color: #333333;
-      margin: 20px 0;
-    }
-    > p {
-      line-height: 30px;
-    }
-    li {
-      margin-bottom: 10px;
-      span {
-        margin-right: 10px;
-      }
-    }
-    .normal li::before {
-      content: '\2022';
-      box-sizing: border-box;
-      display: inline-block;
-      width: 0;
-      font-size: 18px;
-      -webkit-transform: scale(1.25);
-      -ms-transform: scale(1.25);
-      transform: scale(1.25);
-      text-align: right;
-      color: #3370ff;
-      margin-right: 18px;
-    }
-    .indent-li {
-        margin-left: 2em;
-    }
-    .normal .indent-li::before {
-        content: '\25E6';
-        box-sizing: border-box;
-        display: inline-block;
-        width: 0;
-        font-size: 20px;
-        transform: scale(1.25);
-        font-weight: 700;
-        text-align: right;
-        color: #3370ff;
-        margin-right: 18px;
-    }
+    -webkit-transform: scale(1.25);
+    -ms-transform: scale(1.25);
+    transform: scale(1.25);
+    text-align: right;
+    color: #3370ff;
+    margin-right: 18px;
+  }
+  .indent-li {
+    margin-left: 2em;
+  }
+  .normal .indent-li::before {
+    content: '\25E6';
+    box-sizing: border-box;
+    display: inline-block;
+    width: 0;
+    font-size: 20px;
+    transform: scale(1.25);
+    font-weight: 700;
+    text-align: right;
+    color: #3370ff;
+    margin-right: 18px;
+  }
 }
 // 部分文档支持阿语
-html[lang='ar'] .ardocs  h1 {
-    text-align: right;
+html[lang='ar'] .ardocs h1 {
+  text-align: right;
 }
-html[lang='ar'] .ardocs  .title-2 {
-    text-align: right;
+html[lang='ar'] .ardocs .title-2 {
+  text-align: right;
 }
-html[lang='ar'] .ardocs .bold, .oil {
-    text-align: right;
+html[lang='ar'] .ardocs .bold,
+.oil {
+  text-align: right;
 }
-html[lang='ar'] .docs  .oil {
-    text-align: right;
+html[lang='ar'] .docs .oil {
+  text-align: right;
 }
-html[lang='ar'] .ardocs  h2{
-    text-align: right;
+html[lang='ar'] .ardocs h2 {
+  text-align: right;
 }
 html[lang='ar'] .ardocs p {
-    text-align: right;
+  text-align: right;
 }
 html[lang='ar'] .ardocs li {
-    text-align: right;
+  text-align: right;
 }
 html[lang='ar'] .ardocs li span {
-    margin-left: 10px;
-    margin-right: 0;
+  margin-left: 10px;
+  margin-right: 0;
 }
 html[lang='ar'] .ardocs li::before {
-    margin-left: 20px;
-    margin-right: 0;
+  margin-left: 20px;
+  margin-right: 0;
 }

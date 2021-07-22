@@ -1,16 +1,19 @@
 <template>
-  <div class="scheduled_live">
+  <div class="scheduled_live text-right">
     <p class="title">
-      Appointment List
+      {{ $t('live.liveStream') }}
     </p>
     <ul>
       <li v-for="item in liveList" :key="item.streamKey">
         <img :src="`https://img.bee-cdn.com/orj360/${item.liveInfoBean.coverPid}.jpg`" />
         <div class="right-box">
           <div>
-            <p>Title: {{ item.liveInfoBean.title }}</p>
-            <p>Time: {{ item.liveInfoBean.apptTime }}</p>
-            <p>Permission: {{ item.liveInfoBean.visible }}</p>
+            <p>{{ $t('live.scheduleTitle') }}: {{ item.liveInfoBean.title }}</p>
+            <p>
+              {{ $t('live.time') }}:
+              {{ $moment(new Date(item.liveInfoBean.apptTime)).format('DD/MM/YYYY HH:mm ') }}
+            </p>
+            <p>{{ $t('live.privacy') }}: {{ item.liveInfoBean.visible }}</p>
           </div>
           <div class="btn-operation">
             <el-button
@@ -35,7 +38,7 @@
               v-clipboard:copy="item.pushUrl"
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
-              >Copy URL</el-button
+              >{{ $t('live.copyURL') }}</el-button
             >
             <el-button
               type="primary"
@@ -44,7 +47,7 @@
               v-clipboard:copy="item.streamKey"
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
-              >Copy Key</el-button
+              >{{ $t('live.copyKey') }}</el-button
             >
           </div>
         </div>
@@ -95,6 +98,7 @@ export default {
         uid: item.liveInfoBean.uid,
         lid: item.liveInfoBean.lid,
         pullUrl: item.pullUrl,
+        pushUrl: item.pushUrl,
         streamKey: item.streamKey,
         title: item.liveInfoBean.title,
         coverPid: item.liveInfoBean.coverPid,
@@ -111,16 +115,16 @@ export default {
       });
     },
     // ----- copy ----- //
-    onCopy(e) {
+    onCopy() {
       this.$message({
-        message: '复制成功！',
+        message: this.$t('live.success'),
         type: 'success',
       });
     },
-    onError(e) {
+    onError() {
       // 复制失败
       this.$message({
-        message: '复制失败！',
+        message: this.$t('live.failed'),
         type: 'error',
       });
     },
@@ -159,6 +163,16 @@ export default {
         display: flex;
       }
     }
+  }
+}
+html[lang='ar'] {
+  .right-box {
+    margin-right: 20px;
+    margin-left: 0 !important;
+  }
+  .el-button + .el-button {
+    margin-right: 10px;
+    margin-left: 0;
   }
 }
 </style>

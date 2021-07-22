@@ -56,7 +56,7 @@ const IMinit = () => {
     RongIMClient.connect(TOKEN, {
       onSuccess(userId) {
         // 连接已成功, 可以进行 RTC 相关业务操作
-        console.log(`IM连接成功,${userId}`);
+        console.log(`IM连接成功,userId:${userId}`);
         resolve(userId);
       },
       onTokenIncorrect() {
@@ -112,7 +112,7 @@ const joinLivingRoom = roomId => {
       .then(({ code, room }) => {
         // 若加入失败，则 room、userIds、tracks 值为 undefined
         if (code === RCRTCCode.SUCCESS) {
-          console.log('加入房间成功');
+          console.log('加入房间成功', roomId);
           // 返回房间实例
           resolve(room);
         } else {

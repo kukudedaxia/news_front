@@ -14,54 +14,50 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>
-      <div class="title-box">
-        <p class="title">Beeto Live Title</p>
-        <el-input
-          v-model="title"
-          placeholder="Gigi`s Live"
-          maxlength="50"
-          :clearable="true"
-        ></el-input>
+      <div class="title-box text-right">
+        <p class="title">{{ $t('live.title') }}</p>
+        <el-input v-model="title" maxlength="50" :clearable="true"></el-input>
       </div>
     </div>
     <el-divider></el-divider>
-    <div class="item-box">
-      <p class="title">Server URL</p>
+    <div class="item-box text-right">
+      <p class="title">{{ $t('live.blogTitle') }}</p>
+      <div class="flex">
+        <el-input v-model="blobText" type="textarea" :rows="2"></el-input>
+      </div>
+    </div>
+    <el-divider></el-divider>
+    <div class="item-box text-right">
+      <p class="title">{{ $t('live.serverURL') }}</p>
       <div class="flex">
         <el-input v-model="pushUrl"></el-input>
         <el-button
           type="primary"
-          style="margin-left:10px"
+          class="item-btn"
           v-clipboard:copy="pushUrl"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
-          >Copy</el-button
+          >{{ $t('live.copy') }}</el-button
         >
       </div>
-      <span class="desc">
-        1. This may be referred to as "URL" or "Address" in your streaming software
-      </span>
+      <span class="desc"> 1. {{ $t('live.msg1') }} </span>
     </div>
     <el-divider></el-divider>
-    <div class="item-box">
-      <p class="title">Stream Key</p>
+    <div class="item-box text-right">
+      <p class="title">{{ $t('live.streamKey') }}</p>
       <div class="flex">
         <el-input v-model="streamKey"></el-input>
         <el-button
           type="primary"
-          style="margin-left:10px"
+          class="item-btn"
           v-clipboard:copy="streamKey"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
-          >Copy</el-button
+          >{{ $t('live.copy') }}</el-button
         >
       </div>
-      <span class="desc">
-        2. This stream key is valid until you log out of Beeto
-      </span>
-      <span class="desc">
-        3. Link source
-      </span>
+      <span class="desc"> 2. {{ $t('live.msg2') }} </span>
+      <span class="desc"> 3. {{ $t('live.msg3') }} </span>
     </div>
     <el-button
       type="primary"
@@ -69,7 +65,7 @@
       :loading="btnLoading"
       :disabled="btnDisabled"
       @click="onLiveClick"
-      >{{ btnTextObj[liveState] }}</el-button
+      >{{ btnText }}</el-button
     >
   </div>
 </template>
@@ -91,23 +87,34 @@ export default {
     },
     streamKey: String,
     pushUrl: String,
+    blobText: String,
+    title: String,
   },
   computed: {
     btnDisabled() {
-      if (this.title && this.pushUrl && this.streamKey && this.imgPid && this.liveState !== 2) {
+      if (
+        this.title &&
+        this.blobText &&
+        this.pushUrl &&
+        this.streamKey &&
+        this.imgPid &&
+        this.liveState !== 2
+      ) {
         return false;
       }
       return true;
     },
+    btnText() {
+      const btnTextObj = {
+        0: this.$t('live.startLive'),
+        1: this.$t('live.endLive'),
+        2: this.$t('live.liveEnded'),
+      };
+      return btnTextObj[this.liveState];
+    },
   },
   data() {
     return {
-      title: '',
-      btnTextObj: {
-        0: 'Start Live',
-        1: 'End Live',
-        2: 'Live Ended',
-      },
       imgPid: '3ba012bblz1grwynbdh5cj20u015u42h',
       file: '',
       uploadLoading: false,
@@ -161,27 +168,30 @@ export default {
         live_type: 1, // 0:预约feed开播 1:直接开播
         title: this.title,
         cover_img: this.imgPid,
+        blobText: this.blobText,
       };
       this.$emit('liveState', param);
     },
     // 清空数据
     onClearData() {
+      this.$emit('onClearData');
       this.title = '';
       this.pushUrl = '';
       this.streamKey = '';
       this.imgPid = '';
+      this.blobText = '';
     },
     // ----- copy ----- //
-    onCopy(e) {
+    onCopy() {
       this.$message({
-        message: '复制成功！',
+        message: this.$t('live.success'),
         type: 'success',
       });
     },
-    onError(e) {
+    onError() {
       // 复制失败
       this.$message({
-        message: '复制失败！',
+        message: this.$t('live.failed'),
         type: 'error',
       });
     },
@@ -204,6 +214,9 @@ export default {
       margin-top: 10px;
       color: #909399;
     }
+    .item-btn {
+      margin-left: 10px;
+    }
   }
   .title_img {
     .title-box {
@@ -215,6 +228,13 @@ export default {
 }
 .flex {
   display: flex;
+}
+html[lang='ar'] {
+  .title-box,
+  .item-btn {
+    margin-right: 10px;
+    margin-left: 0 !important;
+  }
 }
 </style>
 <style lang="less">

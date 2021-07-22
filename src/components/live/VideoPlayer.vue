@@ -9,24 +9,24 @@
     <span class="video_msg">
       <!-- 连接超时 -->
       <div class="timeout" v-if="timeout">
-        <p>Signal connection timed out</p>
-        <el-button type="primary" round size="small">Reload</el-button>
+        <p>{{ $t('live.timeOut') }}</p>
+        <el-button type="primary" round size="small">{{ $t('live.reload') }}</el-button>
       </div>
       <!-- 未连接 -->
       <div class="no_connect" v-if="liveState === 0">
         <p>
-          Connect strearming software to go live
+          {{ $t('live.connect') }}
         </p>
       </div>
       <!-- 直播结束 -->
       <div class="finished" v-if="liveState === 2">
         <p>
-          Your Beeto live has ended
+          {{ $t('live.endMsg1') }}
         </p>
         <el-button type="primary" class="btn" :disabled="saveReplay" @click="onSaveReplay">
-          Allow Replay Live
+          {{ $t('live.replaying') }}
         </el-button>
-        <el-button plain class="btn" @click="onRefresh">Refresh And Start A New Live</el-button>
+        <el-button plain class="btn" @click="onRefresh"> {{ $t('live.refresh') }}</el-button>
       </div>
     </span>
     <video id="videoNode" class="video" v-show="liveState === 1"></video>
@@ -41,7 +41,8 @@ export default {
       type: Number,
       default: 0,
     },
-    lid: Number, // 直播id
+    lid: Number, // 直播间id
+    uid: Number, // 登录用户uid
   },
   data() {
     return {
@@ -57,15 +58,16 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/live/replay.json',
+          url: 'liveApi/2/video/pc/replay.json',
           params: {
-            lid: this.lid, // 直播id, sdk获取
+            uid: this.uid,
+            lid: this.lid,
             replay: 1,
           },
         },
         onSuccess: () => {
           this.$message({
-            message: 'replay success!',
+            message: this.$t('live.success'),
             type: 'success',
           });
           this.saveReplay = true;

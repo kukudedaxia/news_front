@@ -9,10 +9,13 @@ import ElementUI from 'element-ui';
 import './theme/element/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import moment from 'moment';
+
 Vue.use(ElementUI).use(VueClipboard);
 // 动态title库
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
+Vue.prototype.$moment = moment;
 
 import './directive';
 import tools from './utils/tools';

@@ -2,19 +2,21 @@
   <div class="live">
     <div class="operation">
       <el-tabs v-model="activeName" :stretch="true" style="width: 100%;">
-        <el-tab-pane label="Go Live Now" name="1">
+        <el-tab-pane :label="$t('live.goLive')" name="1">
           <go-live
             :liveState="liveState"
             :btnLoading="goLiveBtnLoading"
             :pushUrl="pushUrl"
             :streamKey="streamKey"
+            :blobText="blobText"
+            :title="title"
             :disabled="liveState === 1 && live_type === 0"
             @liveState="onLiveClick"
             ref="goLiveRef"
           ></go-live>
         </el-tab-pane>
         <el-tab-pane
-          label="Scheduled Beeto Live"
+          :label="$t('live.scheduleLive')"
           name="2"
           :disabled="liveState === 1 && live_type === 1"
         >
@@ -32,23 +34,10 @@
         ref="videoRef"
         :liveState="liveState"
         :lid="lid"
+        :uid="uid"
         @refresh="onRefresh"
       ></video-player>
     </div>
-    <el-dialog :visible.sync="blobTextDialogShow" width="20%" :show-close="false" class="bolb-text">
-      <p class="dialog-title">Edit live beeto,let more people see</p>
-      <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="blobText"> </el-input>
-      <span slot="footer" class="dialog-footer">
-        <el-button
-          type="primary"
-          size="small"
-          :disabled="blobText == ''"
-          :loading="releaseLoading"
-          @click="startLive()"
-          >Release
-        </el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -69,7 +58,6 @@ export default {
     return {
       activeName: '1',
       liveState: 0, // 0 未直播 1 直播中 2 已结束
-      blobTextDialogShow: false, // 博文dialog显示
       uid: 1000005298,
       pushUrl: null, // 推流地址
       pullUrl: null, // 拉流地址
@@ -80,14 +68,40 @@ export default {
       live_type: 1, // 0:预约feed开播 1:直接开播
       blobText: '', // 博文内容
       goLiveBtnLoading: false, // 直接开播btn按钮状态
-      releaseLoading: false, // 直接开播确认弹窗btn状态
     };
   },
   created() {},
   mounted() {
-    this.init();
+    this.access();
   },
   methods: {
+    // 检测是否有直播
+    access() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/pc/access.json',
+          params: {
+            uid: this.uid,
+          },
+        },
+        onSuccess: ({ data }) => {
+          // 不存在直播，走直接开播逻辑
+          if (data.access) {
+            this.init();
+          } else {
+            this.lid = data.lid;
+            this.pullUrl = data.pullUrl;
+            this.pushUrl = data.pushUrl;
+            this.streamKey = data.streamKey;
+            this.title = data.title;
+            this.blobText = data.content;
+            this.initSdk(this.lid, 2);
+          }
+        },
+        onComplete: () => {},
+      });
+    },
     // 重置信息，重新开播
     onRefresh() {
       this.liveState = 0;
@@ -112,7 +126,8 @@ export default {
       });
     },
     // 初始化sdk回调
-    async initSdk(lid) {
+    // state 1 直播  2 续播
+    async initSdk(lid, state = 1) {
       const _this = this;
       await initMain();
       const room = await joinLivingRoom(lid);
@@ -168,10 +183,7 @@ export default {
         async onTrackPublish(tracks) {
           console.log(tracks);
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
-          const { code } = await room.subscribe(tracks);
-          // if (code !== RCRTCCode.SUCCESS) {
-          //   console.log('资源订阅失败 ->', code);
-          // }
+          await room.subscribe(tracks);
         },
         /**
          * 房间用户取消发布资源
@@ -206,6 +218,19 @@ export default {
           console.log(userIds);
         },
       });
+      // 如果是续播，初始化完room实例后需要订阅远端流
+      if (state === 2) {
+        this.$alert(this.$t('live.msg4'), '', {
+          confirmButtonText: this.$t('live.continue'),
+          showClose: false,
+          callback: () => {
+            const remoteTracks = room.getRemoteTracks();
+            console.log(remoteTracks);
+            room.subscribe(remoteTracks);
+            _this.liveState = 1; // 设置为直播中
+          },
+        });
+      }
     },
     // 开播、下播按钮处理函数
     onLiveClick(param) {
@@ -215,17 +240,15 @@ export default {
         if (this.liveState === 0) {
           // 直接开播流程
           if (this.live_type === 1) {
-            this.initSdk(this.lid);
             this.goLiveBtnLoading = true;
-            // 应该走开播前校验接口，但是后端未完成，现在直接弹出博文输入框
+            // 走开播前校验
             this.title = param.title;
             this.cover_img = param.cover_img;
-            // this.startLive(param);
-            this.blobTextDialogShow = true;
-            this.goLiveBtnLoading = false;
+            this.blobText = param.blobText;
+            this.check();
           } else {
-            this.initSdk(param.lid);
             // 预约开播，不走校验逻辑
+            this.initSdk(param.lid);
             this.startLive(param);
           }
           // 此时是直播状态，走下播流程
@@ -234,14 +257,10 @@ export default {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = false;
             // 下播确认弹窗
-            this.$confirm(
-              'People are still watching your Beeto Live. Do you want to continue and end Beeto Live?',
-              'End the Beeto live?',
-              {
-                confirmButtonText: 'End Beeto Live',
-                cancelButtonText: 'Cancel',
-              },
-            )
+            this.$confirm(this.$t('live.endMsg'), this.$t('live.endTitle'), {
+              confirmButtonText: this.$t('live.endBtn'),
+              cancelButtonText: this.$t('live.cancel'),
+            })
               .then(() => {
                 // 确认下播
                 this.stopLive();
@@ -255,16 +274,48 @@ export default {
         console.error(error);
       }
     },
+    // 检验开播合规性
+    check() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'liveApi/2/video/pc/check.json',
+          params: {
+            uid: this.uid,
+            lid: this.lid,
+            title: this.title,
+            statusContent: this.blobText,
+          },
+        },
+        onSuccess: ({ data }) => {
+          // 15分钟内有预约直播，弹窗提醒
+          if (data.haveLiveOnline === 1) {
+            this.$confirm(this.$t('live.endMsg'), this.$t('live.endTitle'), {
+              confirmButtonText: this.$t('live.endBtn'),
+              cancelButtonText: this.$t('live.cancel'),
+            })
+              .then(() => {})
+              .catch(() => {});
+          } else {
+            // 校验通过，弹出博文输入框
+            this.initSdk(this.lid);
+            this.startLive();
+          }
+        },
+        onComplete: () => {},
+      });
+    },
     // 开播
     startLive(param) {
       let params = {};
       // 直接开播，需要将标题、封面、博文内容等参数上传
       if (this.live_type === 1) {
-        this.releaseLoading = true;
         params = {
           uid: this.uid,
           lid: this.lid,
           pullUrl: this.pullUrl,
+          pushUrl: this.pushUrl,
+          streamKey: this.streamKey,
           title: this.title,
           coverPid: this.cover_img,
           statusContent: this.blobText,
@@ -275,8 +326,11 @@ export default {
           uid: param.uid,
           lid: param.lid,
           pullUrl: param.pullUrl,
+          pushUrl: param.pushUrl,
+          streamKey: param.streamKey,
           title: param.title,
           coverPid: param.coverPid,
+          statusContent: 'test',
           liveType: this.live_type,
         };
       }
@@ -288,14 +342,13 @@ export default {
         },
         onSuccess: () => {
           this.$message({
-            message: '开播成功',
+            message: this.$t('live.success'),
             type: 'success',
           });
         },
         onComplete: () => {
           if (this.live_type === 1) {
-            this.blobTextDialogShow = false;
-            this.releaseLoading = false;
+            this.goLiveBtnLoading = false;
           } else {
             this.$refs.scheduledLiveRef.changeLiveState(param.lid, 1);
           }
@@ -306,7 +359,6 @@ export default {
     stopLive(param) {
       let params = {};
       if (this.live_type === 1) {
-        this.releaseLoading = true;
         params = {
           uid: this.uid,
           lid: this.lid,
@@ -328,13 +380,13 @@ export default {
         onSuccess: () => {
           this.liveState = 2;
           this.$message({
-            message: '下播成功',
+            message: this.$t('live.success'),
             type: 'success',
           });
         },
         onComplete: () => {
           if (this.live_type === 1) {
-            this.releaseLoading = false;
+            this.goLiveBtnLoading = false;
           } else {
             this.$refs.scheduledLiveRef.changeLiveState(param.lid, 2);
           }
@@ -348,7 +400,7 @@ export default {
 <style lang="less" scoped>
 .live {
   width: 1130px;
-  height: 650px;
+  min-height: 650px;
   display: flex;
   justify-content: space-between;
   margin: auto;
