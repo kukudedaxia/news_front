@@ -97,6 +97,10 @@ module.exports = {
         pathRewrite: { '^/liveApi': '' },
         // pathRewrite: { '^/api': '' },
       },
+      '/sup': {
+        target: 'https://img.whale.weibo.com/',
+        pathRewrite: { '^/sup': '' },
+      },
     },
   },
 };

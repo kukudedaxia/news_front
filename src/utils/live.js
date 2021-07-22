@@ -12,6 +12,8 @@ import {
   RCMediaType,
   RCFrameRate,
   RCResolution,
+  MixLayoutMode,
+  MixVideoRenderMode,
 } from '@rongcloud/plugin-rtc';
 
 const APPkEY = 'c9kqb3rdc63ej';
@@ -82,7 +84,7 @@ const createMicrophoneAndCameraTracks = () => {
         // tracks 包含一个 RCMicphoneAudioTrack 实例和一个 RCCameraVideoTrack 实例
         resolve(tracks);
       } else {
-        throw new Error('麦克风和摄像头开启失败');
+        throw new Error('麦克风和摄像头开启失败 ->', code);
       }
     });
   });
@@ -114,7 +116,7 @@ const joinLivingRoom = roomId => {
           // 返回房间实例
           resolve(room);
         } else {
-          throw new Error('join room failed:', code);
+          throw new Error('加入房间失败 ->', code);
         }
       });
   });
@@ -137,7 +139,7 @@ const createCameraVideoTrack = async () => {
           console.log('视频参数设置成功! FPS:15、分辨率:1920*1080');
           resolve(track);
         } else {
-          throw new Error('设置视频参数失败', code);
+          throw new Error('设置视频参数失败 ->', code);
         }
       });
   });
@@ -158,7 +160,7 @@ const publish = (room, audioTrack, videoTrack) => {
         console.log('直播资源发布成功，订阅地址:', liveUrl);
         resolve(liveUrl);
       } else {
-        throw new Error('资源发布失败,', code);
+        throw new Error('资源发布失败 ->', code);
       }
     });
   });
@@ -179,7 +181,7 @@ const unpublish = (room, audioTrack, videoTrack) => {
         console.log('直播资源取消发布成功');
         resolve(liveUrl);
       } else {
-        throw new Error('取消发布失败,', code);
+        throw new Error('取消发布失败 ->,', code);
       }
     });
   });
@@ -236,6 +238,49 @@ const unsubscribe = async audience => {
   });
 };
 
+/**
+ * 设置合流布局
+ * @param layoutMode CUSTOMIZE:自定义布局，需用户设置布局结构、SUSPENSION:悬浮布局、ADAPTATION:自适应布局
+ * @param videoRenderMode CROP:当画布尺寸与视频分辨率比例不同时，裁剪视频内容、WHOLE: 当画布尺寸与视频分辨率不同时，压缩视频尺寸以填充画布
+ */
+const setLayoutMode = async (room, layoutMode = 'ADAPTATION', videoRenderMode = 'WHOLE') => {
+  return new Promise(resolve => {
+    // 获取构建器实例;
+    const builder = room.getMCUConfigBuilder();
+    // 修改布局模式;
+    builder.setMixLayoutMode(MixLayoutMode[layoutMode]);
+    builder.setOutputVideoRenderMode(MixVideoRenderMode[videoRenderMode]);
+    // 配置生效;
+    builder.flush().then(({ code }) => {
+      console.log(code);
+      if (code === RCRTCCode.SUCCESS) {
+        resolve();
+      } else {
+        throw new Error('设置合流布局模式失败 ->', code);
+      }
+    });
+  });
+};
+
+/**
+ * 观众端订阅视频流
+ * @param liveUrl 订阅地址
+ * @param node video标签dom节点
+ */
+const audienceSubscribe = async (liveUrl, node) => {
+  const audience = getAudienceClient();
+  await subscribe(audience, liveUrl);
+  audience.registerTrackEventListener({
+    /**
+     * 订阅的音视频流通道已建立, track 已可以进行播放
+     * @param track RCRemoteTrack 类实例
+     */
+    onTrackReady(track) {
+      track.play(node);
+    },
+  });
+};
+
 export {
   initMain,
   IMinit,
@@ -246,5 +291,7 @@ export {
   joinLivingRoom,
   subscribe,
   unsubscribe,
+  setLayoutMode,
   getAudienceClient,
+  audienceSubscribe,
 };

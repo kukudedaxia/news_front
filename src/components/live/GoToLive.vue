@@ -4,9 +4,8 @@
       <div class="upliad">
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="#"
           :show-file-list="false"
-          :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
           <img v-if="imgPid" :src="`https://img.bee-cdn.com/orj360/${imgPid}.jpg`" class="avatar" />
@@ -74,6 +73,9 @@
 </template>
 
 <script>
+import $ from 'jquery';
+import { fileByBase64, base64ByBlob, getCrc32, getMd5 } from '@/utils/upload';
+
 export default {
   props: {
     // 直播状态：0 未直播 1 直播中 2 已结束
@@ -105,23 +107,41 @@ export default {
         2: 'Live Ended',
       },
       imgPid: '3ba012bblz1grwynbdh5cj20u015u42h',
+      file: '',
     };
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imgPid = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+    async beforeAvatarUpload(file) {
+      try {
+        this.file = file;
+        const base64 = await fileByBase64(file);
+        const blob = await base64ByBlob(base64);
+        const md5 = await getMd5(blob);
+        const cs = await getCrc32(blob);
+        const form = new FormData();
+        form.append('file', blob);
+        $.ajax({
+          type: 'post',
+          data: form.get('file'),
+          // eslint-disable-next-line prettier/prettier
+              url: `/sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=7268104713&raw_md5=${md5}`,
+          async: false,
+          contentType: 'application/x-www-form-urlencoded',
+          processData: false,
+          headers: {
+            Accept: 'application/json',
+          },
+          success: res => {
+            this.imgPid = res.pic.pid;
+          },
+          error: err => {
+            console.log(err);
+          },
+        });
+      } catch (error) {
+        console.error(error);
       }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+      return false;
     },
     onLiveClick() {
       const param = {

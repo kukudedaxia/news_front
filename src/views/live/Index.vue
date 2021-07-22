@@ -47,6 +47,7 @@ import {
   joinLivingRoom,
   subscribe,
   unsubscribe,
+  setLayoutMode,
   getAudienceClient,
 } from '@/utils/live';
 
@@ -119,10 +120,12 @@ export default {
         this.lid = lid;
         // 加入房间
         const room = (this.room = await joinLivingRoom(lid));
+
         // 设置音视频参数
         await createCameraVideoTrack();
         // 推流
         const liveUrl = (this.liveUrl = await publish(room, audioTrack, videoTrack));
+        await setLayoutMode(room);
         // 走后端开播接口
         await this.startLiveApi(param);
         // 获取观众实例
@@ -138,7 +141,8 @@ export default {
            * @param track RCRemoteTrack 类实例
            */
           onTrackReady(track) {
-            const videoNode = _this.$refs.videoRef.$el.querySelector('#videoNode');
+            const videoNode = document.querySelector('#videoNode');
+            // const videoNode = _this.$refs.videoRef.$el.querySelector('#videoNode');
             track.play(videoNode);
             _this.liveState = 1; // 设置为直播中
           },
@@ -241,7 +245,7 @@ export default {
 
 <style lang="less" scoped>
 .live {
-  width: 1300px;
+  width: 1130px;
   height: 650px;
   display: flex;
   justify-content: space-between;
@@ -249,6 +253,7 @@ export default {
   border: 1px solid #ebebeb;
   border-radius: 3px;
   padding: 10px;
+  margin-top: 20px;
   .operation {
     height: 100%;
     width: 500px;
