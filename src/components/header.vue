@@ -106,6 +106,8 @@ export default {
         onSuccess: res => {
           console.log(res);
           Cookies.remove('uid');
+          this.signOutGoogle();
+          this.signOutFaceBook();
           this.$router.push('/');
         },
         onFail: res => {

@@ -47,16 +47,37 @@ export default {
       auth2: '',
     };
   },
-  created() {},
+  created() {
+    this.LoadJS('https://accounts.google.com/gsi/client', this.initNewgoogle);
+  },
   mounted() {
-    this.initNewgoogle();
+    // this.initNewgoogle();
     // console.log(window.google);
+    // this.LoadJS('https://accounts.google.com/gsi/client', this.initNewgoogle);
     setTimeout(() => {
       this.initApple();
       this.initFB();
     }, 10);
   },
   methods: {
+    LoadJS(url, callback) {
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.src = url;
+      var done = false;
+      script.onload = script.onreadystatechange = function() {
+        if (
+          !done &&
+          (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')
+        ) {
+          done = true;
+          callback();
+          script.onload = script.onreadystatechange = null;
+          head.removeChild(script);
+        }
+      };
+      head.appendChild(script);
+    },
     initNewgoogle() {
       window.google.accounts.id.initialize({
         client_id: '323627425448-i3697bcdimd39k3qrdqcp85iju447s1v.apps.googleusercontent.com',
@@ -66,7 +87,7 @@ export default {
         skip_prompt_cookie: 'sid',
         callback: response => {
           console.log(response);
-          this.thirdLogin('2', response);
+          this.thirdLogin('1', response);
         },
       });
       var em = document.getElementById('customBtn');
@@ -88,12 +109,15 @@ export default {
       const that = this;
       let accesstoken = '';
       let thirduid = '123';
-      if (type == '2') {
+      if (type == '1') {
         accesstoken = data.credential;
+      } else if (type == '3') {
+        accesstoken = data.authorization.id_token;
       } else {
         accesstoken = data.authResponse.accessToken;
         thirduid = data.authResponse.userID;
       }
+      console.log(accesstoken, 'accesstoken');
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
@@ -115,9 +139,10 @@ export default {
           this.$router.push({ path: replaceUrl });
         },
         onFail: res => {
-          console.log(res);
           if (res.error_code == 30070) {
             this.$message.error('You have no permission');
+          } else {
+            this.$message.error(res.error);
           }
         },
       });
@@ -178,7 +203,6 @@ export default {
     },
     // facebook
     initFB() {
-      console.log(2342);
       window.FB.init({
         appId: '192200776032093', // 这里填入第2步的appid
         cookie: true, // Enable cookies to allow the server to access the session.
@@ -187,10 +211,11 @@ export default {
       });
     },
     FBlogin() {
+      const that = this;
       window.FB.login(function(response) {
         console.log(response, 'respingse');
         if (response.authResponse) {
-          this.thirdLogin('2', response);
+          that.thirdLogin('2', response);
           console.log('Welcome!  Fetching your information.... ');
           window.FB.api('/me', function(response) {
             console.log('Good to see you, ' + response.name + '.');
@@ -204,7 +229,7 @@ export default {
       // Called when a person is finished with the Login Button.
       window.FB.getLoginStatus(function(response) {
         // See the onlogin handler
-        
+
         if (response.status === 'connected') {
           // The user is logged in and has authenticated your
           // app, and response.authResponse supplies
@@ -233,7 +258,7 @@ export default {
         clientId: 'to.bee.m',
         scope: 'name email',
         // response_type: 'code id_token',
-        redirectURI: 'https://m.bee.to',
+        redirectURI: 'https://test.bee.to/sign/api/callback',
         state: 'initial',
         // nonce: '[NONCE]',
         usePopup: true, //or false defaults to false
@@ -242,7 +267,8 @@ export default {
     async loginInApple() {
       try {
         const data = await window.AppleID.auth.signIn();
-        console.log(data);
+        this.thirdLogin('3', data);
+        console.log(data, 'loginapple');
       } catch (error) {
         //handle error.
         console.log(error);
@@ -250,8 +276,10 @@ export default {
     },
     listenApple() {
       //Listen for authorization success
+      // const that = this;
       document.addEventListener('AppleIDSignInOnSuccess', data => {
-        console.log(data);
+        console.log(data, 'apple');
+        // that.thirdLogin('3',data);
         //handle successful response
       });
       //Listen for authorization failures

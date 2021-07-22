@@ -31,9 +31,9 @@
                 <span
                   class="send"
                   v-if="!codeLoading"
-                  @click="phoneLengthCorrect ? sendCode() : ''"
+                  @click="phoneLengthCorrect ? sendCode() : errorPhone()"
                 >
-                  {{ codeTimes > 0 ? `${codeTimes}s` : 'get verification Code' }}
+                  {{ codeTimes > 0 ? `${codeTimes}s` : send ? 'resend' : 'get verification Code' }}
                 </span>
                 <loading :isComplete="false" v-else style="width: 20px" />
               </template>
@@ -59,13 +59,24 @@
         <el-tab-pane label="Account Login" name="account">
           <div class="con">
             <div class="line">
-              <input placeholder="请输入密码" v-model="account" class="input" @focus="errorHide" />
+              <input
+                placeholder="请输入用户名"
+                v-model="account"
+                class="input"
+                @focus="errorHide"
+              />
+              <img
+                src="@/assets/images/icon_clear.png"
+                class="icon icon-clear"
+                v-show="account != ''"
+                @mousedown.prevent="account = ''"
+              />
             </div>
             <div class="line">
               <input
                 placeholder="请输入密码"
                 v-model="password"
-                class="input"
+                class="input password"
                 @focus="errorHide"
                 :type="showPwd ? 'text' : 'password'"
               />
@@ -103,6 +114,7 @@
   </div>
 </template>
 <script>
+import JSEncrypt from 'jsencrypt';
 import Cookies from 'js-cookie';
 import Loading from '@/components/common/Loading';
 import ThirdLogin from '@/components/thirdLogin';
@@ -114,15 +126,16 @@ export default {
   },
   data() {
     return {
-      activeName: 'account',
-      phone: '7529908827',
+      activeName: 'phone',
+      phone: '',
       areaCode: '+44',
       areaList: [],
       verifyCode: '',
-      account: 'a11',
-      password: 'qwe123',
+      account: '',
+      password: '',
       codeLoading: false,
       loginLoading: false,
+      send: false, // 是否已经发送过验证码了
       codeTimes: '', // 倒计时计数
       codeCount: 0,
       errorMsg: '',
@@ -131,6 +144,10 @@ export default {
   },
   created() {
     this.getArea();
+    window.addEventListener('keydown', this.keydown);
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this.keydown);
   },
   computed: {
     // 手机号位数是否输入正确
@@ -154,6 +171,13 @@ export default {
     },
   },
   methods: {
+    keydown(event) {
+      if (event.keyCode !== 13) return;
+      this.login();
+    },
+    errorPhone() {
+      this.errorMsg = 'Please fill in the phone number correctly';
+    },
     changeTab() {
       this.errorMsg = '';
     },
@@ -184,6 +208,7 @@ export default {
         },
         onSuccess: () => {
           this.codeLoading = false;
+          this.send = true;
           this.countDown();
         },
         onFail: res => {
@@ -194,7 +219,7 @@ export default {
     },
     countDown() {
       this.codeCount++;
-      this.codeTimes = 20;
+      this.codeTimes = 60;
       let times = null;
       // eslint-disable-next-line no-undef
       if (!times) {
@@ -218,7 +243,7 @@ export default {
       this.errorMsg = '';
     },
     login() {
-      const that = this;
+      // const that = this;
       this.loginLoading = true;
       this.$store.dispatch('ajax', {
         req: {
@@ -227,7 +252,7 @@ export default {
           data: {
             entry: 'sinbad',
             user: this.activeName == 'phone' ? this.areaCode + this.phone : this.account,
-            pwd: this.password,
+            pwd: this.rsa(this.password),
             type: this.activeName == 'phone' ? '1' : '2',
             code: String(this.verifyCode),
           },
@@ -235,10 +260,10 @@ export default {
         onSuccess: res => {
           this.loginLoading = false;
           const uid = res.data.user.id;
-          const replaceUrl = that.$route.query.redirect || '/';
+          // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid);
-          this.$router.push({ path: replaceUrl });
+          this.$router.push({ path: 'live' });
         },
         onFail: res => {
           if (res.error_code == 30070) {
@@ -249,6 +274,15 @@ export default {
           this.loginLoading = false;
         },
       });
+    },
+    rsa(password) {
+      let encryptor = new JSEncrypt();
+      let pubKey =
+        '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDfw1/P15GQzGGYvNwVmXIGGxea8Pb2wJcF7ZW7tmFdLSjOItn9kvUsbQgS5yxx+f2sAv1ocxbPTsFdRc6yUTJdeQolDOkEzNP0B8XKm+Lxy4giwwR5LJQTANkqe4w/d9u129bRhTu/SUzSUIr65zZ/s6TUGQD6QzKY1Y8xS+FoQQIDAQAB-----END PUBLIC KEY-----';
+      encryptor.setPublicKey(pubKey); //设置公钥
+      let rsaPassWord = encryptor.encrypt(password);
+      console.log(rsaPassWord, 'rsa');
+      return rsaPassWord;
     },
   },
 };
@@ -265,6 +299,7 @@ export default {
   height: 40px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .area-code {
   width: 80px;
@@ -314,5 +349,29 @@ export default {
   position: absolute;
   right: 10px;
   cursor: pointer;
+}
+.password {
+  padding-right: 32px;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.icon-clear {
+  width: 20px;
+  height: 20px;
+  font-size: 19px;
+  color: #c9cdd8;
+  right: 10px;
+}
+html[lang='ar'] .password {
+  padding-right: 10px;
+  padding-left: 32px;
+}
+html[lang='ar'] .icon-pwd,
+html[lang='ar'] .icon-clear {
+  left: 10px;
+  right: auto;
 }
 </style>
