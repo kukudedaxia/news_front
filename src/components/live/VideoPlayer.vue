@@ -58,7 +58,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/replay.json',
+          url: '/multimedia/2/video/pc/replay.json',
           params: {
             uid: this.uid,
             lid: this.lid,

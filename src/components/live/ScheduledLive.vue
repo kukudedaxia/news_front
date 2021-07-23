@@ -75,7 +75,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/subLiveList.json',
+          url: '/multimedia/2/video/pc/subLiveList.json',
           params: {
             uid: this.uid,
           },

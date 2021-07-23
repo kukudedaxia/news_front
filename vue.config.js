@@ -92,10 +92,8 @@ module.exports = {
       '/api': {
         target: 'http://m.whale.weibo.com/',
       },
-      '/liveApi': {
-        target: 'http://10.92.160.246:8080/',
-        pathRewrite: { '^/liveApi': '' },
-        // pathRewrite: { '^/api': '' },
+      '/multimedia': {
+        target: 'https://test.bee.to/',
       },
       '/sup': {
         target: 'https://img.whale.weibo.com/',

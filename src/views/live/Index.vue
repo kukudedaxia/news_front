@@ -83,7 +83,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/access.json',
+          url: '/multimedia/2/video/pc/access.json',
           params: {
             uid: this.uid,
           },
@@ -115,7 +115,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/init.json',
+          url: '/multimedia/2/video/pc/init.json',
           params: {
             uid: this.uid,
           },
@@ -186,7 +186,9 @@ export default {
         async onTrackPublish(tracks) {
           console.log(tracks);
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
-          await room.subscribe(tracks);
+          room.subscribe(tracks).then(({ code }) => {
+            console.log(code);
+          });
         },
         /**
          * 房间用户取消发布资源
@@ -284,7 +286,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/check.json',
+          url: '/multimedia/2/video/pc/check.json',
           params: {
             uid: this.uid,
             lid: this.lid,
@@ -342,7 +344,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/start.json',
+          url: '/multimedia/2/video/pc/start.json',
           params,
         },
         onSuccess: () => {
@@ -379,7 +381,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: 'liveApi/2/video/pc/stop.json',
+          url: '/multimedia/2/video/pc/stop.json',
           params,
         },
         onSuccess: () => {
