@@ -196,7 +196,7 @@ const getAudienceClient = () => {
 };
 
 /**
- * 订阅直播间资源(观众端)
+ * 订阅直播间资源(观众端)-不加入房间，通过liveUrl订阅
  * @param liveUrl 直播资源地址
  * @param livingType 直播间类型，其有效值为 `RCLivingType` 所定义的枚举值
  * @param mediaType 订阅资源类型，其有效值为 `RCMediaType` 所定义的枚举值
@@ -216,6 +216,27 @@ const subscribe = async (
         resolve();
       } else {
         throw new Error('订阅主播资源失败 ->', code);
+      }
+    });
+  });
+};
+
+/**
+ * 观众加入直播房间调用
+ * @param roomId 房间 Id
+ * @param livingType 直播类型
+ * * 当 `livingType` 值为 `RCLivingType.AUDIO` 是表示音频直播
+ * * 当 `livingType` 值为 `RCLivingType.AUDIO_VIDEO` 是表示音视频直播
+ */
+const joinLivingRoomAsAudience = async roomId => {
+  return new Promise(resolve => {
+    rtcClient.joinLivingRoomAsAudience(roomId, RCLivingType.AUDIO_VIDEO).then(({ code, room }) => {
+      if (code === RCRTCCode.SUCCESS) {
+        console.log('观众加入房间成功', roomId);
+        // 返回房间实例
+        resolve(room);
+      } else {
+        throw new Error('观众加入房间失败 ->', code);
       }
     });
   });
@@ -294,4 +315,5 @@ export {
   setLayoutMode,
   getAudienceClient,
   audienceSubscribe,
+  joinLivingRoomAsAudience,
 };

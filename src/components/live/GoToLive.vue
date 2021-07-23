@@ -10,31 +10,35 @@
           :before-upload="beforeAvatarUpload"
           v-loading="uploadLoading"
         >
-          <img v-if="imgPid" :src="`https://img.bee-cdn.com/orj360/${imgPid}.jpg`" class="avatar" />
+          <img
+            v-if="imgPids"
+            :src="`https://img.bee-cdn.com/orj360/${imgPids}.jpg`"
+            class="avatar"
+          />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>
       <div class="title-box text-right">
         <p class="title">{{ $t('live.title') }}</p>
-        <el-input v-model="title" maxlength="50" :clearable="true"></el-input>
+        <el-input v-model="titles" maxlength="50" :clearable="true"></el-input>
       </div>
     </div>
     <el-divider></el-divider>
     <div class="item-box text-right">
       <p class="title">{{ $t('live.blogTitle') }}</p>
       <div class="flex">
-        <el-input v-model="blobText" type="textarea" :rows="2"></el-input>
+        <el-input v-model="blobTexts" type="textarea" :rows="2"></el-input>
       </div>
     </div>
     <el-divider></el-divider>
     <div class="item-box text-right">
       <p class="title">{{ $t('live.serverURL') }}</p>
       <div class="flex">
-        <el-input v-model="pushUrl"></el-input>
+        <el-input v-model="pushUrls"></el-input>
         <el-button
           type="primary"
           class="item-btn"
-          v-clipboard:copy="pushUrl"
+          v-clipboard:copy="pushUrls"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
           >{{ $t('live.copy') }}</el-button
@@ -46,11 +50,11 @@
     <div class="item-box text-right">
       <p class="title">{{ $t('live.streamKey') }}</p>
       <div class="flex">
-        <el-input v-model="streamKey"></el-input>
+        <el-input v-model="streamKeys"></el-input>
         <el-button
           type="primary"
           class="item-btn"
-          v-clipboard:copy="streamKey"
+          v-clipboard:copy="streamKeys"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
           >{{ $t('live.copy') }}</el-button
@@ -93,11 +97,11 @@ export default {
   computed: {
     btnDisabled() {
       if (
-        this.title &&
-        this.blobText &&
-        this.pushUrl &&
-        this.streamKey &&
-        this.imgPid &&
+        this.titles &&
+        this.blobTexts &&
+        this.pushUrls &&
+        this.streamKeys &&
+        this.imgPids &&
         this.liveState !== 2
       ) {
         return false;
@@ -113,11 +117,29 @@ export default {
       return btnTextObj[this.liveState];
     },
   },
+  watch: {
+    title(newV) {
+      this.titles = newV;
+    },
+    blobText(newV) {
+      this.blobTexts = newV;
+    },
+    pushUrl(newV) {
+      this.pushUrls = newV;
+    },
+    streamKey(newV) {
+      this.streamKeys = newV;
+    },
+  },
   data() {
     return {
-      imgPid: '3ba012bblz1grwynbdh5cj20u015u42h',
+      imgPids: '3ba012bblz1grwynbdh5cj20u015u42h',
       file: '',
       uploadLoading: false,
+      titles: this.title,
+      blobTexts: this.blobText,
+      pushUrls: this.pushUrl,
+      streamKeys: this.streamKey,
     };
   },
   created() {},
@@ -151,7 +173,7 @@ export default {
           },
           success: res => {
             this.uploadLoading = false;
-            this.imgPid = res.pic.pid;
+            this.imgPids = res.pic.pid;
           },
           error: err => {
             this.uploadLoading = false;
@@ -166,20 +188,20 @@ export default {
     onLiveClick() {
       const param = {
         live_type: 1, // 0:预约feed开播 1:直接开播
-        title: this.title,
-        cover_img: this.imgPid,
-        blobText: this.blobText,
+        title: this.titles,
+        cover_img: this.imgPids,
+        blobText: this.blobTexts,
       };
       this.$emit('liveState', param);
     },
     // 清空数据
     onClearData() {
       this.$emit('onClearData');
-      this.title = '';
-      this.pushUrl = '';
-      this.streamKey = '';
-      this.imgPid = '';
-      this.blobText = '';
+      this.titles = '';
+      this.pushUrls = '';
+      this.streamKeys = '';
+      this.imgPids = '';
+      this.blobTexts = '';
     },
     // ----- copy ----- //
     onCopy() {

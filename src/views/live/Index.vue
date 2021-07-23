@@ -7,7 +7,7 @@
             :liveState="liveState"
             :btnLoading="goLiveBtnLoading"
             :pushUrl="pushUrl"
-            :streamKey="streamKey"
+            :streamKey.sync="streamKey"
             :blobText="blobText"
             :title="title"
             :disabled="liveState === 1 && live_type === 0"
@@ -47,6 +47,7 @@ import ScheduledLive from '@/components/live/ScheduledLive.vue';
 import VideoPlayer from '@/components/live/VideoPlayer.vue';
 
 import { initMain, joinLivingRoom } from '@/utils/live';
+import Cookies from 'js-cookie';
 
 export default {
   components: {
@@ -70,7 +71,9 @@ export default {
       goLiveBtnLoading: false, // 直接开播btn按钮状态
     };
   },
-  created() {},
+  created() {
+    this.uid = Number(Cookies.get('uid'));
+  },
   mounted() {
     this.access();
   },
@@ -249,7 +252,9 @@ export default {
           } else {
             // 预约开播，不走校验逻辑
             this.initSdk(param.lid);
-            this.startLive(param);
+            setTimeout(() => {
+              this.startLive(param);
+            }, 1000);
           }
           // 此时是直播状态，走下播流程
         } else if (this.liveState === 1) {
@@ -290,16 +295,16 @@ export default {
         onSuccess: ({ data }) => {
           // 15分钟内有预约直播，弹窗提醒
           if (data.haveLiveOnline === 1) {
-            this.$confirm(this.$t('live.endMsg'), this.$t('live.endTitle'), {
+            this.$alert(this.$t('live.endMsg'), this.$t('live.endTitle'), {
               confirmButtonText: this.$t('live.endBtn'),
-              cancelButtonText: this.$t('live.cancel'),
-            })
-              .then(() => {})
-              .catch(() => {});
+              callback: () => {},
+            });
           } else {
             // 校验通过，弹出博文输入框
             this.initSdk(this.lid);
-            this.startLive();
+            setTimeout(() => {
+              this.startLive();
+            }, 1000);
           }
         },
         onComplete: () => {},
