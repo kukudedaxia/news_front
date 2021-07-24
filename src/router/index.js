@@ -21,7 +21,8 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue'),
     meta: {
-      title: 'login',
+      title: 'loginpage',
+      auth: true,
     },
   },
   {
@@ -70,16 +71,8 @@ const routes = [
     name: 'Live',
     component: () => import('../views/live/Index.vue'),
     meta: {
-      title: 'beeto',
+      title: 'lives',
       auth: true,
-    },
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue'),
-    meta: {
-      title: 'Login',
     },
   },
   {

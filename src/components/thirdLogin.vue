@@ -111,12 +111,16 @@ export default {
       let thirduid = '123';
       if (type == '1') {
         accesstoken = data.credential;
+        this.$store.commit('setLoginType', 'google');
       } else if (type == '3') {
         accesstoken = data.authorization.id_token;
+        this.$store.commit('setLoginType', 'apple');
       } else {
         accesstoken = data.authResponse.accessToken;
         thirduid = data.authResponse.userID;
+        this.$store.commit('setLoginType', 'facebook');
       }
+
       console.log(accesstoken, 'accesstoken');
       this.$store.dispatch('ajax', {
         req: {
@@ -275,6 +279,7 @@ export default {
       }
     },
     listenApple() {
+   
       //Listen for authorization success
       // const that = this;
       document.addEventListener('AppleIDSignInOnSuccess', data => {

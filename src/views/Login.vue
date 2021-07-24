@@ -2,8 +2,8 @@
   <div>
     <div class="tabs">
       <el-tabs v-model="activeName" @tab-click="changeTab">
-        <el-tab-pane label="Login With Phone" name="phone">
-          <div class="con">
+        <el-tab-pane :label="$t('login.tab1')" name="phone">
+          <div class="con" v-if="!hide">
             <div class="line">
               <el-select v-model="areaCode" slot="prepend" placeholder="请选择" class="area-code">
                 <el-option :value="item.num" v-for="(item, index) of areaList" :key="index">
@@ -12,7 +12,7 @@
                 </el-option>
               </el-select>
               <input
-                placeholder="请输入内容"
+                :placeholder="$t('login.phoneph')"
                 v-model="phone"
                 @focus="errorHide"
                 @input="checkInputRules('phone', 11)"
@@ -22,7 +22,7 @@
             </div>
             <div class="line">
               <input
-                placeholder="请输入验证码"
+                :placeholder="$t('login.codeph')"
                 v-model="verifyCode"
                 class="input"
                 @input="checkInputRules('verifyCode', 6)"
@@ -33,7 +33,13 @@
                   v-if="!codeLoading"
                   @click="phoneLengthCorrect ? sendCode() : errorPhone()"
                 >
-                  {{ codeTimes > 0 ? `${codeTimes}s` : send ? 'resend' : 'get verification Code' }}
+                  {{
+                    codeTimes > 0
+                      ? `${codeTimes}s`
+                      : send
+                      ? $t('login.resend')
+                      : $t('login.getcode')
+                  }}
                 </span>
                 <loading :isComplete="false" v-else style="width: 20px" />
               </template>
@@ -49,21 +55,28 @@
             :disabled="disabled"
             :loading="loginLoading"
             @click="login"
-            >Login</el-button
+            >{{ $t('login.login') }}</el-button
           >
-          <p class="info">
-            I.ve read and agreedto the <a href="/term">Terms of Use</a> and
-            <a href="policy">Privacy policy</a>
+          <p class="info" v-if="lang == 'en'">
+            I've read and agreed to the <a href="/terms" target="_blank">>Terms of Use</a> and
+            <a href="policy" target="_blank">>Privacy policy</a>
+          </p>
+          <p class="info" v-else>
+            لقد قرأت ووافقت على
+            <a href="/terms" target="_blank">>شروط الاستخدام </a>
+            و
+            <a href="policy" target="_blank">>سياسة الخصوصية</a>
           </p>
         </el-tab-pane>
-        <el-tab-pane label="Account Login" name="account">
+        <el-tab-pane :label="$t('login.tab2')" name="account">
           <div class="con">
             <div class="line">
               <input
-                placeholder="请输入用户名"
+                :placeholder="$t('login.accountph')"
                 v-model="account"
                 class="input"
                 @focus="errorHide"
+                type="text"
               />
               <img
                 src="@/assets/images/icon_clear.png"
@@ -74,7 +87,7 @@
             </div>
             <div class="line">
               <input
-                placeholder="请输入密码"
+                :placeholder="$t('login.passwordph')"
                 v-model="password"
                 class="input password"
                 @focus="errorHide"
@@ -101,11 +114,17 @@
             :disabled="disabled"
             :loading="loginLoading"
             @click="login"
-            >Login</el-button
+            >{{ $t('login.login') }}</el-button
           >
-          <p class="info">
-            I.ve read and agreedto the <a href="/term">Terms of Use</a> and
-            <a href="policy">Privacy policy</a>
+          <p class="info" v-if="lang == 'en'">
+            I've read and agreed to the <a href="/terms" target="_blank">>Terms of Use</a> and
+            <a href="policy" target="_blank">>Privacy policy</a>
+          </p>
+          <p class="info" v-else>
+            لقد قرأت ووافقت على
+            <a href="/terms" target="_blank">شروط الاستخدام </a>
+            و
+            <a href="policy" target="_blank">>سياسة الخصوصية</a>
           </p>
         </el-tab-pane>
       </el-tabs>
@@ -126,6 +145,7 @@ export default {
   },
   data() {
     return {
+      hide: false,
       activeName: 'phone',
       phone: '',
       areaCode: '+44',
@@ -169,6 +189,21 @@ export default {
       }
       return true;
     },
+    lang() {
+      return this.$store.state.language;
+    },
+  },
+  watch: {
+    password(val) {
+      // eslint-disable-next-line no-useless-escape
+      let str = val.replace(/[^\w\.\/]/gi, '');
+      // eslint-disable-next-line no-useless-escape
+      str = str.replace(/[`~!@#$%^&*+<>{}/\'[\]]/im, '').replace(/\s+/g, '');
+      this.password = str;
+    },
+    lang() {
+      this.getArea()
+    }
   },
   methods: {
     keydown(event) {
@@ -179,6 +214,11 @@ export default {
       this.errorMsg = 'Please fill in the phone number correctly';
     },
     changeTab() {
+      if (this.activeName == 'account') {
+        this.hide = true;
+      } else {
+        this.hide = false;
+      }
       this.errorMsg = '';
     },
     getArea() {
@@ -263,14 +303,21 @@ export default {
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid);
+          this.$store.commit('setLoginType', 'normal');
           this.$router.push({ path: 'live' });
         },
         onFail: res => {
           if (res.error_code == 30070) {
-            this.$message.error('You have no permission');
+            this.$message.error(this.$t('login.permission'));
           } else {
             this.errorMsg = res.error;
           }
+          this.loginLoading = false;
+        },
+        onComplete: () => {
+          this.loginLoading = false;
+        },
+        onError: () => {
           this.loginLoading = false;
         },
       });

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import request from '../utils/request';
 import { sendReport } from '../server/index';
+import i18n from '../utils/i18n';
+import { Message } from 'element-ui';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,6 +14,7 @@ export default new Vuex.Store({
     uicode: '',
     luicode: '',
     slideIndex: 1,
+    loginType: 'normal', //facebook, google, apple, normal
     uid: '',
     userInfo: {},
   },
@@ -32,6 +35,9 @@ export default new Vuex.Store({
     },
     setUid(state, data) {
       state.uid = data;
+    },
+    setLoginType(state, data) {
+      state.loginType = data;
     },
     setUser(state, data) {
       state.userInfo = data;
@@ -90,11 +96,7 @@ export default new Vuex.Store({
       let emptyFunc = () => {};
       // 多语言请求
       if (request.defaults.headers.common['Accept-Language'] == 'ar') {
-        if (reqConf.method == 'get') {
-          reqConf.params = { ...reqConf.params, language: 1 };
-        } else {
-          reqConf.data = { ...reqConf.data, language: 1 };
-        }
+        reqConf.params = { ...reqConf.params, language: 1 };
       }
       payload.onFail = payload.onFail || emptyFunc;
       payload.onComplete = payload.onComplete || emptyFunc;
@@ -110,7 +112,14 @@ export default new Vuex.Store({
           payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
         })
         .catch(err => {
-          payload.onError && payload.onError(err, reqConf);
+          if (!navigator.onLine) {
+            payload.onNetworkError && payload.onNetworkError(err, reqConf);
+            Message.error(i18n.t('netError'));
+          } else {
+            // 400、500 异常
+            payload.onError && payload.onError(err, reqConf);
+            Message.error(String(err));
+          }
           payload.onComplete && payload.onComplete(err, null, reqConf, null);
         });
       return true;

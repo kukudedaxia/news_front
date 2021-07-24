@@ -11,13 +11,13 @@
       @click="goHome"
     ></div>
     <div class="header-right">
-      <router-link to="/live" class="menu-item">Live</router-link>
-      <router-link to="/" class="menu-item">Home</router-link>
+      <router-link to="/live" class="menu-item">{{ $t('lives') }}</router-link>
+      <router-link to="/" class="menu-item">{{ $t('home') }}</router-link>
       <div class="user" v-if="Object.keys(user).length > 0">
         <el-dropdown @command="handleCommand">
-          <span class="el-dropdown-link"> 用户名:{{ user.nickname }} </span>
+          <span class="el-dropdown-link">{{ user.nickname }} </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="logout">logout</el-dropdown-item>
+            <el-dropdown-item command="logout">{{ $t('login.logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -48,6 +48,9 @@ export default {
     uid() {
       return this.$store.state.uid;
     },
+    loginType() {
+      return this.$store.state.loginType;
+    },
   },
   watch: {
     uid(v) {
@@ -74,19 +77,16 @@ export default {
     handleCommand(command) {
       this.logoutLoading = true;
       if (command == 'logout') {
-        this.$confirm(
-          '<strong>Are you sure want to log outof the current login</strong>',
-          'SignOut',
-          {
-            confirmButtonText: 'Logout',
-            cancelButtonText: 'Cancel',
-            cancelButtonClass: 'cancel-btn',
-            confirmButtonClass: 'confirm-btn',
-            type: '',
-            customClass: 'custom-message',
-            dangerouslyUseHTMLString: true,
-          },
-        )
+        const text = this.$t('signText');
+        this.$confirm(`<strong>${text}</strong>`, this.$t('login.logout'), {
+          confirmButtonText: this.$t('live.ok'),
+          cancelButtonText: this.$t('live.cancel'),
+          cancelButtonClass: 'cancel-btn',
+          confirmButtonClass: 'confirm-btn',
+          type: '',
+          customClass: 'custom-message',
+          dangerouslyUseHTMLString: true,
+        })
           .then(() => {
             this.logout();
           })
@@ -106,8 +106,13 @@ export default {
         onSuccess: res => {
           console.log(res);
           Cookies.remove('uid');
-          this.signOutGoogle();
-          this.signOutFaceBook();
+          this.$store.dispatch('changeUid', '');
+          if (this.loginType == 'google') {
+            this.signOutGoogle();
+          }
+          if (this.loginType == 'facebook') {
+            this.signOutFaceBook();
+          }
           this.$router.push('/');
         },
         onFail: res => {
@@ -136,6 +141,10 @@ export default {
 <style lang="less">
 .custom-message {
   vertical-align: inherit;
+}
+html[lang='ar'] .el-message-box__headerbtn {
+  right: auto;
+  left: 15px;
 }
 </style>
 <style lang="less">

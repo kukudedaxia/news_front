@@ -1,7 +1,11 @@
 export default {
   en: {
+    netError: 'Network error, try again',
     en: 'EN',
     beeto: 'Beeto-Express freely',
+    home: 'Home',
+    lives: 'live',
+    loginpage: 'log in',
     slide1: {
       beeto: 'Freshly delivered',
       born: 'content with',
@@ -62,6 +66,7 @@ export default {
       endTitle: 'End the Beeto Live?',
       endMsg: 'People are still watching your Beeto Live, do you really want to end Beeto Live?',
       cancel: 'Cancel',
+      ok: 'Ok ',
       endBtn: 'End Beeto Live',
       endMsg1: 'Your Beeto Live has ended',
       replaying: 'Allow Replaying Beeto Live',
@@ -77,6 +82,21 @@ export default {
       failed: 'failed',
       scheduleTitle: 'title',
       release: 'Release',
+    },
+    signOut: 'signOut',
+    signText: 'Are you sure you want to log out?',
+    login: {
+      tab1: 'Log in with phone',
+      tab2: 'Account login',
+      phoneph: 'Enter your phone number',
+      codeph: 'Verification code',
+      accountph: 'Enter your username',
+      passwordph: 'Enter yout password',
+      getcode: 'Get Verification Code',
+      resend: 'resend',
+      login: 'Log In',
+      logout: 'Log out',
+      permission: 'You have no permission',
     },
   },
 };
