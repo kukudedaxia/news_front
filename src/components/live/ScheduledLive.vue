@@ -13,13 +13,13 @@
               {{ $t('live.time') }}:
               {{ $moment(new Date(item.liveInfoBean.apptTime)).format('DD/MM/YYYY HH:mm ') }}
             </p>
-            <p>{{ $t('live.privacy') }}: {{ item.liveInfoBean.visible }}</p>
+            <p>{{ $t('live.privacy') }}: {{ visibleMap.get(item.liveInfoBean.visible) }}</p>
           </div>
           <div class="btn-operation">
             <el-button
               type="primary"
               size="small"
-              :disabled="item.liveState === 2"
+              :disabled="item.liveState === 2 || (liveState === 1 && item.liveState !== 1)"
               :loading="item.loading"
               @click="onLiveClick(item)"
             >
@@ -38,6 +38,7 @@
               v-clipboard:copy="item.pushUrl"
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
+              :disabled="liveState === 1 && item.liveState !== 1"
               >{{ $t('live.copyURL') }}</el-button
             >
             <el-button
@@ -47,6 +48,7 @@
               v-clipboard:copy="item.streamKey"
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
+              :disabled="liveState === 1 && item.liveState !== 1"
               >{{ $t('live.copyKey') }}</el-button
             >
           </div>
@@ -60,10 +62,21 @@
 export default {
   props: {
     uid: Number,
+    // 直播状态：0 未直播 1 直播中 2 已结束
+    liveState: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
       liveList: [],
+      visibleMap: new Map([
+        [-1, this.$t('live.public')],
+        [0, this.$t('live.private')],
+        [1, this.$t('live.onlyFollowers')],
+        [2, this.$t('live.onlyFriends')],
+      ]),
     };
   },
   created() {

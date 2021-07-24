@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading="pageLoading">
     <div id="nav">
       <Header />
     </div>
@@ -17,6 +17,11 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  computed: {
+    pageLoading() {
+      return this.$store.getters['route/getLoading'];
+    },
   },
   data() {
     return {

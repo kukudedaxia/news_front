@@ -2,7 +2,11 @@
   <div class="live">
     <div class="operation">
       <el-tabs v-model="activeName" :stretch="true" style="width: 100%;">
-        <el-tab-pane :label="$t('live.goLive')" name="1">
+        <el-tab-pane
+          :label="$t('live.goLive')"
+          name="1"
+          :disabled="liveState === 1 && live_type === 0"
+        >
           <go-live
             :liveState="liveState"
             :btnLoading="goLiveBtnLoading"
@@ -10,7 +14,6 @@
             :streamKey.sync="streamKey"
             :blobText="blobText"
             :title="title"
-            :disabled="liveState === 1 && live_type === 0"
             @liveState="onLiveClick"
             ref="goLiveRef"
           ></go-live>
@@ -22,6 +25,7 @@
         >
           <scheduled-live
             :uid="uid"
+            :liveState="liveState"
             class="tab-content"
             ref="scheduledLiveRef"
             @liveState="onLiveClick"
@@ -75,6 +79,10 @@ export default {
     this.uid = Number(Cookies.get('uid'));
   },
   mounted() {
+    // window.addEventListener('beforeunload', event => {
+    //   event.returnValue = '我在这写点东西...';
+    // });
+
     this.access();
   },
   methods: {
@@ -102,13 +110,17 @@ export default {
             this.initSdk(this.lid, 2);
           }
         },
-        onComplete: () => {},
+        onComplete: () => {
+          this.$store.commit('route/setLoadingState', false);
+        },
       });
     },
     // 重置信息，重新开播
     onRefresh() {
+      this.activeName = '1';
       this.liveState = 0;
       this.$refs.goLiveRef.onClearData();
+      this.init();
     },
     // 获取初始化参数(只针对直接开播使用)
     init() {
@@ -351,6 +363,12 @@ export default {
           this.$message({
             message: this.$t('live.success'),
             type: 'success',
+          });
+        },
+        onFail: ({ error }) => {
+          this.$message({
+            type: 'error',
+            message: error,
           });
         },
         onComplete: () => {

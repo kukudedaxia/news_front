@@ -8,6 +8,7 @@
           ref="upload"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
+          :disabled="liveState == 1"
           v-loading="uploadLoading"
         >
           <img
@@ -20,21 +21,31 @@
       </div>
       <div class="title-box text-right">
         <p class="title">{{ $t('live.title') }}</p>
-        <el-input v-model="titles" maxlength="50" :clearable="true"></el-input>
+        <el-input
+          v-model="titles"
+          maxlength="100"
+          :clearable="true"
+          :disabled="liveState == 1"
+        ></el-input>
       </div>
     </div>
     <el-divider></el-divider>
     <div class="item-box text-right">
       <p class="title">{{ $t('live.blogTitle') }}</p>
       <div class="flex">
-        <el-input v-model="blobTexts" type="textarea" :rows="2"></el-input>
+        <el-input
+          v-model="blobTexts"
+          type="textarea"
+          :rows="2"
+          :disabled="liveState == 1"
+        ></el-input>
       </div>
     </div>
     <el-divider></el-divider>
     <div class="item-box text-right">
       <p class="title">{{ $t('live.serverURL') }}</p>
       <div class="flex">
-        <el-input v-model="pushUrls"></el-input>
+        <el-input v-model="pushUrls" :disabled="liveState == 1"></el-input>
         <el-button
           type="primary"
           class="item-btn"
@@ -50,7 +61,7 @@
     <div class="item-box text-right">
       <p class="title">{{ $t('live.streamKey') }}</p>
       <div class="flex">
-        <el-input v-model="streamKeys"></el-input>
+        <el-input v-model="streamKeys" :disabled="liveState == 1"></el-input>
         <el-button
           type="primary"
           class="item-btn"
@@ -164,7 +175,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `/sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
+              url: `https://img.whale.weibo.com/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
@@ -196,7 +207,6 @@ export default {
     },
     // 清空数据
     onClearData() {
-      this.$emit('onClearData');
       this.titles = '';
       this.pushUrls = '';
       this.streamKeys = '';

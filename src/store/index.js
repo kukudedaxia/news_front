@@ -4,7 +4,15 @@ import request from '../utils/request';
 import { sendReport } from '../server/index';
 import i18n from '../utils/i18n';
 import { Message } from 'element-ui';
+
 Vue.use(Vuex);
+const modulesFiles = require.context('./modules', true, /\.js$/);
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  let moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1');
+  let value = modulesFiles(modulePath);
+  modules[moduleName] = value.default;
+  return modules;
+}, {});
 
 export default new Vuex.Store({
   state: {
@@ -17,6 +25,7 @@ export default new Vuex.Store({
     loginType: 'normal', //facebook, google, apple, normal
     uid: '',
     userInfo: {},
+    pageLoading: false,
   },
   mutations: {
     setLanguage(state, lang) {
@@ -42,6 +51,7 @@ export default new Vuex.Store({
     setUser(state, data) {
       state.userInfo = data;
     },
+    setPageLoading() {},
   },
   actions: {
     changeLanguage({ commit }, lang) {
@@ -151,5 +161,5 @@ export default new Vuex.Store({
       });
     },
   },
-  modules: {},
+  modules,
 });
