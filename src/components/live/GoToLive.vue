@@ -13,7 +13,7 @@
         >
           <img
             v-if="imgPids"
-            :src="`https://img.bee-cdn.com/orj360/${imgPids}.jpg`"
+            :src="`http://img.whale.weibo.com/orj1080/${imgPids}.jpg`"
             class="avatar"
           />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -144,7 +144,7 @@ export default {
   },
   data() {
     return {
-      imgPids: '3ba012bblz1grwynbdh5cj20u015u42h',
+      imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
       file: '',
       uploadLoading: false,
       titles: this.title,

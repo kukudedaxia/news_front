@@ -73,6 +73,7 @@ export default {
       live_type: 1, // 0:预约feed开播 1:直接开播
       blobText: '', // 博文内容
       goLiveBtnLoading: false, // 直接开播btn按钮状态
+      TOKEN: 'ehD5kBhGQl/u1GOXFWhyWkKZ8J6A8aHdmVzjREuDmvw=@y4sa.cn.rongnav.com;y4sa.cn.rongcfg.com',
     };
   },
   created() {
@@ -82,10 +83,25 @@ export default {
     // window.addEventListener('beforeunload', event => {
     //   event.returnValue = '我在这写点东西...';
     // });
-
-    this.access();
+    this.getToken();
   },
   methods: {
+    // 获取直播token
+    getToken() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: '/multimedia/2/video/pc/user_token.json',
+          params: {
+            auth_uid: this.uid,
+          },
+        },
+        onSuccess: ({ data }) => {
+          this.TOKEN = data.token;
+          this.access();
+        },
+      });
+    },
     // 检测是否有直播
     access() {
       this.$store.dispatch('ajax', {
@@ -144,7 +160,7 @@ export default {
     // state 1 直播  2 续播
     async initSdk(lid, state = 1) {
       const _this = this;
-      await initMain();
+      await initMain(this.TOKEN);
       const room = await joinLivingRoom(lid);
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
       room.registerRoomEventListener({

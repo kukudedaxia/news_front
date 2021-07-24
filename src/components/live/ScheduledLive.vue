@@ -5,7 +5,7 @@
     </p>
     <ul>
       <li v-for="item in liveList" :key="item.streamKey">
-        <img :src="`https://img.bee-cdn.com/orj360/${item.liveInfoBean.coverPid}.jpg`" />
+        <img :src="`http://img.whale.weibo.com/orj1080/${item.liveInfoBean.coverPid}.jpg`" />
         <div class="right-box">
           <div>
             <p>{{ $t('live.scheduleTitle') }}: {{ item.liveInfoBean.title }}</p>

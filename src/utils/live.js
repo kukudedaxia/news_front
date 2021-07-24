@@ -17,17 +17,15 @@ import {
 } from '@rongcloud/plugin-rtc';
 
 const APPkEY = 'c9kqb3rdc63ej';
-const TOKEN =
-  'ehD5kBhGQl/u1GOXFWhyWkKZ8J6A8aHdmVzjREuDmvw=@y4sa.cn.rongnav.com;y4sa.cn.rongcfg.com';
 let rtcClient = null; // rtcClient实例
 
 /**
  * 音视频初始化入口函数
  * @param role 1 主播  2 观众
  */
-const initMain = async role => {
+const initMain = async TOKEN => {
   // IM初始化
-  await IMinit();
+  await IMinit(TOKEN);
   // 获取 IMLib 的单例实例
   const im = RongIMClient.getInstance();
   // 初始化 RTCClient
@@ -38,7 +36,7 @@ const initMain = async role => {
  * IM初始化
  * @returns 返回promise类型的IM实例
  */
-const IMinit = () => {
+const IMinit = TOKEN => {
   // 初始化 IMLib
   RongIMClient.init(APPkEY);
 
