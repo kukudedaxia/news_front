@@ -87,9 +87,8 @@ export default {
       strtTitle: 'ابدأ البث المباشر لبيتو مقدمًا',
       startMsg:
         'سيبدأ حجزك للبث المباشر لبيتو  قريبًا. إذا كنت تريد الدخول إلى البث المباشر في أقرب وقت ممكن ، فيرجى النقر للحجز للدخول.',
-      leaveTitle: 'Leave Beeto Live?',
-      leaveMsg:
-        'If you navigate away from this sceen the live will end. Do you want to continue and end Beeto Live?',
+      leaveTitle: 'ترك بيتو لايف؟',
+      leaveMsg: 'إذا تركت هذه الصفحة ، فسيتم إنهاء بيتو لايف. هل تريد الاستمرار؟',
     },
     signOut: 'signOut',
     signText: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',

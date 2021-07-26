@@ -50,8 +50,7 @@ import GoLive from '@/components/live/GoToLive.vue';
 import ScheduledLive from '@/components/live/ScheduledLive.vue';
 import VideoPlayer from '@/components/live/VideoPlayer.vue';
 
-import { initMain, joinLivingRoom } from '@/utils/live';
-import Cookies from 'js-cookie';
+import { initMain, joinLivingRoom, leaveRoom } from '@/utils/live';
 
 export default {
   components: {
@@ -66,6 +65,7 @@ export default {
   },
   data() {
     return {
+      room: null, // 直播间实例
       activeName: '1',
       liveState: 0, // 0 未直播 1 直播中 2 已结束
       uid: 1000005298,
@@ -86,9 +86,6 @@ export default {
     this.$store.commit('route/setLoadingState', true);
   },
   mounted() {
-    // window.addEventListener('beforeunload', event => {
-    //   event.returnValue = '我在这写点东西...';
-    // });
     this.getToken();
   },
   methods: {
@@ -168,6 +165,7 @@ export default {
       const _this = this;
       await initMain(this.TOKEN);
       const room = await joinLivingRoom(lid);
+      this.room = room;
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
       room.registerRoomEventListener({
         /**
@@ -179,7 +177,7 @@ export default {
          * 当值为 true 时，说明本端收到被踢出房间通知
          */
         onKickOff(byServer) {
-          console.log(byServer);
+          console.log('onKickOff', byServer);
         },
         /**
          * 接收到房间信令时回调，用户可通过房间实例的 `sendMessage(name, content)` 接口发送信令
@@ -189,7 +187,7 @@ export default {
          * @param messageUId 消息唯一标识
          */
         onMessageReceive(name, content, senderUserId, messageUId) {
-          console.log(name, content, senderUserId, messageUId);
+          console.log('onMessageReceive', name, content, senderUserId, messageUId);
         },
         /**
          * 监听房间属性变更通知
@@ -197,28 +195,28 @@ export default {
          * @param content
          */
         onRoomAttributeChange(name, content) {
-          console.log(name, content);
+          console.log('onRoomAttributeChange', name, content);
         },
         /**
          * 房间用户禁用/启用音频
          * @param audioTrack RCRemoteAudioTrack 类实例
          */
         onAudioMuteChange(audioTrack) {
-          console.log(audioTrack);
+          console.log('onAudioMuteChange', audioTrack);
         },
         /**
          * 房间用户禁用/启用视频
          * @param videoTrack RCRemoteVideoTrack 类实例对象
          */
         onVideoMuteChange(videoTrack) {
-          console.log(videoTrack);
+          console.log('onVideoMuteChange', videoTrack);
         },
         /**
          * 房间内用户发布资源
          * @param tracks 新发布的音轨与视轨数据列表，包含新发布的 RCRemoteAudioTrack 与 RCRemoteVideoTrack 实例
          */
         async onTrackPublish(tracks) {
-          console.log(tracks);
+          console.log('onTrackPublish', tracks);
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
           room.subscribe(tracks).then(({ code }) => {
             console.log(code);
@@ -230,14 +228,14 @@ export default {
          * @description 当资源被取消发布时，SDK 内部会取消对相关资源的订阅，业务层仅需处理 UI 业务
          */
         onTrackUnpublish(tracks) {
-          console.log(tracks);
+          console.log('onTrackUnpublish', tracks);
         },
         /**
          * 订阅的音视频流通道已建立, track 已可以进行播放
          * @param track RCRemoteTrack 类实例
          */
         onTrackReady(track) {
-          console.log(track);
+          console.log('onTrackReady', track);
           const videoNode = document.querySelector('#videoNode');
           track.play(videoNode);
           _this.liveState = 1; // 设置为直播中
@@ -247,26 +245,31 @@ export default {
          * @param userIds 加入的人员 id 列表
          */
         onUserJoin(userIds) {
-          console.log(userIds);
+          console.log('onUserJoin', userIds);
         },
         /**
          * 人员退出
          * @param userIds
          */
         onUserLeave(userIds) {
-          console.log(userIds);
+          console.log('onUserLeave', userIds);
+          // 如果检测到人员退出，则主动下播
+          _this.stopLive();
         },
       });
       // 如果是续播，初始化完room实例后需要订阅远端流
       if (state === 2) {
+        // 弹窗是因为用户无操作没法直接播放流
         this.$alert(this.$t('live.msg4'), '', {
           confirmButtonText: this.$t('live.continue'),
           showClose: false,
           callback: () => {
             const remoteTracks = room.getRemoteTracks();
             console.log(remoteTracks);
-            room.subscribe(remoteTracks);
-            _this.liveState = 1; // 设置为直播中
+            if (remoteTracks.length > 0) {
+              room.subscribe(remoteTracks);
+              _this.liveState = 1; // 设置为直播中
+            }
           },
         });
       }
@@ -332,7 +335,7 @@ export default {
           // 15分钟内有预约直播，弹窗提醒
           if (data.haveLiveOnline === 1) {
             this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
-              confirmButtonText: this.$t('live.endBtn'),
+              confirmButtonText: 'I know',
               callback: () => {
                 this.goLiveBtnLoading = false;
               },
@@ -435,6 +438,8 @@ export default {
             type: 'success',
           });
           this.$refs.scheduledLiveRef.changeLiveState(param.lid, 2);
+          // 退出直播间
+          leaveRoom(this.room);
         },
         onComplete: () => {
           if (this.live_type === 1) {
@@ -454,7 +459,7 @@ export default {
         cancelButtonText: this.$t('live.cancel'),
       })
         .then(() => {
-          next();
+          this.stopLive();
         })
         .catch(() => {});
     } else {

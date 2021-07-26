@@ -121,6 +121,25 @@ const joinLivingRoom = roomId => {
 };
 
 /**
+ * 退出直播间
+ * @param room实例
+ */
+const leaveRoom = room => {
+  return new Promise(resolve => {
+    rtcClient.leaveRoom(room).then(({ code }) => {
+      // 若加入失败，则 room、userIds、tracks 值为 undefined
+      if (code === RCRTCCode.SUCCESS) {
+        console.log('退出房间成功');
+        // 返回房间实例
+        resolve(room);
+      } else {
+        throw new Error('退出房间失败 ->', code);
+      }
+    });
+  });
+};
+
+/**
  * 设置推送视频流的参数（主播端）
  * @param RCFrameRate 帧率 10、15、24、30
  * @param RCResolution  分辨率
@@ -305,6 +324,7 @@ export {
   IMinit,
   publish,
   unpublish,
+  leaveRoom,
   createCameraVideoTrack,
   createMicrophoneAndCameraTracks,
   joinLivingRoom,

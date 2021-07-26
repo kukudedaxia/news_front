@@ -25,10 +25,10 @@
             >
               {{
                 item.liveState === 0
-                  ? 'start Live'
+                  ? $t('live.startLive')
                   : item.liveState === 1
-                  ? 'End Live'
-                  : 'Live Ended'
+                  ? $t('live.endLive')
+                  : $t('live.liveEnded')
               }}
             </el-button>
             <el-button

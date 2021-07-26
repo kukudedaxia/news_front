@@ -942,12 +942,10 @@
   dependencies:
     "@rongcloud/engine" "~4.4.2"
 
-"@rongcloud/plugin-rtc@^5.1.2":
-  version "5.1.2"
-  resolved "https://registry.npmjs.org/@rongcloud/plugin-rtc/-/plugin-rtc-5.1.2.tgz"
-  integrity sha512-cFhZdj6jXySUUfRI70H3ompyprVqaAHlsgcSlFX8OwP3HfcAkh3DuSscs7VwTcOxdv3na20nN1LlekHRwiN5GA==
-  dependencies:
-    "@rongcloud/engine" "~4.4.2"
+"@rongcloud/plugin-rtc@5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@rongcloud/plugin-rtc/-/plugin-rtc-5.1.4.tgz#2948ec53d7e7692dafe425d05c213de13913fe92"
+  integrity sha512-Jmu4mgCX1b7Uqdy4UlTkEilttXV9CtHEZeg+PwwPgANvYgU+zTnN0JpGWdutFLjn/KKnmTY/aAjJfBPYtZnJrA==
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.8.0"
