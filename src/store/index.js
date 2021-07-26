@@ -4,6 +4,7 @@ import request from '../utils/request';
 import { sendReport } from '../server/index';
 import i18n from '../utils/i18n';
 import { Message } from 'element-ui';
+import Cookies from 'js-cookie';
 
 Vue.use(Vuex);
 const modulesFiles = require.context('./modules', true, /\.js$/);
@@ -23,7 +24,7 @@ export default new Vuex.Store({
     luicode: '',
     slideIndex: 1,
     loginType: 'normal', //facebook, google, apple, normal
-    uid: '',
+    // uid: '',
     userInfo: {},
     pageLoading: false,
   },
@@ -113,7 +114,7 @@ export default new Vuex.Store({
       payload.onError = payload.onError || emptyFunc;
 
       request(reqConf)
-        .then(res => {
+        .then(res => {      
           if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
             payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
           } else {
@@ -134,8 +135,8 @@ export default new Vuex.Store({
         });
       return true;
     },
-    // 获取用户信息 校验用户是否存在
-    async getUser(ctx) {
+    // 获取用户信息 校验用户是否存在 存入cookie
+    async getUser(ctx, uid) {
       return new Promise(resolve => {
         ctx.dispatch('ajax', {
           req: {
@@ -143,11 +144,12 @@ export default new Vuex.Store({
             url: '/api/dispatch/to',
             params: {
               direct: 'user_profile_header',
-              uid: ctx.state.uid,
+              uid,
             },
           },
           onSuccess: res => {
             ctx.state.userInfo = res.data.user;
+            Cookies.set('userInfo', JSON.stringify(res.data.user));
             resolve(res.data);
           },
           onFail: () => {

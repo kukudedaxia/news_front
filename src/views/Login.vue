@@ -57,9 +57,9 @@
             @click="login"
             >{{ $t('login.login') }}</el-button
           >
-          <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <a href="/terms" target="_blank">>Terms of Use</a> and
-            <a href="policy" target="_blank">>Privacy policy</a>
+           <p class="info" v-if="lang == 'en'">
+            I've read and agreed to the <a href="/terms" target="_blank">Terms of Use></a> and
+            <a href="policy" target="_blank">Privacy policy></a>
           </p>
           <p class="info" v-else>
             لقد قرأت ووافقت على
@@ -117,14 +117,14 @@
             >{{ $t('login.login') }}</el-button
           >
           <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <a href="/terms" target="_blank">>Terms of Use</a> and
-            <a href="policy" target="_blank">>Privacy policy</a>
+            I've read and agreed to the <a href="/terms" target="_blank">Terms of Use></a> and
+            <a href="policy" target="_blank">Privacy policy></a>
           </p>
           <p class="info" v-else>
             لقد قرأت ووافقت على
-            <a href="/terms" target="_blank">شروط الاستخدام </a>
+            <a href="/terms" target="_blank">شروط الاستخدام ></a>
             و
-            <a href="policy" target="_blank">>سياسة الخصوصية</a>
+            <a href="policy" target="_blank">سياسة الخصوصية ></a>
           </p>
         </el-tab-pane>
       </el-tabs>
@@ -297,12 +297,13 @@ export default {
             code: String(this.verifyCode),
           },
         },
-        onSuccess: res => {
+        onSuccess: async res => {
           this.loginLoading = false;
           const uid = res.data.user.id;
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid);
+          await this.$store.dispatch('getUser', uid);
           this.$store.commit('setLoginType', 'normal');
           this.$router.push({ path: 'live' });
         },

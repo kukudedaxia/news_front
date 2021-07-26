@@ -113,13 +113,18 @@ router.beforeEach(async (to, from, next) => {
   }
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
-  store.dispatch('changeUid', Cookies.get('uid'));
+  if (Cookies.get('userInfo')) {
+    store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
+  }
+  // store.dispatch('changeUid', JSON.parse(Cookies.get('userInfo')));
   if (to.meta.auth) {
-    if (Cookies.get('uid')) {
+    if (Cookies.get('userInfo')) {
       // 离开行为 如果用户此时登录成功去登录页 自动跳回首页
       if (to.path === '/login') {
+        console.log(2);
         next('/');
       } else {
+        console.log(1);
         next();
       }
     } else {

@@ -53,13 +53,13 @@ export default {
     },
   },
   watch: {
-    uid(v) {
-      if (v) {
-        this.$store.dispatch('getUser');
-      } else {
-        this.$store.commit('setUser', {});
-      }
-    },
+    // uid(v) {
+    //   if (v) {
+    //     this.$store.dispatch('getUser');
+    //   } else {
+    //     this.$store.commit('setUser', {});
+    //   }
+    // },
   },
   methods: {
     changeLanuage() {
@@ -103,10 +103,9 @@ export default {
             sub: Cookies.get('SUB'),
           },
         },
-        onSuccess: res => {
-          console.log(res);
-          Cookies.remove('uid');
-          this.$store.dispatch('changeUid', '');
+        onSuccess: () => {
+          Cookies.remove('userInfo');
+          this.$store.commit('setUser', {});
           if (this.loginType == 'google') {
             this.signOutGoogle();
           }

@@ -21,12 +21,16 @@ request.interceptors.response.use(
           // 返回 401 清除token信息并跳转到登录页面
           Cookies.remove('uid');
           Cookies.remove('SUB');
-          router.replace({
-            path: '/login',
-            query: {
-              redirect: router.currentRoute.fullPath,
-            },
-          });
+          Cookies.remove('userInfo');
+          // 解决退出时候 还有权限接口仍在访问
+          if (router.currentRoute.meta.auth) {
+            router.replace({
+              path: '/login',
+              query: {
+                redirect: router.currentRoute.fullPath,
+              },
+            });
+          }
           return Promise.reject(response);
       }
     }
@@ -40,6 +44,7 @@ request.interceptors.response.use(
         case 401:
           // 返回 401 清除token信息并跳转到登录页面
           Cookies.remove('uid');
+          Cookies.remove('userInfo');
           Cookies.remove('SUB');
           router.replace({
             path: '/login',
