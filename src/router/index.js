@@ -73,7 +73,6 @@ const routes = [
     meta: {
       title: 'lives',
       auth: true,
-      loading: true,
     },
   },
   {
@@ -99,12 +98,6 @@ VueRouter.prototype.push = function push(location) {
 };
 
 router.beforeEach(async (to, from, next) => {
-  // 判断路由是否需要loading
-  if (to.meta.loading) {
-    // 延迟200ms再加载loading
-    store.commit('route/setLoadingState', to.meta.loading);
-  }
-
   window.scrollTo(0, 0);
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;

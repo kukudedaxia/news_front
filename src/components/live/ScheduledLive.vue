@@ -13,7 +13,7 @@
               {{ $t('live.time') }}:
               {{ $moment(new Date(item.liveInfoBean.apptTime)).format('DD/MM/YYYY HH:mm ') }}
             </p>
-            <p>{{ $t('live.privacy') }}: {{ visibleMap.get(item.liveInfoBean.visible) }}</p>
+            <p>{{ $t('live.privacy') }}: {{ visible(item.liveInfoBean.visible) }}</p>
           </div>
           <div class="btn-operation">
             <el-button
@@ -71,18 +71,22 @@ export default {
   data() {
     return {
       liveList: [],
-      visibleMap: new Map([
-        [-1, this.$t('live.public')],
-        [0, this.$t('live.private')],
-        [1, this.$t('live.onlyFollowers')],
-        [2, this.$t('live.onlyFriends')],
-      ]),
     };
   },
   created() {
     this.getSubLiveList();
   },
   methods: {
+    // 隐私列表
+    visible(visible) {
+      const visibleMap = new Map([
+        [-1, this.$t('live.public')],
+        [0, this.$t('live.private')],
+        [1, this.$t('live.onlyFollowers')],
+        [2, this.$t('live.onlyFriends')],
+      ]);
+      return visibleMap.get(visible);
+    },
     // 获取预约直播列表
     getSubLiveList() {
       this.$store.dispatch('ajax', {

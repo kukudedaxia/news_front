@@ -78,6 +78,7 @@ export default {
   },
   created() {
     this.uid = Number(Cookies.get('uid'));
+    this.$store.commit('route/setLoadingState', true);
   },
   mounted() {
     // window.addEventListener('beforeunload', event => {
@@ -325,12 +326,13 @@ export default {
         onSuccess: ({ data }) => {
           // 15分钟内有预约直播，弹窗提醒
           if (data.haveLiveOnline === 1) {
-            this.$alert(this.$t('live.endMsg'), this.$t('live.endTitle'), {
+            this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
               confirmButtonText: this.$t('live.endBtn'),
               callback: () => {},
             });
+            // 此处应有title和博文合规校验
           } else {
-            // 校验通过，弹出博文输入框
+            // 校验通过，初始化sdk，并开播
             this.initSdk(this.lid);
             setTimeout(() => {
               this.startLive();
@@ -434,6 +436,21 @@ export default {
         },
       });
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    // 如果在直播状态下离开live页面，则弹窗提示是否结束直播
+    if (this.liveState === 1) {
+      this.$confirm(this.$t('live.leaveMsg'), this.$t('live.leaveTitle'), {
+        confirmButtonText: this.$t('live.endBtn'),
+        cancelButtonText: this.$t('live.cancel'),
+      })
+        .then(() => {
+          next();
+        })
+        .catch(() => {});
+    } else {
+      next();
+    }
   },
 };
 </script>

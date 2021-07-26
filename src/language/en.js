@@ -86,6 +86,12 @@ export default {
       private: 'Private',
       onlyFollowers: 'Only followers',
       onlyFriends: 'Only friends',
+      strtTitle: 'Start Beeto Live in Advance?',
+      startMsg:
+        'You have scheduled Beeto Live that is about to start. Please go to the scheduled Beeto Live tab if you want to go live early',
+      leaveTitle: 'Leave Beeto Live?',
+      leaveMsg:
+        'If you navigate away from this sceen the live will end. Do you want to continue and end Beeto Live?',
     },
     signOut: 'signOut',
     signText: 'Are you sure you want to log out?',
