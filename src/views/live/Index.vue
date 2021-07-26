@@ -59,6 +59,11 @@ export default {
     'scheduled-live': ScheduledLive,
     'video-player': VideoPlayer,
   },
+  computed: {
+    user() {
+      return this.$store.state.userInfo;
+    },
+  },
   data() {
     return {
       activeName: '1',
@@ -77,7 +82,7 @@ export default {
     };
   },
   created() {
-    this.uid = Number(Cookies.get('uid'));
+    this.uid = Number(this.user.id);
     this.$store.commit('route/setLoadingState', true);
   },
   mounted() {
@@ -328,7 +333,9 @@ export default {
           if (data.haveLiveOnline === 1) {
             this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
               confirmButtonText: this.$t('live.endBtn'),
-              callback: () => {},
+              callback: () => {
+                this.goLiveBtnLoading = false;
+              },
             });
             // 此处应有title和博文合规校验
           } else {
@@ -382,6 +389,7 @@ export default {
             message: this.$t('live.success'),
             type: 'success',
           });
+          this.$refs.scheduledLiveRef.changeLiveState(param.lid, 1);
         },
         onFail: ({ error }) => {
           this.$message({
@@ -393,7 +401,7 @@ export default {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = false;
           } else {
-            this.$refs.scheduledLiveRef.changeLiveState(param.lid, 1);
+            this.$refs.scheduledLiveRef.changeBtnLoading(param.lid);
           }
         },
       });
@@ -426,12 +434,13 @@ export default {
             message: this.$t('live.success'),
             type: 'success',
           });
+          this.$refs.scheduledLiveRef.changeLiveState(param.lid, 2);
         },
         onComplete: () => {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = false;
           } else {
-            this.$refs.scheduledLiveRef.changeLiveState(param.lid, 2);
+            this.$refs.scheduledLiveRef.changeBtnLoading(param.lid);
           }
         },
       });

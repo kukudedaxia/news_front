@@ -80,10 +80,10 @@ export default {
     // 隐私列表
     visible(visible) {
       const visibleMap = new Map([
-        [-1, this.$t('live.public')],
-        [0, this.$t('live.private')],
-        [1, this.$t('live.onlyFollowers')],
-        [2, this.$t('live.onlyFriends')],
+        [0, this.$t('live.public')],
+        [1, this.$t('live.private')],
+        [2, this.$t('live.onlyFollowers')],
+        [3, this.$t('live.onlyFriends')],
       ]);
       return visibleMap.get(visible);
     },
@@ -128,6 +128,14 @@ export default {
         if (item.liveInfoBean.lid === lid) {
           item.loading = false;
           item.liveState = state;
+        }
+      });
+    },
+    // 改变按钮loading状态
+    changeBtnLoading(lid) {
+      this.liveList.forEach(item => {
+        if (item.liveInfoBean.lid === lid) {
+          item.loading = false;
         }
       });
     },
