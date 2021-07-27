@@ -935,12 +935,24 @@
   resolved "https://registry.npmjs.org/@rongcloud/engine/-/engine-4.4.2.tgz"
   integrity sha512-mfr5ofWARguhJTul7OBdnn5Xl8mmwRoazmdjpNKqxXrsGmwWJNMKKOxBfNigyWiyb6HiVE0EwbV6AgvVIJTQTA==
 
+"@rongcloud/engine@~4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@rongcloud/engine/-/engine-4.4.4.tgz#b74543313c40471f16cd5a46c0f5791e5cf833b3"
+  integrity sha512-nn/6NM9JaUNvneOfYt7BbGeyW0oE/lO4QHB1KbHlAqPITpmzuE+u1ve1r1vWBc3FZxnUfJkjgv4dkqVaPhGBCQ==
+
 "@rongcloud/imlib-v2@^2.9.2":
   version "2.9.2"
   resolved "https://registry.npmjs.org/@rongcloud/imlib-v2/-/imlib-v2-2.9.2.tgz"
   integrity sha512-md2LnSzm7Bx0krEGz/vCqFLqlcaWwqiuLg5x9SKrH1ni8hAVyiPb0mI7Wmj+QLS0adiSpXPZyYdaitXdd9dwFw==
   dependencies:
     "@rongcloud/engine" "~4.4.2"
+
+"@rongcloud/imlib-v4@^4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@rongcloud/imlib-v4/-/imlib-v4-4.4.4.tgz#1f3b88079651f88b8622a58c6a8aa421e8a0776d"
+  integrity sha512-CGLoAZ7sj+5WRhocHck+dIwp1nN9KgUuH1esYW9WaZBxkjY2VQ9+OQdUIHRZJocHZaC9XUYTDeFuU+9N4hfeSg==
+  dependencies:
+    "@rongcloud/engine" "~4.4.4"
 
 "@rongcloud/plugin-rtc@5.1.4":
   version "5.1.4"

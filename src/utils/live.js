@@ -5,6 +5,7 @@
  */
 
 import { RongIMClient } from '@rongcloud/imlib-v2';
+import * as RongIMLib from '@rongcloud/imlib-v4';
 import {
   installer,
   RCRTCCode,
@@ -24,16 +25,20 @@ let rtcClient = null; // rtcClient实例
  * @param role 1 主播  2 观众
  */
 const initMain = async TOKEN => {
-  // IM初始化
-  await IMinit(TOKEN);
-  // 获取 IMLib 的单例实例
-  const im = RongIMClient.getInstance();
+  // IM v2初始化
+  // await IMinit(TOKEN);
+  // // 获取 IMLib 的单例实例
+  // const im = RongIMClient.getInstance();
+
+  // IM v4初始化
+  const im = await IMinitV4(TOKEN);
   // 初始化 RTCClient
   rtcClient = im.install(installer, {});
+  return im;
 };
 
 /**
- * IM初始化
+ * IM初始化 v2版本
  * @returns 返回promise类型的IM实例
  */
 const IMinit = TOKEN => {
@@ -65,6 +70,27 @@ const IMinit = TOKEN => {
         throw new Error(`IM连接失败${errorCode}`);
       },
     });
+  });
+};
+
+/**
+ * IM初始化 v4版本
+ * @returns 返回promise类型的IM实例
+ */
+const IMinitV4 = TOKEN => {
+  // 获取 IMLib 实例
+  const im = RongIMLib.init({ appkey: APPkEY });
+
+  // 建立 IM 连接
+  return new Promise(resolve => {
+    im.connect({ token: TOKEN })
+      .then(user => {
+        console.log('IM链接成功, 链接用户 id 为: ', user.id);
+        resolve(im);
+      })
+      .catch(error => {
+        console.log('IM链接失败: ', error.code, error.msg);
+      });
   });
 };
 
@@ -322,6 +348,7 @@ const audienceSubscribe = async (liveUrl, node) => {
 export {
   initMain,
   IMinit,
+  IMinitV4,
   publish,
   unpublish,
   leaveRoom,

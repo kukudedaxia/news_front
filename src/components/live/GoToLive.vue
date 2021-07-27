@@ -24,6 +24,7 @@
         <el-input
           v-model="titles"
           maxlength="100"
+          :placeholder="$t('live.titleP', [user.nickname])"
           :clearable="true"
           :disabled="liveState == 1"
         ></el-input>
@@ -126,6 +127,9 @@ export default {
         2: this.$t('live.liveEnded'),
       };
       return btnTextObj[this.liveState];
+    },
+    user() {
+      return this.$store.state.userInfo;
     },
   },
   watch: {

@@ -46,6 +46,7 @@ export default {
       goLive: 'ابدأ البث المباشر الآن',
       scheduleLive: 'جدولة بيتو لايف',
       title: 'عنوان بيتو لايف',
+      titleP: '{0} البث المباشر ل ',
       serverURL: 'رابط الصفحة',
       streamKey: 'مفتاح البث',
       copy: 'نسخ',

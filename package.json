@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@rongcloud/imlib-v2": "^2.9.2",
+    "@rongcloud/imlib-v4": "^4.4.4",
     "@rongcloud/plugin-rtc": "5.1.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",

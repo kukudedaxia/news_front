@@ -163,7 +163,7 @@ export default {
     // state 1 直播  2 续播
     async initSdk(lid, state = 1) {
       const _this = this;
-      await initMain(this.TOKEN);
+      const im = await initMain(this.TOKEN);
       const room = await joinLivingRoom(lid);
       this.room = room;
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
@@ -273,6 +273,34 @@ export default {
           },
         });
       }
+
+      // 添加事件监听
+      im.watch({
+        // 监听会话列表变更事件, 触发时机：会话状态变化（置顶、免打扰）、会话未读数变化（未读数增加、未读数清空）、会话 @ 信息、会话最后一条消息变化
+        conversation(event) {
+          // 假定存在 getExistedConversationList 方法，以获取当前已存在的会话列表数据
+          // eslint-disable-next-line no-undef
+          const conversationList = getExistedConversationList();
+          // 发生变更的会话列表
+          const updatedConversationList = event.updatedConversationList;
+          // 通过 im.Conversation.merge 计算最新的会话列表
+          // eslint-disable-next-line no-unused-vars
+          const latestConversationList = im.Conversation.merge({
+            conversationList,
+            updatedConversationList,
+          });
+        },
+        // 监听消息通知
+        message(event) {
+          // 新接收到的消息内容
+          const message = event.message;
+          console.log('message', message);
+        },
+        // 监听 IM 连接状态变化
+        status(event) {
+          console.log('connection status:', event.status);
+        },
+      });
     },
     // 开播、下播按钮处理函数
     onLiveClick(param) {

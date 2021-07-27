@@ -48,6 +48,7 @@ export default {
       goLive: 'Go Live Now',
       scheduleLive: 'Schedule Beeto Live',
       title: 'Beeto Live Title',
+      titleP: '{0} Livestream',
       serverURL: 'Server URL',
       streamKey: 'Stream Key',
       copy: 'Copy',
