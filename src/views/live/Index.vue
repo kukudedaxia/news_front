@@ -14,6 +14,7 @@
             :streamKey.sync="streamKey"
             :blobText="blobText"
             :title="title"
+            :startSource="startSource"
             @liveState="onLiveClick"
             ref="goLiveRef"
           ></go-live>
@@ -66,6 +67,7 @@ export default {
   data() {
     return {
       room: null, // 直播间实例
+      startSource: 1, // 直播来源  0 app   1 web
       activeName: '1',
       liveState: 0, // 0 未直播 1 直播中 2 已结束
       uid: 1000005298,
@@ -76,6 +78,7 @@ export default {
       title: '', // 标题
       cover_img: '', // 封面id
       live_type: 1, // 0:预约feed开播 1:直接开播
+      scheduledParam: {}, // 预约直播参数
       blobText: '', // 博文内容
       goLiveBtnLoading: false, // 直接开播btn按钮状态
       TOKEN: 'ehD5kBhGQl/u1GOXFWhyWkKZ8J6A8aHdmVzjREuDmvw=@y4sa.cn.rongnav.com;y4sa.cn.rongcfg.com',
@@ -84,6 +87,7 @@ export default {
   created() {
     this.uid = Number(this.user.id);
     this.$store.commit('route/setLoadingState', true);
+    this.initIM();
   },
   mounted() {
     this.getToken();
@@ -126,6 +130,7 @@ export default {
             this.streamKey = data.streamKey;
             this.title = data.title;
             this.blobText = data.content;
+            this.startSource = data.startSource;
             this.initSdk(this.lid, 2);
           }
         },
@@ -159,15 +164,44 @@ export default {
         },
       });
     },
+    // 初始化im
+    async initIM() {
+      const im = await initMain(this.TOKEN);
+      // 添加事件监听
+      im.watch({
+        // 监听会话列表变更事件, 触发时机：会话状态变化（置顶、免打扰）、会话未读数变化（未读数增加、未读数清空）、会话 @ 信息、会话最后一条消息变化
+        conversation(event) {
+          // 假定存在 getExistedConversationList 方法，以获取当前已存在的会话列表数据
+          // eslint-disable-next-line no-undef
+          const conversationList = getExistedConversationList();
+          // 发生变更的会话列表
+          const updatedConversationList = event.updatedConversationList;
+          // 通过 im.Conversation.merge 计算最新的会话列表
+          // eslint-disable-next-line no-unused-vars
+          const latestConversationList = im.Conversation.merge({
+            conversationList,
+            updatedConversationList,
+          });
+        },
+        // 监听消息通知
+        message(event) {
+          // 新接收到的消息内容
+          const message = event.message;
+          console.log('message', message);
+        },
+        // 监听 IM 连接状态变化
+        status(event) {
+          console.log('connection status:', event.status);
+        },
+      });
+    },
     // 初始化sdk回调
     // state 1 直播  2 续播
     async initSdk(lid, state = 1) {
       const _this = this;
-      const im = await initMain(this.TOKEN);
-      const room = await joinLivingRoom(lid);
-      this.room = room;
+      this.room = await joinLivingRoom(lid);
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
-      room.registerRoomEventListener({
+      this.room.registerRoomEventListener({
         /**
          * 当本端被剔出房间
          * @description 被踢出房间可能是由于服务端超出一定时间未能收到 rtcPing 消息，所以认为己方离线。
@@ -218,7 +252,7 @@ export default {
         async onTrackPublish(tracks) {
           console.log('onTrackPublish', tracks);
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
-          room.subscribe(tracks).then(({ code }) => {
+          _this.room.subscribe(tracks).then(({ code }) => {
             console.log(code);
           });
         },
@@ -241,20 +275,33 @@ export default {
           _this.liveState = 1; // 设置为直播中
         },
         /**
-         * 人员加入
+         * 人员加入  只会监听到直播
          * @param userIds 加入的人员 id 列表
          */
         onUserJoin(userIds) {
           console.log('onUserJoin', userIds);
         },
         /**
-         * 人员退出
+         * 人员退出  只会监听到主播
          * @param userIds
          */
         onUserLeave(userIds) {
           console.log('onUserLeave', userIds);
-          // 如果检测到人员退出，则主动下播
-          _this.stopLive();
+          // 如果检测到主播退出，则主动下播
+          // 如果是app端下播，则这里应该取消订阅并且退出房间
+          if (_this.startSource === 0) {
+            const remoteTracks = _this.room.getRemoteTracks();
+            if (remoteTracks.length > 0) {
+              _this.room.unsubscribe(remoteTracks);
+            }
+            leaveRoom(_this.room);
+            _this.onRefresh();
+            _this.startSource = 1;
+          }
+          // else {
+          //   // 融云、obs断流被动下播都会走这个逻辑
+          //   _this.stopLive(2);
+          // }
         },
       });
       // 如果是续播，初始化完room实例后需要订阅远端流
@@ -264,43 +311,15 @@ export default {
           confirmButtonText: this.$t('live.continue'),
           showClose: false,
           callback: () => {
-            const remoteTracks = room.getRemoteTracks();
+            const remoteTracks = this.room.getRemoteTracks();
             console.log(remoteTracks);
             if (remoteTracks.length > 0) {
-              room.subscribe(remoteTracks);
-              _this.liveState = 1; // 设置为直播中
+              this.room.subscribe(remoteTracks);
+              this.liveState = 1; // 设置为直播中
             }
           },
         });
       }
-
-      // 添加事件监听
-      im.watch({
-        // 监听会话列表变更事件, 触发时机：会话状态变化（置顶、免打扰）、会话未读数变化（未读数增加、未读数清空）、会话 @ 信息、会话最后一条消息变化
-        conversation(event) {
-          // 假定存在 getExistedConversationList 方法，以获取当前已存在的会话列表数据
-          // eslint-disable-next-line no-undef
-          const conversationList = getExistedConversationList();
-          // 发生变更的会话列表
-          const updatedConversationList = event.updatedConversationList;
-          // 通过 im.Conversation.merge 计算最新的会话列表
-          // eslint-disable-next-line no-unused-vars
-          const latestConversationList = im.Conversation.merge({
-            conversationList,
-            updatedConversationList,
-          });
-        },
-        // 监听消息通知
-        message(event) {
-          // 新接收到的消息内容
-          const message = event.message;
-          console.log('message', message);
-        },
-        // 监听 IM 连接状态变化
-        status(event) {
-          console.log('connection status:', event.status);
-        },
-      });
     },
     // 开播、下播按钮处理函数
     onLiveClick(param) {
@@ -312,15 +331,16 @@ export default {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = true;
             // 走开播前校验
-            this.title = param.title;
-            this.cover_img = param.cover_img;
-            this.blobText = param.blobText;
+            // this.title = param.title;
+            // this.cover_img = param.cover_img;
+            // this.blobText = param.blobText;
+            this.scheduledParam = param;
             this.check();
           } else {
             // 预约开播，不走校验逻辑
             this.initSdk(param.lid);
             setTimeout(() => {
-              this.startLive(param);
+              this.startLive();
             }, 1000);
           }
           // 此时是直播状态，走下播流程
@@ -334,12 +354,13 @@ export default {
               cancelButtonText: this.$t('live.cancel'),
             })
               .then(() => {
+                this.goLiveBtnLoading = true;
                 // 确认下播
                 this.stopLive();
               })
               .catch(() => {});
           } else {
-            this.stopLive(param);
+            this.stopLive();
           }
         }
       } catch (error) {
@@ -361,14 +382,17 @@ export default {
         },
         onSuccess: ({ data }) => {
           // 15分钟内有预约直播，弹窗提醒
-          if (data.haveLiveOnline === 1) {
+          if (data.haveLiveOnline === 0 && data.haveSchedule === 1) {
             this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
-              confirmButtonText: 'I know',
+              confirmButtonText: this.$t('live.ok'),
               callback: () => {
                 this.goLiveBtnLoading = false;
               },
             });
             // 此处应有title和博文合规校验
+            // 如果有正在直播的，弹窗提醒
+          } else if (data.haveLiveOnline === 1) {
+            this.initSdk(this.lid, 2);
           } else {
             // 校验通过，初始化sdk，并开播
             this.initSdk(this.lid);
@@ -381,7 +405,7 @@ export default {
       });
     },
     // 开播
-    startLive(param) {
+    startLive() {
       let params = {};
       // 直接开播，需要将标题、封面、博文内容等参数上传
       if (this.live_type === 1) {
@@ -398,13 +422,13 @@ export default {
         };
       } else {
         params = {
-          uid: param.uid,
-          lid: param.lid,
-          pullUrl: param.pullUrl,
-          pushUrl: param.pushUrl,
-          streamKey: param.streamKey,
-          title: param.title,
-          coverPid: param.coverPid,
+          uid: this.scheduledParam.uid,
+          lid: this.scheduledParam.lid,
+          pullUrl: this.scheduledParam.pullUrl,
+          pushUrl: this.scheduledParam.pushUrl,
+          streamKey: this.scheduledParam.streamKey,
+          title: this.scheduledParam.title,
+          coverPid: this.scheduledParam.coverPid,
           statusContent: 'test',
           liveType: this.live_type,
         };
@@ -420,25 +444,30 @@ export default {
             message: this.$t('live.success'),
             type: 'success',
           });
-          this.$refs.scheduledLiveRef.changeLiveState(param.lid, 1);
+          this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 1);
         },
         onFail: ({ error }) => {
           this.$message({
             type: 'error',
             message: error,
           });
+          // 开播失败，退出直播间
+          if (this.room) {
+            leaveRoom(this.room);
+          }
         },
         onComplete: () => {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = false;
           } else {
-            this.$refs.scheduledLiveRef.changeBtnLoading(param.lid);
+            this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
           }
         },
       });
     },
     // 下播
-    stopLive(param) {
+    // type  1 直接下播  2 被动下播
+    stopLive(type = 1) {
       let params = {};
       if (this.live_type === 1) {
         params = {
@@ -448,8 +477,8 @@ export default {
         };
       } else {
         params = {
-          uid: param.uid,
-          lid: param.lid,
+          uid: this.scheduledParam.uid,
+          lid: this.scheduledParam.lid,
           liveType: this.live_type,
         };
       }
@@ -460,20 +489,23 @@ export default {
           params,
         },
         onSuccess: () => {
+          // 如果是用户在pc端主动下播，则需要手动离开房间；如果是被动下播，则已经被融云提出房间，无需调用
+          if (type === 1) {
+            leaveRoom(this.room);
+          }
+
           this.liveState = 2;
           this.$message({
             message: this.$t('live.success'),
             type: 'success',
           });
-          this.$refs.scheduledLiveRef.changeLiveState(param.lid, 2);
-          // 退出直播间
-          leaveRoom(this.room);
+          this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 2);
         },
         onComplete: () => {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = false;
           } else {
-            this.$refs.scheduledLiveRef.changeBtnLoading(param.lid);
+            this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
           }
         },
       });

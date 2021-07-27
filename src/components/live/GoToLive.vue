@@ -50,6 +50,7 @@
         <el-button
           type="primary"
           class="item-btn"
+          :disabled="startSource === 0"
           v-clipboard:copy="pushUrls"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
@@ -66,6 +67,7 @@
         <el-button
           type="primary"
           class="item-btn"
+          :disabled="startSource === 0"
           v-clipboard:copy="streamKeys"
           v-clipboard:success="onCopy"
           v-clipboard:error="onError"
@@ -96,6 +98,11 @@ export default {
     liveState: {
       type: Number,
       default: 0,
+    },
+    // 直播来源 0 app  1 web
+    startSource: {
+      type: Number,
+      default: 1,
     },
     btnLoading: {
       type: Boolean,
@@ -179,7 +186,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `https://img.whale.weibo.com/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
+              url: `sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
