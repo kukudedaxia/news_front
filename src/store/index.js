@@ -19,7 +19,7 @@ export default new Vuex.Store({
   state: {
     language: '',
     fromPage: {},
-    topage: {},
+    toPage: {},
     uicode: '',
     luicode: '',
     slideIndex: 1,

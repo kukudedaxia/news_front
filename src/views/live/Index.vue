@@ -165,14 +165,23 @@ export default {
     },
     // 初始化im
     async initIM() {
+      const _this = this;
       const im = await initMain(this.TOKEN);
       // 添加事件监听
       im.watch({
         // 监听消息通知
         message(event) {
-          // 新接收到的消息内容
-          const message = event.message;
-          console.log('message', message);
+          // msg 1 app下播  2 审核后台下播
+          const msg = event.message.content.event;
+          if (msg === 1 || msg === 2) {
+            const remoteTracks = _this.room.getRemoteTracks();
+            if (remoteTracks.length > 0) {
+              _this.room.unsubscribe(remoteTracks);
+            }
+            leaveRoom(_this.room);
+            _this.onRefresh();
+            _this.startSource = 1;
+          }
         },
         // 监听 IM 连接状态变化
         status(event) {
@@ -278,17 +287,6 @@ export default {
          */
         onUserLeave(userIds) {
           console.log('onUserLeave', userIds);
-          // 如果检测到主播退出，则主动下播
-          // 如果是app端下播，则这里应该取消订阅并且退出房间
-          if (_this.startSource === 0) {
-            const remoteTracks = _this.room.getRemoteTracks();
-            if (remoteTracks.length > 0) {
-              _this.room.unsubscribe(remoteTracks);
-            }
-            leaveRoom(_this.room);
-            _this.onRefresh();
-            _this.startSource = 1;
-          }
           // else {
           //   // 融云、obs断流被动下播都会走这个逻辑
           //   _this.stopLive(2);
@@ -559,33 +557,38 @@ export default {
 }
 </style>
 <style lang="less">
-.el-dialog__header {
-  display: none;
-}
-
-.el-tabs__header {
-  .el-tabs__nav-wrap::after {
-    background: #000000;
-    border-radius: 10px 0 0 0;
-  }
-  .el-tabs__item {
-    font-family: SFUIText-Regular;
-    font-size: 16px;
-    color: #dddddd;
-    height: 50px;
-    line-height: 50px;
-  }
-  .el-tabs__item.is-active {
-    font-family: SFUIText-Bold;
-    color: #ff536c;
+.live {
+  .el-dialog__header {
+    display: none;
   }
 
-  .el-tabs__active-bar {
-    height: 3px;
-    // width: 40px !important;
-    background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
-    border-radius: 2px;
-    // transform: translateX(calc(104px - 50%)) !important;
+  .el-tabs__header {
+    .el-tabs__nav-wrap::after {
+      background: #000000;
+      border-radius: 10px 0 0 0;
+    }
+    .el-tabs__item {
+      font-family: SFUIText-Regular;
+      font-size: 16px;
+      color: #dddddd;
+      height: 50px;
+      line-height: 50px;
+    }
+    .el-tabs__item.is-disabled {
+      color: rgba(221, 221, 221, 0.2);
+    }
+    .el-tabs__item.is-active {
+      font-family: SFUIText-Bold;
+      color: #ff536c;
+    }
+
+    .el-tabs__active-bar {
+      height: 3px;
+      // width: 40px !important;
+      background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+      border-radius: 2px;
+      // transform: translateX(calc(104px - 50%)) !important;
+    }
   }
 }
 </style>

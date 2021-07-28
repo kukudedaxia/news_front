@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div id="login">
     <div class="tabs">
       <el-tabs v-model="activeName" @tab-click="changeTab">
-        <el-tab-pane :label="$t('login.tab1')" name="phone">
+        <el-tab-pane :label="$t('login.tab1')" name="phone" class="mt-30">
           <div class="con" v-if="!hide">
             <div class="line">
               <el-select v-model="areaCode" slot="prepend" placeholder="请选择" class="area-code">
@@ -20,6 +20,10 @@
                 v-arInput
               />
             </div>
+            <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
+              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <span class="no-flip-over">{{ errorMsg }}</span>
+            </p>
             <div class="line">
               <input
                 :placeholder="$t('login.codeph')"
@@ -29,7 +33,7 @@
               />
               <template>
                 <span
-                  class="send"
+                  :class="['send', { resend: send, time: codeTimes > 0 && send }]"
                   v-if="!codeLoading"
                   @click="phoneLengthCorrect ? sendCode() : errorPhone()"
                 >
@@ -44,7 +48,7 @@
                 <loading :isComplete="false" v-else style="width: 20px" />
               </template>
             </div>
-            <p class="tip_info" v-if="errorMsg">
+            <p class="tip_info" v-if="errorMsg && this.tip == ''">
               <img src="@/assets/images/icon_warn.png" class="icon_warn" />
               <span class="no-flip-over">{{ errorMsg }}</span>
             </p>
@@ -57,15 +61,25 @@
             @click="login"
             >{{ $t('login.login') }}</el-button
           >
-           <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <a href="/terms" target="_blank">Terms of Use></a> and
-            <a href="policy" target="_blank">Privacy policy></a>
+          <el-divider><span class="continue">Continue with</span></el-divider>
+          <ThirdLogin v-if="activeName == 'phone'" />
+          <p class="info" v-if="lang == 'en'">
+            I've read and agreed to the <br />
+            <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
+              >Community Guidelines</a
+            >
+            and
+            <a href="/policy" target="_blank">Privacy Policy</a>
           </p>
           <p class="info" v-else>
-            لقد قرأت ووافقت على
-            <a href="/terms" target="_blank">>شروط الاستخدام </a>
+            لقد قرأت ووافقت على<br />
+            <a href="/terms" target="_blank">شروط الاستخدام </a>,<a
+              href="/community"
+              target="_blank"
+              >قواعد المجتمع</a
+            >
             و
-            <a href="policy" target="_blank">>سياسة الخصوصية</a>
+            <a href="/policy" target="_blank">سياسة الخصوصية</a>
           </p>
         </el-tab-pane>
         <el-tab-pane :label="$t('login.tab2')" name="account">
@@ -74,22 +88,26 @@
               <input
                 :placeholder="$t('login.accountph')"
                 v-model="account"
-                class="input"
+                class="input inputs"
                 @focus="errorHide"
                 type="text"
               />
-              <img
+              <!-- <img
                 src="@/assets/images/icon_clear.png"
                 class="icon icon-clear"
                 v-show="account != ''"
                 @mousedown.prevent="account = ''"
-              />
+              /> -->
             </div>
+            <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
+              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <span class="no-flip-over">{{ errorMsg }}</span>
+            </p>
             <div class="line">
               <input
                 :placeholder="$t('login.passwordph')"
                 v-model="password"
-                class="input password"
+                class="input  inputs password"
                 @focus="errorHide"
                 :type="showPwd ? 'text' : 'password'"
               />
@@ -104,7 +122,7 @@
               />
             </div>
           </div>
-          <p class="tip_info" v-if="errorMsg">
+          <p class="tip_info" v-if="errorMsg && this.tip == ''">
             <img src="@/assets/images/icon_warn.png" class="icon_warn" />
             <span class="no-flip-over">{{ errorMsg }}</span>
           </p>
@@ -116,20 +134,29 @@
             @click="login"
             >{{ $t('login.login') }}</el-button
           >
+          <el-divider><span class="continue">Continue with</span></el-divider>
+          <ThirdLogin v-if="activeName == 'account'" />
           <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <a href="/terms" target="_blank">Terms of Use></a> and
-            <a href="policy" target="_blank">Privacy policy></a>
+            I've read and agreed to the <br />
+            <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
+              >Community Guidelines</a
+            >
+            and
+            <a href="/policy" target="_blank">Privacy Policy</a>
           </p>
           <p class="info" v-else>
-            لقد قرأت ووافقت على
-            <a href="/terms" target="_blank">شروط الاستخدام ></a>
+            لقد قرأت ووافقت على<br />
+            <a href="/terms" target="_blank">شروط الاستخدام </a>,<a
+              href="/community"
+              target="_blank"
+              >قواعد المجتمع</a
+            >
             و
-            <a href="policy" target="_blank">سياسة الخصوصية ></a>
-          </p>
-        </el-tab-pane>
+            <a href="/policy" target="_blank">سياسة الخصوصية</a>
+          </p></el-tab-pane
+        >
       </el-tabs>
     </div>
-    <ThirdLogin />
   </div>
 </template>
 <script>
@@ -158,12 +185,14 @@ export default {
       send: false, // 是否已经发送过验证码了
       codeTimes: '', // 倒计时计数
       codeCount: 0,
+      tip: '',
       errorMsg: '',
       showPwd: false, // 是否显示密码明文
     };
   },
   created() {
     this.getArea();
+
     window.addEventListener('keydown', this.keydown);
   },
   destroyed() {
@@ -202,8 +231,8 @@ export default {
       this.password = str;
     },
     lang() {
-      this.getArea()
-    }
+      this.getArea();
+    },
   },
   methods: {
     keydown(event) {
@@ -211,7 +240,8 @@ export default {
       this.login();
     },
     errorPhone() {
-      this.errorMsg = 'Please fill in the phone number correctly';
+      this.tip = '1';
+      this.errorMsg = this.$t('login.error');
     },
     changeTab() {
       if (this.activeName == 'account') {
@@ -219,6 +249,7 @@ export default {
       } else {
         this.hide = false;
       }
+      this.tip = '';
       this.errorMsg = '';
     },
     getArea() {
@@ -308,9 +339,18 @@ export default {
           this.$router.push({ path: 'live' });
         },
         onFail: res => {
-          if (res.error_code == 30070) {
-            this.$message.error(this.$t('login.permission'));
+          if (res.error_code == 30070 || res.error_code == 30071) {
+            this.$message({
+              type: 'warning',
+              message: this.$t('login.permission'),
+              customClass: 'warning_tip',
+            });
           } else {
+            if (res.error_code == 50002 || res.error_code == 30011) {
+              this.tip = '1';
+            } else {
+              this.tip = '';
+            }
             this.errorMsg = res.error;
           }
           this.loginLoading = false;
@@ -335,41 +375,150 @@ export default {
   },
 };
 </script>
+<style lang="less">
+#login {
+  .el-tabs__header {
+    height: 40px;
+  }
+  .el-tabs__nav-wrap,
+  .el-tabs__nav-scroll {
+    overflow: initial;
+  }
+  .el-tabs__item {
+    font-size: 20px;
+    font-family: 'SF-UI-Text-Regular';
+  }
+  .el-tabs__active-bar {
+    bottom: -20px;
+    height: 3px;
+    background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+  }
+  .el-tabs__nav-wrap::after {
+    display: none;
+  }
+
+  .el-input--suffix .el-input__inner {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .el-select .el-input .el-select__caret {
+    color: #333333;
+
+    font-size: 12px;
+  }
+  .el-input__suffix {
+    right: 2px;
+  }
+  .el-tabs__nav {
+    width: 340px;
+  }
+  .el-select-dropdown {
+    border: 1px solid #eeeeee;
+    margin-top: 4px !important;
+    box-shadow: none;
+    border-radius: 0 0 10px 10px;
+  }
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover {
+    background-color: #f6f6f6;
+  }
+  .el-divider {
+    background-color: #eeeeee;
+  }
+  .el-divider--horizontal {
+    margin: 38px 0;
+  }
+  .el-divider__text {
+    color: #777f8e;
+    padding: 10px;
+  }
+}
+.warning_tip {
+  background: rgba(136, 142, 152, 0.96);
+  border-radius: 20px;
+  padding: 10px 12px;
+  color: #ffffff;
+  .el-message__content,
+  .el-icon-warning {
+    color: #ffffff;
+  }
+}
+.el-popper .popper__arrow,
+.el-popper .popper__arrow::after {
+  display: none;
+}
+.el-popper[x-placement^='bottom'] {
+  margin-top: 4px;
+}
+</style>
+
 <style lang="less" scoped>
+#login {
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
+  background-size: 100% 100%;
+  margin-top: -56px;
+  height: 980px;
+  display: flex;
+  align-items: center;
+}
 .tabs {
-  max-width: 500px;
-  padding: 20px;
+  max-width: 440px;
+  padding: 50px;
   margin: 100px auto;
-  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 20px 55px -30px rgba(11, 0, 152, 0.3);
+}
+.mt-30 {
+  margin-top: 30px;
 }
 .line {
   margin: 20px 0;
-  height: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
   position: relative;
+  border-bottom: 1px solid #eeeeee;
 }
 .area-code {
-  width: 80px;
+  width: 54px;
+  margin-right: 10px;
 }
 .login-btn {
   width: 100%;
+  border-radius: 20px;
 }
 .info {
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 30px;
+  a {
+    color: #160000;
+    text-decoration: none;
+  }
 }
 .send {
   cursor: pointer;
+  font-family: 'SFUIText-Medium';
+  font-size: 14px;
+  color: #333333;
+}
+.resend {
+  color: #ff536c;
+}
+.time {
+  color: #777f8e;
 }
 .tip_info {
   font-size: 12px;
   letter-spacing: 0;
-  line-height: 18px;
-  margin-top: 12px;
+  line-height: 14px;
+  margin-top: -8px;
   color: #ee3b23;
   display: flex;
   align-items: center;
+  margin-bottom: 12px;
+  text-align: left;
   .icon_warn {
     width: 12px;
     height: 12px;
@@ -378,11 +527,15 @@ export default {
     // vertical-align: -2px;
   }
 }
+.tip_1 {
+  margin-bottom: -26px;
+}
 
 .input {
   border: none;
   font-size: 16px;
-  padding: 10px;
+  // padding: 10px;
+  padding: 10px 10px 10px 0;
   flex: 1;
   &:focus {
     outline: 0;
@@ -390,6 +543,9 @@ export default {
   &::placeholder {
     color: #c9cdd8;
   }
+}
+.inputs {
+  padding: 10px;
 }
 .icon-pwd {
   width: 20px;

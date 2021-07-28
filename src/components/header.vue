@@ -11,16 +11,25 @@
       @click="goHome"
     ></div>
     <div class="header-right">
-      <router-link to="/live" class="menu-item">{{ $t('lives') }}</router-link>
+      <span
+        v-if="Object.keys(user).length > 0 && path == '/live'"
+        class="menu-item"
+        @click="logout"
+        >{{ $t('login.logout') }}</span
+      >
+      <router-link v-if="path && path !== '/live'" to="/live" class="menu-item">{{
+        $t('lives')
+      }}</router-link>
       <router-link to="/" class="menu-item">{{ $t('home') }}</router-link>
-      <div class="user" v-if="Object.keys(user).length > 0">
+      <!-- <div class="user" v-if="Object.keys(user).length > 0">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">{{ user.nickname }} </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="logout">{{ $t('login.logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      </div>
+      </div> -->
+
       <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
     </div>
   </div>
@@ -94,6 +103,21 @@ export default {
       }
     },
     logout() {
+      this.$alert(this.$t('signText'), '', {
+        customClass: 'custom-messsage',
+        confirmButtonText: this.$t('login.logout'),
+        cancelButtonText: this.$t('live.cancel'),
+        cancelButtonClass: 'cancel-btn',
+        confirmButtonClass: 'confirm-btn',
+        showCancelButton: true,
+        callback: action => {
+          if (action == 'confirm') {
+            this.logouts();
+          }
+        },
+      });
+    },
+    logouts() {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
@@ -199,6 +223,11 @@ html[lang='ar'] .lanuage {
   line-height: 20px;
 }
 .menu-item {
-  margin: 0 20px;
+  color: #333333;
+  text-decoration: none;
+  margin-right: 20px;
+}
+html[lang='ar'] .menu-item  {
+  margin-left: 20px;
 }
 </style>

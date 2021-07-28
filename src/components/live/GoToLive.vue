@@ -52,7 +52,7 @@
         ></el-input>
         <el-button
           type="primary"
-          class="item-btn"
+          class="item-btn flex-align"
           size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="pushUrls"
@@ -76,7 +76,7 @@
         ></el-input>
         <el-button
           type="primary"
-          class="item-btn"
+          class="item-btn flex-align"
           size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="streamKeys"
@@ -86,7 +86,6 @@
         >
       </div>
       <span class="desc">{{ $t('live.msg2') }} </span>
-      <span class="desc"> 3. {{ $t('live.msg3') }} </span>
     </div>
     <div class="item-box text-right flex bottom-btn">
       <div class="flex">
@@ -97,7 +96,7 @@
         type="primary"
         :loading="btnLoading"
         :disabled="btnDisabled"
-        class="item-btn"
+        class="item-btn flex-align"
         @click="onLiveClick"
         >{{ btnText }}
       </el-button>
@@ -270,9 +269,9 @@ export default {
       .item-btn {
         position: absolute;
         position: absolute;
-        height: 28px;
         top: calc(50% - 14px);
         right: 6px;
+        padding: 7px 9px;
       }
     }
     .title {
@@ -294,7 +293,9 @@ export default {
       border-radius: 21px;
       font-family: SFUIText-Medium;
       font-size: 12px;
+      height: 28px;
       color: #dddddd;
+      padding: 7px 15px;
     }
   }
   .title_img {
@@ -316,6 +317,10 @@ export default {
 }
 .flex {
   display: flex;
+}
+.flex-align {
+  display: flex;
+  align-items: center;
 }
 html[lang='ar'] {
   .title-box,
@@ -373,6 +378,19 @@ html[lang='ar'] {
 .input-right {
   input {
     padding-right: 75px;
+  }
+}
+
+// 按钮
+.el-button--primary.is-disabled,
+.el-button--primary.is-disabled:hover {
+  background: rgba(231, 64, 89, 0.2);
+  border: none;
+  color: rgba(102, 102, 102, 0.4) !important;
+}
+.goto_live {
+  .el-input.is-disabled .el-input__inner {
+    border-color: transparent;
   }
 }
 </style>

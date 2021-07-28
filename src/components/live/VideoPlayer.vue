@@ -23,10 +23,19 @@
         <p>
           {{ $t('live.endMsg1') }}
         </p>
-        <el-button type="primary" class="btn" :disabled="saveReplay" @click="onSaveReplay">
+        <el-button
+          type="primary"
+          round
+          size="small"
+          class="btn"
+          :disabled="saveReplay"
+          @click="onSaveReplay"
+        >
           {{ $t('live.replaying') }}
         </el-button>
-        <el-button plain class="btn" @click="onRefresh"> {{ $t('live.refresh') }}</el-button>
+        <el-button plain round class="btn" size="small" @click="onRefresh">
+          {{ $t('live.refresh') }}</el-button
+        >
       </div>
     </span>
     <video id="videoNode" class="video" v-show="liveState === 1"></video>
@@ -128,13 +137,16 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      font-family: PingFangSC-Medium;
+      font-size: 24px;
+      color: #dddddd;
       p {
         font-size: 24px;
         margin-bottom: 20px;
       }
       .btn {
         width: 250px;
-        margin-top: 15px;
+        margin-top: 20px;
         margin-left: 0;
       }
     }
