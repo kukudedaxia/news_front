@@ -20,6 +20,10 @@
                 v-arInput
               />
             </div>
+            <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
+              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <span class="no-flip-over">{{ errorMsg }}</span>
+            </p>
             <div class="line">
               <input
                 :placeholder="$t('login.codeph')"
@@ -44,7 +48,7 @@
                 <loading :isComplete="false" v-else style="width: 20px" />
               </template>
             </div>
-            <p class="tip_info" v-if="errorMsg">
+            <p class="tip_info" v-if="errorMsg && this.tip == ''">
               <img src="@/assets/images/icon_warn.png" class="icon_warn" />
               <span class="no-flip-over">{{ errorMsg }}</span>
             </p>
@@ -60,14 +64,22 @@
           <el-divider><span class="continue">Continue with</span></el-divider>
           <ThirdLogin v-if="activeName == 'phone'" />
           <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <br /><a href="/terms" target="_blank">Terms of Use</a> and
-            <a href="policy" target="_blank">Privacy Policy</a>
+            I've read and agreed to the <br />
+            <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
+              >Community Guidelines</a
+            >
+            and
+            <a href="/policy" target="_blank">Privacy Policy</a>
           </p>
           <p class="info" v-else>
             لقد قرأت ووافقت على<br />
-            <a href="/terms" target="_blank">شروط الاستخدام </a>
+            <a href="/terms" target="_blank">شروط الاستخدام </a>,<a
+              href="/community"
+              target="_blank"
+              >قواعد المجتمع</a
+            >
             و
-            <a href="policy" target="_blank">سياسة الخصوصية</a>
+            <a href="/policy" target="_blank">سياسة الخصوصية</a>
           </p>
         </el-tab-pane>
         <el-tab-pane :label="$t('login.tab2')" name="account">
@@ -76,7 +88,7 @@
               <input
                 :placeholder="$t('login.accountph')"
                 v-model="account"
-                class="input"
+                class="input inputs"
                 @focus="errorHide"
                 type="text"
               />
@@ -87,11 +99,15 @@
                 @mousedown.prevent="account = ''"
               /> -->
             </div>
+            <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
+              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <span class="no-flip-over">{{ errorMsg }}</span>
+            </p>
             <div class="line">
               <input
                 :placeholder="$t('login.passwordph')"
                 v-model="password"
-                class="input password"
+                class="input  inputs password"
                 @focus="errorHide"
                 :type="showPwd ? 'text' : 'password'"
               />
@@ -106,7 +122,7 @@
               />
             </div>
           </div>
-          <p class="tip_info" v-if="errorMsg">
+          <p class="tip_info" v-if="errorMsg && this.tip == ''">
             <img src="@/assets/images/icon_warn.png" class="icon_warn" />
             <span class="no-flip-over">{{ errorMsg }}</span>
           </p>
@@ -121,14 +137,22 @@
           <el-divider><span class="continue">Continue with</span></el-divider>
           <ThirdLogin v-if="activeName == 'account'" />
           <p class="info" v-if="lang == 'en'">
-            I've read and agreed to the <br /><a href="/terms" target="_blank">Terms of Use</a> and
-            <a href="policy" target="_blank">Privacy Policy</a>
+            I've read and agreed to the <br />
+            <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
+              >Community Guidelines</a
+            >
+            and
+            <a href="/policy" target="_blank">Privacy Policy</a>
           </p>
           <p class="info" v-else>
             لقد قرأت ووافقت على<br />
-            <a href="/terms" target="_blank">شروط الاستخدام </a>
+            <a href="/terms" target="_blank">شروط الاستخدام </a>,<a
+              href="/community"
+              target="_blank"
+              >قواعد المجتمع</a
+            >
             و
-            <a href="policy" target="_blank">سياسة الخصوصية</a>
+            <a href="/policy" target="_blank">سياسة الخصوصية</a>
           </p></el-tab-pane
         >
       </el-tabs>
@@ -161,6 +185,7 @@ export default {
       send: false, // 是否已经发送过验证码了
       codeTimes: '', // 倒计时计数
       codeCount: 0,
+      tip: '',
       errorMsg: '',
       showPwd: false, // 是否显示密码明文
     };
@@ -215,7 +240,8 @@ export default {
       this.login();
     },
     errorPhone() {
-      this.errorMsg = 'Please fill in the phone number correctly';
+      this.tip = '1';
+      this.errorMsg = this.$t('login.error');
     },
     changeTab() {
       if (this.activeName == 'account') {
@@ -223,6 +249,7 @@ export default {
       } else {
         this.hide = false;
       }
+      this.tip = '';
       this.errorMsg = '';
     },
     getArea() {
@@ -319,6 +346,11 @@ export default {
               customClass: 'warning_tip',
             });
           } else {
+            if (res.error_code == 50002 || res.error_code == 30011) {
+              this.tip = '1';
+            } else {
+              this.tip = '';
+            }
             this.errorMsg = res.error;
           }
           this.loginLoading = false;
@@ -486,6 +518,7 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  text-align: left;
   .icon_warn {
     width: 12px;
     height: 12px;
@@ -493,6 +526,9 @@ export default {
     margin-top: 1px;
     // vertical-align: -2px;
   }
+}
+.tip_1 {
+  margin-bottom: -26px;
 }
 
 .input {
@@ -507,6 +543,9 @@ export default {
   &::placeholder {
     color: #c9cdd8;
   }
+}
+.inputs {
+  padding: 10px;
 }
 .icon-pwd {
   width: 20px;

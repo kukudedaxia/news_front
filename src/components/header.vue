@@ -227,4 +227,7 @@ html[lang='ar'] .lanuage {
   text-decoration: none;
   margin-right: 20px;
 }
+html[lang='ar'] .menu-item  {
+  margin-left: 20px;
+}
 </style>
