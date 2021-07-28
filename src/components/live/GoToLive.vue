@@ -27,29 +27,33 @@
           :placeholder="$t('live.titleP', [user.nickname])"
           :clearable="true"
           :disabled="liveState == 1"
+          class="item-input"
+          style="margin-bottom:20px"
         ></el-input>
-      </div>
-    </div>
-    <el-divider></el-divider>
-    <div class="item-box text-right">
-      <p class="title">{{ $t('live.blogTitle') }}</p>
-      <div class="flex">
+        <p class="title">{{ $t('live.blogTitle') }}</p>
         <el-input
           v-model="blobTexts"
-          type="textarea"
-          :rows="2"
+          :clearable="true"
           :disabled="liveState == 1"
+          class="item-input"
         ></el-input>
       </div>
     </div>
-    <el-divider></el-divider>
     <div class="item-box text-right">
-      <p class="title">{{ $t('live.serverURL') }}</p>
       <div class="flex">
-        <el-input v-model="pushUrls" :disabled="liveState == 1"></el-input>
+        <img src="@/assets/images/live/icon_step1@3x.png" class="title-tips" />
+        <p class="title">{{ $t('live.serverURL') }}</p>
+      </div>
+      <div class="flex input-box">
+        <el-input
+          v-model="pushUrls"
+          :disabled="liveState == 1"
+          class="item-input input-right"
+        ></el-input>
         <el-button
           type="primary"
           class="item-btn"
+          size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="pushUrls"
           v-clipboard:success="onCopy"
@@ -57,16 +61,23 @@
           >{{ $t('live.copy') }}</el-button
         >
       </div>
-      <span class="desc"> 1. {{ $t('live.msg1') }} </span>
+      <span class="desc">{{ $t('live.msg1') }} </span>
     </div>
-    <el-divider></el-divider>
     <div class="item-box text-right">
-      <p class="title">{{ $t('live.streamKey') }}</p>
       <div class="flex">
-        <el-input v-model="streamKeys" :disabled="liveState == 1"></el-input>
+        <img src="@/assets/images/live/icon_step2@3x.png" class="title-tips" />
+        <p class="title">{{ $t('live.streamKey') }}</p>
+      </div>
+      <div class="flex input-box">
+        <el-input
+          v-model="streamKeys"
+          :disabled="liveState == 1"
+          class="item-input input-right"
+        ></el-input>
         <el-button
           type="primary"
           class="item-btn"
+          size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="streamKeys"
           v-clipboard:success="onCopy"
@@ -74,17 +85,23 @@
           >{{ $t('live.copy') }}</el-button
         >
       </div>
-      <span class="desc"> 2. {{ $t('live.msg2') }} </span>
+      <span class="desc">{{ $t('live.msg2') }} </span>
       <span class="desc"> 3. {{ $t('live.msg3') }} </span>
     </div>
-    <el-button
-      type="primary"
-      style="width: 200px"
-      :loading="btnLoading"
-      :disabled="btnDisabled"
-      @click="onLiveClick"
-      >{{ btnText }}</el-button
-    >
+    <div class="item-box text-right flex bottom-btn">
+      <div class="flex">
+        <img src="@/assets/images/live/icon_step3@3x.png" class="title-tips" />
+        <p class="title">{{ $t('live.msg3') }}</p>
+      </div>
+      <el-button
+        type="primary"
+        :loading="btnLoading"
+        :disabled="btnDisabled"
+        class="item-btn"
+        @click="onLiveClick"
+        >{{ btnText }}
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -244,21 +261,40 @@ export default {
 
 <style lang="less" scoped>
 .goto_live {
+  padding: 15px 20px;
   .item-box {
     text-align: left;
-    margin: 20px 0;
+    margin-bottom: 20px;
+    .input-box {
+      position: relative;
+      .item-btn {
+        position: absolute;
+        position: absolute;
+        height: 28px;
+        top: calc(50% - 14px);
+        right: 6px;
+      }
+    }
     .title {
-      font-weight: bold;
-      margin-block: 8px;
+      font-family: SFUIText-Semibold;
+      font-size: 14px;
+      color: #dddddd;
+      margin-bottom: 8px;
     }
     .desc {
       display: block;
-      font-size: 14px;
       margin-top: 10px;
-      color: #909399;
+      font-family: SFUIText-Regular;
+      font-size: 10px;
+      color: #666666;
+      letter-spacing: 0;
     }
     .item-btn {
       margin-left: 10px;
+      border-radius: 21px;
+      font-family: SFUIText-Medium;
+      font-size: 12px;
+      color: #dddddd;
     }
   }
   .title_img {
@@ -267,6 +303,15 @@ export default {
       margin-left: 10px;
       text-align: left;
     }
+  }
+  .title-tips {
+    width: 44px;
+    height: 19px;
+    margin-right: 4px;
+  }
+  .bottom-btn {
+    align-items: center;
+    justify-content: space-between;
   }
 }
 .flex {
@@ -278,18 +323,22 @@ html[lang='ar'] {
     margin-right: 10px;
     margin-left: 0 !important;
   }
+  .title-tips {
+    margin-left: 4px;
+  }
 }
 </style>
 <style lang="less">
 .avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  background: #2e2f32;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 5px;
 }
 .avatar-uploader .el-upload:hover {
-  border-color: #409eff;
+  border-color: #ff536c;
 }
 .avatar-uploader-icon {
   font-size: 28px;
@@ -301,8 +350,29 @@ html[lang='ar'] {
 }
 .avatar {
   width: 100px;
-  height: 100px;
+  height: 130px;
   display: block;
   object-fit: cover;
+}
+
+.item-input {
+  input {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    font-family: SFUIText-Regular;
+    font-size: 14px;
+    color: #dddddd;
+    &::placeholder {
+      font-family: SFUIText-Regular;
+      font-size: 14px;
+      color: #666666;
+    }
+  }
+}
+.input-right {
+  input {
+    padding-right: 75px;
+  }
 }
 </style>

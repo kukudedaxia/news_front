@@ -33,7 +33,9 @@ const initMain = async TOKEN => {
   // IM v4初始化
   const im = await IMinitV4(TOKEN);
   // 初始化 RTCClient
-  rtcClient = im.install(installer, {});
+  rtcClient = im.install(installer, {
+    // logLevel: 0,
+  });
   return im;
 };
 

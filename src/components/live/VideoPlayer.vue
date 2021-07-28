@@ -90,7 +90,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #535c63;
+  // background-color: #535c63;
   // height: 500px;
   height: 100%;
   width: 100%;
@@ -98,11 +98,10 @@ export default {
   position: relative;
   .video {
     position: absolute;
-    left: 20px;
-    top: 20px;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    border-radius: 4px;
+    left: calc(50% - 154px);
+    top: 0px;
+    width: 308px;
+    height: 100%;
   }
   .video_msg {
     position: absolute;
@@ -114,17 +113,18 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
     .timeout {
       p {
-        color: #ffffff;
         margin-bottom: 10px;
       }
     }
     .no_connect {
-      color: #ffffff;
     }
     .finished {
-      color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;

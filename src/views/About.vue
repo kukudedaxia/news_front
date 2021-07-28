@@ -92,7 +92,7 @@
 h2 {
   font-size: 20px;
   margin: 10px 0;
-  font-family: SF-UI-Text-Bold;
+  font-family: SFUIText-Bold;
   color: #333333;
 }
 </style>

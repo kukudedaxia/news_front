@@ -8,12 +8,15 @@
         <img :src="`http://img.whale.weibo.com/orj1080/${item.liveInfoBean.coverPid}.jpg`" />
         <div class="right-box">
           <div>
-            <p>{{ $t('live.scheduleTitle') }}: {{ item.liveInfoBean.title }}</p>
-            <p>
-              {{ $t('live.time') }}:
+            <p class="name">{{ item.liveInfoBean.title }}</p>
+            <p class="time">
+              <img src="@/assets/images/live/live_Schedule_time_icon1.png" class="tips-img" />
               {{ $moment(new Date(item.liveInfoBean.apptTime)).format('DD/MM/YYYY HH:mm ') }}
             </p>
-            <p>{{ $t('live.privacy') }}: {{ visible(item.liveInfoBean.visible) }}</p>
+            <p class="privacy">
+              <img src="@/assets/images/live/live_Schedule_time_icon2.png" class="tips-img" />
+              {{ visible(item.liveInfoBean.visible) }}
+            </p>
           </div>
           <div class="btn-operation">
             <el-button
@@ -21,6 +24,7 @@
               size="small"
               :disabled="item.liveState === 2 || (liveState === 1 && item.liveState !== 1)"
               :loading="item.loading"
+              class="btn"
               @click="onLiveClick(item)"
             >
               {{
@@ -39,6 +43,7 @@
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
               :disabled="liveState === 1 && item.liveState !== 1"
+              class="btn"
               >{{ $t('live.copyURL') }}</el-button
             >
             <el-button
@@ -49,6 +54,7 @@
               v-clipboard:success="onCopy"
               v-clipboard:error="onError"
               :disabled="liveState === 1 && item.liveState !== 1"
+              class="btn"
               >{{ $t('live.copyKey') }}</el-button
             >
           </div>
@@ -162,30 +168,69 @@ export default {
   text-align: left;
   height: 100%;
   overflow-y: auto;
+  padding: 15px 20px;
   .title {
-    font-weight: bold;
+    font-family: SFUIText-Semibold;
+    font-size: 14px;
+    color: #dddddd;
+    letter-spacing: 0;
   }
   ul {
     li {
       padding: 20px 0;
       display: flex;
-      border-bottom: 2px solid #ffffff;
       & > img {
-        width: 150px;
-        height: 200px;
+        width: 90px;
+        height: 116px;
         object-fit: cover;
+        background: #2e2f32;
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        border-radius: 5px;
       }
       .right-box {
-        margin-left: 20px;
+        margin-left: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        p {
-          margin-bottom: 15px;
+        padding: 4px;
+
+        .name {
+          font-family: SFUIText-Semibold;
+          font-size: 14px;
+          color: #dddddd;
+          margin-bottom: 10px;
+        }
+        .time,
+        .privacy {
+          font-family: SFUIText-Regular;
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 4px;
+        }
+        .tips-img {
+          width: 14px;
+          height: 14px;
+          vertical-align: -2px;
         }
       }
       .btn-operation {
         display: flex;
+        .btn {
+          font-family: SFUIText-Medium;
+          font-size: 12px;
+          color: #dddddd;
+          letter-spacing: 0;
+          text-align: center;
+          border-radius: 21px;
+          padding: 5px 9px;
+          height: 24px;
+        }
+        .is-plain {
+          border: 1px solid #6d7283;
+          color: #6d7283;
+          background-color: transparent;
+        }
       }
     }
   }

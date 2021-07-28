@@ -81,17 +81,15 @@ export default {
       scheduledParam: {}, // 预约直播参数
       blobText: '', // 博文内容
       goLiveBtnLoading: false, // 直接开播btn按钮状态
-      TOKEN: 'ehD5kBhGQl/u1GOXFWhyWkKZ8J6A8aHdmVzjREuDmvw=@y4sa.cn.rongnav.com;y4sa.cn.rongcfg.com',
+      TOKEN: '',
     };
   },
   created() {
     this.uid = Number(this.user.id);
     this.$store.commit('route/setLoadingState', true);
-    this.initIM();
-  },
-  mounted() {
     this.getToken();
   },
+  mounted() {},
   methods: {
     // 获取直播token
     getToken() {
@@ -105,6 +103,7 @@ export default {
         },
         onSuccess: ({ data }) => {
           this.TOKEN = data.token;
+          this.initIM();
           this.access();
         },
       });
@@ -169,20 +168,6 @@ export default {
       const im = await initMain(this.TOKEN);
       // 添加事件监听
       im.watch({
-        // 监听会话列表变更事件, 触发时机：会话状态变化（置顶、免打扰）、会话未读数变化（未读数增加、未读数清空）、会话 @ 信息、会话最后一条消息变化
-        conversation(event) {
-          // 假定存在 getExistedConversationList 方法，以获取当前已存在的会话列表数据
-          // eslint-disable-next-line no-undef
-          const conversationList = getExistedConversationList();
-          // 发生变更的会话列表
-          const updatedConversationList = event.updatedConversationList;
-          // 通过 im.Conversation.merge 计算最新的会话列表
-          // eslint-disable-next-line no-unused-vars
-          const latestConversationList = im.Conversation.merge({
-            conversationList,
-            updatedConversationList,
-          });
-        },
         // 监听消息通知
         message(event) {
           // 新接收到的消息内容
@@ -200,6 +185,7 @@ export default {
     async initSdk(lid, state = 1) {
       const _this = this;
       this.room = await joinLivingRoom(lid);
+      console.log(this.room);
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
       this.room.registerRoomEventListener({
         /**
@@ -269,10 +255,15 @@ export default {
          * @param track RCRemoteTrack 类实例
          */
         onTrackReady(track) {
-          console.log('onTrackReady', track);
-          const videoNode = document.querySelector('#videoNode');
-          track.play(videoNode);
-          _this.liveState = 1; // 设置为直播中
+          if (track.isAudioTrack()) {
+            // 音轨不需要传递播放控件
+            track.play();
+          } else {
+            // 视轨需要一个 video 标签才可进行播放
+            const videoNode = document.querySelector('#videoNode');
+            track.play(videoNode);
+            _this.liveState = 1; // 设置为直播中
+          }
         },
         /**
          * 人员加入  只会监听到直播
@@ -331,13 +322,13 @@ export default {
           if (this.live_type === 1) {
             this.goLiveBtnLoading = true;
             // 走开播前校验
-            // this.title = param.title;
-            // this.cover_img = param.cover_img;
-            // this.blobText = param.blobText;
-            this.scheduledParam = param;
+            this.title = param.title;
+            this.cover_img = param.cover_img;
+            this.blobText = param.blobText;
             this.check();
           } else {
             // 预约开播，不走校验逻辑
+            this.scheduledParam = param;
             this.initSdk(param.lid);
             setTimeout(() => {
               this.startLive();
@@ -398,7 +389,7 @@ export default {
             this.initSdk(this.lid);
             setTimeout(() => {
               this.startLive();
-            }, 1000);
+            }, 2000);
           }
         },
         onComplete: () => {},
@@ -531,20 +522,19 @@ export default {
 
 <style lang="less" scoped>
 .live {
-  width: 1130px;
-  min-height: 650px;
+  width: 1140px;
   display: flex;
   justify-content: space-between;
   margin: auto;
-  border: 1px solid #ebebeb;
-  border-radius: 3px;
-  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: #000000;
+  border-radius: 10px;
   margin-top: 20px;
+  overflow: hidden;
   .operation {
     height: 100%;
-    width: 500px;
-    padding: 10px;
-    background-color: #f2f2f2;
+    width: 416px;
+    background: #16161a;
     display: flex;
     justify-content: space-between;
     .tab-content {
@@ -554,7 +544,7 @@ export default {
   }
   .player-content {
     flex: 1;
-    padding: 0 10px 0 20px;
+    // padding: 0 10px 0 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -571,5 +561,31 @@ export default {
 <style lang="less">
 .el-dialog__header {
   display: none;
+}
+
+.el-tabs__header {
+  .el-tabs__nav-wrap::after {
+    background: #000000;
+    border-radius: 10px 0 0 0;
+  }
+  .el-tabs__item {
+    font-family: SFUIText-Regular;
+    font-size: 16px;
+    color: #dddddd;
+    height: 50px;
+    line-height: 50px;
+  }
+  .el-tabs__item.is-active {
+    font-family: SFUIText-Bold;
+    color: #ff536c;
+  }
+
+  .el-tabs__active-bar {
+    height: 3px;
+    // width: 40px !important;
+    background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+    border-radius: 2px;
+    // transform: translateX(calc(104px - 50%)) !important;
+  }
 }
 </style>

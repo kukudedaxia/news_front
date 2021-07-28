@@ -29,7 +29,7 @@
   justify-content: space-around;
   line-height: 100px;
   a {
-    font-family: SF-UI-Text-Regular;
+    font-family: SFUIText-Regular;
     font-size: 12px;
     color: #333333;
     cursor: pointer;
