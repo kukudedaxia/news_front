@@ -2,7 +2,7 @@ import axios from 'axios';
 import { stringify } from 'qs';
 import Cookies from 'js-cookie';
 import router from '../router';
-
+import store from '../store/index';
 const request = axios.create({
   paramsSerializer: params => stringify(params, { arrayFormat: 'comma' }),
 });
@@ -46,6 +46,7 @@ request.interceptors.response.use(
           Cookies.remove('uid');
           Cookies.remove('userInfo');
           Cookies.remove('SUB');
+          store.commit('setUser', {})
           router.replace({
             path: '/login',
             query: {

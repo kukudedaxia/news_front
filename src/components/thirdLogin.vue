@@ -1,33 +1,21 @@
 <template>
   <div class="wrap">
     <el-row class="icons">
-      <el-col :span="8" class="item" id="customBtn">
-        <img :src="require('../assets/images/google2.png')" />
-      </el-col>
-      <el-col :span="8">
-        <div class="item" @click="FBlogin">
-          <img :src="require('../assets/images/facebook.png')" />
-        </div>
-      </el-col>
-      <el-col :span="8" class="item">
-        <div class="item" @click="loginInApple">
-          <img :src="require('../assets/images/apple2.png')" />
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <span>Googles</span>
-      </el-col>
-      <el-col :span="8">
-        <span>FaceBook</span>
-      </el-col>
-      <el-col :span="8">
-        <span>Apple</span>
-      </el-col>
+      <div class="item" @click="FBlogin">
+        <img :src="require('../assets/images/facebook.png')" />
+      </div>
+      <div class="item">
+        <div id="customBtn" />
+        <img :src="require('../assets/images/google.png')" />
+      </div>
+      <div class="item" @click="loginInApple">
+        <img :src="require('../assets/images/apple.png')" />
+      </div>
     </el-row>
-    <div class="g_id_signout">Sign Out</div>
+    <!-- <div class="g_id_signout">Sign Out</div>
     <div>
       <span @click="signOutGoogle">Exit Google</span>
-    </div>
+    </div> -->
     <!-- <div
       id="appleid-signin"
       class="signin-button"
@@ -279,7 +267,6 @@ export default {
       }
     },
     listenApple() {
-   
       //Listen for authorization success
       // const that = this;
       document.addEventListener('AppleIDSignInOnSuccess', data => {
@@ -296,22 +283,37 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
-.wrap {
-  min-height: 200px;
+<style lang="less">
+#customBtn {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  opacity: 0;
+  > div {
+    width: 100%;
+    height: 100%;
+  }
 }
+</style>
+<style lang="less" scoped>
 .icons {
-  max-width: 300px;
+  max-width: 330px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   img {
-    width: 40px;
+    width: 48px;
     margin-bottom: 10px;
+    cursor: pointer;
   }
   .item {
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: 48px;
+    height: 48px;
   }
 }
 </style>

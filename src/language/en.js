@@ -104,7 +104,7 @@ export default {
       accountph: 'Enter your username',
       passwordph: 'Enter yout password',
       getcode: 'Get Verification Code',
-      resend: 'resend',
+      resend: 'Resend',
       login: 'Log In',
       logout: 'Log out',
       permission: 'You have no permission',
