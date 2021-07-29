@@ -117,7 +117,7 @@ const createMicrophoneAndCameraTracks = () => {
 };
 
 /**
- * 加入直播间
+ * 加入直播间（主播端）
  * @description 主播加入直播房间或观众上麦场景调用，观众上麦之前需先取消已订阅的直播间资源
  * 从 5.0.7 开始增加返回 `tracks` 与 `userIds`
  * userIds - 当前已加入房间的主播人员列表
@@ -149,7 +149,7 @@ const joinLivingRoom = roomId => {
 };
 
 /**
- * 退出直播间
+ * 退出直播间（主播端）
  * @param room实例
  */
 const leaveRoom = room => {
@@ -267,7 +267,7 @@ const subscribe = async (
 };
 
 /**
- * 观众加入直播房间调用
+ * 加入直播房间（观众端）
  * @param roomId 房间 Id
  * @param livingType 直播类型
  * * 当 `livingType` 值为 `RCLivingType.AUDIO` 是表示音频直播
@@ -275,13 +275,35 @@ const subscribe = async (
  */
 const joinLivingRoomAsAudience = async roomId => {
   return new Promise(resolve => {
-    rtcClient.joinLivingRoomAsAudience(roomId, RCLivingType.AUDIO_VIDEO).then(({ code, room }) => {
+    rtcClient
+      .joinLivingRoomAsAudience(String(roomId), RCLivingType.AUDIO_VIDEO)
+      .then(({ code, room }) => {
+        debugger;
+        if (code === RCRTCCode.SUCCESS) {
+          console.log('加入房间成功', roomId);
+          // 返回房间实例
+          resolve(room);
+        } else {
+          throw new Error('加入房间失败 ->', code);
+        }
+      });
+  });
+};
+
+/**
+ * 退出直播间（观众端）
+ * @param 观众端的room实例
+ */
+const leaveLivingRoomAsAudience = audienceRoom => {
+  return new Promise(resolve => {
+    rtcClient.leaveLivingRoomAsAudience(audienceRoom).then(({ code }) => {
+      // 若加入失败，则 room、userIds、tracks 值为 undefined
       if (code === RCRTCCode.SUCCESS) {
-        console.log('观众加入房间成功', roomId);
+        console.log('退出房间成功');
         // 返回房间实例
-        resolve(room);
+        resolve(audienceRoom);
       } else {
-        throw new Error('观众加入房间失败 ->', code);
+        throw new Error('退出房间失败 ->', code);
       }
     });
   });
@@ -305,22 +327,33 @@ const unsubscribe = async audience => {
 };
 
 /**
- * 设置合流布局
+ * 设置合流布局、分辨率
  * @param layoutMode CUSTOMIZE:自定义布局，需用户设置布局结构、SUSPENSION:悬浮布局、ADAPTATION:自适应布局
  * @param videoRenderMode CROP:当画布尺寸与视频分辨率比例不同时，裁剪视频内容、WHOLE: 当画布尺寸与视频分辨率不同时，压缩视频尺寸以填充画布
+ * @param videoRenderMode 分辨率 默认W1920_H1080; 可以通过RCResolution查找所支持的分辨率
+ * @param fps  默认帧率 30
  */
-const setLayoutMode = async (room, layoutMode = 'ADAPTATION', videoRenderMode = 'WHOLE') => {
+const setLayoutMode = async (
+  room,
+  layoutMode = 'ADAPTATION',
+  videoRenderMode = 'WHOLE',
+  resolvingPower = 'W1920_H1080',
+  fps = 30,
+) => {
   return new Promise(resolve => {
     // 获取构建器实例;
     const builder = room.getMCUConfigBuilder();
     // 修改布局模式;
-    builder.setMixLayoutMode(MixLayoutMode[layoutMode]);
-    builder.setOutputVideoRenderMode(MixVideoRenderMode[videoRenderMode]);
+    builder
+      .setMixLayoutMode(MixLayoutMode[layoutMode])
+      .setOutputVideoRenderMode(MixVideoRenderMode[videoRenderMode])
+      .setOutputVideoResolution(RCResolution[resolvingPower])
+      .setOutputVideoFPS(RCFrameRate[`FPS_${fps}`]);
     // 配置生效;
     builder.flush().then(({ code }) => {
-      console.log(code);
       if (code === RCRTCCode.SUCCESS) {
         resolve();
+        console.log('设置合流布局、分辨率成功');
       } else {
         throw new Error('设置合流布局模式失败 ->', code);
       }
@@ -363,4 +396,5 @@ export {
   getAudienceClient,
   audienceSubscribe,
   joinLivingRoomAsAudience,
+  leaveLivingRoomAsAudience,
 };

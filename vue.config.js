@@ -96,7 +96,7 @@ module.exports = {
         target: 'https://test.bee.to/',
       },
       '/sup': {
-        target: 'https://test.bee.to/',
+        target: 'https://img.whale.weibo.com/',
         pathRewrite: { '^/sup': '' },
       },
     },

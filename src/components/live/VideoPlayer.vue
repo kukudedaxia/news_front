@@ -61,6 +61,11 @@ export default {
       saveReplay: false, // 是否缓存直播视频
     };
   },
+  watch: {
+    lid(newV) {
+      console.log(newV);
+    },
+  },
   methods: {
     // 缓存本次直播视频
     onSaveReplay() {
@@ -106,11 +111,8 @@ export default {
   color: #ffffff;
   position: relative;
   .video {
-    position: absolute;
-    left: calc(50% - 154px);
-    top: 0px;
-    width: 308px;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
   .video_msg {
     position: absolute;

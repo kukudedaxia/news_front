@@ -1,11 +1,12 @@
 <template>
   <div class="live">
     <div class="operation">
-      <el-tabs v-model="activeName" :stretch="true" style="width: 100%;">
+      <el-tabs v-model="activeName" :stretch="true" style="width: 100%;" class="flip-over">
         <el-tab-pane
           :label="$t('live.goLive')"
           name="1"
           :disabled="liveState === 1 && live_type === 0"
+          class="flip-over"
         >
           <go-live
             :liveState="liveState"
@@ -23,11 +24,12 @@
           :label="$t('live.scheduleLive')"
           name="2"
           :disabled="liveState === 1 && live_type === 1"
+          class="flip-over"
         >
           <scheduled-live
             :uid="uid"
             :liveState="liveState"
-            class="tab-content"
+            class="tab-content "
             ref="scheduledLiveRef"
             @liveState="onLiveClick"
           ></scheduled-live>
@@ -51,7 +53,7 @@ import GoLive from '@/components/live/GoToLive.vue';
 import ScheduledLive from '@/components/live/ScheduledLive.vue';
 import VideoPlayer from '@/components/live/VideoPlayer.vue';
 
-import { initMain, joinLivingRoom, leaveRoom } from '@/utils/live';
+import { initMain, joinLivingRoom, leaveRoom, setLayoutMode } from '@/utils/live';
 
 export default {
   components: {
@@ -194,7 +196,7 @@ export default {
     async initSdk(lid, state = 1) {
       const _this = this;
       this.room = await joinLivingRoom(lid);
-      console.log(this.room);
+
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
       this.room.registerRoomEventListener({
         /**
@@ -249,6 +251,9 @@ export default {
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
           _this.room.subscribe(tracks).then(({ code }) => {
             console.log(code);
+            // if (state === 1) {
+            //   setLayoutMode(_this.room);
+            // }
           });
         },
         /**
@@ -341,6 +346,7 @@ export default {
             this.$confirm(this.$t('live.endMsg'), this.$t('live.endTitle'), {
               confirmButtonText: this.$t('live.endBtn'),
               cancelButtonText: this.$t('live.cancel'),
+              showClose: false,
             })
               .then(() => {
                 this.goLiveBtnLoading = true;
@@ -374,9 +380,7 @@ export default {
           if (data.haveLiveOnline === 0 && data.haveSchedule === 1) {
             this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
               confirmButtonText: this.$t('live.ok'),
-              callback: () => {
-                this.goLiveBtnLoading = false;
-              },
+              callback: () => {},
             });
             // 此处应有title和博文合规校验
             // 如果有正在直播的，弹窗提醒
@@ -390,7 +394,12 @@ export default {
             }, 2000);
           }
         },
-        onComplete: () => {},
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+        onComplete: () => {
+          this.goLiveBtnLoading = false;
+        },
       });
     },
     // 开播
@@ -590,5 +599,8 @@ export default {
       // transform: translateX(calc(104px - 50%)) !important;
     }
   }
+}
+html[lang='ar'] .el-tabs__item {
+  transform: scaleX(-1) !important;
 }
 </style>

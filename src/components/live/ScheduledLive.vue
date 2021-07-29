@@ -61,11 +61,16 @@
         </div>
       </li>
     </ul>
+    <default class="default" v-if="liveList.length === 0"></default>
   </div>
 </template>
 
 <script>
+import Default from '@/components/common/Default';
 export default {
+  components: {
+    Default,
+  },
   props: {
     uid: Number,
     // 直播状态：0 未直播 1 直播中 2 已结束
@@ -233,6 +238,9 @@ export default {
         }
       }
     }
+  }
+  .default {
+    margin-top: 50%;
   }
 }
 html[lang='ar'] {

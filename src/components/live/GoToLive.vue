@@ -44,15 +44,15 @@
         <img src="@/assets/images/live/icon_step1@3x.png" class="title-tips" />
         <p class="title">{{ $t('live.serverURL') }}</p>
       </div>
-      <div class="flex input-box">
+      <div class="flex input-box flip-over">
         <el-input
           v-model="pushUrls"
           :disabled="liveState == 1"
-          class="item-input input-right"
+          class="item-input input-right flip-over"
         ></el-input>
         <el-button
           type="primary"
-          class="item-btn flex-align"
+          class="item-btn flex-align flip-over"
           size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="pushUrls"
@@ -68,15 +68,15 @@
         <img src="@/assets/images/live/icon_step2@3x.png" class="title-tips" />
         <p class="title">{{ $t('live.streamKey') }}</p>
       </div>
-      <div class="flex input-box">
+      <div class="flex input-box flip-over">
         <el-input
           v-model="streamKeys"
           :disabled="liveState == 1"
-          class="item-input input-right"
+          class="item-input input-right flip-over"
         ></el-input>
         <el-button
           type="primary"
-          class="item-btn flex-align"
+          class="item-btn flex-align flip-over"
           size="small"
           :disabled="startSource === 0"
           v-clipboard:copy="streamKeys"
@@ -378,6 +378,13 @@ html[lang='ar'] {
 .input-right {
   input {
     padding-right: 75px;
+  }
+}
+
+html[lang='ar'] {
+  .input-right input {
+    padding-right: 15px;
+    padding-left: 75px;
   }
 }
 
