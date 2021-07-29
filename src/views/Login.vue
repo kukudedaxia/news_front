@@ -61,7 +61,9 @@
             @click="login"
             >{{ $t('login.login') }}</el-button
           >
-          <el-divider><span class="continue">Continue with</span></el-divider>
+          <el-divider
+            ><span class="continue">{{ $t('login.continue') }}</span></el-divider
+          >
           <ThirdLogin v-if="activeName == 'phone'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
@@ -134,7 +136,9 @@
             @click="login"
             >{{ $t('login.login') }}</el-button
           >
-          <el-divider><span class="continue">Continue with</span></el-divider>
+          <el-divider
+            ><span class="continue">{{ $t('login.continue') }}</span></el-divider
+          >
           <ThirdLogin v-if="activeName == 'account'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
@@ -396,6 +400,9 @@ export default {
   .el-tabs__nav-wrap::after {
     display: none;
   }
+  .el-tabs__item:nth-child(2) {
+    padding-right: 75px;
+  }
 
   .el-input--suffix .el-input__inner {
     border: none;
@@ -412,6 +419,9 @@ export default {
   }
   .el-tabs__nav {
     width: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .el-select-dropdown {
     border: 1px solid #eeeeee;
@@ -451,6 +461,27 @@ export default {
 .el-popper[x-placement^='bottom'] {
   margin-top: 4px;
 }
+
+html[lang='ar'] #login .el-input__suffix {
+  right: auto;
+  left: 6px;
+}
+html[lang='ar'] #login .el-tabs__nav {
+  width: auto;
+}
+html[lang='ar'] #login .el-tabs__item:nth-child(2) {
+  transform: scaleX(-1);
+  padding-right: 0;
+}
+html[lang='ar'] #login .el-tabs__item:last-child {
+  transform: scaleX(-1);
+}
+html[lang='ar'] #login .el-tabs__header {
+  transform: scaleX(-1);
+}
+html[lang='ar'] #login  .el-tabs__nav {
+  width: 425px;
+}
 </style>
 
 <style lang="less" scoped>
@@ -469,6 +500,9 @@ export default {
   border-radius: 20px;
   background: #ffffff;
   box-shadow: 0 20px 55px -30px rgba(11, 0, 152, 0.3);
+}
+html[lang='ar'] .tabs {
+  max-width: none;
 }
 .mt-30 {
   margin-top: 30px;

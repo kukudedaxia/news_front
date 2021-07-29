@@ -1,7 +1,7 @@
 <template>
   <div class="bottom">
     <div class="bottom-info">
-      <span class="power">Powered by Weibo</span>
+      <span class="power">{{ $t('desc.power') }}</span>
       <div class="bottom-link">
         <a href="/about" target="_blank">{{ $t('desc.about') }}</a>
         <a href="/concat" target="_blank">{{ $t('desc.concat') }}</a>
