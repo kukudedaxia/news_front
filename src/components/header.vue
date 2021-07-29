@@ -52,7 +52,7 @@ export default {
       return this.$store.state.userInfo;
     },
     path() {
-      return this.$store.state.toPage.path;
+      return this.$route.path;
     },
     uid() {
       return this.$store.state.uid;
