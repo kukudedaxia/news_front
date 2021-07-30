@@ -12,6 +12,7 @@
         <p>{{ $t('live.timeOut') }}</p>
         <el-button type="primary" round size="small">{{ $t('live.reload') }}</el-button>
       </div>
+      <!-- <img src="@/assets/images/live/compose_icon_cover_uploading@3x.gif" class="loading-icon" /> -->
       <!-- 未连接 -->
       <div class="no_connect" v-if="liveState === 0">
         <p>
@@ -152,6 +153,10 @@ export default {
         margin-left: 0;
       }
     }
+  }
+  .loading-icon {
+    width: 34px;
+    height: 34px;
   }
 }
 </style>

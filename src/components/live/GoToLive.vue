@@ -9,7 +9,6 @@
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
           :disabled="liveState == 1"
-          v-loading="uploadLoading"
         >
           <img
             v-if="imgPids"
@@ -21,6 +20,13 @@
             class="avatar-uploader-icon"
             v-else
           />
+          <div class="upload-loading" v-show="uploadLoading">
+            <img
+              src="@/assets/images/live/compose_icon_cover_uploading@3x.gif"
+              class="loading-icon"
+            />
+          </div>
+
           <!-- <img
             src="@/assets/images/live/compose_icon_uploadagain@3x.png"
             class="refresh-icon"
@@ -36,19 +42,12 @@
         <el-input
           v-model="titles"
           maxlength="100"
-          :placeholder="$t('live.titleP', [user.nickname])"
-          :clearable="true"
           :disabled="liveState == 1"
           class="item-input"
           style="margin-bottom:20px"
         ></el-input>
         <p class="title">{{ $t('live.blogTitle') }}</p>
-        <el-input
-          v-model="blobTexts"
-          :clearable="true"
-          :disabled="liveState == 1"
-          class="item-input"
-        ></el-input>
+        <el-input v-model="blobTexts" :disabled="liveState == 1" class="item-input"></el-input>
       </div>
     </div>
     <div class="item-box text-right">
@@ -168,8 +167,15 @@ export default {
     },
   },
   watch: {
-    title(newV) {
-      this.titles = newV;
+    title: {
+      handler(newV) {
+        if (newV === '') {
+          this.titles = this.$t('live.titleP', [this.user.nickname]);
+          return;
+        }
+        this.titles = newV;
+      },
+      immediate: true,
     },
     blobText(newV) {
       this.blobTexts = newV;
@@ -369,6 +375,22 @@ export default {
       transform: translate(-50%, -50%);
       width: 30px;
       height: 30px;
+    }
+    .upload-loading {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.3);
+      .loading-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }

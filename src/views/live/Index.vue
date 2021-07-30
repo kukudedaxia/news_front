@@ -1,7 +1,7 @@
 <template>
   <div class="live">
     <div class="operation">
-      <el-tabs v-model="activeName" :stretch="true" style="width: 100%;" class="flip-over">
+      <el-tabs v-model="activeName" @tab-click="onTabClick" style="width: 100%;" class="flip-over">
         <el-tab-pane
           :label="$t('live.goLive')"
           name="1"
@@ -507,6 +507,12 @@ export default {
           }
         },
       });
+    },
+    // tabs点击
+    onTabClick(tab) {
+      if (tab.name === '2') {
+        this.$refs.scheduledLiveRef.getSubLiveList();
+      }
     },
   },
   beforeRouteLeave(to, from, next) {
