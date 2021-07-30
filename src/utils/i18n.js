@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import messages from '@/language/en';
+import en from '@/language/en';
+import ar from '@/language/ar';
 import store from '../store/index';
 import request from './request';
 
@@ -9,11 +10,14 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'en', // 设置默认语言环境
   fallbackLocale: 'en',
-  messages,
+  messages: {
+    en,
+    ar,
+  },
 });
 
 export default i18n;
-const loadedLanguages = ['en']; // 我们的默认语言
+const loadedLanguages = ['en', 'ar'];  // 我们的默认语言
 
 export function setI18nLanguage(lang) {
   i18n.locale = lang;
