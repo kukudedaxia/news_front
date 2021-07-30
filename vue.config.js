@@ -95,9 +95,8 @@ module.exports = {
       '/multimedia': {
         target: 'https://test.bee.to/',
       },
-      '/sup': {
+      '/upload': {
         target: 'https://img.whale.weibo.com/',
-        pathRewrite: { '^/sup': '' },
       },
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="goto_live">
     <div class="item-box flex title_img">
-      <div class="upliad">
+      <div class="upload-box">
         <el-upload
           class="avatar-uploader"
           action="#"
@@ -16,8 +16,20 @@
             :src="`http://img.whale.weibo.com/orj1080/${imgPids}.jpg`"
             class="avatar"
           />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <img
+            src="@/assets/images/live/icon_addcover@3x.png"
+            class="avatar-uploader-icon"
+            v-else
+          />
+          <!-- <img
+            src="@/assets/images/live/compose_icon_uploadagain@3x.png"
+            class="refresh-icon"
+            v-if="imgPids"
+          /> -->
         </el-upload>
+        <div class="upload-tips flex-align" v-if="!imgPids">
+          <span>{{ $t('live.addCover') }}</span>
+        </div>
       </div>
       <div class="title-box text-right">
         <p class="title">{{ $t('live.title') }}</p>
@@ -172,6 +184,7 @@ export default {
   data() {
     return {
       imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
+      // imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,
@@ -202,7 +215,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `sup/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
+              url: `/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
@@ -314,6 +327,50 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
+  .upload-box {
+    position: relative;
+    height: 130px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    .upload-tips {
+      display: block;
+      height: 30px;
+      font-family: SFUIText-Regular;
+      color: #dddddd;
+      text-align: center;
+      background: #202022;
+      line-height: 30px;
+      position: absolute;
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      border-radius: 0 0 5px 5px;
+      span {
+        display: block;
+        font-size: 12px;
+        transform: scale(0.83);
+      }
+    }
+    .avatar {
+      width: 100px;
+      height: 130px;
+      display: block;
+      object-fit: cover;
+    }
+    .avatar-uploader-icon {
+      width: 26px;
+      height: 26px;
+    }
+    .refresh-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 .flex {
   display: flex;
@@ -334,30 +391,26 @@ html[lang='ar'] {
 }
 </style>
 <style lang="less">
-.avatar-uploader .el-upload {
-  cursor: pointer;
-  position: relative;
+.avatar-uploader {
+  height: 100%;
   overflow: hidden;
-  background: #2e2f32;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-radius: 5px;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #ff536c;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-}
-.avatar {
-  width: 100px;
-  height: 130px;
-  display: block;
-  object-fit: cover;
+  .el-upload {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: #2e2f32;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    font-size: 28px;
+    color: #8c939d;
+    line-height: 100px;
+    text-align: center;
+  }
+  .el-upload:hover {
+    border-color: #ff536c;
+  }
 }
 
 .item-input {
