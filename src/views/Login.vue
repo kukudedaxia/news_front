@@ -7,8 +7,8 @@
             <div class="line">
               <el-select v-model="areaCode" slot="prepend" placeholder="请选择" class="area-code">
                 <el-option :value="item.num" v-for="(item, index) of areaList" :key="index">
-                  <span style="float: left">{{ item.place }}</span>
-                  <span style="float: right">{{ item.num }}</span>
+                  <span class="place">{{ item.place }}</span>
+                  <span class="code">{{ item.num }}</span>
                 </el-option>
               </el-select>
               <input
@@ -479,7 +479,7 @@ html[lang='ar'] #login .el-tabs__item:last-child {
 html[lang='ar'] #login .el-tabs__header {
   transform: scaleX(-1);
 }
-html[lang='ar'] #login  .el-tabs__nav {
+html[lang='ar'] #login .el-tabs__nav {
   width: 425px;
 }
 </style>
@@ -603,6 +603,24 @@ html[lang='ar'] .tabs {
   color: #c9cdd8;
   right: 10px;
 }
+.place {
+  float: left;
+  margin-right: 10px;
+}
+.code {
+  float: right;
+}
+html[lang='ar'] .place {
+  float: right;
+  margin-right: 0;
+}
+html[lang='ar'] .code {
+  float: left;
+  direction: ltr;
+  display: inline-block;
+  margin-right: 10px;
+}
+
 html[lang='ar'] .password {
   padding-right: 10px;
   padding-left: 32px;
