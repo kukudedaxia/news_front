@@ -43,16 +43,22 @@
           v-model="titles"
           maxlength="100"
           :disabled="liveState == 1"
+          :placeholder="$t('live.titleP', [user.nickname])"
           class="item-input"
           style="margin-bottom:20px"
         ></el-input>
         <p class="title">{{ $t('live.blogTitle') }}</p>
-        <el-input v-model="blobTexts" :disabled="liveState == 1" class="item-input"></el-input>
+        <el-input
+          v-model="blobTexts"
+          :placeholder="$t('live.blogP')"
+          :disabled="liveState == 1"
+          class="item-input"
+        ></el-input>
       </div>
     </div>
     <div class="item-box text-right">
       <div class="flex">
-        <img src="@/assets/images/live/icon_step1@3x.png" class="title-tips" />
+        <img :src="step1Image" class="title-tips" />
         <p class="title">{{ $t('live.serverURL') }}</p>
       </div>
       <div class="flex input-box flip-over">
@@ -76,7 +82,7 @@
     </div>
     <div class="item-box text-right">
       <div class="flex">
-        <img src="@/assets/images/live/icon_step2@3x.png" class="title-tips" />
+        <img :src="step2Image" class="title-tips" />
         <p class="title">{{ $t('live.streamKey') }}</p>
       </div>
       <div class="flex input-box flip-over">
@@ -100,7 +106,7 @@
     </div>
     <div class="item-box text-right flex bottom-btn">
       <div class="flex">
-        <img src="@/assets/images/live/icon_step3@3x.png" class="title-tips" />
+        <img :src="step3Image" class="title-tips" />
         <p class="title">{{ $t('live.msg3') }}</p>
       </div>
       <el-button
@@ -164,6 +170,24 @@ export default {
     },
     user() {
       return this.$store.state.userInfo;
+    },
+    lang() {
+      return this.$store.state.language;
+    },
+    step1Image() {
+      return this.lang === 'en'
+        ? require('@/assets/images/live/icon_step1@3x.png')
+        : require('@/assets/images/live/icon_step1_Arabic@3x.png');
+    },
+    step2Image() {
+      return this.lang === 'en'
+        ? require('@/assets/images/live/icon_step2@3x.png')
+        : require('@/assets/images/live/icon_step2_Arabic@3x.png');
+    },
+    step3Image() {
+      return this.lang === 'en'
+        ? require('@/assets/images/live/icon_step3@3x.png')
+        : require('@/assets/images/live/icon_step3_Arabic@3x.png');
     },
   },
   watch: {
@@ -253,7 +277,7 @@ export default {
     },
     // 清空数据
     onClearData() {
-      this.titles = '';
+      this.titles = this.$t('live.titleP', [this.user.nickname]);
       this.pushUrls = '';
       this.streamKeys = '';
       this.imgPids = '';
@@ -303,9 +327,12 @@ export default {
       display: block;
       margin-top: 10px;
       font-family: SFUIText-Regular;
-      font-size: 10px;
+      font-size: 12px;
       color: #666666;
       letter-spacing: 0;
+      transform: scale(0.83);
+      transform-origin: left;
+      white-space: nowrap;
     }
     .item-btn {
       margin-left: 10px;
@@ -409,6 +436,7 @@ html[lang='ar'] {
   }
   .title-tips {
     margin-left: 4px;
+    width: 78px;
   }
 }
 </style>

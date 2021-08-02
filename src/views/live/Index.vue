@@ -1,7 +1,13 @@
 <template>
   <div class="live">
     <div class="operation">
-      <el-tabs v-model="activeName" @tab-click="onTabClick" style="width: 100%;" class="flip-over">
+      <el-tabs
+        v-model="activeName"
+        :stretch="true"
+        @tab-click="onTabClick"
+        style="width: 100%;"
+        class="flip-over"
+      >
         <el-tab-pane
           :label="$t('live.goLive')"
           name="1"
@@ -108,6 +114,9 @@ export default {
           this.initIM();
           this.access();
         },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
       });
     },
     // 检测是否有直播
@@ -134,6 +143,9 @@ export default {
             this.startSource = data.startSource;
             this.initSdk(this.lid, 2);
           }
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
         },
         onComplete: () => {
           this.$store.commit('route/setLoadingState', false);
@@ -163,6 +175,9 @@ export default {
           this.lid = data.lid;
           this.pullUrl = data.pullUrl;
         },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
       });
     },
     // 初始化im
@@ -173,9 +188,9 @@ export default {
       im.watch({
         // 监听消息通知
         message(event) {
-          // msg 1 app下播  2 审核后台下播
+          // msg 1 app下播  2 审核后台下播  3 obs停止推流
           const msg = event.message.content.event;
-          if (msg === 1 || msg === 2) {
+          if (msg === 1 || msg === 2 || msg === 3) {
             const remoteTracks = _this.room.getRemoteTracks();
             if (remoteTracks.length > 0) {
               _this.room.unsubscribe(remoteTracks);
@@ -445,14 +460,7 @@ export default {
           this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 1);
         },
         onFail: ({ error }) => {
-          this.$message({
-            type: 'error',
-            message: error,
-          });
-          // 开播失败，退出直播间
-          if (this.room) {
-            leaveRoom(this.room);
-          }
+          this.$message.error(error);
         },
         onComplete: () => {
           if (this.live_type === 1) {
@@ -498,6 +506,9 @@ export default {
             type: 'success',
           });
           this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 2);
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
         },
         onComplete: () => {
           if (this.live_type === 1) {
@@ -557,7 +568,6 @@ export default {
   }
   .player-content {
     flex: 1;
-    // padding: 0 10px 0 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -599,10 +609,8 @@ export default {
 
     .el-tabs__active-bar {
       height: 3px;
-      // width: 40px !important;
       background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
       border-radius: 2px;
-      // transform: translateX(calc(104px - 50%)) !important;
     }
   }
 }

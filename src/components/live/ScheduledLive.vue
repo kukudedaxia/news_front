@@ -173,17 +173,22 @@ export default {
   text-align: left;
   height: 100%;
   overflow-y: auto;
-  padding: 15px 20px;
+  // padding: 15px 20px;
   .title {
     font-family: SFUIText-Semibold;
     font-size: 14px;
     color: #dddddd;
     letter-spacing: 0;
+    margin: 15px 15px auto 20px;
   }
   ul {
     li {
-      padding: 20px 0;
+      padding: 20px;
       display: flex;
+      transition: 0.3s;
+      &:hover {
+        background: #0f0f12;
+      }
       & > img {
         width: 90px;
         height: 116px;

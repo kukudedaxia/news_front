@@ -17,7 +17,8 @@ import {
   MixVideoRenderMode,
 } from '@rongcloud/plugin-rtc';
 
-const APPkEY = 'c9kqb3rdc63ej';
+const APPkEY = process.env.VUE_APP_APPkEY;
+
 let rtcClient = null; // rtcClient实例
 
 /**
