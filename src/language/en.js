@@ -95,6 +95,7 @@ const message = {
     leaveMsg: 'If you leave this page the Beeto Live will be ended. Do you want to continue?',
     default: 'No upcoming streams',
     addCover: 'Add Cover',
+    uploadErr: 'The picture upload failed.Please try again.',
   },
   signOut: 'signOut',
   signText: 'Are you sure you want to log out?',

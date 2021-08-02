@@ -12,7 +12,7 @@
         >
           <img
             v-if="imgPids"
-            :src="`http://img.whale.weibo.com/orj1080/${imgPids}.jpg`"
+            :src="`https://img.bee-cdn.com/orj1080/${imgPids}.jpg`"
             class="avatar"
           />
           <img
@@ -245,7 +245,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=1000005298&raw_md5=${md5}`,
+              url: `/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
@@ -254,7 +254,11 @@ export default {
           },
           success: res => {
             this.uploadLoading = false;
-            this.imgPids = res.pic.pid;
+            if (res.ret) {
+              this.imgPids = res.pic.pid;
+            } else {
+              this.$message.error(this.$t('live.uploadErr'));
+            }
           },
           error: err => {
             this.uploadLoading = false;
@@ -491,13 +495,6 @@ html[lang='ar'] {
   }
 }
 
-// 按钮
-.el-button--primary.is-disabled,
-.el-button--primary.is-disabled:hover {
-  background: rgba(231, 64, 89, 0.2);
-  border: none;
-  color: rgba(102, 102, 102, 0.4) !important;
-}
 .goto_live {
   .el-input.is-disabled .el-input__inner {
     border-color: transparent;

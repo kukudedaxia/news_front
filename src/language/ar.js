@@ -91,6 +91,7 @@ const message = {
     leaveMsg: 'إذا تركت هذه الصفحة ، فسيتم إنهاء بيتو لايف. هل تريد الاستمرار؟',
     default: 'ليس هناك المباشر القادمة',
     addCover: 'إضافة صورة',
+    uploadErr: 'The picture upload failed.Please try again.',
   },
   signOut: 'signOut',
   signText: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',

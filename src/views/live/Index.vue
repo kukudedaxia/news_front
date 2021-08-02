@@ -58,8 +58,9 @@
 import GoLive from '@/components/live/GoToLive.vue';
 import ScheduledLive from '@/components/live/ScheduledLive.vue';
 import VideoPlayer from '@/components/live/VideoPlayer.vue';
+import Bus from '@/utils/bus';
 
-import { initMain, joinLivingRoom, leaveRoom, setLayoutMode } from '@/utils/live';
+import { initMain, joinLivingRoom, leaveRoom } from '@/utils/live';
 
 export default {
   components: {
@@ -70,6 +71,19 @@ export default {
   computed: {
     user() {
       return this.$store.state.userInfo;
+    },
+    leaveLivingDialog() {
+      return this.$store.state.live.leaveLivingDialog;
+    },
+  },
+  watch: {
+    leaveLivingDialog: {
+      handler(newV) {
+        if (newV) {
+          this.leaveLiveConfirm();
+        }
+      },
+      immediate: true,
     },
   },
   data() {
@@ -188,6 +202,7 @@ export default {
       im.watch({
         // 监听消息通知
         message(event) {
+          console.log('message', event);
           // msg 1 app下播  2 审核后台下播  3 obs停止推流
           const msg = event.message.content.event;
           if (msg === 1 || msg === 2 || msg === 3) {
@@ -195,8 +210,8 @@ export default {
             if (remoteTracks.length > 0) {
               _this.room.unsubscribe(remoteTracks);
             }
-            leaveRoom(_this.room);
             _this.onRefresh();
+            _this.stopLive();
             _this.startSource = 1;
           }
         },
@@ -307,10 +322,6 @@ export default {
          */
         onUserLeave(userIds) {
           console.log('onUserLeave', userIds);
-          // else {
-          //   // 融云、obs断流被动下播都会走这个逻辑
-          //   _this.stopLive(2);
-          // }
         },
       });
       // 如果是续播，初始化完room实例后需要订阅远端流
@@ -458,6 +469,7 @@ export default {
             type: 'success',
           });
           this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 1);
+          this.$store.commit('live/setLiving', true);
         },
         onFail: ({ error }) => {
           this.$message.error(error);
@@ -472,51 +484,50 @@ export default {
       });
     },
     // 下播
-    // type  1 直接下播  2 被动下播
-    stopLive(type = 1) {
-      let params = {};
-      if (this.live_type === 1) {
-        params = {
-          uid: this.uid,
-          lid: this.lid,
-          liveType: this.live_type,
-        };
-      } else {
-        params = {
-          uid: this.scheduledParam.uid,
-          lid: this.scheduledParam.lid,
-          liveType: this.live_type,
-        };
-      }
-      this.$store.dispatch('ajax', {
-        req: {
-          method: 'post',
-          url: '/multimedia/2/video/pc/stop.json',
-          params,
-        },
-        onSuccess: () => {
-          // 如果是用户在pc端主动下播，则需要手动离开房间；如果是被动下播，则已经被融云提出房间，无需调用
-          if (type === 1) {
+    stopLive() {
+      return new Promise(resolve => {
+        let params = {};
+        if (this.live_type === 1) {
+          params = {
+            uid: this.uid,
+            lid: this.lid,
+            liveType: this.live_type,
+          };
+        } else {
+          params = {
+            uid: this.scheduledParam.uid,
+            lid: this.scheduledParam.lid,
+            liveType: this.live_type,
+          };
+        }
+        this.$store.dispatch('ajax', {
+          req: {
+            method: 'post',
+            url: '/multimedia/2/video/pc/stop.json',
+            params,
+          },
+          onSuccess: () => {
             leaveRoom(this.room);
-          }
-
-          this.liveState = 2;
-          this.$message({
-            message: this.$t('live.success'),
-            type: 'success',
-          });
-          this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 2);
-        },
-        onFail: ({ error }) => {
-          this.$message.error(error);
-        },
-        onComplete: () => {
-          if (this.live_type === 1) {
-            this.goLiveBtnLoading = false;
-          } else {
-            this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
-          }
-        },
+            this.liveState = 2;
+            this.$message({
+              message: this.$t('live.success'),
+              type: 'success',
+            });
+            this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 2);
+            this.$store.commit('live/setLiving', false);
+            resolve();
+          },
+          onFail: ({ error }) => {
+            this.$message.error(error);
+          },
+          onComplete: () => {
+            if (this.live_type === 1) {
+              this.goLiveBtnLoading = false;
+            } else {
+              this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
+            }
+          },
+        });
       });
     },
     // tabs点击
@@ -525,18 +536,25 @@ export default {
         this.$refs.scheduledLiveRef.getSubLiveList();
       }
     },
-  },
-  beforeRouteLeave(to, from, next) {
-    // 如果在直播状态下离开live页面，则弹窗提示是否结束直播
-    if (this.liveState === 1) {
+    // 离开直播弹窗
+    leaveLiveConfirm() {
       this.$confirm(this.$t('live.leaveMsg'), this.$t('live.leaveTitle'), {
         confirmButtonText: this.$t('live.endBtn'),
         cancelButtonText: this.$t('live.cancel'),
       })
         .then(() => {
-          this.stopLive();
+          this.stopLive().then(() => {
+            // 触发bus
+            Bus.$emit('stopLive');
+          });
         })
         .catch(() => {});
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    // 如果在直播状态下离开live页面，则弹窗提示是否结束直播
+    if (this.liveState === 1) {
+      this.leaveLiveConfirm();
     } else {
       next();
     }

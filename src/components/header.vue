@@ -37,6 +37,8 @@
 <script>
 import Cookies from 'js-cookie';
 import { loadLanguageAsync } from '@/utils/i18n';
+import Bus from '@/utils/bus';
+
 export default {
   name: 'Header',
   data() {
@@ -59,6 +61,9 @@ export default {
     },
     loginType() {
       return this.$store.state.loginType;
+    },
+    living() {
+      return this.$store.state.live.living;
     },
   },
   watch: {
@@ -103,19 +108,27 @@ export default {
       }
     },
     logout() {
-      this.$alert(this.$t('signText'), '', {
-        customClass: 'custom-messsage',
-        confirmButtonText: this.$t('login.logout'),
-        cancelButtonText: this.$t('live.cancel'),
-        cancelButtonClass: 'cancel-btn',
-        confirmButtonClass: 'confirm-btn',
-        showCancelButton: true,
-        callback: action => {
-          if (action == 'confirm') {
-            this.logouts();
-          }
-        },
-      });
+      if (this.living) {
+        this.$store.commit('live/setLeaveLivingDialog', true);
+        Bus.$on('stopLive', () => {
+          this.$store.commit('live/setLeaveLivingDialog', false);
+          // this.logouts();
+        });
+      } else {
+        this.$alert(this.$t('signText'), '', {
+          customClass: 'custom-messsage',
+          confirmButtonText: this.$t('login.logout'),
+          cancelButtonText: this.$t('live.cancel'),
+          cancelButtonClass: 'cancel-btn',
+          confirmButtonClass: 'confirm-btn',
+          showCancelButton: true,
+          callback: action => {
+            if (action == 'confirm') {
+              this.logouts();
+            }
+          },
+        });
+      }
     },
     logouts() {
       this.$store.dispatch('ajax', {
@@ -227,7 +240,7 @@ html[lang='ar'] .lanuage {
   text-decoration: none;
   margin-right: 20px;
 }
-html[lang='ar'] .menu-item  {
+html[lang='ar'] .menu-item {
   margin-left: 20px;
 }
 </style>
