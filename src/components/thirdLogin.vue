@@ -94,7 +94,7 @@ export default {
       // });
     },
     thirdLogin(type, data) {
-      const that = this;
+      // const that = this;
       let accesstoken = '';
       let thirduid = '123';
       if (type == '1') {
@@ -125,10 +125,10 @@ export default {
         onSuccess: res => {
           console.log(res, 'thirdLogin');
           const uid = res.data.user.id;
-          const replaceUrl = that.$route.query.redirect || '/';
+          // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid);
-          this.$router.push({ path: replaceUrl });
+          this.$router.push({ path: 'live' });
         },
         onFail: res => {
           if (res.error_code == 30070) {
