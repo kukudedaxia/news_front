@@ -411,8 +411,8 @@ export default {
   }
   .el-select .el-input .el-select__caret {
     color: #333333;
-
     font-size: 12px;
+    width: 20px;
   }
   .el-input__suffix {
     right: 2px;
