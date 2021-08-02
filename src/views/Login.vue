@@ -8,7 +8,7 @@
               <el-select v-model="areaCode" slot="prepend" placeholder="请选择" class="area-code">
                 <el-option :value="item.num" v-for="(item, index) of areaList" :key="index">
                   <span class="place">{{ item.place }}</span>
-                  <span class="code">{{ item.num }}</span>
+                  <span class="codes">{{ item.num }}</span>
                 </el-option>
               </el-select>
               <input
@@ -346,7 +346,7 @@ export default {
           if (res.error_code == 30070 || res.error_code == 30071) {
             this.$message({
               type: 'warning',
-              message: this.$t('login.permission'),
+              message: res.error_code == 30070 ? this.$t('login.permission') : res.error,
               customClass: 'warning_tip',
             });
           } else {
@@ -469,18 +469,24 @@ html[lang='ar'] #login .el-input__suffix {
 html[lang='ar'] #login .el-tabs__nav {
   width: auto;
 }
-html[lang='ar'] #login .el-tabs__item:nth-child(2) {
+html[lang='ar'] #login .el-tabs__item {
   transform: scaleX(-1);
+}
+html[lang='ar'] #login .el-tabs__item:nth-child(2) {
   padding-right: 0;
 }
 html[lang='ar'] #login .el-tabs__item:last-child {
-  transform: scaleX(-1);
+  flex: 1;
+  padding: 0 30px;
 }
 html[lang='ar'] #login .el-tabs__header {
   transform: scaleX(-1);
 }
 html[lang='ar'] #login .el-tabs__nav {
-  width: 425px;
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
 
@@ -607,14 +613,14 @@ html[lang='ar'] .tabs {
   float: left;
   margin-right: 10px;
 }
-.code {
+.codes {
   float: right;
 }
 html[lang='ar'] .place {
   float: right;
   margin-right: 0;
 }
-html[lang='ar'] .code {
+html[lang='ar'] .codes {
   float: left;
   direction: ltr;
   display: inline-block;
