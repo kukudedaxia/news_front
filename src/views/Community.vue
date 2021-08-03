@@ -206,6 +206,13 @@
         or home services. . Do not post any content featuring a creator purchasing their views from
         a third party with the intent of promoting the service.
       </p>
+      <div class="title-2">Livestreaming</div>
+      <p>
+        All terms in this Community Rules policy applies to livestreaming events on your Beeto
+        account. Any behavior that is conducted in the livestream room, including any questions or
+        answers, blogs, comments or other posts that violates these Community Rules will be
+        immediately terminated and removed.
+      </p>
     </div>
     <div id="community_6">
       <h2>Regulated Goods</h2>
@@ -430,6 +437,12 @@
         بما في ذلك التماس الحصول على المعلومات المتعلقة بالوظائف المزيفة أو المزايا الصحية أو
         المعلومات المصرفية أو الخدمات المنزلية. يجب الامتناع عن نشر أي محتوى يظهر فيه صانع محتوى
         يشتري وجهات نظره من طرف ثالث بقصد الترويج للخدمة.
+      </p>
+      <div class="title-2">البث المباشر</div>
+      <p>
+        تنطبق جميع الشروط الواردة في سياسات المجتمع هذه على حالات البث المباشر على حساب Beeto الخاص
+        بك. سيتم إنهاء وإزالة أي سلوك أو ممارسات يتم إجراؤها في غرفة البث المباشر، بما في ذلك أي
+        أسئلة أو إجابات أو مدونات أو تعليقات أو منشورات أخرى تنتهك سياسات المجتمع هذه.
       </p>
     </div>
     <div id="community_6">

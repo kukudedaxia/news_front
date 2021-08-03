@@ -180,6 +180,22 @@
         </li>
         <li>You must not be a convicted sex offender.</li>
       </ul>
+      <div class="bold">Livestreaming</div>
+      <p>
+        Through the live streaming account feature, You may live stream content (the "Live Content")
+        through your Beeto account by setting up an appointment no more than seven (7) days in
+        advance and only one event a day to be hosted on the Beeto livestreaming room. You represent
+        and warrant that You have all necessary rights for the exploitation of the Live Content in
+        the Beeto livestreaming room throughout the world, including, without limitation, music
+        licensing rights from artists, record labels, pictures, movie clips, publishers (including
+        public performance licenses) and any other royalty participants. You agree to comply with
+        all applicable laws, rules and regulations regarding the Live Content including posting Live
+        Content that does not violate the Community Rules. The Live Content will constitute your
+        content and you are solely responsible for the Live Content. Any dynamic efforts provided by
+        Beeto are Beeto’s sole intellectual property and the Beeto user may utilize such dynamic
+        effects at its sole discretion. Any gifts or offers of gifts by the Beeto user or acceptance
+        of such offers or gifts is at the Beeto user’s sole discretion.
+      </p>
       <div class="bold">How You May Not Use Beeto</div>
       <p>
         Providing a safe and open Service for a broad community requires that we all do our part. As
@@ -736,6 +752,22 @@
         </li>
         <li>يجب ألا تكون مداناً بارتكاب جرائم جنسية.</li>
       </ul>
+      <div class="bold">البث المباشر</div>
+      <p>
+        من خلال ميزة حساب البث المباشر، يمكنك بث المحتوى على الهواء مباشرة ("محتوى البث المباشر")
+        عبر حساب "بيتو Beeto" الخاص بك، وذلك عن طريق تحديد موعد مسبق خلال فترة أقصاها سبعة (7) أيام
+        قبل البث. ويُسمَح باستضافة حدث واحد فقط في غرفة "بيتو Beeto" للبث المباشر. وتُقر وتتعهد بأنك
+        تمتلك جميع الحقوق اللازمة لاستغلال محتوى البث المباشر في غرفة "بيتو Beeto" للبث المباشر في
+        جميع أنحاء العالم، بما في ذلك على سبيل المثال وليس الحصر، حقوق ترخيص الموسيقى الخاصة
+        بالفنانين وشركات التسجيلات والأفلام ومقاطع الأفلام والناشرين (بما في ذلك تراخيص الأداء
+        العام) وأي مشاركين أو جهات متعلقة بحقوق التأليف. وتُقر أيضًا بموافقتك على الامتثال لجميع
+        القوانين والقواعد واللوائح المعمول بها فيما يتعلق بمحتوى البث المباشر، بما في ذلك نشر محتوى
+        البث المباشر الذي لا ينتهك سياسات المجتمع. وسيشكل محتوى البث المباشر المحتوى الخاص بك،
+        وستتحمل المسؤولية منفردًا عن هذا المحتوى. وتُعَد الجهود الديناميكية التي تقدمها "بيتو Beeto"
+        بمثابة ملكية فكرية خاصة بها، ويجوز لمستخدم منصة "بيتو Beeto" استخدام هذه التأثيرات
+        الديناميكية وفقًا لتقديره الخاص. وتخضع الهدايا أو عروض الهدايا من جانب مستخدم منصة "بيتو
+        Beeto" أو قبول المستخدم لهذه العروض أو الهدايا للتقدير المنفرد للمستخدم.
+      </p>
       <div class="bold">
         الطرق التي لا يُسمح باستخدام "بيتو <span class="bold">Beeto</span>" بها
       </div>
