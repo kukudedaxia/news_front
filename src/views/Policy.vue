@@ -5,13 +5,15 @@
       <h2>Beeto Privacy Policy</h2>
       <p>
         In order to effectively protect Beeto users' privacy and optimize the user experience, Beeto
-        has formulated this Privacy Policy in accordance with the current privacy laws and
-        regulations. The Privacy Policy describes how we collect and use your information, sets out
-        details of the safeguards and measures adopted by Beeto in the collection, management and
-        protection of users' personal information and gives information about the choices you can
-        make with respect to the use of your Personal Information. The Privacy Policy is applicable
-        to all the services provided to you by Beeto, whether you access the services on a computer,
-        a mobile terminal or any other device (the “Services”).
+        has formulated this Privacy Policy in accordance with current privacy laws and regulations
+        and to give you control over how we use the information you provide to us. Beeto takes your
+        privacy extremely serious and has written this Privacy Policy to describe how we collect and
+        use your information, sets out details of the safeguards and measures adopted by Beeto in
+        the collection, management and protection of users' personal information and gives
+        information about the choices you can make with respect to the use of your Personal
+        Information. The Privacy Policy is applicable to all the services provided to you by Beeto,
+        whether you access the services on a computer, a mobile terminal or any other device (the
+        “Services”).
       </p>
     </div>
     <div id="policy_2">
@@ -19,10 +21,10 @@
       <p>
         You acknowledge and agree that when you sign up for Beeto account or use the Services, Beeto
         will collect personal information provided by you, such as: name, email address, cell phone
-        number, credit card or other payment information, age, location, and any other information
-        you choose to provide as well as log information (device information, IP address, page
-        visited). This includes technical and behavioural information about your use of the platform
-        and such personal information is used to allow you to obtain the Services.
+        number,your photograph,credit card or other payment information, age, location, and any
+        other information you choose to provide as well as log information (device information, IP
+        address, page visited). This includes technical and behavioural information about your use
+        of the platform and such personal information is used to allow you to obtain the Services.
       </p>
     </div>
     <div id="policy_3">
@@ -31,6 +33,14 @@
         We may use your personal information in the following ways:
       </div>
       <ul class="normal">
+        <li>
+          To provide, maintain and improve the Services, including sharing your personal information
+          with third parties which perform technical services on our behalf, including managing the
+          technical aspects of and monitoring livestream features, .We do not share the personal
+          information that you share with us with other users of the Services, and we do not share
+          your personal information with What’sApp (although if you can choose to share a post on
+          What’sApp you can do so via the What’sApp icon)
+        </li>
         <li>To provide, maintain and improve the Services</li>
         <li>
           To send you emails to provide you with related customer service in order to manage our
@@ -61,8 +71,16 @@
           compromised based on our legitimate interests
         </li>
         <li>For internal and operational use, such as to enable the website to function;</li>
-        <li>For other purposes when in identified or aggregate form;</li>
-        <li>When we use your credit card information to process your payments;></li>
+        <li>For other purposes when in identified or aggregate form</li>
+        <div style="text-indent: 2em">
+          When we share your personal data with third parties in order to process payments on your
+          behalf for the use of the Services, such as Google Pay and Apple Pay, or other electronic
+          payment providers that we may partner with
+        </div>
+        <div style="text-indent: 2em">
+          When we use your banking information or credit card information to process your payments
+          or manage withdrawal payments.
+        </div>
       </ul>
       <p>
         In addition, for the purpose of optimizing users’ experience, Beeto may gather additional
@@ -78,8 +96,8 @@
       <p class="no-indent">1) is required by law or regulations;</p>
       <p class="no-indent">2) is authorized by you (by your consent in clear terms);</p>
       <p class="no-indent">
-        3) complies with <a href="/terms" target="_blank">Beeto's Terms of Service</a>, and the provisions set forth
-        in the licensing agreement.
+        3) complies with <a href="/terms" target="_blank">Beeto's Terms of Service</a>, and the
+        provisions set forth in the licensing agreement.
       </p>
       <p>
         In addition, you acknowledge and agree that to the extent permitted by current laws and
@@ -198,8 +216,8 @@
       <h2>Your Rights</h2>
       <p>
         You may have certain rights in connection with your Personal Information, depending on the
-        jurisdiction in which you live, including if you live in the European Union. These rights
-        may include:
+        jurisdiction in which you live, including if you live in the European Union or the United
+        Kingdom. These rights may include:
       </p>
       <ul>
         <li>· Accessing, correcting, updating, or requesting deletion of your information.</li>
@@ -342,24 +360,25 @@
     <h1>سياسة الخصوصية</h1>
     <div id="policy_1">
       <p>
-        قامت "بيتو Beeto" بصياغة سياسة الخصوصية هذه وفقًا لقوانين ولوائح الخصوصية الحالية من أجل
-        حماية خصوصية مستخدمي "بيتو Beeto" بشكل فعال وتحسين تجربة المستخدم. تصف سياسة الخصوصية هذه
-        كيفية جمعنا لمعلوماتك واستخدامها. تحدد سياسة الخصوصية تفاصيل الضمانات والتدابير التي
-        اعتمدتها "بيتو Beeto" في جمع وإدارة وحماية المعلومات الشخصية للمستخدمين كما أنها توفر
-        معلومات حول الخيارات التي يمكنك القيام بها فيما يتعلق باستخدام معلوماتك الشخصية. تنطبق سياسة
-        الخصوصية على جميع الخدمات المقدمة لك من قبل "بيتو Beeto"، سواء قمت بالوصول إلى الخدمات على
-        جهاز كمبيوتر أو جهاز محمول أو أي جهاز آخر ويشار إليها جميعا بلفظ ("الخدمات").
+        قامت "بيتو Beeto" بصياغة سياسة الخصوصية هذه وفقًا لقوانين ولوائح الخصوصية الحالية وذلك لكي
+        تمنحك السيطرة على كيفية استخدام المعلومات التي تقدمها لنا. تصف سياسة الخصوصية هذه كيفية
+        جمعنا لمعلوماتك واستخدامها. إن بيتو تأخذ مسألة الخصوصية على محمل الجد وقد قامت بصياغة سياسة
+        الخصوصية لكي تحدد تفاصيل الضمانات والتدابير التي اعتمدتها "بيتو Beeto" في جمع وإدارة وحماية
+        المعلومات الشخصية للمستخدمين. كما أنها توفر معلومات حول الخيارات التي يمكنك القيام بها فيما
+        يتعلق باستخدام معلوماتك الشخصية. تنطبق سياسة الخصوصية على جميع الخدمات المقدمة لك من قبل
+        "بيتو Beeto"، سواء قمت بالوصول إلى الخدمات عبر جهاز كمبيوتر أو جهاز محمول أو أي جهاز آخر
+        ويشار إليها جميعا بلفظ ("الخدمات").
       </p>
     </div>
     <div id="policy_2">
       <h2>جمع المعلومات الشخصية</h2>
       <p>
         أنت تقر وتوافق على أنه عند التسجيل في حساب "بيتو Beeto" أو استخدام الخدمات، فإن "بيتو Beeto"
-        ستجمع المعلومات الشخصية التي تقدمها، مثل: الاسم وعنوان البريد الإلكتروني ورقم الهاتف المحمول
-        وبطاقة الائتمان أو معلومات الدفع الأخرى والعمر والموقع وأي معلومات أخرى تختار تقديمها
-        بالإضافة إلى معلومات التسجيل (معلومات الجهاز، عنوان IP، الصفحة التي تمت زيارتها). تتضمن
-        عملية الجمع هذه المعلومات الفنية والسلوكية حول استخدامك للمنصة وتستخدم هذه المعلومات الشخصية
-        للسماح لك بالحصول على الخدمات.
+        ستجمع المعلومات الشخصية التي تقدمها، مثل: الاسم وعنوان البريد الإلكتروني، والعنوان البريدي،
+        ورقم الهاتف المحمول وصورتك الفوتوغرافية وبطاقة الائتمان أو معلومات الدفع الأخرى والعمر
+        والموقع وأي معلومات أخرى تختار تقديمها بالإضافة إلى معلومات التسجيل (معلومات الجهاز، عنوان
+        IP، الصفحة التي تمت زيارتها). تتضمن عملية الجمع هذه المعلومات الفنية والسلوكية حول استخدامك
+        للمنصة وتستخدم هذه المعلومات الشخصية للسماح لك بالحصول على الخدمات.
       </p>
     </div>
     <div id="policy_3">
@@ -368,10 +387,16 @@
         قد نستخدم معلوماتك الشخصية لأي من الأغراض التالية:
       </div>
       <ul class="normal">
-        <li>توفير الخدمات وصيانتها وتحسينها.</li>
+        <li>
+          توفير الخدمات وصيانتها وتحسينها، بما في ذلك مشاركة معلوماتك الشخصية مع أطراف خارجية تقوم
+          بتقديم خدمات فنية بالنيابة عنها، والتي من بينها خدمات إدارة الجوانب الفنية ومراقبة خصائص
+          البث المباشر. ونحن لا نشارك معلوماتك الشخصية مع أية مستخدمين آخرين للخدمة، ولا نشارك
+          معلوماتك الشخصية مع تطبيق واتساب (بالرغم من أنك إذا اخترت مشاركة منشور على تطبيق واتساب،
+          يمكنك فعل ذلك عبر الضغط على أيقونة تطبيق واتساب).
+        </li>
         <li>
           إرسال رسائل بريد إلكتروني لتزويدك بخدمة العملاء ذات الصلة من أجل إدارة علاقتنا التعاقدية
-          معك، وبحسب الضرورة، للامتثال لالتزاماتنا القانونية.
+          معك، وللوفاء بالتزاماتنا القانونية بحسب الضرورة.
         </li>
         <li>
           التواصل معك وإرسال معلومات إليك عبر البريد الإلكتروني أو البريد العادي أو الهاتف أو
@@ -398,9 +423,15 @@
         </li>
         <li>للاستخدامات الداخلية والتشغيلية، مثل تمكين موقع الإنترنت من العمل.</li>
         <li>
-          لأغراض أخرى عندما تكون في شكل محدد أو مجمع؛ وعندما نستخدم معلومات بطاقتك الائتمانية
-          لمعالجة عمليات الدفع الخاصة بك.
+          لأغراض أخرى عندما تكون في شكل محدد أو مجمع
         </li>
+        <div style="text-indent: 2em">
+          عندما نقوم بمشاركة بياناتك الشخصية مع أطراف أخرى من أجل معالجة عمليات السداد نيابة عنك من
+          أجل استخدام الخدمات، مثل Google Pay و Apple Pay أو خدمات سداد إلكتروني أخرى نتعامل معها.
+        </div>
+        <div style="text-indent: 2em">
+          عندما نستخدم معلوماتك البنكية أو معلومات بطاقتك الائتمانية لمعالجة عمليات الدفع الخاصة بك.
+        </div>
       </ul>
       <p>
         بالإضافة إلى ذلك، قد تجمع "بيتو Beeto" معلومات إضافية مرتبطة بتحديث الخدمات لغرض تحسين تجربة
@@ -414,9 +445,10 @@
         بشرط أن يكون هذا الاستخدام:
       </p>
       <p class="no-indent">1. مطلوب بموجب القانون أو اللوائح التنظيمية؛</p>
-      <p class="no-indent">2. مخول بواسطتك (بموافقتك بشروط واضحة)؛</p>
+      <p class="no-indent">2. مخول بواسطتك (بموافقتك وبشروط واضحة)؛</p>
       <p class="no-indent">
-        3. متوافق مع <a href="terms" target="_blank"> شروط خدمة "بيتو Beeto"</a>، والأحكام المنصوص عليها في اتفاقية الترخيص.
+        3. متوافق مع <a href="terms" target="_blank"> شروط خدمة "بيتو Beeto"</a>، والأحكام المنصوص
+        عليها في اتفاقية الترخيص.
       </p>
       <p>
         بالإضافة إلى ذلك، فإنك تقر وتوافق على أنه إلى الحد الذي تسمح به القوانين واللوائح الحالية،
@@ -480,8 +512,7 @@
         <li>2. استخدام كلمات المرور لحماية المعلومات الشخصية بالشكل المناسب؛</li>
         <li>
           3. اقتصار عملية الوصول إلى المعلومات الشخصية على الموظفين المصرح لهم فقط والذين يخضعون
-          لواجبات السرية فيما يتعلق بمهام عملهم؛ واتخاذ الإجراءات الأمنية الأخرى التي تراها "بيتو
-          Beeto" معقولة وضرورية.
+          للالتزام بالسرية فيما يتعلق بمهام عملهم.
         </li>
       </ul>
       <p>
@@ -523,7 +554,8 @@
       <h2>حقوق المستخدم</h2>
       <p>
         قد يكون لديك حقوق معينة فيما يتعلق بمعلوماتك الشخصية استناداً إلى الولاية أو السلطة القضائية
-        التي تعيش فيها، بما في ذلك إذا كنت تعيش في الاتحاد الأوروبي. قد تشمل هذه الحقوق:
+        التي تعيش فيها، بما في ذلك إذا كنت تعيش في الاتحاد الأوروبي أو المملكة المتحدة. قد تشمل هذه
+        الحقوق ما يلي:
       </p>
       <ul>
         <li>· الوصول إلى معلوماتك أو تصحيحها أو تحديثها أو طلب حذفها.</li>
@@ -532,10 +564,10 @@
           معلوماتك.
         </li>
         <li>
-          · إلغاء طلب تلقي الاتصالات التسويقية التي نرسلها لك في أي وقت. تُمكِنك ممارسة هذا الحق عن
-          طريق تحديد رابط "إلغاء الاشتراك" أو "طلب الانسحاب" في رسائل البريد الإلكتروني التسويقية
-          التي نرسلها إليك. بالإضافة إلى ذلك، يمكنك تحديث تفضيلات البريد الإلكتروني الخاصة بك عن
-          طريق تغيير الإعدادات في حسابك.
+          · إلغاء طلب تلقي الاتصالات التسويقية التي نرسلها لك في أي وقت. تستطيع ممارسة هذا الحق عن
+          طريق الضغط على رابط "إلغاء الاشتراك" أو "طلب الانسحاب" في رسائل البريد الإلكتروني
+          التسويقية التي نرسلها إليك. بالإضافة إلى ذلك، يمكنك تحديث تفضيلات البريد الإلكتروني الخاصة
+          بك عن طريق تغيير الإعدادات في حسابك.
         </li>
         <li>
           · سحب موافقتك في أي وقت إذا قمنا بجمع ومعالجة معلوماتك بموجب موافقة منك. لن يؤثر سحب
@@ -549,7 +581,7 @@
       </ul>
       <p>
         إذا كنت ترغب في ممارسة أي من هذه الحقوق، فيرجى الاتصال بنا كما هو موضح في قسم "كيف تتصل بنا"
-        أدناه. وفي سبيل إكمال الكلب فإننا قد نتحقق من هويتك قبل الشروع بمعالجة طلبك.
+        أدناه. وفي سبيل إكمال الطلب فإننا قد نتحقق من هويتك قبل الشروع بمعالجة طلبك.
       </p>
     </div>
     <div id="policy_9">
