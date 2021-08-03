@@ -122,12 +122,13 @@ export default {
             vid: window.$CONFIG ? window.$CONFIG.user : '',
           },
         },
-        onSuccess: res => {
+        onSuccess: async res => {
           console.log(res, 'thirdLogin');
           const uid = res.data.user.id;
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid);
+          await this.$store.dispatch('getUser', uid);
           this.$router.push({ path: 'live' });
         },
         onFail: res => {
