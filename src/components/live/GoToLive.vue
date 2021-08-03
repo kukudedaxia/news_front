@@ -10,11 +10,7 @@
           :before-upload="beforeAvatarUpload"
           :disabled="liveState == 1"
         >
-          <img
-            v-if="imgPids"
-            :src="`https://img.bee-cdn.com/orj1080/${imgPids}.jpg`"
-            class="avatar"
-          />
+          <img v-if="imgPids" :src="`${uploadUrl}/orj1080/${imgPids}.jpg`" class="avatar" />
           <img
             src="@/assets/images/live/icon_addcover@3x.png"
             class="avatar-uploader-icon"
@@ -189,6 +185,9 @@ export default {
         ? require('@/assets/images/live/icon_step3@3x.png')
         : require('@/assets/images/live/icon_step3_Arabic@3x.png');
     },
+    uploadUrl() {
+      return process.env.VUE_APP_UPLOAD_URL;
+    },
   },
   watch: {
     title: {
@@ -213,8 +212,8 @@ export default {
   },
   data() {
     return {
-      imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
-      // imgPids: '',
+      // imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
+      imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,

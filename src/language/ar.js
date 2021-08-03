@@ -3,7 +3,7 @@ const message = {
   ar: 'عربى',
   beeto: 'Beeto - عبر براحتك',
   home: 'الصفحة الرئيسية',
-  lives: 'مباشر',
+  lives: 'مركز صناع المحتوى',
   loginpage: 'تسجيل الدخول',
   slide1: {
     beeto: 'محتوى يقدم لك كل ',
@@ -91,7 +91,7 @@ const message = {
     leaveMsg: 'إذا تركت هذه الصفحة ، فسيتم إنهاء بيتو لايف. هل تريد الاستمرار؟',
     default: 'ليس هناك المباشر القادمة',
     addCover: 'إضافة صورة',
-    uploadErr: 'The picture upload failed.Please try again.',
+    uploadErr: 'فشل تحميل الصورة، الرجاء المحاولة مرة أخرى.',
   },
   signOut: 'signOut',
   signText: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',

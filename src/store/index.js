@@ -114,7 +114,7 @@ export default new Vuex.Store({
       payload.onError = payload.onError || emptyFunc;
 
       request(reqConf)
-        .then(res => {      
+        .then(res => {
           if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
             payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
           } else {
@@ -123,15 +123,17 @@ export default new Vuex.Store({
           payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
         })
         .catch(err => {
-          if (!navigator.onLine) {
-            payload.onNetworkError && payload.onNetworkError(err, reqConf);
-            Message.error(i18n.t('netError'));
-          } else {
-            // 400、500 异常
-            payload.onError && payload.onError(err, reqConf);
-            Message.error(String(err));
+          if (err.data.error_code !== 35000) {
+            if (!navigator.onLine) {
+              payload.onNetworkError && payload.onNetworkError(err, reqConf);
+              Message.error(i18n.t('netError'));
+            } else {
+              // 400、500 异常
+              payload.onError && payload.onError(err, reqConf);
+              Message.error(String(err));
+            }
+            payload.onComplete && payload.onComplete(err, null, reqConf, null);
           }
-          payload.onComplete && payload.onComplete(err, null, reqConf, null);
         });
       return true;
     },

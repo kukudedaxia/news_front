@@ -96,7 +96,8 @@ module.exports = {
         target: 'https://test.bee.to/',
       },
       '/upload': {
-        target: 'https://upimg.bee.to/',
+        // target: 'https://upimg.bee.to/',
+        target: 'https://img.whale.weibo.com/',
       },
     },
   },

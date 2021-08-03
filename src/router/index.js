@@ -121,18 +121,14 @@ router.beforeEach(async (to, from, next) => {
     if (Cookies.get('userInfo')) {
       // 离开行为 如果用户此时登录成功去登录页 自动跳回首页
       if (to.path === '/login') {
-        console.log(2);
         next('/');
       } else {
-        console.log(1);
         next();
       }
     } else {
       if (to.path === '/login') {
-        console.log(2);
         next();
       } else {
-        console.log(3);
         next(`/login?redirect=${to.path}`);
       }
     }

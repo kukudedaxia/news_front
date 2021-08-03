@@ -244,7 +244,6 @@ export default {
     },
     // apple
     async initApple() {
-      console.log(window.AppleID);
       this.listenApple();
       window.AppleID.auth.init({
         clientId: 'to.bee.m',

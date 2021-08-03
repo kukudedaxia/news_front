@@ -281,9 +281,9 @@ export default {
           // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
           _this.room.subscribe(tracks).then(({ code }) => {
             console.log(code);
-            // if (state === 1) {
-            //   setLayoutMode(_this.room);
-            // }
+            if (state === 1) {
+              _this.mcuConfig();
+            }
           });
         },
         /**
@@ -530,6 +530,25 @@ export default {
         });
       });
     },
+    // 设置mcu合流布局
+    mcuConfig() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: '/multimedia/2/video/pc/mcu_config.json',
+          params: {
+            roomId: this.lid,
+          },
+        },
+        onSuccess: () => {
+          console.log('mcu success');
+          // this.$message.success(this.$t('live.success'));
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+      });
+    },
     // tabs点击
     onTabClick(tab) {
       if (tab.name === '2') {
@@ -552,6 +571,7 @@ export default {
     },
   },
   beforeRouteLeave(to, from, next) {
+    this.$store.commit('route/setLoadingState', false);
     // 如果在直播状态下离开live页面，则弹窗提示是否结束直播
     if (this.liveState === 1) {
       this.leaveLiveConfirm();

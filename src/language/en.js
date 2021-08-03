@@ -3,7 +3,7 @@ const message = {
   en: 'EN',
   beeto: 'Beeto-Express freely',
   home: 'Home',
-  lives: 'live',
+  lives: 'Creator Center',
   loginpage: 'log in',
   slide1: {
     beeto: 'Freshly delivered',

@@ -266,7 +266,7 @@ export default {
           this.areaList = res.data;
         },
         onComplete: () => {
-          console.log('complete');
+          // console.log('complete');
         },
       });
     },

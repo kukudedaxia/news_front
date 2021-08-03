@@ -46,7 +46,7 @@ request.interceptors.response.use(
           Cookies.remove('uid');
           Cookies.remove('userInfo');
           Cookies.remove('SUB');
-          store.commit('setUser', {})
+          store.commit('setUser', {});
           router.replace({
             path: '/login',
             query: {
