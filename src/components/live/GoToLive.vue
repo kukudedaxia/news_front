@@ -10,7 +10,12 @@
           :before-upload="beforeAvatarUpload"
           :disabled="liveState == 1"
         >
-          <img v-if="imgPids" :src="`${uploadUrl}/orj1080/${imgPids}.jpg`" class="avatar" />
+          <img
+            v-if="imgPids"
+            :src="`${uploadUrl}/orj1080/${imgPids}.jpg`"
+            onerror="this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'"
+            class="avatar"
+          />
           <img
             src="@/assets/images/live/icon_addcover@3x.png"
             class="avatar-uploader-icon"

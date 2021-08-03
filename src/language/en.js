@@ -96,6 +96,8 @@ const message = {
     default: 'No upcoming streams',
     addCover: 'Add Cover',
     uploadErr: 'The picture upload failed.Please try again.',
+    obsMsg: 'Something just went wrong.Please check the OBS status.',
+    closeMsg: 'The Beeto Live was closed due to something unexpected happened.',
   },
   signOut: 'signOut',
   signText: 'Are you sure you want to log out?',

@@ -205,7 +205,7 @@ export default {
           console.log('message', event);
           // msg 1 app下播  2 审核后台下播  3 obs停止推流
           const msg = event.message.content.event;
-          if (msg === 1 || msg === 2 || msg === 3) {
+          if (msg === 1 || msg === 2) {
             const remoteTracks = _this.room.getRemoteTracks();
             if (remoteTracks.length > 0) {
               _this.room.unsubscribe(remoteTracks);
@@ -213,6 +213,14 @@ export default {
             _this.onRefresh();
             _this.stopLive();
             _this.startSource = 1;
+          }
+          // 如果是obs断流，则弹窗提醒用户
+          if (msg === 3) {
+            _this.$alert(_this.$t('live.obsMsg'), '', {
+              confirmButtonText: _this.$t('live.ok'),
+              showClose: false,
+              callback: () => {},
+            });
           }
         },
         // 监听 IM 连接状态变化
@@ -322,6 +330,14 @@ export default {
          */
         onUserLeave(userIds) {
           console.log('onUserLeave', userIds);
+          // 如果主播被提出房间，则走下播接口
+          _this.stopLive().then(() => {
+            _this.$alert(_this.$t('live.closeMsg'), '', {
+              confirmButtonText: _this.$t('live.ok'),
+              showClose: false,
+              callback: () => {},
+            });
+          });
         },
       });
       // 如果是续播，初始化完room实例后需要订阅远端流
@@ -372,7 +388,9 @@ export default {
             this.$confirm(this.$t('live.endMsg'), this.$t('live.endTitle'), {
               confirmButtonText: this.$t('live.endBtn'),
               cancelButtonText: this.$t('live.cancel'),
+              cancelButtonClass: 'be-btn--dark',
               showClose: false,
+              closeOnClickModal: false,
             })
               .then(() => {
                 this.goLiveBtnLoading = true;
@@ -560,6 +578,9 @@ export default {
       this.$confirm(this.$t('live.leaveMsg'), this.$t('live.leaveTitle'), {
         confirmButtonText: this.$t('live.endBtn'),
         cancelButtonText: this.$t('live.cancel'),
+        cancelButtonClass: 'be-btn--dark',
+        closeOnClickModal: false,
+        showClose: false,
       })
         .then(() => {
           this.stopLive().then(() => {
