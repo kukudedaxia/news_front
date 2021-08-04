@@ -21,7 +21,7 @@
               />
             </div>
             <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
-              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
               <span class="no-flip-over">{{ errorMsg }}</span>
             </p>
             <div class="line">
@@ -50,7 +50,7 @@
               </template>
             </div>
             <p class="tip_info" v-if="errorMsg && this.tip == ''">
-              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
               <span class="no-flip-over">{{ errorMsg }}</span>
             </p>
           </div>
@@ -103,7 +103,7 @@
               /> -->
             </div>
             <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
-              <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+              <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
               <span class="no-flip-over">{{ errorMsg }}</span>
             </p>
             <div class="line">
@@ -126,7 +126,7 @@
             </div>
           </div>
           <p class="tip_info" v-if="errorMsg && this.tip == ''">
-            <img src="@/assets/images/icon_warn.png" class="icon_warn" />
+            <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
             <span class="no-flip-over">{{ errorMsg }}</span>
           </p>
           <el-button
