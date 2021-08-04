@@ -125,6 +125,7 @@
 <script>
 import $ from 'jquery';
 import { fileByBase64, base64ByBlob, getCrc32, getMd5 } from '@/utils/upload';
+import baseUrl from '@/utils/requestConfig.js';
 
 export default {
   props: {
@@ -217,8 +218,8 @@ export default {
   },
   data() {
     return {
-      // imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
-      imgPids: '',
+      imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
+      // imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,
@@ -245,11 +246,12 @@ export default {
         const cs = await getCrc32(blob);
         const form = new FormData();
         form.append('file', blob);
+
         $.ajax({
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
+              url: `${process.env.NODE_ENV !== 'production' ? baseUrl.upload : ''}/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
@@ -264,9 +266,9 @@ export default {
               this.$message.error(this.$t('live.uploadErr'));
             }
           },
-          error: err => {
+          error: () => {
             this.uploadLoading = false;
-            this.$message.error(err);
+            this.$message.error(this.$t('live.uploadErr'));
           },
         });
       } catch (error) {
@@ -474,7 +476,7 @@ html[lang='ar'] {
 .item-input {
   input {
     background: #000000 !important;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     font-family: SFUIText-Regular;
     font-size: 14px;
@@ -483,6 +485,12 @@ html[lang='ar'] {
       font-family: SFUIText-Regular;
       font-size: 14px;
       color: #666666;
+    }
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    &:focus {
+      border-color: #ee304c;
     }
   }
 }

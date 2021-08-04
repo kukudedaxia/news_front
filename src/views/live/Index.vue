@@ -606,6 +606,7 @@ export default {
 <style lang="less" scoped>
 .live {
   width: 1140px;
+  height: 553px;
   display: flex;
   justify-content: space-between;
   margin: auto;
@@ -621,7 +622,7 @@ export default {
     display: flex;
     justify-content: space-between;
     .tab-content {
-      height: 560px;
+      height: 485px;
       overflow: auto;
     }
   }
