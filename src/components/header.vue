@@ -227,9 +227,9 @@ html[lang='ar'] .el-message-box__headerbtn {
   -webkit-transform: scale(0.83, 0.83);
 }
 .header-right {
-      display: flex;
-    align-items: center;
-    font-size: 14px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
 }
 .user {
   margin: 0 20px;

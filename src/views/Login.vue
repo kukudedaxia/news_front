@@ -502,10 +502,10 @@ html[lang='ar'] #login .el-tabs__nav {
 }
 .el-select-dropdown__item {
   color: #333;
-   font-family: SFUIText-Medium;
+  font-family: SFUIText-Medium;
 }
 .el-select-dropdown__item.selected {
-  color: #FF563C;
+  color: #ff563c;
 }
 </style>
 
@@ -552,17 +552,19 @@ html[lang='ar'] .tabs {
   font-size: 12px;
   margin-top: 30px;
   a {
-    color: #346AA7;
+    color: #346aa7;
     text-decoration: none;
-   font-family: SFUIText-Medium;
+    font-family: SFUIText-Medium;
   }
 }
 .send {
   cursor: pointer;
-   font-family: SFUIText-Medium;
-    font-size: 16px;
-    color: #333333;
-        white-space: nowrap;
+  font-family: SFUIText-Medium;
+  font-size: 16px;
+  color: #333333;
+  white-space: nowrap;
+}
+html[lang='ar'] .send {
 }
 .resend {
   color: #ff536c;
@@ -574,7 +576,7 @@ html[lang='ar'] .tabs {
   font-size: 12px;
   letter-spacing: 0;
   line-height: 14px;
-     margin-top: -5px;
+  margin-top: -5px;
   color: #ee3b23;
   display: flex;
   align-items: center;
@@ -594,9 +596,9 @@ html[lang='ar'] .tabs {
 
 .input {
   border: none;
-      font-family: SFUIText-Medium;
-    font-size: 16px;
-    color: #333333;
+  font-family: SFUIText-Medium;
+  font-size: 16px;
+  color: #333333;
   padding: 10px 10px 10px 0;
   flex: 1;
   &:focus {
