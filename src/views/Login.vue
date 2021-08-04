@@ -30,12 +30,13 @@
                 v-model="verifyCode"
                 class="input"
                 @input="checkInputRules('verifyCode', 6)"
+                style="width: 176px;"
               />
               <template>
                 <span
                   :class="['send', { resend: send, time: codeTimes > 0 && send }]"
                   v-if="!codeLoading"
-                  @click="phoneLengthCorrect ? sendCode() : errorPhone()"
+                  @click="errorPhone()"
                 >
                   {{
                     codeTimes > 0
@@ -45,7 +46,7 @@
                       : $t('login.getcode')
                   }}
                 </span>
-                <loading :isComplete="false" v-else style="width: 20px" />
+                <loading :isComplete="false" v-else style="width: 164px" />
               </template>
             </div>
             <p class="tip_info" v-if="errorMsg && this.tip == ''">
@@ -84,7 +85,7 @@
             <a href="/policy" target="_blank">سياسة الخصوصية</a>
           </p>
         </el-tab-pane>
-        <el-tab-pane :label="$t('login.tab2')" name="account">
+        <el-tab-pane :label="$t('login.tab2')" name="account" class="mt-30">
           <div class="con">
             <div class="line">
               <input
@@ -380,9 +381,12 @@ export default {
 };
 </script>
 <style lang="less">
+.el-tabs__item {
+  color: #333333;
+}
 #login {
   .el-tabs__header {
-    height: 40px;
+    height: 36px;
   }
   .el-tabs__nav-wrap,
   .el-tabs__nav-scroll {
@@ -393,21 +397,29 @@ export default {
     font-family: 'SF-UI-Text-Regular';
   }
   .el-tabs__active-bar {
-    bottom: -20px;
+    bottom: -15px;
     height: 3px;
     background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+    border-radius: 2px;
+  }
+  .el-tabs__item.is-active {
+    font-family: 'SFUIText-Bold';
+    color: '#FF536C';
   }
   .el-tabs__nav-wrap::after {
     display: none;
   }
   .el-tabs__item:nth-child(2) {
-    padding-right: 75px;
+    padding-right: 72px;
   }
 
   .el-input--suffix .el-input__inner {
     border: none;
     padding-left: 0;
     padding-right: 0;
+    font-family: SFUIText-Medium;
+    font-size: 16px;
+    color: #333333;
   }
   .el-select .el-input .el-select__caret {
     color: #333333;
@@ -488,6 +500,13 @@ html[lang='ar'] #login .el-tabs__nav {
   justify-content: space-between;
   align-items: center;
 }
+.el-select-dropdown__item {
+  color: #333;
+   font-family: SFUIText-Medium;
+}
+.el-select-dropdown__item.selected {
+  color: #FF563C;
+}
 </style>
 
 <style lang="less" scoped>
@@ -522,7 +541,7 @@ html[lang='ar'] .tabs {
   border-bottom: 1px solid #eeeeee;
 }
 .area-code {
-  width: 54px;
+  width: 64px;
   margin-right: 10px;
 }
 .login-btn {
@@ -533,15 +552,17 @@ html[lang='ar'] .tabs {
   font-size: 12px;
   margin-top: 30px;
   a {
-    color: #160000;
+    color: #346AA7;
     text-decoration: none;
+   font-family: SFUIText-Medium;
   }
 }
 .send {
   cursor: pointer;
-  font-family: 'SFUIText-Medium';
-  font-size: 14px;
-  color: #333333;
+   font-family: SFUIText-Medium;
+    font-size: 16px;
+    color: #333333;
+        white-space: nowrap;
 }
 .resend {
   color: #ff536c;
@@ -553,7 +574,7 @@ html[lang='ar'] .tabs {
   font-size: 12px;
   letter-spacing: 0;
   line-height: 14px;
-  margin-top: -8px;
+     margin-top: -5px;
   color: #ee3b23;
   display: flex;
   align-items: center;
@@ -568,13 +589,14 @@ html[lang='ar'] .tabs {
   }
 }
 .tip_1 {
-  margin-bottom: -26px;
+  margin-bottom: -12px;
 }
 
 .input {
   border: none;
-  font-size: 16px;
-  // padding: 10px;
+      font-family: SFUIText-Medium;
+    font-size: 16px;
+    color: #333333;
   padding: 10px 10px 10px 0;
   flex: 1;
   &:focus {
@@ -585,7 +607,7 @@ html[lang='ar'] .tabs {
   }
 }
 .inputs {
-  padding: 10px;
+  // padding: 10px;
 }
 .icon-pwd {
   width: 20px;
