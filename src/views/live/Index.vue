@@ -123,9 +123,9 @@ export default {
             auth_uid: this.uid,
           },
         },
-        onSuccess: ({ data }) => {
+        onSuccess: async ({ data }) => {
           this.TOKEN = data.token;
-          this.initIM();
+          await this.initIM();
           this.access();
         },
         onFail: ({ error }) => {
@@ -195,38 +195,42 @@ export default {
       });
     },
     // 初始化im
-    async initIM() {
+    initIM() {
       const _this = this;
-      const im = await initMain(this.TOKEN);
-      // 添加事件监听
-      im.watch({
-        // 监听消息通知
-        message(event) {
-          console.log('message', event);
-          // msg 1 app下播  2 审核后台下播  3 obs停止推流
-          const msg = event.message.content.event;
-          if (msg === 1 || msg === 2) {
-            const remoteTracks = _this.room.getRemoteTracks();
-            if (remoteTracks.length > 0) {
-              _this.room.unsubscribe(remoteTracks);
-            }
-            _this.onRefresh();
-            _this.stopLive();
-            _this.startSource = 1;
-          }
-          // 如果是obs断流，则弹窗提醒用户
-          if (msg === 3) {
-            _this.$alert(_this.$t('live.obsMsg'), '', {
-              confirmButtonText: _this.$t('live.ok'),
-              showClose: false,
-              callback: () => {},
-            });
-          }
-        },
-        // 监听 IM 连接状态变化
-        status(event) {
-          console.log('connection status:', event.status);
-        },
+      return new Promise(resolve => {
+        initMain(this.TOKEN).then(im => {
+          // 添加事件监听
+          im.watch({
+            // 监听消息通知
+            message(event) {
+              console.log('message', event);
+              // msg 1 app下播  2 审核后台下播  3 obs停止推流
+              const msg = event.message.content.event;
+              if (msg === 1 || msg === 2) {
+                const remoteTracks = _this.room.getRemoteTracks();
+                if (remoteTracks.length > 0) {
+                  _this.room.unsubscribe(remoteTracks);
+                }
+                _this.onRefresh();
+                _this.stopLive();
+                _this.startSource = 1;
+              }
+              // 如果是obs断流，则弹窗提醒用户
+              if (msg === 3) {
+                _this.$alert(_this.$t('live.obsMsg'), '', {
+                  confirmButtonText: _this.$t('live.ok'),
+                  showClose: false,
+                  callback: () => {},
+                });
+              }
+            },
+            // 监听 IM 连接状态变化
+            status(event) {
+              console.log('connection status:', event.status);
+            },
+          });
+          resolve();
+        });
       });
     },
     // 初始化sdk回调
@@ -234,7 +238,6 @@ export default {
     async initSdk(lid, state = 1) {
       const _this = this;
       this.room = await joinLivingRoom(lid);
-
       // 注册房间事件监听器，重复注册时，仅最后一次注册有效
       this.room.registerRoomEventListener({
         /**
