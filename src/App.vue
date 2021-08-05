@@ -3,7 +3,7 @@
     <div id="nav">
       <Header />
     </div>
-    <router-view v-wechat-title="$i18n.t($route.meta.title)" />
+    <router-view v-wechat-title="$i18n.t($route.meta.title)" class="main" />
     <Footer v-if="footerShow" />
   </div>
 </template>
@@ -54,3 +54,8 @@ export default {
   // },
 };
 </script>
+<style lang="less" scoped>
+.main {
+  min-height: calc(100vh - 100px);
+}
+</style>
