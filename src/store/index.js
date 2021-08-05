@@ -150,8 +150,11 @@ export default new Vuex.Store({
             },
           },
           onSuccess: res => {
-            ctx.state.userInfo = res.data.user;
-            Cookies.set('userInfo', JSON.stringify(res.data.user));
+            ctx.state.userInfo = {
+              id: res.data.user.id,
+              nickname: res.data.user.nickname,
+            };
+            Cookies.set('userInfo', JSON.stringify(ctx.state.userInfo));
             resolve(res.data);
           },
           onFail: () => {
