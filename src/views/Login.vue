@@ -338,7 +338,9 @@ export default {
           const uid = res.data.user.id;
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
-          Cookies.set('SUB', res.data.gsid);
+          Cookies.set('SUB', res.data.gsid, {
+            domain: 'bee.to',
+          });
           await this.$store.dispatch('getUser', uid);
           this.$store.commit('setLoginType', 'normal');
           this.$router.push({ path: 'live' });
