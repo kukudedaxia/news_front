@@ -256,9 +256,13 @@ export default {
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,
+          crossDomain: true, //设置跨域为true
+          xhrFields: {
+            withCredentials: true, //默认情况下，标准的跨域请求是不会发送cookie的
+          },
           headers: {
             Accept: 'application/json',
-            Cookie: `sub: ${Cookies.get('SUB')}`,
+            // Cookie: `sub: ${Cookies.get('SUB')}`,
           },
           success: res => {
             this.uploadLoading = false;
