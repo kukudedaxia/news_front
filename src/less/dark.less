@@ -9,10 +9,29 @@
 @INPUT-BORDER-COLOR: rgba(255, 255, 255, 0.1);
 @INPUT-BORDER-COLOR-HOVER: rgba(255, 255, 255, 0.3);
 @INPUT-BORDER-COLOR-FOCUS: #e74059;
+@INPUT-BG-DIS: rgba(0, 0, 0, 0.2);
+@INPUT-BORDER-COLOR-DIS: rgba(255, 255, 255, 0.01);
+@INPUT-COLOR-DIS: rgba(102, 102, 102, 0.3);
+
 // ----- button ----- //
 @BUTTON-BG: #e74059;
 @BUTTON-COLOR: #dddddd;
-@BUTTON-BG-HOVER: #e74059;
+@BUTTON-BG-DIS: rgba(231, 64, 89, 0.2);
+@BUTTON-COLOR-DIS: rgba(102, 102, 102, 0.4);
+@BUTTON-BG-HOVER: rgba(231, 64, 89, 0.7);
+@BUTTON-BG-FOCUS: #dd2943;
+
+// button - plain
+@BUTTON-PLA-BG: transparent;
+@BUTTON-PLA-COLOR: #e74059;
+@BUTTON-PLA-BORDER_COLOR: #e74059;
+
+@BUTTON-PLA-BORDER-COLOR-HOVER: #dd2943;
+@BUTTON-PLA-COLOR-HOVER: #dd2943;
+
+@BUTTON-PLA-BORDER-COLOR-FOCUS: #dd2943;
+@BUTTON-PLA-COLOR-FOCUS: #dd2943;
+
 .dark {
   #nav,
   .com-footer {
@@ -46,6 +65,48 @@
       &::placeholder {
         color: #666666;
       }
+    }
+  }
+  .el-input.is-disabled {
+    input {
+      background-color: @INPUT-BG-DIS;
+      border-color: @INPUT-BORDER-COLOR-DIS;
+      color: @INPUT-COLOR-DIS;
+    }
+  }
+
+  // button
+  .el-button--primary {
+    &:hover {
+      background: @BUTTON-BG-HOVER;
+      border-color: @BUTTON-BG-HOVER;
+    }
+    &:active,
+    &:focus {
+      background: @BUTTON-BG-FOCUS;
+      border-color: @BUTTON-BG-FOCUS;
+    }
+  }
+
+  .el-button--primary.is-disabled,
+  .el-button--primary.is-disabled:hover {
+    background: @BUTTON-BG-DIS;
+    border: none;
+    color: @BUTTON-COLOR-DIS !important;
+  }
+
+  .el-button--default.is-plain {
+    background-color: @BUTTON-PLA-BG;
+    border-color: @BUTTON-PLA-COLOR;
+    color: @BUTTON-PLA-COLOR;
+    &:hover {
+      border-color: @BUTTON-PLA-BORDER-COLOR-HOVER;
+      color: @BUTTON-PLA-COLOR-HOVER;
+    }
+    &:active,
+    &:focus {
+      border-color: @BUTTON-PLA-BORDER-COLOR-FOCUS;
+      color: @BUTTON-PLA-COLOR-FOCUS;
     }
   }
 }

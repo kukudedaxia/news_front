@@ -114,7 +114,7 @@
         type="primary"
         :loading="btnLoading"
         :disabled="btnDisabled"
-        class="item-btn flex-align"
+        :class="['item-btn', 'flex-align', { 'be-btn--dark': liveState !== 0 }]"
         @click="onLiveClick"
         >{{ btnText }}
       </el-button>
@@ -126,7 +126,6 @@
 import $ from 'jquery';
 import { fileByBase64, base64ByBlob, getCrc32, getMd5 } from '@/utils/upload';
 import baseUrl from '@/utils/requestConfig.js';
-import Cookies from 'js-cookie';
 
 export default {
   props: {
@@ -157,7 +156,8 @@ export default {
         this.pushUrls &&
         this.streamKeys &&
         this.imgPids &&
-        this.liveState !== 2
+        this.liveState !== 2 &&
+        this.startSource !== 0
       ) {
         return false;
       }
@@ -262,7 +262,6 @@ export default {
           },
           headers: {
             Accept: 'application/json',
-            // Cookie: `sub: ${Cookies.get('SUB')}`,
           },
           success: res => {
             this.uploadLoading = false;
@@ -322,7 +321,7 @@ export default {
   padding: 15px 20px;
   .item-box {
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     .input-box {
       position: relative;
       .item-btn {
@@ -341,7 +340,7 @@ export default {
     }
     .desc {
       display: block;
-      margin-top: 10px;
+      margin-top: 6px;
       font-family: SFUIText-Regular;
       font-size: 12px;
       color: #666666;

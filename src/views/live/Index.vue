@@ -432,6 +432,9 @@ export default {
             // 此处应有title和博文合规校验
             // 如果有正在直播的，弹窗提醒
           } else if (data.haveLiveOnline === 1) {
+            this.lid = data.lid;
+            this.title = data.liveInfo.title;
+            this.startSource = data.liveInfo.startSource;
             this.initSdk(this.lid, 2);
           } else {
             // 校验通过，初始化sdk，并开播

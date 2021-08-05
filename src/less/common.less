@@ -382,37 +382,29 @@ html[lang='ar'] .el-tabs__nav {
   letter-spacing: 0;
   text-align: center;
 }
-.el-button--default.is-plain {
-  background-color: transparent;
-  border-color: #e74059;
-  color: #e74059;
-}
-.el-button--default.is-plain:hover {
-  background-color: transparent;
-}
-// button - disabled
-.el-button.is-disabled,
-.el-button.is-disabled:hover {
-  background: rgba(231, 64, 89, 0.2);
-  border: none;
-  color: rgba(102, 102, 102, 0.4) !important;
-}
 
 // button 样式
-
 .be-btn--dark {
-  background: rgb(71, 75, 85);
-  border-color: rgb(71, 75, 85);
+  background: #474b55;
+  border-color: #474b55;
   font-family: SFUIText-Medium;
   font-size: 14px;
   color: #dddddd;
   &:hover {
-    background: #50545f;
-    border-color: #50545f;
+    background: rgba(71, 75, 85, 0.7) !important;
+    border-color: rgba(71, 75, 85, 0.7) !important;
+    color: rgba(211, 211, 211, 0.7) !important;
   }
   &:active,
   &:focus {
-    background: #4a4e58;
-    border-color: #4a4e58;
+    background: rgba(71, 75, 85, 0.7) !important;
+    border-color: rgba(71, 75, 85, 0.7) !important;
+    color: rgba(211, 211, 211, 0.7) !important;
   }
+}
+.be-btn--dark.is-disabled,
+.be-btn--dark.is-disabled:hover {
+  background: rgba(71, 75, 85, 0.2) !important;
+  border: none;
+  color: rgba(102, 102, 102, 0.4) !important;
 }
