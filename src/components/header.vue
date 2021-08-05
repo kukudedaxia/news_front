@@ -141,6 +141,7 @@ export default {
           },
         },
         onSuccess: () => {
+          Cookies.remove('SUB');
           Cookies.remove('userInfo');
           this.$store.commit('setUser', {});
           if (this.loginType == 'google') {
@@ -149,7 +150,8 @@ export default {
           if (this.loginType == 'facebook') {
             this.signOutFaceBook();
           }
-          this.$router.push('/');
+          window.location.href = window.location.origin
+          // this.$router.push('/');
         },
         onFail: res => {
           console.log(res);

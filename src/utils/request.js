@@ -24,12 +24,15 @@ request.interceptors.response.use(
           Cookies.remove('userInfo');
           // 解决退出时候 还有权限接口仍在访问
           if (router.currentRoute.meta.auth) {
-            router.replace({
-              path: '/login',
-              query: {
-                redirect: router.currentRoute.fullPath,
-              },
-            });
+            // console.log(router.currentRoute)
+            window.location.href =
+              window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+            // router.replace({
+            //   path: '/login',
+            //   query: {
+            //     redirect: router.currentRoute.fullPath,
+            //   },
+            // });
           }
           return Promise.reject(response);
       }
@@ -47,12 +50,14 @@ request.interceptors.response.use(
           Cookies.remove('userInfo');
           Cookies.remove('SUB');
           store.commit('setUser', {});
-          router.replace({
-            path: '/login',
-            query: {
-              redirect: router.currentRoute.fullPath,
-            },
-          });
+          window.location.href =
+            window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+        // router.replace({
+        //   path: '/login',
+        //   query: {
+        //     redirect: router.currentRoute.fullPath,
+        //   },
+        // });
       }
     }
     return Promise.reject(error.response.data);
