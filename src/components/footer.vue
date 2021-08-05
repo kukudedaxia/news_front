@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom">
+  <div class="bottom com-footer">
     <div class="bottom-info">
       <span class="power">{{ $t('desc.power') }}</span>
       <div class="bottom-link">

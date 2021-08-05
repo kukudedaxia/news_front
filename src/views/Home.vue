@@ -25,7 +25,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .home {
-  margin-top: -56px;
+  margin-top: -80px;
   min-width: 1068px;
 }
 </style>

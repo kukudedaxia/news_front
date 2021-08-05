@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header com-header">
     <div
       :class="[
         'header-icon',
@@ -150,7 +150,7 @@ export default {
           if (this.loginType == 'facebook') {
             this.signOutFaceBook();
           }
-          window.location.href = window.location.origin
+          window.location.href = window.location.origin;
           // this.$router.push('/');
         },
         onFail: res => {
@@ -192,6 +192,7 @@ html[lang='ar'] .el-message-box__headerbtn {
   justify-content: space-between;
   position: relative;
   padding-top: 23px;
+  padding-bottom: 22px;
   // left: 0;
   // right: 0;
   z-index: 99;

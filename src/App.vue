@@ -1,9 +1,11 @@
 <template>
-  <div id="app" v-loading="pageLoading">
+  <div id="app" v-loading="pageLoading" :class="{ dark: $route.name === 'Live' }">
     <div id="nav">
       <Header />
     </div>
-    <router-view v-wechat-title="$i18n.t($route.meta.title)" class="main" />
+    <div :class="['main']">
+      <router-view v-wechat-title="$i18n.t($route.meta.title)" />
+    </div>
     <Footer v-if="footerShow" />
   </div>
 </template>
@@ -56,6 +58,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .main {
-  min-height: calc(100vh - 100px);
+  border: 1px solid transparent;
+  min-height: calc(100vh - 178px);
 }
 </style>

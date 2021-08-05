@@ -1,0 +1,51 @@
+// 暗黑模式
+
+//变量
+@BG: #232427;
+@HEADER-BG: #2b2c2f;
+@HEADER-BORDER-COLOR: rgba(255, 255, 255, 0.06);
+// ----- input ----- //
+@INPUT-BG: #000000;
+@INPUT-BORDER-COLOR: rgba(255, 255, 255, 0.1);
+@INPUT-BORDER-COLOR-HOVER: rgba(255, 255, 255, 0.3);
+@INPUT-BORDER-COLOR-FOCUS: #e74059;
+// ----- button ----- //
+@BUTTON-BG: #e74059;
+@BUTTON-COLOR: #dddddd;
+@BUTTON-BG-HOVER: #e74059;
+.dark {
+  #nav,
+  .com-footer {
+    background-color: @HEADER-BG;
+    border-color: @HEADER-BORDER-COLOR;
+  }
+  #nav {
+    .menu-item {
+      color: #dddddd !important;
+    }
+  }
+  .com-footer {
+    .bottom-info a {
+      color: #dddddd !important;
+    }
+  }
+  .main {
+    background-color: @BG;
+  }
+  // input
+  .el-input {
+    input {
+      background-color: @INPUT-BG;
+      border: 1px solid @INPUT-BORDER-COLOR;
+      &:hover {
+        border-color: @INPUT-BORDER-COLOR-HOVER;
+      }
+      &:focus {
+        border-color: @INPUT-BORDER-COLOR-FOCUS;
+      }
+      &::placeholder {
+        color: #666666;
+      }
+    }
+  }
+}

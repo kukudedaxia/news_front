@@ -9,6 +9,8 @@ import ElementUI from 'element-ui';
 import './theme/element/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import './less/dark.less';
+
 import moment from 'moment';
 
 Vue.use(ElementUI).use(VueClipboard);

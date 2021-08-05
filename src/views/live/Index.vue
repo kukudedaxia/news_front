@@ -1,5 +1,5 @@
 <template>
-  <div class="live">
+  <div class="live dark">
     <div class="operation">
       <el-tabs
         v-model="activeName"
@@ -616,7 +616,7 @@ export default {
   border: 1px solid rgba(255, 255, 255, 0.03);
   background: #000000;
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 40px;
   overflow: hidden;
   .operation {
     height: 100%;
