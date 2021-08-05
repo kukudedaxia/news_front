@@ -75,7 +75,7 @@ export default {
         skip_prompt_cookie: 'sid',
         callback: response => {
           console.log(response);
-          this.thirdLogin('1', response);
+          this.thirdLogin('2', response);
         },
       });
       var em = document.getElementById('customBtn');
@@ -97,7 +97,7 @@ export default {
       // const that = this;
       let accesstoken = '';
       let thirduid = '123';
-      if (type == '1') {
+      if (type == '2') {
         accesstoken = data.credential;
         this.$store.commit('setLoginType', 'google');
       } else if (type == '3') {
@@ -208,7 +208,7 @@ export default {
       window.FB.login(function(response) {
         console.log(response, 'respingse');
         if (response.authResponse) {
-          that.thirdLogin('2', response);
+          that.thirdLogin('1', response);
           console.log('Welcome!  Fetching your information.... ');
           window.FB.api('/me', function(response) {
             console.log('Good to see you, ' + response.name + '.');
