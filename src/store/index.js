@@ -123,11 +123,12 @@ export default new Vuex.Store({
           payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
         })
         .catch(err => {
-          if (err.data.error_code !== 35000) {
-            if (!navigator.onLine) {
-              payload.onNetworkError && payload.onNetworkError(err, reqConf);
-              Message.error(i18n.t('netError'));
-            } else {
+          if (!navigator.onLine) {
+            payload.onNetworkError && payload.onNetworkError(err, reqConf);
+            Message.error(i18n.t('netError'));
+            payload.onComplete && payload.onComplete();
+          } else {
+            if (err.data.error_code !== 35000) {
               // 400、500 异常
               payload.onError && payload.onError(err, reqConf);
               Message.error(String(err));

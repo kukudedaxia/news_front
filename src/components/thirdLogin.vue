@@ -252,7 +252,7 @@ export default {
         clientId: 'to.bee.m',
         scope: 'name email',
         // response_type: 'code id_token',
-        redirectURI: 'https://test.bee.to/sign/api/callback',
+        redirectURI: 'https://bee.to/sign/api/callback',
         state: 'initial',
         // nonce: '[NONCE]',
         usePopup: true, //or false defaults to false
