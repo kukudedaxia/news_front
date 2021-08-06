@@ -125,7 +125,6 @@
 <script>
 import $ from 'jquery';
 import { fileByBase64, base64ByBlob, getCrc32, getMd5 } from '@/utils/upload';
-import baseUrl from '@/utils/requestConfig.js';
 
 export default {
   props: {
@@ -219,8 +218,8 @@ export default {
   },
   data() {
     return {
-      imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
-      // imgPids: '',
+      // imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
+      imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,
