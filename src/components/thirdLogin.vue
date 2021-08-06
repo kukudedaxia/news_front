@@ -246,8 +246,7 @@ export default {
       });
     },
     // apple
-    async initApple() {
-      this.listenApple();
+    async initApple() { 
       window.AppleID.auth.init({
         clientId: 'to.bee.m',
         scope: 'name email',
@@ -257,6 +256,7 @@ export default {
         // nonce: '[NONCE]',
         usePopup: true, //or false defaults to false
       });
+      this.listenApple();
     },
     async loginInApple() {
       try {
