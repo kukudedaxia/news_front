@@ -141,6 +141,7 @@ export default {
           },
         },
         onSuccess: () => {
+          Cookies.remove('uid');
           Cookies.remove('SUB');
           Cookies.remove('userInfo');
           this.$store.commit('setUser', {});

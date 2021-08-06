@@ -25,14 +25,14 @@ request.interceptors.response.use(
           // 解决退出时候 还有权限接口仍在访问
           if (router.currentRoute.meta.auth) {
             // console.log(router.currentRoute)
-            // window.location.href =
-            //   window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
-            router.replace({
-              path: '/login',
-              query: {
-                redirect: router.currentRoute.fullPath,
-              },
-            });
+            window.location.href =
+              window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+            // router.replace({
+            //   path: '/login',
+            //   query: {
+            //     redirect: router.currentRoute.fullPath,
+            //   },
+            // });
           }
           return Promise.reject(response);
       }
