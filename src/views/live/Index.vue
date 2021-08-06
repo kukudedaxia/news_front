@@ -202,7 +202,7 @@ export default {
             // 监听消息通知
             message(event) {
               console.log('message', event);
-              // msg 1 app下播  2 审核后台下播  3 obs停止推流
+              // msg 1 app下播  2 审核后台下播  3 obs停止推流  4 直播异常
               const msg = event.message.content.event;
               if (msg === 1 || msg === 2) {
                 const remoteTracks = _this.room.getRemoteTracks();
@@ -217,6 +217,16 @@ export default {
                   confirmButtonText: _this.$t('live.ok'),
                   showClose: false,
                   callback: () => {},
+                });
+              }
+              // 直播异常，自动下播
+              if (msg === 4) {
+                _this.stopLive().then(() => {
+                  _this.$alert(_this.$t('live.closeMsg'), '', {
+                    confirmButtonText: _this.$t('live.ok'),
+                    showClose: false,
+                    callback: () => {},
+                  });
                 });
               }
             },
@@ -330,14 +340,6 @@ export default {
          */
         onUserLeave(userIds) {
           console.log('onUserLeave', userIds);
-          // 如果主播被提出房间，则走下播接口
-          _this.stopLive().then(() => {
-            _this.$alert(_this.$t('live.closeMsg'), '', {
-              confirmButtonText: _this.$t('live.ok'),
-              showClose: false,
-              callback: () => {},
-            });
-          });
         },
       });
       // 如果是续播，初始化完room实例后需要订阅远端流
@@ -352,6 +354,7 @@ export default {
             if (remoteTracks.length > 0) {
               this.room.subscribe(remoteTracks);
               this.liveState = 1; // 设置为直播中
+              this.$store.commit('live/setLiving', true);
             }
           },
         });
@@ -595,7 +598,9 @@ export default {
             Bus.$emit('stopLive');
           });
         })
-        .catch(() => {});
+        .catch(() => {
+          this.$store.commit('live/setLeaveLivingDialog', false);
+        });
     },
   },
   beforeRouteLeave(to, from, next) {

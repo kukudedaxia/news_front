@@ -112,7 +112,6 @@ export default {
         this.$store.commit('live/setLeaveLivingDialog', true);
         Bus.$on('stopLive', () => {
           this.$store.commit('live/setLeaveLivingDialog', false);
-          // this.logouts();
         });
       } else {
         this.$alert(this.$t('signText'), '', {
