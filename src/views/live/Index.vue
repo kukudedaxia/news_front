@@ -165,6 +165,7 @@ export default {
     },
     // 重置信息，重新开播
     onRefresh() {
+      this.startSource = 1;
       this.activeName = '1';
       this.liveState = 0;
       this.$refs.goLiveRef.onClearData();
@@ -208,9 +209,7 @@ export default {
                 if (remoteTracks.length > 0) {
                   _this.room.unsubscribe(remoteTracks);
                 }
-                _this.onRefresh();
                 _this.stopLive();
-                _this.startSource = 1;
               }
               // 如果是obs断流，则弹窗提醒用户
               if (msg === 3) {

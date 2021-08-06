@@ -72,7 +72,7 @@ const message = {
     endMsg1: 'Your Beeto Live has ended',
     replaying: 'Allow Replaying Beeto Live',
     released: 'Replay Released',
-    refresh: 'Refresh And Start A New Live',
+    refresh: 'Refresh and Start a New Live',
     liveStream: 'Live stream',
     time: 'Time',
     privacy: 'Privacy',
@@ -116,6 +116,6 @@ const message = {
     error: 'Please fill in the phone number correctly',
     continue: 'Continue with',
   },
-  internalerror: 'Internal Server Error'
+  internalerror: 'Internal Server Error',
 };
 export default message;

@@ -64,11 +64,6 @@ export default {
       saveReplay: false, // 是否缓存直播视频
     };
   },
-  watch: {
-    lid(newV) {
-      console.log(newV);
-    },
-  },
   methods: {
     // 缓存本次直播视频
     onSaveReplay() {
