@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="title-box text-right">
-        <p class="title">{{ $t('live.title') }}</p>
+        <p class="title text-overflow-1">{{ $t('live.title') }}</p>
         <el-input
           v-model="titles"
           maxlength="100"
@@ -48,7 +48,7 @@
           class="item-input"
           style="margin-bottom:20px"
         ></el-input>
-        <p class="title">{{ $t('live.blogTitle') }}</p>
+        <p class="title text-overflow-1">{{ $t('live.blogTitle') }}</p>
         <el-input
           v-model="blobTexts"
           :placeholder="$t('live.blogP')"
@@ -146,6 +146,7 @@ export default {
     pushUrl: String,
     blobText: String,
     title: String,
+    coverImg: String,
   },
   computed: {
     btnDisabled() {
@@ -215,11 +216,17 @@ export default {
     streamKey(newV) {
       this.streamKeys = newV;
     },
+    coverImg: {
+      handler(newV) {
+        this.imgPids = newV;
+      },
+      immediate: true,
+    },
   },
   data() {
     return {
+      imgPids: this.coverImg,
       // imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
-      imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,
@@ -499,6 +506,9 @@ html[lang='ar'] {
   .input-right input {
     padding-right: 15px;
     padding-left: 75px;
+  }
+  .desc {
+    transform-origin: right !important;
   }
 }
 

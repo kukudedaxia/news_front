@@ -1,13 +1,7 @@
 <template>
   <div class="live dark">
     <div class="operation">
-      <el-tabs
-        v-model="activeName"
-        :stretch="true"
-        @tab-click="onTabClick"
-        style="width: 100%;"
-        class="flip-over"
-      >
+      <el-tabs v-model="activeName" @tab-click="onTabClick" style="width: 100%;" class="flip-over">
         <el-tab-pane
           :label="$t('live.goLive')"
           name="1"
@@ -21,6 +15,7 @@
             :streamKey.sync="streamKey"
             :blobText="blobText"
             :title="title"
+            :coverImg="cover_img"
             :startSource="startSource"
             @liveState="onLiveClick"
             ref="goLiveRef"
@@ -48,6 +43,7 @@
         :liveState="liveState"
         :lid="lid"
         :uid="uid"
+        :startSource="startSource"
         @refresh="onRefresh"
       ></video-player>
     </div>
@@ -99,7 +95,7 @@ export default {
       lid: null, // 直播间id
       title: '', // 标题
       cover_img: '', // 封面id
-      live_type: 1, // 0:预约feed开播 1:直接开播
+      live_type: 1, // 0:预约开播 1:直接开播
       scheduledParam: {}, // 预约直播参数
       blobText: '', // 博文内容
       goLiveBtnLoading: false, // 直接开播btn按钮状态
@@ -155,6 +151,7 @@ export default {
             this.title = data.title;
             this.blobText = data.content;
             this.startSource = data.startSource;
+            this.cover_img = data.coverPid;
             this.initSdk(this.lid, 2);
           }
         },
@@ -318,6 +315,7 @@ export default {
             const videoNode = document.querySelector('#videoNode');
             track.play(videoNode);
             _this.liveState = 1; // 设置为直播中
+            _this.goLiveBtnLoading = false;
           }
         },
         /**
@@ -364,7 +362,9 @@ export default {
     onLiveClick(param) {
       try {
         this.live_type = param.live_type;
-        // 此时是未开播状态，走开播流程
+        /**
+         * @title 开播
+         */
         if (this.liveState === 0) {
           // 直接开播流程
           if (this.live_type === 1) {
@@ -382,7 +382,9 @@ export default {
               this.startLive();
             }, 1000);
           }
-          // 此时是直播状态，走下播流程
+          /**
+           * @title 下播
+           */
         } else if (this.liveState === 1) {
           // 直接开播-下播流程
           if (this.live_type === 1) {
@@ -425,6 +427,7 @@ export default {
         onSuccess: ({ data }) => {
           // 15分钟内有预约直播，弹窗提醒
           if (data.haveLiveOnline === 0 && data.haveSchedule === 1) {
+            this.goLiveBtnLoading = false;
             this.$alert(this.$t('live.startMsg'), this.$t('live.strtTitle'), {
               confirmButtonText: this.$t('live.ok'),
               callback: () => {},
@@ -446,10 +449,9 @@ export default {
         },
         onFail: ({ error }) => {
           this.$message.error(error);
-        },
-        onComplete: () => {
           this.goLiveBtnLoading = false;
         },
+        onComplete: () => {},
       });
     },
     // 开播
@@ -497,11 +499,11 @@ export default {
         },
         onFail: ({ error }) => {
           this.$message.error(error);
+          this.goLiveBtnLoading = false;
+          leaveRoom(this.room);
         },
         onComplete: () => {
-          if (this.live_type === 1) {
-            this.goLiveBtnLoading = false;
-          } else {
+          if (this.live_type === 0) {
             this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
           }
         },
@@ -561,7 +563,7 @@ export default {
           method: 'post',
           url: '/multimedia/2/video/pc/mcu_config.json',
           params: {
-            roomId: this.lid,
+            roomId: this.live_type === 1 ? this.lid : this.scheduledParam.lid,
           },
         },
         onSuccess: () => {
@@ -654,9 +656,11 @@ export default {
   }
 
   .el-tabs__header {
+    padding-left: 20px;
     .el-tabs__nav-wrap::after {
       background: #000000;
       border-radius: 10px 0 0 0;
+      height: 1px;
     }
     .el-tabs__item {
       font-family: SFUIText-Regular;
@@ -664,6 +668,7 @@ export default {
       color: #dddddd;
       height: 50px;
       line-height: 50px;
+      padding: 0 15px;
     }
     .el-tabs__item.is-disabled {
       color: rgba(221, 221, 221, 0.2);
@@ -672,15 +677,27 @@ export default {
       font-family: SFUIText-Bold;
       color: #ff536c;
     }
-
     .el-tabs__active-bar {
       height: 3px;
       background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
       border-radius: 2px;
     }
+    &::after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #000000;
+      border-radius: 10px 0 0 0;
+    }
   }
 }
-html[lang='ar'] .el-tabs__item {
-  transform: scaleX(-1) !important;
+html[lang='ar'] {
+  .el-tabs__item {
+    transform: scaleX(-1) !important;
+    padding: 0 15px !important;
+  }
 }
 </style>

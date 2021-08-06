@@ -22,7 +22,9 @@
             <el-button
               type="primary"
               size="small"
-              :disabled="item.liveState === 2 || (liveState === 1 && item.liveState !== 1)"
+              :disabled="
+                item.liveState === 2 || (liveState === 1 && item.liveState !== 1) || liveState === 2
+              "
               :loading="item.loading"
               class="btn"
               @click="onLiveClick(item)"

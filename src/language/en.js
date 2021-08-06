@@ -78,7 +78,7 @@ const message = {
     privacy: 'Privacy',
     copyURL: 'Copy URL',
     copyKey: 'Copy Key',
-    blogTitle: 'Beeto',
+    blogTitle: 'Beet',
     blogP: 'Write a beet for Beeto Live',
     success: 'Success!',
     failed: 'failed',

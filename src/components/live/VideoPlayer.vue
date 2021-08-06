@@ -31,6 +31,7 @@
           class="btn"
           :disabled="saveReplay"
           @click="onSaveReplay"
+          v-if="startSource === 1"
         >
           {{ $t('live.replaying') }}
         </el-button>
@@ -53,6 +54,7 @@ export default {
     },
     lid: Number, // 直播间id
     uid: Number, // 登录用户uid
+    startSource: Number, // 直播来源 0 app  1 web
   },
   data() {
     return {
