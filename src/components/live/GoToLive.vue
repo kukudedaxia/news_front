@@ -12,7 +12,7 @@
         >
           <img
             v-if="imgPids"
-            :src="`${uploadUrl}/orj1080/${imgPids}.jpg`"
+            :src="`${uploadImgUrl}/orj1080/${imgPids}.jpg`"
             onerror="this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'"
             class="avatar"
           />
@@ -192,8 +192,8 @@ export default {
         ? require('@/assets/images/live/icon_step3@3x.png')
         : require('@/assets/images/live/icon_step3_Arabic@3x.png');
     },
-    uploadUrl() {
-      return process.env.VUE_APP_UPLOAD_URL;
+    uploadImgUrl() {
+      return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
   },
   watch: {
@@ -219,8 +219,8 @@ export default {
   },
   data() {
     return {
-      // imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
-      imgPids: '',
+      imgPids: '3b9b31d1lz1gsqq1m7ddjj20n00n0k57',
+      // imgPids: '',
       file: '',
       uploadLoading: false,
       titles: this.title,
@@ -252,7 +252,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `${process.env.NODE_ENV === 'production' ? baseUrl.upload : ''}/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
+              url: `${process.env.VUE_APP_UPLOAD_URL}/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,

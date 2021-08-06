@@ -408,3 +408,16 @@ html[lang='ar'] .el-tabs__nav {
   border: none;
   color: rgba(102, 102, 102, 0.4) !important;
 }
+
+// 两行省略号
+
+.text-overflow-2 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}

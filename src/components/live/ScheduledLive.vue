@@ -5,10 +5,10 @@
     </p>
     <ul>
       <li v-for="item in liveList" :key="item.streamKey">
-        <img :src="`http://img.whale.weibo.com/orj1080/${item.liveInfoBean.coverPid}.jpg`" />
+        <img :src="`${uploadImgUrl}/orj1080/${item.liveInfoBean.coverPid}.jpg`" />
         <div class="right-box">
           <div>
-            <p class="name">{{ item.liveInfoBean.title }}</p>
+            <p class="name text-overflow-2">{{ item.liveInfoBean.title }}</p>
             <p class="time">
               <img src="@/assets/images/live/live_Schedule_time_icon1.png" class="tips-img" />
               {{ $moment(new Date(item.liveInfoBean.apptTime)).format('DD/MM/YYYY HH:mm ') }}
@@ -77,6 +77,11 @@ export default {
     liveState: {
       type: Number,
       default: 0,
+    },
+  },
+  computed: {
+    uploadImgUrl() {
+      return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
   },
   data() {
@@ -183,9 +188,10 @@ export default {
   }
   ul {
     li {
-      padding: 20px;
+      padding: 10px 20px;
       display: flex;
       transition: 0.3s;
+      overflow-x: hidden;
       &:hover {
         background: #0f0f12;
       }
@@ -241,11 +247,15 @@ export default {
           color: #6d7283;
           background-color: transparent;
         }
+        .is-plain:hover {
+          border-color: #9098b2;
+          color: #9098b2;
+        }
       }
     }
   }
   .default {
-    margin-top: 50%;
+    margin-top: calc(50% - 61px);
   }
 }
 html[lang='ar'] {

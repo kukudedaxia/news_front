@@ -339,7 +339,7 @@ export default {
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid, {
-            domain: 'bee.to',
+            domain: process.dev.VUE_APP_DOMAIN,
           });
           await this.$store.dispatch('getUser', uid);
           this.$store.commit('setLoginType', 'normal');
@@ -515,7 +515,7 @@ html[lang='ar'] #login .el-tabs__nav {
 #login {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
   background-size: 100% 100%;
-   margin-top: -80px;
+  margin-top: -80px;
   height: 980px;
   display: flex;
   align-items: center;
