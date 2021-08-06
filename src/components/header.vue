@@ -142,7 +142,9 @@ export default {
         },
         onSuccess: () => {
           Cookies.remove('uid');
-          Cookies.remove('SUB');
+          Cookies.remove('SUB', {
+            domain: process.env.VUE_APP_DOMAIN,
+          });
           Cookies.remove('userInfo');
           this.$store.commit('setUser', {});
           if (this.loginType == 'google') {

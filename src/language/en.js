@@ -116,5 +116,6 @@ const message = {
     error: 'Please fill in the phone number correctly',
     continue: 'Continue with',
   },
+  internalerror: 'Internal Server Error'
 };
 export default message;

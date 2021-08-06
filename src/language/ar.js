@@ -113,5 +113,6 @@ const message = {
     error: 'يرجى ملء رقم الهاتف بشكل صحيح',
     continue: 'استمر مع',
   },
+  internalerror: 'خطأ بالخادم الداخلي'
 };
 export default message;
