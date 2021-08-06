@@ -339,7 +339,7 @@ export default {
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
           Cookies.set('SUB', res.data.gsid, {
-            domain: process.dev.VUE_APP_DOMAIN,
+            domain: process.env.VUE_APP_DOMAIN,
           });
           await this.$store.dispatch('getUser', uid);
           this.$store.commit('setLoginType', 'normal');
