@@ -354,7 +354,9 @@ export default {
             if (remoteTracks.length > 0) {
               this.room.subscribe(remoteTracks);
               this.liveState = 1; // 设置为直播中
-              this.$store.commit('live/setLiving', true);
+              if (this.startSource === 1) {
+                this.$store.commit('live/setLiving', true);
+              }
             }
           },
         });

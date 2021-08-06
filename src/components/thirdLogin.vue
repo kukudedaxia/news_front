@@ -127,9 +127,14 @@ export default {
           const uid = res.data.user.id;
           // const replaceUrl = that.$route.query.redirect || '/';
           Cookies.set('uid', uid);
-          Cookies.set('SUB', res.data.gsid, {
-            domain: process.env.VUE_APP_DOMAIN,
-          });
+          if (process.env.NODE_ENV === 'production') {
+            Cookies.set('SUB', res.data.gsid, {
+              domain: process.env.VUE_APP_DOMAIN,
+            });
+          } else {
+            Cookies.set('SUB', res.data.gsid);
+          }
+
           await this.$store.dispatch('getUser', uid);
           this.$router.push({ path: 'live' });
         },
@@ -246,7 +251,7 @@ export default {
       });
     },
     // apple
-    async initApple() { 
+    async initApple() {
       window.AppleID.auth.init({
         clientId: 'to.bee.m',
         scope: 'name email',
