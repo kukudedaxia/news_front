@@ -130,7 +130,7 @@ export default new Vuex.Store({
           } else {
             if (err == 'Internal Server Error') {
               payload.onComplete && payload.onComplete(err, null, reqConf, null);
-              return Message.error(String(err));
+              return Message.error(i18n.t('internalerror'));
             }
             if (err.data.error_code !== 35000) {
               // 400、500 异常

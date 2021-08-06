@@ -20,7 +20,9 @@ request.interceptors.response.use(
         case 35000:
           // 返回 401 清除token信息并跳转到登录页面
           Cookies.remove('uid');
-          Cookies.remove('SUB');
+          Cookies.remove('SUB', {
+            domain: process.env.VUE_APP_DOMAIN,
+          });
           Cookies.remove('userInfo');
           // 解决退出时候 还有权限接口仍在访问
           if (router.currentRoute.meta.auth) {
@@ -48,16 +50,18 @@ request.interceptors.response.use(
           // 返回 401 清除token信息并跳转到登录页面
           Cookies.remove('uid');
           Cookies.remove('userInfo');
-          Cookies.remove('SUB');
+          Cookies.remove('SUB', {
+            domain: process.env.VUE_APP_DOMAIN,
+          });
           store.commit('setUser', {});
-          // window.location.href =
-          //   window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
-        router.replace({
-          path: '/login',
-          query: {
-            redirect: router.currentRoute.fullPath,
-          },
-        });
+          window.location.href =
+            window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+        // router.replace({
+        //   path: '/login',
+        //   query: {
+        //     redirect: router.currentRoute.fullPath,
+        //   },
+        // });
       }
     }
     return Promise.reject(error.response.data);

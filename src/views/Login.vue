@@ -88,44 +88,49 @@
         </el-tab-pane>
         <el-tab-pane :label="$t('login.tab2')" name="account" class="mt-30">
           <div class="con">
-            <div class="line">
-              <input
-                :placeholder="$t('login.accountph')"
-                v-model="account"
-                class="input inputs"
-                @focus="errorHide"
-                type="text"
-              />
-              <!-- <img
+            <form>
+              <div class="line">
+                <input
+                  :placeholder="$t('login.accountph')"
+                  v-model="account"
+                  autocomplete="username"
+                  class="input inputs"
+                  @focus="errorHide"
+                  type="text"
+                />
+                <!-- <img
                 src="@/assets/images/icon_clear.png"
                 class="icon icon-clear"
                 v-show="account != ''"
                 @mousedown.prevent="account = ''"
               /> -->
-            </div>
-            <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
-              <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
-              <span class="no-flip-over">{{ errorMsg }}</span>
-            </p>
-            <div class="line">
-              <input
-                :placeholder="$t('login.passwordph')"
-                v-model="password"
-                class="input  inputs password"
-                @focus="errorHide"
-                :type="showPwd ? 'text' : 'password'"
-              />
-              <img
-                :src="
-                  showPwd
-                    ? require('@/assets/images/pwd_open.png')
-                    : require('@/assets/images/pwd_close.png')
-                "
-                class="icon-pwd"
-                @click="showPwd = !showPwd"
-              />
-            </div>
+              </div>
+              <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
+                <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
+                <span class="no-flip-over">{{ errorMsg }}</span>
+              </p>
+              <div class="line">
+                <input
+                  :placeholder="$t('login.passwordph')"
+                  v-model="password"
+                  class="input  inputs password"
+                  @focus="errorHide"
+                  autocomplete="current-password"
+                  :type="showPwd ? 'text' : 'password'"
+                />
+                <img
+                  :src="
+                    showPwd
+                      ? require('@/assets/images/pwd_open.png')
+                      : require('@/assets/images/pwd_close.png')
+                  "
+                  class="icon-pwd"
+                  @click="showPwd = !showPwd"
+                />
+              </div>
+            </form>
           </div>
+
           <p class="tip_info" v-if="errorMsg && this.tip == ''">
             <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
             <span class="no-flip-over">{{ errorMsg }}</span>
