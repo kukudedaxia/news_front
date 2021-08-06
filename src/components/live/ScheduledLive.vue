@@ -5,7 +5,10 @@
     </p>
     <ul>
       <li v-for="item in liveList" :key="item.streamKey">
-        <img :src="`${uploadImgUrl}/orj1080/${item.liveInfoBean.coverPid}.jpg`" />
+        <img
+          :src="`${uploadImgUrl}/orj1080/${item.liveInfoBean.coverPid}.jpg`"
+          onerror="this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'"
+        />
         <div class="right-box">
           <div>
             <p class="name text-overflow-2">{{ item.liveInfoBean.title }}</p>
