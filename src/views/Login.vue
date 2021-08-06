@@ -28,6 +28,7 @@
               <input
                 :placeholder="$t('login.codeph')"
                 v-model="verifyCode"
+                autocomplete="off"
                 class="input"
                 @input="checkInputRules('verifyCode', 6)"
                 style="width: 176px;"
@@ -36,7 +37,7 @@
                 <span
                   :class="['send', { resend: send, time: codeTimes > 0 && send }]"
                   v-if="!codeLoading"
-                  @click="errorPhone()"
+                  @click="phoneLengthCorrect ? sendCode() : errorPhone()"
                 >
                   {{
                     codeTimes > 0
