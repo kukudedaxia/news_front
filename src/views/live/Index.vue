@@ -381,6 +381,7 @@ export default {
           } else {
             // 预约开播，不走校验逻辑
             this.scheduledParam = param;
+            this.lid = param.lid;
             this.initSdk(param.lid);
             setTimeout(() => {
               this.startLive();

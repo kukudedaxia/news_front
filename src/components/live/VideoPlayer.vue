@@ -91,6 +91,7 @@ export default {
     },
     // 重置信息
     onRefresh() {
+      this.saveReplay = false;
       this.$emit('refresh');
     },
   },
