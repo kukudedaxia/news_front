@@ -113,7 +113,7 @@
                 <input
                   :placeholder="$t('login.passwordph')"
                   v-model="password"
-                  class="input  inputs password"
+                  class="input inputs password"
                   @focus="errorHide"
                   autocomplete="current-password"
                   :type="showPwd ? 'text' : 'password'"

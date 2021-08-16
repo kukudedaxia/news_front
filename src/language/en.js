@@ -107,7 +107,7 @@ const message = {
     phoneph: 'Enter your phone number',
     codeph: 'Verification code',
     accountph: 'Enter your username',
-    passwordph: 'Enter yout password',
+    passwordph: 'Enter your password',
     getcode: 'Get Verification Code',
     resend: 'Resend',
     login: 'Login',
