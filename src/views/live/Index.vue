@@ -94,7 +94,7 @@ export default {
       streamKey: null, // 密钥
       lid: null, // 直播间id
       title: '', // 标题
-      cover_img: '', // 封面id
+      cover_img: '1', // 封面id
       live_type: 1, // 0:预约开播 1:直接开播
       scheduledParam: {}, // 预约直播参数
       blobText: '', // 博文内容
@@ -243,123 +243,131 @@ export default {
     // state 1 直播  2 续播
     async initSdk(lid, state = 1) {
       const _this = this;
-      this.room = await joinLivingRoom(lid);
-      // 注册房间事件监听器，重复注册时，仅最后一次注册有效
-      this.room.registerRoomEventListener({
-        /**
-         * 当本端被剔出房间
-         * @description 被踢出房间可能是由于服务端超出一定时间未能收到 rtcPing 消息，所以认为己方离线。
-         * 另一种可能是己方 rtcPing 失败次数超出上限，故而主动断线
-         * @param byServer
-         * 当值为 false 时，说明本端 rtcPing 超时
-         * 当值为 true 时，说明本端收到被踢出房间通知
-         */
-        onKickOff(byServer) {
-          console.log('onKickOff', byServer);
-        },
-        /**
-         * 接收到房间信令时回调，用户可通过房间实例的 `sendMessage(name, content)` 接口发送信令
-         * @param name 信令名
-         * @param content 信令内容
-         * @param senderUserId 发送者 Id
-         * @param messageUId 消息唯一标识
-         */
-        onMessageReceive(name, content, senderUserId, messageUId) {
-          console.log('onMessageReceive', name, content, senderUserId, messageUId);
-        },
-        /**
-         * 监听房间属性变更通知
-         * @param name
-         * @param content
-         */
-        onRoomAttributeChange(name, content) {
-          console.log('onRoomAttributeChange', name, content);
-        },
-        /**
-         * 房间用户禁用/启用音频
-         * @param audioTrack RCRemoteAudioTrack 类实例
-         */
-        onAudioMuteChange(audioTrack) {
-          console.log('onAudioMuteChange', audioTrack);
-        },
-        /**
-         * 房间用户禁用/启用视频
-         * @param videoTrack RCRemoteVideoTrack 类实例对象
-         */
-        onVideoMuteChange(videoTrack) {
-          console.log('onVideoMuteChange', videoTrack);
-        },
-        /**
-         * 房间内用户发布资源
-         * @param tracks 新发布的音轨与视轨数据列表，包含新发布的 RCRemoteAudioTrack 与 RCRemoteVideoTrack 实例
-         */
-        async onTrackPublish(tracks) {
-          console.log('onTrackPublish', tracks);
-          // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
-          _this.room.subscribe(tracks).then(({ code }) => {
-            console.log(code);
-            if (state === 1) {
-              _this.mcuConfig();
-            }
-          });
-        },
-        /**
-         * 房间用户取消发布资源
-         * @param tracks 被取消发布的音轨与视轨数据列表
-         * @description 当资源被取消发布时，SDK 内部会取消对相关资源的订阅，业务层仅需处理 UI 业务
-         */
-        onTrackUnpublish(tracks) {
-          console.log('onTrackUnpublish', tracks);
-        },
-        /**
-         * 订阅的音视频流通道已建立, track 已可以进行播放
-         * @param track RCRemoteTrack 类实例
-         */
-        onTrackReady(track) {
-          if (track.isAudioTrack()) {
-            // 音轨不需要传递播放控件
-            track.play();
-          } else {
-            // 视轨需要一个 video 标签才可进行播放
-            const videoNode = document.querySelector('#videoNode');
-            track.play(videoNode);
-            _this.liveState = 1; // 设置为直播中
-            _this.goLiveBtnLoading = false;
-          }
-        },
-        /**
-         * 人员加入  只会监听到直播
-         * @param userIds 加入的人员 id 列表
-         */
-        onUserJoin(userIds) {
-          console.log('onUserJoin', userIds);
-        },
-        /**
-         * 人员退出  只会监听到主播
-         * @param userIds
-         */
-        onUserLeave(userIds) {
-          console.log('onUserLeave', userIds);
-        },
-      });
-      // 如果是续播，初始化完room实例后需要订阅远端流
-      if (state === 2) {
-        // 弹窗是因为用户无操作没法直接播放流
-        this.$alert(this.$t('live.msg4'), '', {
-          confirmButtonText: this.$t('live.continue'),
-          showClose: false,
-          callback: () => {
-            const remoteTracks = this.room.getRemoteTracks();
-            console.log(remoteTracks);
-            if (remoteTracks.length > 0) {
-              this.room.subscribe(remoteTracks);
-              this.liveState = 1; // 设置为直播中
-              if (this.startSource === 1) {
-                this.$store.commit('live/setLiving', true);
+      try {
+        this.room = await joinLivingRoom(lid);
+        // 注册房间事件监听器，重复注册时，仅最后一次注册有效
+        this.room.registerRoomEventListener({
+          /**
+           * 当本端被剔出房间
+           * @description 被踢出房间可能是由于服务端超出一定时间未能收到 rtcPing 消息，所以认为己方离线。
+           * 另一种可能是己方 rtcPing 失败次数超出上限，故而主动断线
+           * @param byServer
+           * 当值为 false 时，说明本端 rtcPing 超时
+           * 当值为 true 时，说明本端收到被踢出房间通知
+           */
+          onKickOff(byServer) {
+            console.log('onKickOff', byServer);
+            // 如果收到这个回调，则已被踢出当前房间
+            // 融云会将当前room实例销毁，需要重新加入房间并且重新绑定房间事件
+            _this.initSdk(lid, state);
+          },
+          /**
+           * 接收到房间信令时回调，用户可通过房间实例的 `sendMessage(name, content)` 接口发送信令
+           * @param name 信令名
+           * @param content 信令内容
+           * @param senderUserId 发送者 Id
+           * @param messageUId 消息唯一标识
+           */
+          onMessageReceive(name, content, senderUserId, messageUId) {
+            console.log('onMessageReceive', name, content, senderUserId, messageUId);
+          },
+          /**
+           * 监听房间属性变更通知
+           * @param name
+           * @param content
+           */
+          onRoomAttributeChange(name, content) {
+            console.log('onRoomAttributeChange', name, content);
+          },
+          /**
+           * 房间用户禁用/启用音频
+           * @param audioTrack RCRemoteAudioTrack 类实例
+           */
+          onAudioMuteChange(audioTrack) {
+            console.log('onAudioMuteChange', audioTrack);
+          },
+          /**
+           * 房间用户禁用/启用视频
+           * @param videoTrack RCRemoteVideoTrack 类实例对象
+           */
+          onVideoMuteChange(videoTrack) {
+            console.log('onVideoMuteChange', videoTrack);
+          },
+          /**
+           * 房间内用户发布资源
+           * @param tracks 新发布的音轨与视轨数据列表，包含新发布的 RCRemoteAudioTrack 与 RCRemoteVideoTrack 实例
+           */
+          async onTrackPublish(tracks) {
+            console.log('onTrackPublish', tracks);
+            // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
+            _this.room.subscribe(tracks).then(({ code }) => {
+              console.log(code);
+              if (state === 1) {
+                _this.mcuConfig();
               }
+            });
+          },
+          /**
+           * 房间用户取消发布资源
+           * @param tracks 被取消发布的音轨与视轨数据列表
+           * @description 当资源被取消发布时，SDK 内部会取消对相关资源的订阅，业务层仅需处理 UI 业务
+           */
+          onTrackUnpublish(tracks) {
+            console.log('onTrackUnpublish', tracks);
+          },
+          /**
+           * 订阅的音视频流通道已建立, track 已可以进行播放
+           * @param track RCRemoteTrack 类实例
+           */
+          onTrackReady(track) {
+            if (track.isAudioTrack()) {
+              // 音轨不需要传递播放控件
+              track.play();
+            } else {
+              // 视轨需要一个 video 标签才可进行播放
+              const videoNode = document.querySelector('#videoNode');
+              track.play(videoNode);
+              _this.liveState = 1; // 设置为直播中
+              _this.goLiveBtnLoading = false;
             }
           },
+          /**
+           * 人员加入  只会监听到直播
+           * @param userIds 加入的人员 id 列表
+           */
+          onUserJoin(userIds) {
+            console.log('onUserJoin', userIds);
+          },
+          /**
+           * 人员退出  只会监听到主播
+           * @param userIds
+           */
+          onUserLeave(userIds) {
+            console.log('onUserLeave', userIds);
+          },
         });
+        // 如果是续播，初始化完room实例后需要订阅远端流
+        if (state === 2) {
+          // 弹窗是因为用户无操作没法直接播放流
+          this.$alert(this.$t('live.msg4'), '', {
+            confirmButtonText: this.$t('live.continue'),
+            showClose: false,
+            callback: () => {
+              const remoteTracks = this.room.getRemoteTracks();
+              console.log(remoteTracks);
+              if (remoteTracks.length > 0) {
+                this.room.subscribe(remoteTracks);
+                this.liveState = 1; // 设置为直播中
+                if (this.startSource === 1) {
+                  this.$store.commit('live/setLiving', true);
+                }
+              }
+            },
+          });
+        }
+      } catch (error) {
+        // 加入房间失败，设置按钮loading为false，方便用户再次点击重试
+        this.goLiveBtnLoading = false;
       }
     },
     // 开播、下播按钮处理函数

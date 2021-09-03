@@ -130,7 +130,7 @@ const createMicrophoneAndCameraTracks = () => {
  * @returns 返回room实例
  */
 const joinLivingRoom = roomId => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     rtcClient
       .joinLivingRoom(
         String(roomId), // 房间号必须是字符串
@@ -143,6 +143,7 @@ const joinLivingRoom = roomId => {
           // 返回房间实例
           resolve(room);
         } else {
+          reject(code);
           throw new Error('加入房间失败 ->', code);
         }
       });
