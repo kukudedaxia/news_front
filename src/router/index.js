@@ -65,7 +65,7 @@ const routes = [
       title: 'beeto',
     },
   },
-  // ---- 直播 ----
+  // ---- 直播 ---- //
   {
     path: '/live',
     name: 'Live',
@@ -73,6 +73,15 @@ const routes = [
     meta: {
       title: 'lives',
       auth: true,
+    },
+  },
+  // ---- 发布器 ---- //
+  {
+    path: '/publisher',
+    name: 'Publisher',
+    component: () => import('../views/Publisher.vue'),
+    meta: {
+      title: 'publisher',
     },
   },
   {
