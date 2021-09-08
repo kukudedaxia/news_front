@@ -8,19 +8,28 @@
       type="textarea"
       :autosize="{ minRows: 5, maxRows: 10 }"
       placeholder="Express freely…"
+      ref="textareaId"
       v-model="textarea"
       class="textarea"
     >
     </el-input>
     <div class="bottom flex-align">
-      <div class="operation-box flex-align">
-        <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
-        <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
-        <img src="@/assets/images/publisher/compose_toolbar_mention@3x.png" />
-        <img src="@/assets/images/publisher/compose_toolbar_topics@3x.png" />
-      </div>
+      <ul class="operation-box flex-align">
+        <li>
+          <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
+        </li>
+        <li>
+          <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
+        </li>
+        <li @click="addMention">
+          <img src="@/assets/images/publisher/compose_toolbar_mention@3x.png" />
+        </li>
+        <li @click="addTopics">
+          <img src="@/assets/images/publisher/compose_toolbar_topics@3x.png" />
+        </li>
+      </ul>
       <div class="inform-box">
-        <span class="text-length" v-show="textareaLen >= 9">{{ 10 - textareaLen }}</span>
+        <span class="text-length" v-show="textareaLen >= 9990">{{ 10000 - textareaLen }}</span>
         <el-dropdown
           trigger="click"
           @command="handleCommand"
@@ -36,15 +45,29 @@
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-button type="primary" round size="small" class="inform-box_btn">Release</el-button>
+        <el-button type="primary" round size="small" :disabled="btnDisabled" class="inform-box_btn"
+          >Release</el-button
+        >
       </div>
     </div>
+    <Popover
+      v-if="popoverShow"
+      :type="popoverType"
+      class="popover"
+      id="popoverId"
+      @onItemClick="onItemClick"
+    ></Popover>
   </div>
 </template>
 
 <script>
+import Popover from '@/components/publish/Popover';
+import '../../assets/sdk/jquery.caret';
+import $ from 'jquery';
 export default {
-  components: {},
+  components: {
+    Popover,
+  },
   data() {
     return {
       textarea: '',
@@ -67,17 +90,42 @@ export default {
           name: 'Only me',
         },
       ],
+      // 发布器光标离 @ # 最近的坐标
+      cursorCoordinate: {
+        left: 0,
+        top: 0,
+      },
+      popoverShow: false,
+      popoverType: '', // # topic 、 @ user
     };
   },
   watch: {
+    // 监听发布器文本变化
     textarea(val) {
-      console.log(val.length);
+      const endLetter = val.charAt(val.length - 1);
+      if (endLetter === '@' || endLetter === '#') {
+        this.popoverType = endLetter === '@' ? 'user' : 'topic';
+        Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+        this.popoverShow = true;
+        this.$nextTick(() => {
+          this.popoverPosition();
+        });
+      } else {
+        this.popoverShow = false;
+      }
     },
   },
   computed: {
     textareaLen() {
       return this.textarea.length;
     },
+    btnDisabled() {
+      return this.textareaLen > 0 ? false : true;
+    },
+  },
+  mounted() {
+    // 设置textarea不检查
+    this.$refs.textareaId.$el.spellcheck = false;
   },
   methods: {
     handleCommand(val) {
@@ -92,6 +140,30 @@ export default {
         dropdownId.classList.remove('select-icon_up');
         dropdownId.classList.add('select-icon_down');
       }
+    },
+    // @
+    addMention() {
+      this.textarea += '@';
+      this.$refs.textareaId.focus();
+    },
+    // #
+    addTopics() {
+      this.textarea += '#';
+      this.$refs.textareaId.focus();
+    },
+    getPopoverDom() {
+      return document.querySelector('#popoverId');
+    },
+    // 定位popover的位置
+    popoverPosition() {
+      const dom = this.getPopoverDom();
+      dom.style.top = `${this.cursorCoordinate.top + this.cursorCoordinate.height + 4}px `;
+      dom.style.left = `${this.cursorCoordinate.left}px`;
+    },
+    // popover选中事件
+    onItemClick(data) {
+      this.textarea += `${data} `;
+      this.popoverShow = false;
     },
   },
 };
@@ -131,10 +203,24 @@ export default {
     justify-content: space-between;
     height: 34px;
     .operation-box {
-      img {
-        width: 24px;
-        height: 24px;
-        margin-right: 35px;
+      li {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 19px;
+        cursor: pointer;
+        transition: 0.3s;
+        img {
+          width: 24px;
+          height: 24px;
+          position: relative;
+        }
+        &:hover {
+          background: #f6f6f9;
+          border-radius: 50%;
+        }
       }
     }
     .inform-box {
@@ -180,6 +266,24 @@ export default {
         text-align: center;
       }
     }
+  }
+  .textarea-hide {
+    border-radius: 6px;
+    border-color: transparent;
+    resize: none;
+    padding: 12px 16px;
+    font-family: SFUIText-Regular;
+    font-size: 16px;
+    color: #333333;
+    text-align: justify;
+    line-height: 20px;
+    white-space: pre-wrap;
+    visibility: hidden;
+  }
+  .popover {
+    position: fixed;
+    top: 120px;
+    left: 550px;
   }
 }
 .el-dropdown-menu {
