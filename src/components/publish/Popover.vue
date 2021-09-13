@@ -9,8 +9,25 @@
       <img src="@/assets/images/publisher/account_icon_searching@3x.png" class="seatch-icon" />
       Searching…
     </div>
+    <!-- 创建话题 -->
+    <div
+      class="topic-create"
+      v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
+    >
+      <p>
+        Visual frequency
+      </p>
+      <span>
+        Create a topic
+      </span>
+    </div>
+    <div class="user-result" v-else-if="!searchLoading && type === 'user' && userList.length === 0">
+      <p>
+        No Result
+      </p>
+    </div>
     <div class="list-content" v-else>
-      <p class="top-title">
+      <p class="top-title" v-if="topicList.length > 0 || userList.length > 0">
         {{ topTitle }}
       </p>
       <ul class="list-box" v-infinite-scroll="load" v-if="type === 'topic'">
@@ -95,15 +112,18 @@ export default {
     };
   },
   mounted() {
-    // this.searchLoading = true;
-    setTimeout(() => {
-      this.searchLoading = false;
-    }, 1000);
+    this.searchUser();
   },
   methods: {
     load() {},
     itemClick(data) {
       this.$emit('onItemClick', data);
+    },
+    // @ 用户检索
+    searchUser() {
+      setTimeout(() => {
+        this.searchLoading = false;
+      }, 1000);
     },
   },
 };
@@ -148,21 +168,36 @@ export default {
       overflow: auto;
     }
   }
-  @keyframes turn {
-    0% {
-      -webkit-transform: rotate(0deg);
+  .topic-create {
+    padding: 18px 19px;
+    text-align: left;
+    cursor: pointer;
+    & > p,
+    & > span {
+      display: block;
     }
-    25% {
-      -webkit-transform: rotate(-90deg);
+    & > p {
+      font-family: SFUIText-Regular;
+      font-size: 16px;
+      color: #333333;
+      letter-spacing: 0;
+      margin-bottom: 2px;
     }
-    50% {
-      -webkit-transform: rotate(-180deg);
+    & > span {
+      font-family: SFUIText-Regular;
+      font-size: 12px;
+      color: #777f8e;
+      letter-spacing: 0;
     }
-    75% {
-      -webkit-transform: rotate(-270deg);
-    }
-    100% {
-      -webkit-transform: rotate(-360deg);
+  }
+  .user-result {
+    padding: 18px 19px;
+    text-align: left;
+    p {
+      font-family: SFUIText-Regular;
+      font-size: 12px;
+      color: #777f8e;
+      letter-spacing: 0;
     }
   }
 }

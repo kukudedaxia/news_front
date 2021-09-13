@@ -15,7 +15,7 @@
     </el-input>
     <div class="bottom flex-align">
       <ul class="operation-box flex-align">
-        <li>
+        <li @click="uploadImgShow = true">
           <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
         </li>
         <li>
@@ -50,6 +50,10 @@
         >
       </div>
     </div>
+    <el-divider v-if="uploadImgShow"></el-divider>
+    <transition name="fade_top">
+      <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
+    </transition>
     <Popover
       v-if="popoverShow"
       :type="popoverType"
@@ -62,11 +66,14 @@
 
 <script>
 import Popover from '@/components/publish/Popover';
+import UploadImage from '@/components/publish/UploadImage';
+
 import '../../assets/sdk/jquery.caret';
 import $ from 'jquery';
 export default {
   components: {
     Popover,
+    'upload-image': UploadImage,
   },
   data() {
     return {
@@ -97,6 +104,7 @@ export default {
       },
       popoverShow: false,
       popoverType: '', // # topic 、 @ user
+      uploadImgShow: false,
     };
   },
   watch: {
@@ -165,6 +173,10 @@ export default {
       this.textarea += `${data} `;
       this.popoverShow = false;
     },
+    // 关闭图片上传功能
+    onCloseImgUpload() {
+      this.uploadImgShow = false;
+    },
   },
 };
 </script>
@@ -175,8 +187,8 @@ export default {
   border-radius: 6px;
   width: 782px;
   margin: auto;
-  padding: 20px;
   .textarea {
+    padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
       background: #f6f6f9 !important;
       border-radius: 6px;
@@ -188,6 +200,7 @@ export default {
       color: #333333;
       text-align: justify;
       line-height: 20px;
+
       &::placeholder {
         font-family: SFUIText-Regular;
         font-size: 16px;
@@ -199,9 +212,8 @@ export default {
     }
   }
   .bottom {
-    margin-top: 12px;
     justify-content: space-between;
-    height: 34px;
+    padding: 0 20px 12px 13px;
     .operation-box {
       li {
         width: 38px;
@@ -284,6 +296,10 @@ export default {
     position: fixed;
     top: 120px;
     left: 550px;
+  }
+  .el-divider {
+    margin: 0;
+    background-color: #f1f1f3;
   }
 }
 .el-dropdown-menu {
