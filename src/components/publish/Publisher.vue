@@ -11,6 +11,8 @@
       ref="textareaId"
       v-model="textarea"
       class="textarea"
+      @blur="onInputBlur"
+      @focus="onInputFocus"
     >
     </el-input>
     <div class="bottom flex-align">
@@ -55,7 +57,7 @@
       <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
     </transition>
     <Popover
-      v-if="popoverShow"
+      v-show="popoverShow"
       :type="popoverType"
       class="popover"
       id="popoverId"
@@ -114,9 +116,12 @@ export default {
       if (endLetter === '@' || endLetter === '#') {
         this.popoverType = endLetter === '@' ? 'user' : 'topic';
         Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-        this.popoverShow = true;
+
         this.$nextTick(() => {
           this.popoverPosition();
+          setTimeout(() => {
+            this.popoverShow = true;
+          }, 100);
         });
       } else {
         this.popoverShow = false;
@@ -132,7 +137,7 @@ export default {
     },
   },
   mounted() {
-    // 设置textarea不检查
+    // 设置textarea不检查单词拼写
     this.$refs.textareaId.$el.spellcheck = false;
   },
   methods: {
@@ -158,6 +163,28 @@ export default {
     addTopics() {
       this.textarea += '#';
       this.$refs.textareaId.focus();
+    },
+    // 输入框失去焦点
+    onInputBlur() {
+      if (this.popoverShow) {
+        setTimeout(() => {
+          this.popoverShow = false;
+        }, 100);
+      }
+    },
+    // 输入框获得焦点
+    onInputFocus() {
+      setTimeout(() => {
+        const endLetter = this.textarea.charAt(this.textarea.length - 1);
+        if (endLetter === '@' || endLetter === '#') {
+          this.popoverType = endLetter === '@' ? 'user' : 'topic';
+          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+          this.popoverShow = true;
+          this.$nextTick(() => {
+            this.popoverPosition();
+          });
+        }
+      }, 100);
     },
     getPopoverDom() {
       return document.querySelector('#popoverId');
@@ -244,12 +271,19 @@ export default {
       }
       .select {
         margin: 0 20px;
+        padding: 9px 12px 9px 8px;
+        height: 34px;
         font-family: SFUIText-Medium;
         font-size: 14px;
         color: #777f8e;
         letter-spacing: 0;
         text-align: center;
         cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          border-radius: 17px;
+          background: #f6f6f9;
+        }
         i {
           margin-right: 4px;
           &::before {
@@ -276,6 +310,15 @@ export default {
         color: #ffffff;
         letter-spacing: 0;
         text-align: center;
+        background-color: #ff536c;
+        border-color: #ff536c;
+        &:active {
+          background-color: #ef4c63;
+          border-color: #ef4c63;
+        }
+        &:disabled {
+          opacity: 0.4;
+        }
       }
     }
   }

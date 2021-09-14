@@ -35,6 +35,17 @@ export default {
     },
     // 关闭图片上传功能
     onClose() {
+      if (this.count > 0) {
+        this.$confirm('Are you sure to give upload the image?', '', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'Cancel',
+        })
+          .then(() => {
+            this.$emit('onCloseImgUpload');
+          })
+          .catch(() => {});
+        return;
+      }
       this.$emit('onCloseImgUpload');
     },
   },

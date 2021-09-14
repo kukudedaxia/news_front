@@ -4,15 +4,21 @@
 -->
 <template>
   <div class="publisher">
-    <Publisher></Publisher>
+    <!-- 发布器 -->
+    <publisher></publisher>
+    <!-- Feed流 - tab组件 -->
+    <feed-tabs></feed-tabs>
   </div>
 </template>
 
 <script>
 import Publisher from '@/components/publish/Publisher.vue';
+import FeedTabs from '@/components/common/FeedTabs.vue';
+
 export default {
   components: {
     Publisher,
+    'feed-tabs': FeedTabs,
   },
   data() {
     return {

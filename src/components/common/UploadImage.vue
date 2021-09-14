@@ -54,6 +54,7 @@ import { fileByBase64, base64ByBlob, getCrc32, getMd5 } from '@/utils/upload';
 import draggable from 'vuedraggable';
 
 export default {
+  name: 'UploadImage',
   computed: {
     uploadImgUrl() {
       return process.env.VUE_APP_UPLOAD_IMG_URL;
@@ -78,20 +79,7 @@ export default {
     return {
       file: '', // 待上传的文件
       uploadLoading: false,
-      fileList: [
-        {
-          pid: '1',
-        },
-        {
-          pid: '2',
-        },
-        {
-          pid: '3',
-        },
-        {
-          pid: '',
-        },
-      ],
+      fileList: [],
       myArray: [],
     };
   },

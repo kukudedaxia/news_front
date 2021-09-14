@@ -137,7 +137,7 @@ export default {
   border: 1px solid #eff1f5;
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 6px;
-  // padding: 12px;
+  z-index: 99;
   .searching {
     padding: 20px;
     font-family: SFUIText-Regular;
