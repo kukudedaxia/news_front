@@ -82,6 +82,7 @@ const routes = [
     component: () => import('../views/Publisher.vue'),
     meta: {
       title: 'publisher',
+      auth: true,
     },
   },
   {
@@ -124,6 +125,9 @@ router.beforeEach(async (to, from, next) => {
   store.commit('changeToPage', to);
   if (Cookies.get('userInfo')) {
     store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
+  }
+  if (Cookies.get('tabs')) {
+    store.commit('setTab', JSON.parse(Cookies.get('tabs')));
   }
   // store.dispatch('changeUid', JSON.parse(Cookies.get('userInfo')));
   if (to.meta.auth) {

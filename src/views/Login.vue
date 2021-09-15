@@ -66,7 +66,7 @@
           <el-divider
             ><span class="continue">{{ $t('login.continue') }}</span></el-divider
           >
-          <ThirdLogin v-if="activeName == 'phone'" />
+          <ThirdLogin v-show="activeName == 'phone'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
             <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
@@ -146,7 +146,7 @@
           <el-divider
             ><span class="continue">{{ $t('login.continue') }}</span></el-divider
           >
-          <ThirdLogin v-if="activeName == 'account'" />
+          <ThirdLogin v-show="activeName == 'account'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
             <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
@@ -352,8 +352,9 @@ export default {
             Cookies.set('SUB', res.data.gsid);
           }
           await this.$store.dispatch('getUser', uid);
+          await this.getTab();
           this.$store.commit('setLoginType', 'normal');
-          this.$router.push({ path: 'live' });
+          this.$router.push({ path: '/publisher' });
         },
         onFail: res => {
           if (res.error_code == 30070 || res.error_code == 30071) {
@@ -388,6 +389,26 @@ export default {
       let rsaPassWord = encryptor.encrypt(password);
       console.log(rsaPassWord, 'rsa');
       return rsaPassWord;
+    },
+    getTab() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: `api/pc/login/tab/display`,
+        },
+        onSuccess: res => {
+          let obj = {};
+          for (let key in res.data.allTab) {
+            obj[key] = obj[key] || {};
+            obj[key].name = res.data.allTab[key];
+            obj[key].show = res.data.tab[key];
+          }
+          Cookies.set('tabs', JSON.stringify(obj));
+        },
+        onFail: res => {
+          console.log(res);
+        },
+      });
     },
   },
 };

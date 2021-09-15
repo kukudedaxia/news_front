@@ -136,7 +136,8 @@ export default {
           }
 
           await this.$store.dispatch('getUser', uid);
-          this.$router.push({ path: 'live' });
+          await this.getTab();
+          this.$router.push({ path: '/publisher' });
         },
         onFail: res => {
           if (res.error_code == 30070) {
@@ -203,12 +204,16 @@ export default {
     },
     // facebook
     initFB() {
-      window.FB.init({
-        appId: '192200776032093', // 这里填入第2步的appid
-        cookie: true, // Enable cookies to allow the server to access the session.
-        xfbml: true, // Parse social plugins on this webpage.
-        version: 'v11.0', // Use this Graph API version for this call.
-      });
+      try {
+        window.FB.init({
+          appId: '192200776032093', // 这里填入第2步的appid
+          cookie: true, // Enable cookies to allow the server to access the session.
+          xfbml: true, // Parse social plugins on this webpage.
+          version: 'v11.0', // Use this Graph API version for this call.
+        });
+      } catch {
+        console.log('initFB error');
+      }
     },
     FBlogin() {
       const that = this;
@@ -252,16 +257,20 @@ export default {
     },
     // apple
     async initApple() {
-      window.AppleID.auth.init({
-        clientId: 'to.bee.m',
-        scope: 'name email',
-        // response_type: 'code id_token',
-        redirectURI: 'https://bee.to/sign/api/callback',
-        state: 'initial',
-        // nonce: '[NONCE]',
-        usePopup: true, //or false defaults to false
-      });
-      this.listenApple();
+      try {
+        window.AppleID.auth.init({
+          clientId: 'to.bee.m',
+          scope: 'name email',
+          // response_type: 'code id_token',
+          redirectURI: 'https://bee.to/sign/api/callback',
+          state: 'initial',
+          // nonce: '[NONCE]',
+          usePopup: true, //or false defaults to false
+        });
+        this.listenApple();
+      } catch {
+        console.log('initApple error');
+      }
     },
     async loginInApple() {
       try {
@@ -285,6 +294,28 @@ export default {
       document.addEventListener('AppleIDSignInOnFailure', error => {
         console.log(error, 222);
         //handle error.
+      });
+    },
+
+    //new
+    getTab() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: `api/pc/login/tab/display`,
+        },
+        onSuccess: res => {
+          let obj = {};
+          for (let key in res.data.allTab) {
+            obj[key] = obj[key] || {};
+            obj[key].name = res.data.allTab[key];
+            obj[key].show = res.data.tab[key];
+          }
+          Cookies.set('tabs', JSON.stringify(obj));
+        },
+        onFail: res => {
+          console.log(res);
+        },
       });
     },
   },

@@ -12,13 +12,16 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './less/dark.less';
 
 import moment from 'moment';
+import { Toast } from 'vant';
 
-Vue.use(ElementUI).use(VueClipboard);
+Vue.use(ElementUI)
+  .use(VueClipboard)
+  .use(VueWechatTitle);
 // 动态title库
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
 Vue.prototype.$moment = moment;
-
+Vue.prototype.$toast = Toast;
 import './directive';
 import tools from './utils/tools';
 import './APP.less';

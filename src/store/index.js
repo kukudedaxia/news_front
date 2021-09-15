@@ -26,6 +26,7 @@ export default new Vuex.Store({
     loginType: 'normal', //facebook, google, apple, normal
     // uid: '',
     userInfo: {},
+    tab: {},
     pageLoading: false,
   },
   mutations: {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     },
     setUser(state, data) {
       state.userInfo = data;
+    },
+    setTab(state, data) {
+      state.tab = data;
     },
     setPageLoading() {},
   },
@@ -115,12 +119,20 @@ export default new Vuex.Store({
 
       request(reqConf)
         .then(res => {
-          if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
-            payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
-          } else {
-            payload.onFail && payload.onFail(res.data, reqConf, res);
+          try {
+            if (
+              res &&
+              res.data &&
+              (res.data.error_code === 10000 || res.data.error === 'success')
+            ) {
+              payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
+            } else {
+              payload.onFail && payload.onFail(res.data, reqConf, res);
+            }
+            payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
+          } catch (err) {
+            console.log(err)
           }
-          payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
         })
         .catch(err => {
           if (!navigator.onLine) {

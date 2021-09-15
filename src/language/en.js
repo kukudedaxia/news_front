@@ -5,6 +5,8 @@ const message = {
   home: 'Home',
   lives: 'Creator Center',
   loginpage: 'log in',
+  nav1: 'Post a Beet',
+  nav2: 'Start live broadcast',
   slide1: {
     beeto: 'Freshly delivered',
     born: 'content with',
@@ -117,5 +119,10 @@ const message = {
     continue: 'Continue with',
   },
   internalerror: 'Internal Server Error',
+  uploadV: {
+    error1: 'This video is larger than 4GB',
+    error2: 'This video is more than 60m',
+    error3: 'This video is less than 4s',
+  }
 };
 export default message;

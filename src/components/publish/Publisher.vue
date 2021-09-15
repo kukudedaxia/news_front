@@ -21,7 +21,7 @@
         <li @click="uploadImgShow = true">
           <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
         </li>
-        <li>
+        <li @click="uploadVideoShow = true">
           <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
         </li>
         <li @click="addMention">
@@ -57,6 +57,10 @@
     <transition name="fade_top">
       <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
     </transition>
+      <el-divider v-if="uploadVideoShow"></el-divider>
+    <transition name="fade_top">
+      <UploadV v-if="uploadVideoShow" @onClose="onCloseVideoUpload"></UploadV>
+    </transition>
     <transition name="fade">
       <Popover
         v-show="popoverShow"
@@ -72,6 +76,7 @@
 <script>
 import Popover from '@/components/publish/Popover';
 import UploadImage from '@/components/publish/UploadImage';
+import UploadV from '@/components/publish/UploadV';
 
 import '../../assets/sdk/jquery.caret';
 import $ from 'jquery';
@@ -79,6 +84,7 @@ export default {
   components: {
     Popover,
     'upload-image': UploadImage,
+    UploadV,
   },
   data() {
     return {
@@ -117,6 +123,7 @@ export default {
       },
       // 输入框的光标所在下标
       focusIndex: 0,
+      uploadVideoShow: true,
     };
   },
   watch: {
@@ -272,6 +279,10 @@ export default {
     onCloseImgUpload() {
       this.uploadImgShow = false;
     },
+    // 关闭视频上传功能
+    onCloseVideoUpload() {
+      this.uploadVideoShow = false;
+    },
   },
 };
 </script>
@@ -281,8 +292,12 @@ export default {
   background: #ffffff;
   border-radius: 6px;
   width: 782px;
+<<<<<<< HEAD
   margin: auto;
   position: relative;
+=======
+  margin: 20px auto;
+>>>>>>> 95ad1c2 (feature: 视频上传 + 登录修改)
   .textarea {
     padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
