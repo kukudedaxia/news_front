@@ -94,7 +94,7 @@ export default {
       streamKey: null, // 密钥
       lid: null, // 直播间id
       title: '', // 标题
-      cover_img: '1', // 封面id
+      cover_img: '', // 封面id
       live_type: 1, // 0:预约开播 1:直接开播
       scheduledParam: {}, // 预约直播参数
       blobText: '', // 博文内容
@@ -202,17 +202,24 @@ export default {
             // 监听消息通知
             message(event) {
               console.log('message', event);
-              // msg 1 app下播  2 审核后台下播  3 obs停止推流  4 直播异常
+              // msg 1 app下播  2 审核后台下播  3 obs网络抖动  5 obs停止推流
               const msg = event.message.content.event;
-              if (msg === 1 || msg === 2) {
+              if (msg === 1 || msg === 2 || msg === 5) {
                 const remoteTracks = _this.room.getRemoteTracks();
                 if (remoteTracks.length > 0) {
                   _this.room.unsubscribe(remoteTracks);
                 }
-                _this.stopLive();
+                _this.changeLiveSate();
+                if (msg === 5) {
+                  _this.$alert(_this.$t('live.closeMsg'), '', {
+                    confirmButtonText: _this.$t('live.ok'),
+                    showClose: false,
+                    callback: () => {},
+                  });
+                }
               }
-              // 如果是obs断流，则弹窗提醒用户
-              if (msg === 3) {
+              // obs网路抖动，则弹窗提醒用户
+              else if (msg === 3) {
                 _this.$alert(_this.$t('live.obsMsg'), '', {
                   confirmButtonText: _this.$t('live.ok'),
                   showClose: false,
@@ -220,15 +227,15 @@ export default {
                 });
               }
               // 直播异常，自动下播
-              if (msg === 4) {
-                _this.stopLive().then(() => {
-                  _this.$alert(_this.$t('live.closeMsg'), '', {
-                    confirmButtonText: _this.$t('live.ok'),
-                    showClose: false,
-                    callback: () => {},
-                  });
-                });
-              }
+              // if (msg === 4) {
+              //   _this.stopLive().then(() => {
+              //     _this.$alert(_this.$t('live.closeMsg'), '', {
+              //       confirmButtonText: _this.$t('live.ok'),
+              //       showClose: false,
+              //       callback: () => {},
+              //     });
+              //   });
+              // }
             },
             // 监听 IM 连接状态变化
             status(event) {
@@ -612,6 +619,22 @@ export default {
         .catch(() => {
           this.$store.commit('live/setLeaveLivingDialog', false);
         });
+    },
+    // 更改直播状态
+    changeLiveSate() {
+      leaveRoom(this.room);
+      this.liveState = 2;
+      this.$message({
+        message: this.$t('live.success'),
+        type: 'success',
+      });
+      this.$refs.scheduledLiveRef.changeLiveState(this.scheduledParam.lid, 2);
+      this.$store.commit('live/setLiving', false);
+      if (this.live_type === 1) {
+        this.goLiveBtnLoading = false;
+      } else {
+        this.$refs.scheduledLiveRef.changeBtnLoading(this.scheduledParam.lid);
+      }
     },
   },
   beforeRouteLeave(to, from, next) {
