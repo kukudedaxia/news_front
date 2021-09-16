@@ -20,6 +20,7 @@
       <div class="cover" v-if="data.imgUrls.length >= 9">
         +9
       </div>
+      <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" />
     </div>
     <div class="video" v-if="data.video">
       <img :src="data.video.url" />
@@ -123,6 +124,13 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .piiic {
+      width: 31px;
+      height: 19px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
     }
   }
   .video {

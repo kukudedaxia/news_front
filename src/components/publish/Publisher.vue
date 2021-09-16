@@ -9,6 +9,7 @@
       :autosize="{ minRows: 5, maxRows: 10 }"
       placeholder="Express freely…"
       ref="textareaId"
+      id="textareaId"
       v-model="textarea"
       class="textarea"
       @blur="onInputBlur"
@@ -56,13 +57,15 @@
     <transition name="fade_top">
       <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
     </transition>
-    <Popover
-      v-show="popoverShow"
-      :type="popoverType"
-      class="popover"
-      id="popoverId"
-      @onItemClick="onItemClick"
-    ></Popover>
+    <transition name="fade">
+      <Popover
+        v-show="popoverShow"
+        :type="popoverType"
+        class="popover"
+        id="popoverId"
+        @onItemClick="onItemClick"
+      ></Popover>
+    </transition>
   </div>
 </template>
 
@@ -107,25 +110,44 @@ export default {
       popoverShow: false,
       popoverType: '', // # topic 、 @ user
       uploadImgShow: false,
+      // 输入框的偏移量
+      textareaOffset: {
+        top: 0,
+        left: 0,
+      },
+      // 输入框的光标所在下标
+      focusIndex: 0,
     };
   },
   watch: {
     // 监听发布器文本变化
     textarea(val) {
-      const endLetter = val.charAt(val.length - 1);
-      if (endLetter === '@' || endLetter === '#') {
-        this.popoverType = endLetter === '@' ? 'user' : 'topic';
-        Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-
-        this.$nextTick(() => {
-          this.popoverPosition();
-          setTimeout(() => {
-            this.popoverShow = true;
-          }, 100);
-        });
-      } else {
-        this.popoverShow = false;
-      }
+      /**
+       * 1. 获取光标所在下标
+       * 2. 检测光标的前一位字符是否为 @、# ; 如果是，则弹出对应的popover
+       * 3. 选择完成后，需要在后面增加一个空格，以表示完成输入
+       * // ---- 待完善 ---- //
+       * 1. 需要监听光标的移动
+       * 2. 当光标在@、#后一位，则弹出popover
+       * 3. 如果光标在@、#后不存在空格的字符串中的任意位置。则提示敲击空格完成输入
+       * 4. popover选项支持键盘选择
+       */
+      this.$nextTick(() => {
+        this.getFocusIndex();
+        const letter = val.charAt(this.focusIndex - 1);
+        if (letter === '@' || letter === '#') {
+          this.popoverType = letter === '@' ? 'user' : 'topic';
+          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+          this.$nextTick(() => {
+            this.popoverPosition();
+            setTimeout(() => {
+              this.popoverShow = true;
+            }, 100);
+          });
+        } else {
+          this.popoverShow = false;
+        }
+      });
     },
   },
   computed: {
@@ -139,6 +161,11 @@ export default {
   mounted() {
     // 设置textarea不检查单词拼写
     this.$refs.textareaId.$el.spellcheck = false;
+    // 获取textarea的左、上偏移量
+    this.textareaOffset = {
+      top: $('#textareaId').offset().top,
+      left: $('#textareaId').offset().left,
+    };
   },
   methods: {
     handleCommand(val) {
@@ -154,51 +181,92 @@ export default {
         dropdownId.classList.add('select-icon_down');
       }
     },
-    // @
+    // 点击@图标
     addMention() {
-      this.textarea += '@';
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + '@' + this.textarea.slice(this.focusIndex);
+      this.setFocusIndex(this.focusIndex + 1);
       this.$refs.textareaId.focus();
     },
-    // #
+    // 点击#图标
     addTopics() {
-      this.textarea += '#';
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + '#' + this.textarea.slice(this.focusIndex);
+      this.setFocusIndex(this.focusIndex + 1);
       this.$refs.textareaId.focus();
     },
     // 输入框失去焦点
     onInputBlur() {
+      // 失去焦点，更新光标下标
+      this.getFocusIndex();
       if (this.popoverShow) {
         setTimeout(() => {
           this.popoverShow = false;
-        }, 100);
+        }, 200);
       }
     },
     // 输入框获得焦点
     onInputFocus() {
+      // 获得焦点，更新光标下标
       setTimeout(() => {
-        const endLetter = this.textarea.charAt(this.textarea.length - 1);
-        if (endLetter === '@' || endLetter === '#') {
-          this.popoverType = endLetter === '@' ? 'user' : 'topic';
+        this.getFocusIndex();
+        // 光标的上一个字符
+        const letter = this.textarea.charAt(this.focusIndex - 1);
+        if (letter === '@' || letter === '#') {
+          this.popoverType = letter === '@' ? 'user' : 'topic';
           Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
           this.popoverShow = true;
           this.$nextTick(() => {
             this.popoverPosition();
           });
         }
-      }, 100);
+      }, 0);
     },
+    // 获取发布器输入框中光标的下标位置
+    getFocusIndex() {
+      const dom = $('#textareaId')[0];
+      // IE
+      if (document.selection) {
+        var range = document.selection.createRange();
+        range.moveStart('character', -dom.value.length);
+        this.focusIndex = range.text.length;
+      } else if (dom.selectionStart || dom.selectionStart == 0) {
+        // another support
+        this.focusIndex = dom.selectionStart;
+      }
+    },
+    // 设置发布器输入框中光标的下标位置
+    setFocusIndex(index) {
+      const dom = $('#textareaId')[0];
+      if (this.focusIndex < 0) this.focusIndex = this.textarea.length;
+      if (dom.setSelectionRange) {
+        setTimeout(() => {
+          dom.setSelectionRange(index, index);
+        }, 0);
+      } else if (dom.createTextRange) {
+        dom.createTextRange().move('character', this.focusIndex);
+      }
+    },
+    // 获取popover DOM
     getPopoverDom() {
       return document.querySelector('#popoverId');
     },
     // 定位popover的位置
     popoverPosition() {
       const dom = this.getPopoverDom();
-      dom.style.top = `${this.cursorCoordinate.top + this.cursorCoordinate.height + 4}px `;
-      dom.style.left = `${this.cursorCoordinate.left}px`;
+      dom.style.top = `${this.cursorCoordinate.top +
+        2 * this.cursorCoordinate.height -
+        this.textareaOffset.top}px `;
+      dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
     },
     // popover选中事件
     onItemClick(data) {
-      this.textarea += `${data} `;
+      this.getFocusIndex();
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + data + ' ' + this.textarea.slice(this.focusIndex);
       this.popoverShow = false;
+      // 设置光标的位置为选中数据空格的后一位
+      this.focusIndex = this.focusIndex + data.length + 1;
     },
     // 关闭图片上传功能
     onCloseImgUpload() {
@@ -214,6 +282,7 @@ export default {
   border-radius: 6px;
   width: 782px;
   margin: auto;
+  position: relative;
   .textarea {
     padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
@@ -225,7 +294,7 @@ export default {
       font-family: SFUIText-Regular;
       font-size: 16px;
       color: #333333;
-      text-align: justify;
+      // text-align: justify;
       line-height: 20px;
 
       &::placeholder {
@@ -336,7 +405,7 @@ export default {
     visibility: hidden;
   }
   .popover {
-    position: fixed;
+    position: absolute;
     top: 120px;
     left: 550px;
   }

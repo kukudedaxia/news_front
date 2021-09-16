@@ -30,6 +30,6 @@ export default {
 
 <style lang="less" scoped>
 .publisher {
-  padding: 20px auto;
+  // padding: 20px auto;
 }
 </style>
