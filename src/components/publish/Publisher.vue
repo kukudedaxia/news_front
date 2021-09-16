@@ -62,7 +62,7 @@
     <transition name="fade_top">
       <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
     </transition>
-      <el-divider v-if="uploadVideoShow"></el-divider>
+    <el-divider v-if="uploadVideoShow"></el-divider>
     <transition name="fade_top">
       <UploadV v-if="uploadVideoShow" @onClose="onCloseVideoUpload"></UploadV>
     </transition>
@@ -339,14 +339,10 @@ export default {
 .com-publisher {
   background: #ffffff;
   border-radius: 6px;
-  width: 782px;
-<<<<<<< HEAD
-  margin: auto;
+  width: 782px;;
   position: relative;
-=======
   margin: 20px auto;
->>>>>>> 95ad1c2 (feature: 视频上传 + 登录修改)
-  .textarea {
+ .textarea {
     padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
       background: #f6f6f9 !important;
