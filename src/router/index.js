@@ -81,7 +81,7 @@ const routes = [
     name: 'Publisher',
     component: () => import('../views/Publisher.vue'),
     meta: {
-      title: 'publisher',
+      title: 'publish',
     },
   },
   {

@@ -6,7 +6,7 @@
   <div class="com-feed-tabs">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <!-- <el-tab-pane label="Beets" name="Beets">Beets</el-tab-pane> -->
-      <el-tab-pane :label="`Drafts(${draftList.length})`" name="Drafts">
+      <el-tab-pane :label="`${$t('publisher.drafts')}(${draftList.length})`" name="Drafts">
         <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
           <li v-for="(item, index) in draftList" class="infinite-list-item" :key="index">
             <Drafts :data="item"></Drafts>
@@ -27,6 +27,9 @@ export default {
   data() {
     return {
       activeName: 'Drafts',
+      // 草稿箱参数
+      draftStart: 1,
+      draftSize: 20,
       draftList: [
         {
           text:
@@ -118,7 +121,25 @@ export default {
   methods: {
     handleClick() {},
     load() {
-      // this.count += 2;
+      this.searchDraftList();
+    },
+    searchDraftList() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: 'api/pc/draft/page',
+          params: {
+            start: this.draftStart,
+            size: this.draftSize,
+          },
+        },
+        onSuccess: ({ data }) => {
+          console.log(data);
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+      });
     },
   },
 };

@@ -7,7 +7,7 @@
     <p class="title text-overflow-1">
       {{ item.title }}
     </p>
-    <span>{{ item.num }}Posts</span>
+    <span>{{ item.num }}{{ $t('publisher.beets') }}</span>
   </div>
 </template>
 

@@ -7,7 +7,7 @@
     <!-- 检索中 -->
     <div class="searching flex-align" v-if="searchLoading">
       <img src="@/assets/images/publisher/account_icon_searching@3x.png" class="seatch-icon" />
-      Searching…
+      {{ $t('publisher.searching') }}
     </div>
     <!-- 创建话题 -->
     <div
@@ -15,15 +15,16 @@
       v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
     >
       <p>
+        <!-- 话题名 -->
         Visual frequency
       </p>
       <span>
-        Create a topic
+        {{ $t('publisher.topic') }}
       </span>
     </div>
     <div class="user-result" v-else-if="!searchLoading && type === 'user' && userList.length === 0">
       <p>
-        No Result
+        {{ $t('publisher.noResults') }}
       </p>
     </div>
     <div class="list-content" v-else>
@@ -112,7 +113,7 @@ export default {
     };
   },
   mounted() {
-    this.searchUser();
+    // this.searchUser();
   },
   methods: {
     load() {},
@@ -121,9 +122,26 @@ export default {
     },
     // @ 用户检索
     searchUser() {
-      setTimeout(() => {
-        this.searchLoading = false;
-      }, 1000);
+      // setTimeout(() => {
+      //   this.searchLoading = false;
+      // }, 1000);
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: 'api/pc/status/beet/at',
+          params: {
+            keyword: '2',
+            page: 1,
+            count: 50,
+          },
+        },
+        onSuccess: ({ data }) => {
+          console.log(data);
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+      });
     },
   },
 };

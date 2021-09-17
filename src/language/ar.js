@@ -5,6 +5,7 @@ const message = {
   home: 'الصفحة الرئيسية',
   lives: 'مركز صناع المحتوى',
   loginpage: 'تسجيل الدخول',
+  publish: 'مركز صناع المحتوى',
   slide1: {
     beeto: 'محتوى يقدم لك كل ',
     born: 'ما هو جديد حولك على الطريقة ',
@@ -113,6 +114,25 @@ const message = {
     error: 'يرجى ملء رقم الهاتف بشكل صحيح',
     continue: 'استمر مع',
   },
-  internalerror: 'خطأ بالخادم الداخلي'
+  internalerror: 'خطأ بالخادم الداخلي',
+  publisher: {
+    public: 'عام',
+    friends: 'الأصدقاء (المتابعين المشتركين)',
+    fans: 'المتابعين',
+    onlyMe: 'أنا فقط',
+    release: 'نشر',
+    express: ' عبر براحتك…',
+    searching: 'بحث...',
+    topic: 'قم بإنشاء موضوع',
+    noResults: 'لا يوجد نتائج',
+    suppotsImg: 'يدعم التنسيقات التالية: JPG / JPEG / PNG / tiff / webp / heic / gif',
+    uploadImage: 'رفع الصور',
+    imgDialogTitle: 'هل أنت متأكد من إلغاء رفع الصورة؟',
+    confirm: 'تأكيد',
+    cancel: 'إلغاء',
+    drafts: 'المسودات',
+    delete: 'حذف',
+    beets: 'بيتات',
+  },
 };
 export default message;

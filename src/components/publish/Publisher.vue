@@ -7,7 +7,7 @@
     <el-input
       type="textarea"
       :autosize="{ minRows: 5, maxRows: 10 }"
-      placeholder="Express freely…"
+      :placeholder="$t('publisher.express')"
       ref="textareaId"
       id="textareaId"
       v-model="textarea"
@@ -48,8 +48,13 @@
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-button type="primary" round size="small" :disabled="btnDisabled" class="inform-box_btn"
-          >Release</el-button
+        <el-button
+          type="primary"
+          round
+          size="small"
+          :disabled="btnDisabled"
+          class="inform-box_btn"
+          >{{ $t('publisher.release') }}</el-button
         >
       </div>
     </div>
@@ -83,23 +88,23 @@ export default {
   data() {
     return {
       textarea: '',
-      selectVal: 'Public',
+      selectVal: this.$t('publisher.public'),
       selectList: [
         {
           id: 1,
-          name: 'Public',
+          name: this.$t('publisher.public'),
         },
         {
           id: 2,
-          name: 'Followers',
+          name: this.$t('publisher.friends'),
         },
         {
           id: 3,
-          name: 'Friends',
+          name: this.$t('publisher.fans'),
         },
         {
           id: 4,
-          name: 'Only me',
+          name: this.$t('publisher.onlyMe'),
         },
       ],
       // 发布器光标离 @ # 最近的坐标
@@ -117,6 +122,13 @@ export default {
       },
       // 输入框的光标所在下标
       focusIndex: 0,
+      // ------ 草稿 ------ //
+      draftId: null, // 草稿箱id,如果没有传则会新建
+      formalV: '', // 草稿箱修改时必须带上，上一版本版本号
+      // 草稿保存接口是否请求完成  默认是完成态，当在请求时设为false
+      draftSaveFinish: true,
+      // 草稿保存定时器实例
+      draftSaveTimes: null,
     };
   },
   watch: {
@@ -148,6 +160,7 @@ export default {
           this.popoverShow = false;
         }
       });
+      this.draftSave();
     },
   },
   computed: {
@@ -271,6 +284,39 @@ export default {
     // 关闭图片上传功能
     onCloseImgUpload() {
       this.uploadImgShow = false;
+    },
+    // 草稿箱上报
+    draftSave() {
+      // 如果保存草稿状态为完成，则可以走2s延迟保存草稿操作
+      if (this.draftSaveFinish) {
+        this.draftSaveFinish = false;
+        this.draftSaveTimes = setTimeout(() => {
+          const params = {
+            content: JSON.stringify({
+              text: this.textarea,
+            }),
+            formalV: this.formalV,
+          };
+          Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
+          this.$store.dispatch('ajax', {
+            req: {
+              method: 'post',
+              url: 'api/pc/draft/save',
+              params,
+            },
+            onSuccess: ({ data }) => {
+              this.draftId = data.id;
+              this.formalV = data.v;
+            },
+            onFail: ({ error }) => {
+              this.$message.error(error);
+            },
+            onComplete: () => {
+              this.draftSaveFinish = true;
+            },
+          });
+        }, 2000);
+      }
     },
   },
 };
@@ -415,7 +461,7 @@ export default {
   }
 }
 .el-dropdown-menu {
-  width: 160px;
+  min-width: 160px;
   background: #ffffff;
   border: 1px solid #eff1f5;
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.12);

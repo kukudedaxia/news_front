@@ -11,7 +11,7 @@
       <div class="text-bottom flex-align">
         <p class="time">{{ `${data.time} · ${data.power}` }}</p>
         <span class="btn-del">
-          Delete
+          {{ $t('publisher.delete') }}
         </span>
       </div>
     </div>

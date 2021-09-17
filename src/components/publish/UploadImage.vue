@@ -5,9 +5,9 @@
 <template>
   <div class="com-publish-upload_image">
     <div class="top">
-      <p>{{ `Upload image(${count}/18)` }}</p>
+      <p>{{ `${$t('publisher.uploadImage')}(${count}/18)` }}</p>
       <span>
-        Format supports JPG / JPEG / PNG / tiff / webp / heic / gif
+        {{ $t('publisher.suppotsImg') }}
       </span>
     </div>
     <div class="icon-close" @click="onClose"></div>
@@ -36,9 +36,9 @@ export default {
     // 关闭图片上传功能
     onClose() {
       if (this.count > 0) {
-        this.$confirm('Are you sure to give upload the image?', '', {
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'Cancel',
+        this.$confirm(this.$t('publisher.imgDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
         })
           .then(() => {
             this.$emit('onCloseImgUpload');

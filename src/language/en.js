@@ -5,6 +5,7 @@ const message = {
   home: 'Home',
   lives: 'Creator Center',
   loginpage: 'log in',
+  publish: 'Creator Center',
   slide1: {
     beeto: 'Freshly delivered',
     born: 'content with',
@@ -117,5 +118,24 @@ const message = {
     continue: 'Continue with',
   },
   internalerror: 'Internal Server Error',
+  publisher: {
+    public: 'Public',
+    friends: 'Friends(mutual fans)',
+    fans: 'Fans',
+    onlyMe: 'Only me',
+    release: 'Release',
+    express: 'Express freely…',
+    searching: 'Searching…',
+    topic: 'Create a topic',
+    noResults: 'No results',
+    suppotsImg: 'Format supports JPG / JPEG / PNG / tiff / webp / heic / gif',
+    uploadImage: 'Upload image',
+    imgDialogTitle: 'Are you sure to give up uploading the image?',
+    confirm: 'Confirm',
+    cancel: 'Cancel',
+    drafts: 'Drafts',
+    delete: 'Delete',
+    beets: 'Beets',
+  },
 };
 export default message;
