@@ -11,10 +11,19 @@
         ]"
         @click="goHome"
       ></div>
-      <div class="menus" v-if="showMenu">
+      <div class="menus" v-if="showMenu && tabs">
         <el-tabs :value="path" style="width: 100%;" class="flip-over" @tab-click="onTabClick">
-          <el-tab-pane :label="$t('nav1')" name="/publisher" class="flip-over"> </el-tab-pane>
-          <el-tab-pane :label="$t('nav2')" name="/live" class="flip-over"> </el-tab-pane>
+          <template v-for="(item, index) in tabs">
+            <el-tab-pane
+              :key="index"
+              :label="$t('nav_' + item.name)"
+              :name="`/${item.name}`"
+              class="flip-over"
+              v-if="item.show"
+            >
+            </el-tab-pane>
+          </template>
+          <!-- <el-tab-pane :label="$t('nav2')" name="/live" class="flip-over"> </el-tab-pane> -->
         </el-tabs>
       </div>
       <div class="header-right">
@@ -324,6 +333,7 @@ html[lang='ar'] .lanuage {
   text-decoration: none;
   // margin-right: 20px;
   font-size: 16px;
+  cursor: pointer;
 }
 .create {
   margin-right: 20px;

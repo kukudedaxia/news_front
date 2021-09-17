@@ -235,8 +235,8 @@ class wbUploader {
       //   video: { check_url, init_url, upload_url, upload_urls },
       // } = res.data.data;
       // 重写
-      let check_url = '/multimedia/2/video/pc/check.json';
-      let init_url = '/multimedia/2/video/pc/init.json';
+      let check_url = '/multimedia/2/video/pc/upload/check.json';
+      let init_url = '/multimedia/2/video/pc/upload/init.json';
       let upload_url = 'http://video.whale.weibo.com:31001/2/fileplatform/upload.json';
       this.options.urls = { check_url, init_url, upload_url };
       // if (upload_urls) {
@@ -404,7 +404,7 @@ class wbUploader {
         for (let i = 0; i < 9; i++) {
           if (i == 0) {
             arr[i] = await getVideoScreenshot(file, 1);
-            console.log(new Date().getTime(), '第一帧图片')
+            console.log(new Date().getTime(), '第一帧图片');
           } else {
             arr[i] = await getVideoScreenshot(file, (videoSize.duration / 9) * i);
           }
@@ -414,7 +414,7 @@ class wbUploader {
             this.currFile.detail = { detail: videoSize, screenshot: arr };
           }
           if (i == 0) {
-            console.log(arr, 'arr', new Date().getTime(),)
+            console.log(arr, 'arr', new Date().getTime());
             this.emit('screenshot', this.currFile.detail);
           }
         }
@@ -688,6 +688,7 @@ class wbUploader {
       let load = e.loaded - lastLoad > 0 ? e.loaded - lastLoad : e.loaded;
       let speed = formatSpeed(load / sec);
       lastTime = Date.now();
+      lastLoad = e.loaded;
 
       progress[chunkIndex] = Math.floor((e.loaded / e.total) * (end - start));
       if (progress) {
@@ -701,7 +702,7 @@ class wbUploader {
         logs.updateLog({
           process_value: uploadProgress,
         });
-        const quotaSize = file.size * (100 - uploadProgress);
+        const quotaSize = (file.size * (100 - uploadProgress)) / 100;
         const quotaTime = quotaSize / speed.speed;
         this.emit('uploadStatus', {
           progress: uploadProgress,
@@ -754,7 +755,8 @@ class wbUploader {
       });
       this.emit('success', { file: file });
       if (this.options.default.autoLog) {
-        // this.uploadLog();
+        // 上传成功打印日志
+        this.uploadLog();
       }
 
       if (
@@ -772,44 +774,44 @@ class wbUploader {
         this.currFile.detail = {};
         const start = new Date();
         //这里??? 是否上传完在获取截图
-        batchTimer = setInterval(() => {
-          this.batchScreenshot(params).then(res => {
-            if (res.data && res.data[initRes.media_id] && res.data[initRes.media_id].screenshot) {
-              let a = res.data[initRes.media_id].screenshot.file_detail;
-              let screenArray = [];
-              a = JSON.parse(a);
-              if (Object.values(a).length) {
-                const end = new Date();
-                logs.updateLog({
-                  screenshot_time: (end - start) / 1000,
-                  is_screenshot_success: true,
-                });
-                clearInterval(batchTimer);
-                a.files.forEach(item => {
-                  screenArray.push({ pid: item.file_id, url: item.url });
-                });
-                this.screenshot = screenArray;
-                this.currFile.detail.screenshot = screenArray;
-                this.emit('screenshot', this.currFile.detail);
-              }
-            }
-          });
-        }, 2000);
-        detailTimer = setInterval(() => {
-          this.batchDetails({ ids: this.currFile.initRes.media_id }).then(res => {
-            if (
-              res.data &&
-              res.data[initRes.media_id] &&
-              res.data[initRes.media_id].video_basic_info &&
-              res.data[initRes.media_id].video_basic_info.width
-            ) {
-              let { width, height, duration } = res.data[initRes.media_id].video_basic_info;
-              this.currFile.detail.detail = { width, height, duration };
-              this.emit('screenshot', this.currFile.detail);
-              clearInterval(detailTimer);
-            }
-          });
-        }, 2000);
+        // batchTimer = setInterval(() => {
+        //   this.batchScreenshot(params).then(res => {
+        //     if (res.data && res.data[initRes.media_id] && res.data[initRes.media_id].screenshot) {
+        //       let a = res.data[initRes.media_id].screenshot.file_detail;
+        //       let screenArray = [];
+        //       a = JSON.parse(a);
+        //       if (Object.values(a).length) {
+        //         const end = new Date();
+        //         logs.updateLog({
+        //           screenshot_time: (end - start) / 1000,
+        //           is_screenshot_success: true,
+        //         });
+        //         clearInterval(batchTimer);
+        //         a.files.forEach(item => {
+        //           screenArray.push({ pid: item.file_id, url: item.url });
+        //         });
+        //         this.screenshot = screenArray;
+        //         this.currFile.detail.screenshot = screenArray;
+        //         this.emit('screenshot', this.currFile.detail);
+        //       }
+        //     }
+        //   });
+        // }, 2000);
+        // detailTimer = setInterval(() => {
+        //   this.batchDetails({ ids: this.currFile.initRes.media_id }).then(res => {
+        //     if (
+        //       res.data &&
+        //       res.data[initRes.media_id] &&
+        //       res.data[initRes.media_id].video_basic_info &&
+        //       res.data[initRes.media_id].video_basic_info.width
+        //     ) {
+        //       let { width, height, duration } = res.data[initRes.media_id].video_basic_info;
+        //       this.currFile.detail.detail = { width, height, duration };
+        //       this.emit('screenshot', this.currFile.detail);
+        //       clearInterval(detailTimer);
+        //     }
+        //   });
+        // }, 2000);
       }
     } else {
       //在这里错误才触发。。。。。能改为手动
@@ -871,7 +873,8 @@ class wbUploader {
         headers: {
           'X-Up-Auth': initRes.auth,
         },
-        retry: this.options.strategy.chunk_retry,
+        // retry: this.options.strategy.chunk_retry,
+        retry: 3,
         retryDelay: this.options.strategy.chunk_delay,
       });
     } catch (err) {
@@ -899,7 +902,16 @@ class wbUploader {
       .then(
         res => {
           this.time.init.end = new Date();
-          return res.data;
+          if (res.data.error_code == 10000) {
+            return res.data;
+          } else {
+            return (
+              {
+                data: false,
+              },
+              this.emit('error', 'init 失败' + res.data.error)
+            );
+          }
         },
         error => {
           this.emit('error', 'init 失败');
@@ -975,13 +987,13 @@ class wbUploader {
     }
     // this.currFile && this.currFile.cancelSource && this.currFile.cancelSource.cancel('取消');
     logs.updateLog({
-      is_upload_cancel: true,
+      is_cancel: true,
     });
     this.currFile = {};
     this.fileList.splice(0, 1);
     this.successIndex = [];
-    this.emit('error', '用户取消');
-    // this.uploadLog();
+    this.emit('error', 'cancel');
+    console.log('用户取消');
     detailTimer && clearInterval(detailTimer);
     batchTimer && clearInterval(batchTimer);
   };
@@ -1016,13 +1028,13 @@ class wbUploader {
   emit(eventName, fn) {
     let now = new Date();
     if (eventName == 'error') {
-      //上报失败的日志
-
       logs.updateLog({
         total_time: (now - this.time.discovery.start) / 1000,
         is_success: false,
         error_msg: fn,
       });
+      //上报失败的日志
+      this.uploadLog(fn);
     } else if (eventName == 'success') {
       let total_time = (now - this.time.discovery.start) / 1000;
       logs.updateLog({

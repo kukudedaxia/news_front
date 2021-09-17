@@ -6,8 +6,8 @@ const message = {
   lives: 'Creator Center',
   loginpage: 'log in',
   publish: 'Creator Center',
-  nav1: 'Post a Beet',
-  nav2: 'Start live broadcast',
+  nav_publisher: 'Post a Beet',
+  nav_live: 'Start live broadcast',
   slide1: {
     beeto: 'Freshly delivered',
     born: 'content with',
@@ -138,11 +138,16 @@ const message = {
     drafts: 'Drafts',
     delete: 'Delete',
     beets: 'Beets',
+    uploadVideo: 'Upload video',
+    suppotsVideo:
+      'Format supports mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
   },
   uploadV: {
     error1: 'This video is larger than 4GB',
-    error2: 'This video is more than 60m',
-    error3: 'This video is less than 4s',
-  }
+    error2: 'This video is more than 60 minutes',
+    error3: 'This video is less than 3 seconds',
+    try: 'Click to retry',
+    expected: 'Expected',
+  },
 };
 export default message;

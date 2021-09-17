@@ -17,7 +17,7 @@
     </div>
     <div class="img" v-if="data.imgUrls && data.imgUrls.length > 0">
       <img :src="data.imgUrls[0].url" />
-      <div class="cover" v-if="data.imgUrls.length >= 9">
+      <div class="cover" v-if="data.imgUrls.length >= 9" dir="ltr">
         +9
       </div>
       <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" />
@@ -152,6 +152,29 @@ export default {
       position: absolute;
       bottom: 8px;
       right: 12px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+html[lang='ar'] {
+  .com-drafts .img {
+    margin-left: 0;
+    margin-right: 20px;
+    .piiic {
+      left: 0;
+      right: auto;
+    }
+  }
+  .com-drafts .video {
+    margin-left: 0;
+    margin-right: 20px;
+    .time {
+      left: 12px;
+      right: auto;
     }
   }
 }

@@ -92,4 +92,13 @@ export default {
   .upload-img-box {
   }
 }
+html[lang='ar'] {
+   .com-publish-upload_image .top {
+    text-align: right;
+  }
+  .com-publish-upload_image .icon-close {
+    right: auto;
+    left: 25px;
+  }
+}
 </style>

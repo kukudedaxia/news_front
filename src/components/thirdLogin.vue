@@ -305,13 +305,18 @@ export default {
           url: `api/pc/login/tab/display`,
         },
         onSuccess: res => {
-          let obj = {};
+          let arr = [];
           for (let key in res.data.allTab) {
-            obj[key] = obj[key] || {};
-            obj[key].name = res.data.allTab[key];
-            obj[key].show = res.data.tab[key];
+            let obj = {};
+            obj.key = key;
+            obj.name = res.data.allTab[key];
+            obj.show = res.data.tab[key];
+            arr.push(obj);
           }
-          Cookies.set('tabs', JSON.stringify(obj));
+          arr.sort((a, b) => {
+            return b.key - a.key;
+          });
+           Cookies.set('tabs', JSON.stringify(arr));
         },
         onFail: res => {
           console.log(res);

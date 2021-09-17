@@ -8,12 +8,13 @@ const logs = {
     console.log(res);
     this.initRes = res;
   },
+  // 失败自己写
   initLog() {
     this.uploadLog = {
       version: 1, // 新版微博标记
-      is_success: false, // 视频是否上传完成（true/false) [x]
+      is_success: false, // 视频是否上传完成（true/false) [x] //--------------客户端-----------------
       file_type: 'video', // 文件类型（pic/video）[x]
-      file_length: 0, // 文件长度（byte）[x]
+      file_length: 0, // 文件长度（byte）[x]  //--------------客户端- origin-length ----------------
       file_id: '', // 文件上传成功后返回的文件id [x]
       // 'upload_id': '', // 文件MD5值
       filename: '', // 文件名 [x]
@@ -40,7 +41,7 @@ const logs = {
       dataupload_time: 0, // upload接口上传文件数据耗时(秒)
       dataupload_speed: 0, // upload接口上传文件数据速度，即分片单片上传的速度，单位KB/S
       current_upload_length: 0, //正常和upload_length一样，当次上传的长度(Byte)，重传情况和upload_length字段做区别
-      uid: window.$CONFIG && window.$CONFIG.uid, // 用户id：1683631694
+      // uid: window.$CONFIG && window.$CONFIG.uid, // 用户id：1683631694
       ua: navigator.userAgent, // 用户代理[x]
       is_flash: false, // 是否是flash上传（true/false）暂无 [x]
       extra: 'init', // init-页面初始化/change-弹层内入口init时/reupload-续传时/close-弹层关闭时/publish-发布微博
@@ -50,9 +51,9 @@ const logs = {
       is_screenshot_success: false, // 前、后端截图是否成功（true/false）
       // 新增
       trans_protocol: location.protocol, //传输协议，协议头 [x]
-      is_upload_cancel: false, //是否是用户主动取消 [x]
+      is_cancel: false, //是否是用户主动取消 [x]
       total_time: 0, //整体时间 单位秒 [x]
-      total_speed: 0, //整体速度 [x]
+      total_speed: 0, //整体速度 [x]   //--------------客户端-----------------
       start_upload_time: +new Date(), //开始时间:毫秒 [x]
       end_upload_time: 0, //上传结束时间:毫秒 [x]
       media_id: '', //media_id：init.json 返回的 media_id 字段 [x]
@@ -80,13 +81,18 @@ const logs = {
   upload(action) {
     if (action == 'cancel') {
       this.updateLog({
-        is_upload_cancel: true,
+        is_cancel: true, //---------is_upload_cancel端内的区别is_cancel---------
       });
     }
     this.push();
   },
+  //新增
+  getInfo() {
+    return this.uploadLog;
+  },
   push() {
     var bodyFormData = new FormData();
+    let retry = 1;
     bodyFormData.set('data', encodeURIComponent(JSON.stringify(this.uploadLog)));
     axios
       .post(
@@ -94,7 +100,7 @@ const logs = {
         'https://multimedia.api.weibo.com/2/multimedia/post_log.json',
         qs.stringify({
           source: 339644097,
-          data: encodeURIComponent(JSON.stringify(this.uploadLog)),
+          data: JSON.stringify(this.uploadLog),
         }),
         {
           headers: {
@@ -109,9 +115,12 @@ const logs = {
         },
         e => {
           if (e.message === 'Network Error') {
-            setTimeout(() => {
-              this.push();
-            }, 10000);
+            if (retry > 0) {
+              setTimeout(() => {
+                retry -= 1;
+                this.push();
+              }, 10000);
+            }
           }
         },
       );

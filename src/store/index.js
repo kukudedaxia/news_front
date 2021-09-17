@@ -26,7 +26,7 @@ export default new Vuex.Store({
     loginType: 'normal', //facebook, google, apple, normal
     // uid: '',
     userInfo: {},
-    tab: {},
+    tab: [],
     pageLoading: false,
   },
   mutations: {

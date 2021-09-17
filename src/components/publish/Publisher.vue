@@ -40,11 +40,11 @@
           class="select"
         >
           <span class="el-dropdown-link">
-            <i class="el-icon-arrow-down el-icon--right" ref="dropdownId"></i>{{ selectVal }}
+            <i class="el-icon-arrow-down el-icon--right" ref="dropdownId"></i>{{ $t(selectVal) }}
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item :command="item.name" v-for="item in selectList" :key="item.id">{{
-              item.name
+              $t(item.name)
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -94,23 +94,23 @@ export default {
   data() {
     return {
       textarea: '',
-      selectVal: this.$t('publisher.public'),
+      selectVal:'publisher.public',
       selectList: [
         {
           id: 1,
-          name: this.$t('publisher.public'),
+          name: 'publisher.public',
         },
         {
           id: 2,
-          name: this.$t('publisher.friends'),
+          name: 'publisher.friends',
         },
         {
           id: 3,
-          name: this.$t('publisher.fans'),
+          name: 'publisher.fans',
         },
         {
           id: 4,
-          name: this.$t('publisher.onlyMe'),
+          name: 'publisher.onlyMe',
         },
       ],
       // 发布器光标离 @ # 最近的坐标
@@ -292,7 +292,6 @@ export default {
     onCloseImgUpload() {
       this.uploadImgShow = false;
     },
-<<<<<<< HEAD
     // 草稿箱上报
     draftSave() {
       // 如果保存草稿状态为完成，则可以走2s延迟保存草稿操作
@@ -325,11 +324,10 @@ export default {
           });
         }, 2000);
       }
-=======
+    },
     // 关闭视频上传功能
     onCloseVideoUpload() {
       this.uploadVideoShow = false;
->>>>>>> 529f09c (feature: 视频上传 + 登录修改)
     },
   },
 };

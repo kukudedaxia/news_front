@@ -133,6 +133,16 @@ const message = {
     drafts: 'المسودات',
     delete: 'حذف',
     beets: 'بيتات',
+    uploadVideo: 'رفع فيديو',
+    suppotsVideo:
+      'يدعم التنسيقات التالية: mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
+  },
+  uploadV: {
+    error1: 'هذا الفيديو أكبر من 4 قيقابايت',
+    error2: 'مدة هذا الفيديو أكثر من 60 دقيقة',
+    error3: 'مدة هذا الفيديو أقل من 3 ثوان',
+    try: 'انقر لإعادة المحاولة',
+    expected: 'الوقت المتوقع',
   },
 };
 export default message;

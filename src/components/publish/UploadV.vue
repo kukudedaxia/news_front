@@ -1,10 +1,9 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <p>{{ `Upload Video (${count} / 1)` }}</p>
+      <p>{{ `${$t('publisher.uploadVideo')}(${count}/1)` }}</p>
       <span>
-        Format supports mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv /
-        m4v
+        {{ $t('publisher.suppotsVideo') }}
       </span>
     </div>
     <div class="icon-close-big" @click="onClose"></div>
@@ -14,7 +13,7 @@
       <div class="icon-close" @click="deleteVideo" v-if="status !== 0"></div>
       <div class="reset" v-if="status == 2">
         <div class="icon-reset" @click="retry"></div>
-        <p class="tips">Click to try again</p>
+        <p class="tips">{{ $t('uploadV.try') }}</p>
       </div>
       <div class="progress" v-if="status == 1">
         <el-progress
@@ -26,7 +25,7 @@
           :show-text="false"
         ></el-progress>
         <p class="tips" v-if="quotaTime > 0">
-          Expected {{ transformVideoTime(quotaTime) }} ({{ speedk }})
+          {{ $t('uploadV.expected') }} {{ transformVideoTime(quotaTime) }} ({{ speedk }})
         </p>
       </div>
       <span class="duration" v-if="status == 3">{{ transformVideoTime(duartion) }}</span>
@@ -349,5 +348,19 @@ export default {
 .shot1::after {
   content: '';
   background: transparent;
+}
+
+html[lang='ar'] {
+  .top {
+    text-align: right;
+  }
+  .icon-close-big {
+    right: auto;
+    left: 25px;
+  }
+  .duration {
+    right: auto;
+    left: 12px;
+  }
 }
 </style>
