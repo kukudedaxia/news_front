@@ -12,7 +12,7 @@
         @click="goHome"
       ></div>
       <div class="menus" v-if="showMenu && tabs">
-        <el-tabs :value="path" style="width: 100%;" class="flip-over" @tab-click="onTabClick">
+        <el-tabs :value="path" @tab-click="onTabClick" class="flip-over"  ref="tabs">
           <template v-for="(item, index) in tabs">
             <el-tab-pane
               :key="index"
@@ -80,7 +80,11 @@ export default {
       return Object.keys(this.user).length > 0 && this.path !== '/login' && this.path !== '/';
     },
   },
-  watch: {},
+  watch: {
+    lang() {
+      this.renderTab(this.$refs.tabs.$el);
+    },
+  },
   methods: {
     changeLanuage() {
       this.lang == 'en'
@@ -193,6 +197,18 @@ export default {
       // console.log(tab);
       this.$router.push({ path: tab.name });
     },
+    renderTab($el) {
+      this.$nextTick(() => {
+        const activeEl = $el.querySelector('.el-tabs__item.is-active');
+        const lineEl = $el.querySelector('.el-tabs__active-bar');
+        const style = getComputedStyle(activeEl);
+        const pl = style.paddingLeft.match(/\d+/)[0] * 1;
+        const pr = style.paddingRight.match(/\d+/)[0] * 1;
+        const w = style.width.match(/\d+/)[0] * 1;
+        lineEl.style.transform = 'translateX(' + (activeEl.offsetLeft + pl) + 'px)';
+        lineEl.style.width = w - pl - pr + 'px';
+      });
+    },
   },
 };
 </script>
@@ -206,6 +222,10 @@ html[lang='ar'] .el-message-box__headerbtn {
 }
 
 .menus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   .el-dialog__header {
     display: none;
   }

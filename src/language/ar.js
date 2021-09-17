@@ -6,6 +6,8 @@ const message = {
   lives: 'مركز صناع المحتوى',
   loginpage: 'تسجيل الدخول',
   publish: 'مركز صناع المحتوى',
+  nav_publisher: 'انشر بيته',
+  nav_live: 'ابدأ البث المباشر',
   slide1: {
     beeto: 'محتوى يقدم لك كل ',
     born: 'ما هو جديد حولك على الطريقة ',
