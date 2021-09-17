@@ -130,6 +130,7 @@ const message = {
     suppotsImg: 'يدعم التنسيقات التالية: JPG / JPEG / PNG / tiff / webp / heic / gif',
     uploadImage: 'رفع الصور',
     imgDialogTitle: 'هل أنت متأكد من إلغاء رفع الصورة؟',
+    drageDialogTitle: 'هل أنت متأكد من حذف هذه المسودة؟',
     confirm: 'تأكيد',
     cancel: 'إلغاء',
     drafts: 'المسودات',

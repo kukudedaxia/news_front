@@ -7,11 +7,19 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <!-- <el-tab-pane label="Beets" name="Beets">Beets</el-tab-pane> -->
       <el-tab-pane :label="`${$t('publisher.drafts')}(${draftList.length})`" name="Drafts">
-        <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
-          <li v-for="(item, index) in draftList" class="infinite-list-item" :key="index">
-            <Drafts :data="item"></Drafts>
-          </li>
-        </ul>
+        <template v-if="!loading">
+          <ul
+            class="infinite-list"
+            v-infinite-scroll="load"
+            infinite-scroll-immediate="false"
+            style="overflow:auto"
+          >
+            <li v-for="(item, index) in draftList" class="infinite-list-item" :key="index">
+              <Drafts :data="item" @deleteDraftSuccess="onDeleteSuccess"></Drafts>
+            </li>
+          </ul>
+          <default class="default" v-if="draftList.length === 0"></default>
+        </template>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -19,10 +27,13 @@
 
 <script>
 import Drafts from '@/components/publish/Drafts';
+import Default from '@/components/common/Default';
+
 export default {
   name: 'ComFeedTabs',
   components: {
     Drafts,
+    Default,
   },
   data() {
     return {
@@ -30,93 +41,13 @@ export default {
       // 草稿箱参数
       draftStart: 1,
       draftSize: 20,
-      draftList: [
-        {
-          text:
-            'This app is a video collection app developed in the Middle Eastern Arabs. You can make some interesting videos by yourself. ',
-          time: '03/01/2020 14:4',
-          power: 'Public',
-          imgUrls: [
-            {
-              url: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-              piiic: false,
-            },
-          ],
-        },
-        {
-          text:
-            'This app is a video collection app developed in the Middle Eastern Arabs. You can make some interesting videos by yourself. ',
-          time: '03/01/2020 14:4',
-          power: 'Public',
-          imgUrls: [
-            {
-              url: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-              piiic: true,
-            },
-          ],
-        },
-        {
-          text:
-            'This app is a video collection app developed in the Middle Eastern Arabs. You can make some interesting videos by yourself. This app is a video collection app developed in the Middle Eastern Arabs. You can make some interesting…',
-          time: '03/01/2020 14:4',
-          power: 'Public',
-          imgUrls: [
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-            {
-              url: 'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-              piiic: false,
-            },
-          ],
-        },
-        {
-          text:
-            'هذا هو تطبيق لجمع الفيديو تم تطويره في الشرق الأوسط العربي. يمكنك صنع بعض مقاطع الفيديو المثيرة لمثير للاهتمام هذا هو تطبيق لجمع الفيديو تم تطويره في الشرق الأ',
-          time: '03/01/2020 14:4',
-          power: 'Public',
-          video: {
-            url: 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
-            time: '12:40',
-          },
-        },
-        {
-          text:
-            'This app is a video collection app developed in the Middle Eastern Arabs. You can make some interesting videos by yourself. ',
-          time: '03/01/2020 14:4',
-          power: 'Public',
-        },
-      ],
+      draftList: [],
+      loading: false,
     };
+  },
+  created() {
+    this.loading = true;
+    this.searchDraftList();
   },
   methods: {
     handleClick() {},
@@ -134,12 +65,19 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          console.log(data);
+          this.draftList = data;
         },
         onFail: ({ error }) => {
           this.$message.error(error);
         },
+        onComplete: () => {
+          this.loading = false;
+        },
       });
+    },
+    // 删除草稿成功
+    onDeleteSuccess() {
+      this.searchDraftList();
     },
   },
 };
@@ -186,6 +124,20 @@ export default {
           color: #ff536c;
         }
       }
+    }
+  }
+  /deep/.default {
+    margin: 60px auto;
+    .default-img {
+      width: 214px;
+      height: 96px;
+    }
+    p {
+      font-family: SFUIText-Regular;
+      font-size: 14px;
+      color: #777f8e;
+      text-align: center;
+      margin-top: 6px;
     }
   }
 }

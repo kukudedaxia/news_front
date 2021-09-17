@@ -11,7 +11,6 @@ Vue.directive('arInput', {
   inserted: (el, binding, vnode) => {
     let cb_name = binding.expression;
     let cb = vnode.context[cb_name];
-
     //单独做element操作
     if (el.tagName == 'DIV') {
       let domTextArea = el.querySelector('textarea');

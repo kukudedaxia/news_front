@@ -5,12 +5,18 @@
 <template>
   <div class="com-drafts flex-align">
     <div class="text-box flex-align">
-      <p class="blog-text text-overflow-3">
-        {{ data.text }}
+      <p :class="['blog-text text-overflow-3', { 'pub-rtl': tools.checkAr(draftData.text) }]">
+        {{ draftData.text }}
       </p>
       <div class="text-bottom flex-align">
-        <p class="time">{{ `${data.time} · ${data.power}` }}</p>
-        <span class="btn-del">
+        <p class="time">
+          {{
+            `${$moment(new Date(data.lastModifyTime)).format('DD/MM/YYYY HH:mm ')} · ${$t(
+              'draftData.power',
+            )}`
+          }}
+        </p>
+        <span class="btn-del" @click="onDeleteConfirm">
           {{ $t('publisher.delete') }}
         </span>
       </div>
@@ -40,8 +46,44 @@ export default {
       default: () => {},
     },
   },
+  computed: {
+    draftData() {
+      return JSON.parse(this.data.content);
+    },
+  },
   data() {
     return {};
+  },
+  methods: {
+    // 删除草稿
+    onDeleteConfirm() {
+      this.$confirm(this.$t('publisher.drageDialogTitle'), '', {
+        confirmButtonText: this.$t('publisher.confirm'),
+        cancelButtonText: this.$t('publisher.cancel'),
+      })
+        .then(() => {
+          this.onDelete();
+        })
+        .catch(() => {});
+    },
+    onDelete() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: 'api/pc/draft/del',
+          params: {
+            id: this.data.id,
+          },
+        },
+        onSuccess: () => {
+          this.$message.success(this.$t('live.success'));
+          this.$emit('deleteDraftSuccess');
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+      });
+    },
   },
 };
 </script>
@@ -67,8 +109,9 @@ export default {
       font-size: 16px;
       color: #333333;
       letter-spacing: 0;
-      text-align: justify;
       line-height: 20px;
+      width: 100%;
+      text-align: justify;
     }
     .text-bottom {
       width: 100%;

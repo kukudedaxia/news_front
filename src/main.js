@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './less/dark.less';
 
 import moment from 'moment';
-import { Toast } from 'vant';
+// import { Toast } from 'vant';
 
 Vue.use(ElementUI)
   .use(VueClipboard)
@@ -21,7 +21,7 @@ Vue.use(ElementUI)
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
 Vue.prototype.$moment = moment;
-Vue.prototype.$toast = Toast;
+// Vue.prototype.$toast = Toast;
 import './directive';
 import tools from './utils/tools';
 import './APP.less';

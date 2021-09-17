@@ -12,6 +12,7 @@
       id="textareaId"
       v-model="textarea"
       class="textarea"
+      v-arInput
       @blur="onInputBlur"
       @focus="onInputFocus"
     >
@@ -94,7 +95,7 @@ export default {
   data() {
     return {
       textarea: '',
-      selectVal:'publisher.public',
+      selectVal: 'publisher.public',
       selectList: [
         {
           id: 1,
@@ -135,7 +136,7 @@ export default {
       draftSaveFinish: true,
       // 草稿保存定时器实例
       draftSaveTimes: null,
-      uploadVideoShow: true,
+      uploadVideoShow: false,
     };
   },
   watch: {
@@ -301,6 +302,7 @@ export default {
           const params = {
             content: JSON.stringify({
               text: this.textarea,
+              power: this.selectVal,
             }),
             formalV: this.formalV,
           };
@@ -309,7 +311,7 @@ export default {
             req: {
               method: 'post',
               url: 'api/pc/draft/save',
-              params,
+              data: params,
             },
             onSuccess: ({ data }) => {
               this.draftId = data.id;
@@ -337,10 +339,10 @@ export default {
 .com-publisher {
   background: #ffffff;
   border-radius: 6px;
-  width: 782px;;
+  width: 782px;
   position: relative;
   margin: 20px auto;
- .textarea {
+  .textarea {
     padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
       background: #f6f6f9 !important;
