@@ -41,10 +41,11 @@
           class="select"
         >
           <span class="el-dropdown-link">
-            <i class="el-icon-arrow-down el-icon--right" ref="dropdownId"></i>{{ $t(selectVal) }}
+            <i class="el-icon-arrow-down el-icon--right" ref="dropdownId"></i
+            >{{ $t(selectVal.name) }}
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item :command="item.name" v-for="item in selectList" :key="item.id">{{
+            <el-dropdown-item :command="item" v-for="item in selectList" :key="item.id">{{
               $t(item.name)
             }}</el-dropdown-item>
           </el-dropdown-menu>
@@ -55,6 +56,7 @@
           size="small"
           :disabled="btnDisabled"
           class="inform-box_btn"
+          @click="sendBlog"
           >{{ $t('publisher.release') }}</el-button
         >
       </div>
@@ -73,6 +75,7 @@
         :type="popoverType"
         class="popover"
         id="popoverId"
+        :text="searchText"
         @onItemClick="onItemClick"
       ></Popover>
     </transition>
@@ -83,6 +86,7 @@
 import Popover from '@/components/publish/Popover';
 import UploadImage from '@/components/publish/UploadImage';
 import UploadV from '@/components/publish/UploadV';
+import { editClass } from '@/directive/arFocusTools';
 
 import '../../assets/sdk/jquery.caret';
 import $ from 'jquery';
@@ -95,22 +99,25 @@ export default {
   data() {
     return {
       textarea: '',
-      selectVal: 'publisher.public',
+      selectVal: {
+        id: 0,
+        name: 'publisher.public',
+      },
       selectList: [
         {
-          id: 1,
+          id: 0,
           name: 'publisher.public',
         },
         {
-          id: 2,
+          id: 4,
           name: 'publisher.friends',
         },
         {
-          id: 3,
+          id: 2,
           name: 'publisher.fans',
         },
         {
-          id: 4,
+          id: 1,
           name: 'publisher.onlyMe',
         },
       ],
@@ -129,6 +136,8 @@ export default {
       },
       // 输入框的光标所在下标
       focusIndex: 0,
+      startIndex: 0, // @、# 所在的下标
+      searchText: null, // @、# 检索文本
       // ------ 草稿 ------ //
       draftId: null, // 草稿箱id,如果没有传则会新建
       formalV: '', // 草稿箱修改时必须带上，上一版本版本号
@@ -144,7 +153,7 @@ export default {
     textarea(val) {
       /**
        * 1. 获取光标所在下标
-       * 2. 检测光标的前一位字符是否为 @、# ; 如果是，则弹出对应的popover
+       * 2. 检测光标的前一位字符是否为 @、# ; 如果是并且后面字符无空格，则弹出对应的popover
        * 3. 选择完成后，需要在后面增加一个空格，以表示完成输入
        * // ---- 待完善 ---- //
        * 1. 需要监听光标的移动
@@ -153,9 +162,25 @@ export default {
        * 4. popover选项支持键盘选择
        */
       this.$nextTick(() => {
-        this.getFocusIndex();
-        const letter = val.charAt(this.focusIndex - 1);
+        this.getFocusIndex(); // 获取文本变化时的实时光标下标
+        const letter = val.charAt(this.focusIndex - 1); //获取光标的上一个字符
+        // 如果上个字符是空格或者为空，不显示任何
+        // if (letter === ' ' || letter === '') {
+        //   this.popoverShow = false;
+        //   return;
+        // }
         if (letter === '@' || letter === '#') {
+          // // 当光标上一个字符是@、#时，需要检测后续的字符串是否包含空格，如果包含则判定这是个已完成的检索结果，不展示popover；如果不包含空格，则会截取@、#到空格之间的字符串，作为检索文本，并展示popover
+          // // 截取@、# 开始往后的所有字符串
+          // const str = this.textarea.slice(this.focusIndex);
+          // debugger;
+          // if (str !== '') {
+          //   // 匹配空格之前的文本
+          //   const text = str.split(' ');
+          //   debugger;
+          // }
+          this.startIndex = this.focusIndex;
+          this.searchText = '';
           this.popoverType = letter === '@' ? 'user' : 'topic';
           Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
           this.$nextTick(() => {
@@ -165,7 +190,19 @@ export default {
             }, 100);
           });
         } else {
-          this.popoverShow = false;
+          // 说明@、#存在
+          if (this.startIndex !== 0) {
+            const str = this.textarea.slice(this.startIndex, this.focusIndex);
+            // 检索结束
+            if (str.charAt(str.length - 1) === ' ' || str.charAt(str.length - 1) === '') {
+              this.popoverShow = false;
+            } else {
+              Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+              this.popoverPosition();
+              //  未检测空格，所以检索还在继续
+              this.searchText = str;
+            }
+          }
         }
       });
       this.draftSave();
@@ -189,8 +226,8 @@ export default {
     };
   },
   methods: {
-    handleCommand(val) {
-      this.selectVal = val;
+    handleCommand(item) {
+      this.selectVal = item;
     },
     visibleChangeHandler(val) {
       const dropdownId = this.$refs.dropdownId;
@@ -276,9 +313,17 @@ export default {
     popoverPosition() {
       const dom = this.getPopoverDom();
       dom.style.top = `${this.cursorCoordinate.top +
-        2 * this.cursorCoordinate.height -
+        2.5 * this.cursorCoordinate.height -
         this.textareaOffset.top}px `;
-      dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      // 如果是阿语，从右定位
+      if (this.tools.checkAr(this.textarea)) {
+        dom.style.left = '';
+        dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      } else {
+        // 英语从左定位
+        dom.style.right = '';
+        dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      }
     },
     // popover选中事件
     onItemClick(data) {
@@ -288,6 +333,11 @@ export default {
       this.popoverShow = false;
       // 设置光标的位置为选中数据空格的后一位
       this.focusIndex = this.focusIndex + data.length + 1;
+      $('#textareaId').val(this.textarea);
+      editClass($('#textareaId')[0]);
+      setTimeout(() => {
+        this.searchText = null;
+      }, 300);
     },
     // 关闭图片上传功能
     onCloseImgUpload() {
@@ -302,7 +352,7 @@ export default {
           const params = {
             content: JSON.stringify({
               text: this.textarea,
-              power: this.selectVal,
+              power: this.selectVal.name,
             }),
             formalV: this.formalV,
           };
@@ -330,6 +380,46 @@ export default {
     // 关闭视频上传功能
     onCloseVideoUpload() {
       this.uploadVideoShow = false;
+    },
+    // 发博
+    sendBlog() {
+      const params = {
+        text: this.textarea,
+        visible: this.selectVal.id,
+        // media: JSON.stringify([
+        //   // 视频参数
+        //   {
+        //     fid: '4353278255775167',
+        //     pid: '006GuYIzly1g1dk7xtn8aj30k00zkwfs', // 视频封面
+        //     duration: 17,
+        //     type: 2,
+        //   },
+        //   // 图片参数
+        //   {
+        //     pid: '006bERYply3g6qz9o6mq4j30u00u0n5v',
+        //     height: 1080,
+        //     width: 1080,
+        //     type: 1,
+        //   },
+        // ]),
+      };
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'api/pc/status/create',
+          data: params,
+        },
+        onSuccess: () => {
+          this.$message.success(this.$t('publisher.successed'));
+          this.textarea = '';
+          this.uploadImgShow = false;
+          this.uploadVideoShow = false;
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+        onComplete: () => {},
+      });
     },
   },
 };
@@ -465,8 +555,6 @@ export default {
   }
   .popover {
     position: absolute;
-    top: 120px;
-    left: 550px;
   }
   .el-divider {
     margin: 0;

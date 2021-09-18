@@ -5,9 +5,9 @@
 <template>
   <div class="com-topic-item flex-align">
     <p class="title text-overflow-1">
-      {{ item.title }}
+      {{ item.desc1 }}
     </p>
-    <span>{{ item.num }}{{ $t('publisher.beets') }}</span>
+    <span>{{ item.desc2 }}</span>
   </div>
 </template>
 

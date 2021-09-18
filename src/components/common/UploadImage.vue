@@ -97,6 +97,7 @@ export default {
     },
     // 图片上传
     async uploadImg(file) {
+      debugger;
       try {
         this.file = file;
         const base64 = await fileByBase64(file);
@@ -126,6 +127,17 @@ export default {
               this.fileList.push({
                 pid: res.pic.pid,
               });
+              // let reader = new FileReader();
+              // reader.onload = function(e) {
+              //   let txt = e.target.result;
+              //   let img = document.createElement('img');
+              //   img.src = txt;
+              //   img.onload = function() {
+              //     console.log('宽度：', img.width);
+              //     console.log('高度：', img.height);
+              //   };
+              //   reader.readAsDataURL(file);
+              // };
             } else {
               this.$message.error(this.$t('live.uploadErr'));
             }

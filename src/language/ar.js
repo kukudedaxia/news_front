@@ -139,6 +139,7 @@ const message = {
     uploadVideo: 'رفع فيديو',
     suppotsVideo:
       'يدعم التنسيقات التالية: mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
+    successed: 'تم بنجاح',
   },
   uploadV: {
     error1: 'هذا الفيديو أكبر من 4 قيقابايت',

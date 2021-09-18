@@ -31,22 +31,22 @@
       <p class="top-title" v-if="topicList.length > 0 || userList.length > 0">
         {{ topTitle }}
       </p>
-      <ul class="list-box" v-infinite-scroll="load" v-if="type === 'topic'">
+      <ul class="list-box" v-infinite-scroll="onLoadTopic" v-if="type === 'topic'">
         <li
           v-for="item in topicList"
           class="infinite-list-item"
           :key="item.title"
-          @click="itemClick(item.title)"
+          @click="itemClick(item.desc1)"
         >
           <topic-item :item="item"></topic-item>
         </li>
       </ul>
-      <ul class="list-box" v-infinite-scroll="load" v-if="type === 'user'">
+      <ul class="list-box" v-infinite-scroll="onLoadUser" v-if="type === 'user'">
         <li
           v-for="item in userList"
           class="infinite-list-item"
-          :key="item.userName"
-          @click="itemClick(item.userName)"
+          :key="item.username"
+          @click="itemClick(item.username)"
         >
           <user-item :item="item"></user-item>
         </li>
@@ -66,6 +66,8 @@ export default {
       type: String,
       default: '',
     },
+    // 检索文本
+    text: [String, Number],
   },
   components: {
     'user-item': UserItem,
@@ -85,61 +87,82 @@ export default {
       return msg;
     },
   },
+  watch: {
+    text: {
+      handler(v) {
+        if (this.type === 'user') {
+          this.searchUser();
+          return;
+        }
+        if (this.type === 'topic') {
+          this.searchTopic();
+        }
+      },
+    },
+  },
   data() {
     return {
-      searchLoading: true,
-      topicList: [
-        {
-          title: 'Electronic products',
-          num: 99,
-        },
-        {
-          title: 'Novel coronavirus',
-          num: 99,
-        },
-      ],
-      userList: [
-        {
-          coverImg: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-          userName: 'troyesivan',
-          nickName: 'Troye SivaSivaSiva',
-        },
-        {
-          coverImg: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-          userName: 'troyesivan2',
-          nickName: 'Troye SivaSivaSiva',
-        },
-      ],
+      searchLoading: false,
+      topicList: [],
+      topicPage: 1,
+      userList: [],
+      userpage: 1,
     };
   },
   mounted() {
     // this.searchUser();
   },
   methods: {
-    load() {},
+    onLoadTopic() {},
+    onLoadUser() {},
     itemClick(data) {
       this.$emit('onItemClick', data);
     },
     // @ 用户检索
     searchUser() {
-      // setTimeout(() => {
-      //   this.searchLoading = false;
-      // }, 1000);
+      this.searchLoading = true;
       this.$store.dispatch('ajax', {
         req: {
           method: 'get',
           url: 'api/pc/status/beet/at',
           params: {
-            keyword: '2',
-            page: 1,
+            keyword: this.text,
+            page: this.userpage,
             count: 50,
           },
         },
         onSuccess: ({ data }) => {
-          console.log(data);
+          this.userList = data.users;
         },
         onFail: ({ error }) => {
           this.$message.error(error);
+        },
+        onComplete: () => {
+          this.searchLoading = false;
+        },
+      });
+    },
+    // # 话题检索
+    searchTopic() {
+      this.searchLoading = true;
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: 'api/pc/status/search/topic',
+          params: {
+            keyword: this.text ? this.text.replaceAll('#', '') : this.text,
+            page: this.topicPage,
+            count: 50,
+          },
+        },
+        onSuccess: ({ data }) => {
+          this.topicList = data.topics;
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+        onComplete: () => {
+          this.searchLoading = false;
         },
       });
     },

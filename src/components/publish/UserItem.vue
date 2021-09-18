@@ -4,10 +4,10 @@
 -->
 <template>
   <div class="com-user-item flex-align">
-    <img :src="item.coverImg" />
+    <img :src="item.avatar_hd" />
     <div class="info flex-align">
-      <p class="text-overflow-1">{{ item.nickName }}</p>
-      <span> @{{ item.userName }} </span>
+      <p class="text-overflow-1">{{ item.nickname }}</p>
+      <span> @{{ item.username }} </span>
     </div>
   </div>
 </template>

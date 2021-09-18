@@ -26,7 +26,6 @@ Vue.directive('arInput', {
     el.addEventListener('input', () => {
       handler();
     });
-
     // change事件触发
     el.addEventListener('change', () => {
       // 此时dom的值还未更新，需要加个异步函数，无法使用Vue.nextTick,因为不是一个实例
@@ -41,7 +40,6 @@ Vue.directive('arInput', {
         cb && cb();
         return;
       }
-
       // 当使用ui组件，input/textarea做了封装时，找寻其后代输入元素
       let domTextArea = el.querySelector('textarea');
       if (domTextArea) {

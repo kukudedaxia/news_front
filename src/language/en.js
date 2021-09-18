@@ -142,6 +142,7 @@ const message = {
     uploadVideo: 'Upload video',
     suppotsVideo:
       'Format supports mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
+    successed: 'Successed',
   },
   uploadV: {
     error1: 'This video is larger than 4GB',
