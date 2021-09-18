@@ -403,7 +403,7 @@ class wbUploader {
         // 为什么分九份 触发两次截屏 第一次没有arr 第二次9个 （）
         for (let i = 0; i < 9; i++) {
           if (i == 0) {
-            arr[i] = await getVideoScreenshot(file, 1);
+            arr[i] = await getVideoScreenshot(file, 1, true, this);
             console.log(new Date().getTime(), '第一帧图片');
           } else {
             arr[i] = await getVideoScreenshot(file, (videoSize.duration / 9) * i);
@@ -905,16 +905,14 @@ class wbUploader {
           if (res.data.error_code == 10000) {
             return res.data;
           } else {
-            return (
-              {
-                data: false,
-              },
-              this.emit('error', 'init 失败' + res.data.error)
-            );
+            this.emit('error', 'init' + res.data.error);
+            return {
+              data: false,
+            };
           }
         },
         error => {
-          this.emit('error', 'init 失败');
+          this.emit('error', 'init');
         },
       );
   };
@@ -1194,7 +1192,7 @@ const getVideoInfo = file => {
 };
 
 // 这里
-const getVideoScreenshot = (file, second = 0) => {
+const getVideoScreenshot = (file, second = 0, uplaod = false, scope) => {
   return new Promise((rs, rj) => {
     let url = URL.createObjectURL(file);
     let video = document.createElement('video');
@@ -1213,18 +1211,19 @@ const getVideoScreenshot = (file, second = 0) => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       let src = canvas.toDataURL('image/png');
       rs({ url: src });
-      // canvas.toBlob(
-      //   async function(blob) {
-      //     const pid = await uploadWithFile(blob, { watermark: 0 });
-      //     screenshot = getImageURL(pid);
-      //     URL.revokeObjectURL(url);
-      //     console.log(pid, screenshot, 'pid');
-      //     video.src = '';
-      //     rs({ url: screenshot, pid });
-      //   },
-      //   'image/jpeg',
-      //   0.95,
-      // );
+      if (uplaod) {
+        canvas.toBlob(
+          async function(blob) {
+            const pid = await uploadWithFile(blob, { watermark: 0 });
+            console.log(pid, 'pid');
+            scope.emit('uploadScreen', pid);
+          },
+          'image/jpeg',
+          0.95,
+        );
+      } else {
+        rs({ url: src });
+      }
     };
     video.onseeked = () => {
       imgInfo();

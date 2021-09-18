@@ -29,6 +29,9 @@ export default new Vuex.Store({
     tab: [],
     pageLoading: false,
   },
+  getters: {
+    video: state => state.video.attr,
+  },
   mutations: {
     setLanguage(state, lang) {
       state.language = lang;

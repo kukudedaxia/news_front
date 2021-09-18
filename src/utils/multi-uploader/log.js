@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
+import store from '../../store';
+
 const logs = {
   uploadLog: {},
   initRes: {},
@@ -87,10 +89,11 @@ const logs = {
     this.push();
   },
   //新增
-  getInfo() {
-    return this.uploadLog;
-  },
   push() {
+    console.log('上报视频日志')
+    // store.dispatch('send', { action: '5335', extend: this.uploadLog });
+    return false;
+
     var bodyFormData = new FormData();
     let retry = 1;
     bodyFormData.set('data', encodeURIComponent(JSON.stringify(this.uploadLog)));

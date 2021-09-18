@@ -28,7 +28,7 @@
           {{ $t('uploadV.expected') }} {{ transformVideoTime(quotaTime) }} ({{ speedk }})
         </p>
       </div>
-      <span class="duration" v-if="status == 3">{{ transformVideoTime(duartion) }}</span>
+      <span class="duration" v-if="status == 3">{{ transformVideoTime(duration) }}</span>
       <div :class="['shot', { shot1: status == 3 }]" v-if="status != 0">
         <img
           :src="imgSrc"
@@ -54,9 +54,17 @@ export default {
       speedk: '',
       imgSrc: '',
       quotaTime: 0,
-      duartion: 0,
+      duration: 0,
       mediaId: '',
     };
+  },
+  computed: {
+    videos() {
+      return this.$store.state.video.attr;
+    },
+    user() {
+      return this.$store.state.userInfo;
+    },
   },
   mounted() {
     this.init();
@@ -64,7 +72,7 @@ export default {
   methods: {
     init() {
       window.$CONFIG = window.$CONFIG || {};
-      window.$CONFIG.uid = 1683631694;
+      window.$CONFIG.uid = this.user.id;
       const wbUploader = new wbu({
         default: {
           source: 339644097,
@@ -91,51 +99,57 @@ export default {
         console.log(data);
         //... to do在这里做一些视频大小，长度限制
         if (data.size > 1024 * 1024 * 1024 * 4) {
-          this.$toast({
-            message: this.$t('uploadV.error1'),
-            className: 'custom_toast',
-          });
+          this.$message.info(this.$t('uploadV.error1'));
           return;
         } else if (data.detail.duration > 60 * 60) {
-          this.$toast({
-            message: this.$t('uploadV.error2'),
-            className: 'custom_toast',
-          });
+          this.$message.error(this.$t('uploadV.error2'));
           return;
         } else if (data.detail.duration < 4) {
-          this.$toast({
-            message: this.$t('uploadV.error3'),
-            className: 'custom_toast',
-          });
+          this.$message.error(this.$t('uploadV.error3'));
           return;
         }
         wbUploader.upload();
         this.status = 1;
-        this.$store.commit('video/setStatus', 1);
+        this.$store.commit('video/setData', {
+          ...this.videos,
+          status: 1,
+        });
       });
 
       wbUploader.on('uploadStatus', data => {
         this.status = 1;
-        this.$store.commit('video/setStatus', 1);
+        // this.$store.commit('video/setStatus', 1);
         this.progress = data.progress;
         this.speedk = data.speed.speedk;
         this.quotaTime = data.quotaTime;
+
+        // this.$store.commit('video/setData', {
+        //   ...this.videos,
+        //   status: 1,
+        // });
+
         //... 返回速度 百分比
       });
 
       wbUploader.on('success', ({ file }) => {
         console.log(file);
         this.status = 3;
-        this.$store.commit('video/setStatus', this.status);
-        this.$store.commit('video/setMediaId', file.initRes.media_id);
+        // this.$store.commit('video/setStatus', this.status);
+        // this.$store.commit('video/setMediaId', file.initRes.media_id);
         this.mediaId = '';
         this.count = 1;
+        this.$store.commit('video/setData', {
+          ...this.videos,
+          status: 3,
+          media_id: file.initRes.media_id,
+          duration: this.duration,
+        });
         //...
       });
 
       wbUploader.on('screenshot', data => {
         console.log(data, 'screenshot');
-        this.duartion = data.detail.duration;
+        this.duration = data.detail.duration;
         if (data.screenshot && data.screenshot.length > 0) {
           this.imgSrc = data.screenshot[0].url;
           // this.imgSrc = `http://img.whale.weibo.com/orj1080/${data.screenshot[0].pid}.jpg`;
@@ -145,13 +159,21 @@ export default {
 
       wbUploader.on('error', msg => {
         console.log(msg);
-        this.$toast({
-          message: msg,
-          className: 'custom_toast',
-          duration: 100000,
+        if (!msg.includes('init')) {
+          this.status = 2;
+          this.$store.commit('video/setData', {
+            ...this.videos,
+            status: 2,
+          });
+        }
+        this.$message.error(msg);
+      });
+
+      wbUploader.on('uploadScreen', pid => {
+        this.$store.commit('video/setData', {
+          ...this.videos,
+          pid: pid,
         });
-        this.status = 2;
-        this.$store.commit('video/setStatus', 2);
       });
 
       this.wbUploader = wbUploader;
@@ -186,6 +208,7 @@ export default {
       this.count = 0;
       this.$store.commit('video/setStatus', 0);
       this.$store.commit('video/setMediaId', '');
+      this.$store.commit('video/setPid', '');
     },
 
     onClose() {
@@ -361,6 +384,9 @@ html[lang='ar'] {
   .duration {
     right: auto;
     left: 12px;
+  }
+  .tips {
+    direction: rtl;
   }
 }
 </style>

@@ -3,7 +3,7 @@
  * @Description: Feed流 tabs组件
 -->
 <template>
-  <div class="com-feed-tabs">
+  <div id="feed-tab" class="com-feed-tabs">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <!-- <el-tab-pane label="Beets" name="Beets">Beets</el-tab-pane> -->
       <el-tab-pane :label="`${$t('publisher.drafts')}(${draftList.length})`" name="Drafts">
@@ -140,5 +140,28 @@ export default {
       margin-top: 6px;
     }
   }
+}
+
+
+</style>
+
+<style lang="less">
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+  width: auto;
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__item {
+  transform: scaleX(-1);
+}
+
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__item:last-child {
+  flex: 1;
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__header {
+  transform: scaleX(-1);
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

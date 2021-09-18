@@ -1,6 +1,11 @@
 const state = {
-  status: 0, //上传状态 0， 1，2，3
-  media_id: '',
+  name: 'video',
+  attr: {
+    status: 0, //上传状态 0， 1，2，3
+    media_id: '',
+    pid: '',
+    duration: '',
+  },
 };
 const mutations = {
   setStatus(state, val) {
@@ -8,6 +13,9 @@ const mutations = {
   },
   setMediaId(state, val) {
     state.media_id = val;
+  },
+  setData(state, data) {
+    state.attr = { ...state.attr, ...data };
   },
 };
 

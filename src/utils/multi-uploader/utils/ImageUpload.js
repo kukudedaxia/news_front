@@ -1,6 +1,7 @@
 import axios from 'axios';
 import SparkMD5 from 'spark-md5';
 import qs from 'qs';
+import Cookies from 'js-cookie';
 
 const b_crc32 = str => {
   var a_table =
@@ -128,12 +129,19 @@ const uploadWithFile = async (input, opts = {}, ori = 0, file_source = 1) => {
     const md5 = await calFileMd5(input).catch(err => {
       throw new Error(`计算image MD5失败(${err.message})`);
     });
+
+    let user = {};
+    if (Cookies.get('userInfo')) {
+      user = JSON.parse(Cookies.get('userInfo'));
+    }
+
     const hdOption = {
       file_source,
       cs,
       ent: 'alpha',
       appid: 339644097,
       uid:
+        user.id ||
         (window.$CONFIG && window.$CONFIG.uid) ||
         (window.$CONFIG && window.$CONFIG.user && window.$CONFIG.user.id), //???????
       raw_md5: md5,

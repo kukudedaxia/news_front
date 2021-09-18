@@ -82,7 +82,9 @@ export default {
   },
   watch: {
     lang() {
+      if(this.$refs.tabs.$el) {
       this.renderTab(this.$refs.tabs.$el);
+      }
     },
   },
   methods: {
