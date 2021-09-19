@@ -144,6 +144,7 @@ export default {
           media_id: file.initRes.media_id,
           duration: this.duration,
         });
+        this.$emit('onUploadVideoSuccess');
         //...
       });
 
@@ -212,6 +213,7 @@ export default {
     },
 
     onClose() {
+      this.deleteVideo();
       this.$emit('onClose');
     },
   },

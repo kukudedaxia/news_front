@@ -12,7 +12,7 @@
     </div>
     <div class="icon-close" @click="onClose"></div>
     <div class="upload-img-box">
-      <upload-img @onImgChange="onImgChange"></upload-img>
+      <upload-img @onImgChange="onImgChange" @onUploadImgSuccess="onUploadImgSuccess"></upload-img>
     </div>
   </div>
 </template>
@@ -47,6 +47,10 @@ export default {
         return;
       }
       this.$emit('onCloseImgUpload');
+    },
+    // 图片上传成功
+    onUploadImgSuccess() {
+      this.$emit('onUploadImgSuccess');
     },
   },
 };
@@ -93,7 +97,7 @@ export default {
   }
 }
 html[lang='ar'] {
-   .com-publish-upload_image .top {
+  .com-publish-upload_image .top {
     text-align: right;
   }
   .com-publish-upload_image .icon-close {

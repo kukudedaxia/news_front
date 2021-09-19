@@ -67,6 +67,7 @@ export default {
     fileList: {
       handler(data) {
         this.$emit('onImgChange', data);
+        this.$store.dispatch('publisher/setUploadImg', data);
       },
       deep: true,
       immediate: true,
@@ -97,7 +98,6 @@ export default {
     },
     // 图片上传
     async uploadImg(file) {
-      debugger;
       try {
         this.file = file;
         const base64 = await fileByBase64(file);
@@ -138,6 +138,7 @@ export default {
               //   };
               //   reader.readAsDataURL(file);
               // };
+              this.$emit('onUploadImgSuccess');
             } else {
               this.$message.error(this.$t('live.uploadErr'));
             }

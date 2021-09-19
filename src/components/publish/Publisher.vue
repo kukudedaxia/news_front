@@ -19,10 +19,10 @@
     </el-input>
     <div class="bottom flex-align">
       <ul class="operation-box flex-align">
-        <li @click="uploadImgShow = true">
+        <li @click="onUploadImg">
           <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
         </li>
-        <li @click="uploadVideoShow = true">
+        <li @click="onUploadVideo">
           <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
         </li>
         <li @click="addMention">
@@ -63,11 +63,20 @@
     </div>
     <el-divider v-if="uploadImgShow"></el-divider>
     <transition name="fade_top">
-      <upload-image @onCloseImgUpload="onCloseImgUpload" v-if="uploadImgShow"></upload-image>
+      <upload-image
+        @onCloseImgUpload="onCloseImgUpload"
+        @onUploadImgSuccess="onUploadImgSuccess"
+        v-if="uploadImgShow"
+      ></upload-image>
     </transition>
     <el-divider v-if="uploadVideoShow"></el-divider>
     <transition name="fade_top">
-      <UploadV v-if="uploadVideoShow" @onClose="onCloseVideoUpload"></UploadV>
+      <UploadV
+        ref="uploadV"
+        v-if="uploadVideoShow"
+        @onClose="onCloseVideoUpload"
+        @onUploadVideoSuccess="onUploadVideoSuccess"
+      ></UploadV>
     </transition>
     <transition name="fade">
       <Popover
@@ -87,9 +96,9 @@ import Popover from '@/components/publish/Popover';
 import UploadImage from '@/components/publish/UploadImage';
 import UploadV from '@/components/publish/UploadV';
 import { editClass } from '@/directive/arFocusTools';
-
 import '../../assets/sdk/jquery.caret';
 import $ from 'jquery';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     Popover,
@@ -205,7 +214,7 @@ export default {
           }
         }
       });
-      this.draftSave();
+      // this.draftSave();
     },
   },
   computed: {
@@ -214,6 +223,10 @@ export default {
     },
     btnDisabled() {
       return this.textareaLen > 0 ? false : true;
+    },
+    ...mapGetters('publisher', ['getUploadImg', 'getUploadVideo']),
+    uploadMediaId() {
+      return this.$store.state.video.attr.media_id;
     },
   },
   mounted() {
@@ -339,10 +352,6 @@ export default {
         this.searchText = null;
       }, 300);
     },
-    // 关闭图片上传功能
-    onCloseImgUpload() {
-      this.uploadImgShow = false;
-    },
     // 草稿箱上报
     draftSave() {
       // 如果保存草稿状态为完成，则可以走2s延迟保存草稿操作
@@ -353,6 +362,12 @@ export default {
             content: JSON.stringify({
               text: this.textarea,
               power: this.selectVal.name,
+              img: this.getUploadImg,
+              video: {
+                fid: this.uploadMediaId,
+                pid: this.$store.state.video.attr.pid,
+                duration: this.$store.state.video.attr.duration,
+              },
             }),
             formalV: this.formalV,
           };
@@ -377,31 +392,32 @@ export default {
         }, 2000);
       }
     },
-    // 关闭视频上传功能
-    onCloseVideoUpload() {
-      this.uploadVideoShow = false;
-    },
     // 发博
     sendBlog() {
+      const media = [];
+      if (this.uploadMediaId !== '') {
+        media.push({
+          type: 2,
+          id: this.uploadMediaId,
+          fid: this.uploadMediaId,
+          duration: this.$store.state.video.attr.duration,
+        });
+      } else if (this.getUploadImg.length > 0) {
+        const list = this.getUploadImg.map(item => {
+          return {
+            type: 1,
+            id: item,
+            fid: item,
+            height: 1080,
+            width: 1080,
+          };
+        });
+        media.push(...list);
+      }
       const params = {
         text: this.textarea,
         visible: this.selectVal.id,
-        // media: JSON.stringify([
-        //   // 视频参数
-        //   {
-        //     fid: '4353278255775167',
-        //     pid: '006GuYIzly1g1dk7xtn8aj30k00zkwfs', // 视频封面
-        //     duration: 17,
-        //     type: 2,
-        //   },
-        //   // 图片参数
-        //   {
-        //     pid: '006bERYply3g6qz9o6mq4j30u00u0n5v',
-        //     height: 1080,
-        //     width: 1080,
-        //     type: 1,
-        //   },
-        // ]),
+        media: JSON.stringify(media),
       };
       this.$store.dispatch('ajax', {
         req: {
@@ -412,6 +428,10 @@ export default {
         onSuccess: () => {
           this.$message.success(this.$t('publisher.successed'));
           this.textarea = '';
+          if (this.$refs.uploadV) {
+            this.$refs.uploadV.deleteVideo();
+          }
+          this.$store.dispatch('publisher/setUploadImg', []);
           this.uploadImgShow = false;
           this.uploadVideoShow = false;
         },
@@ -420,6 +440,59 @@ export default {
         },
         onComplete: () => {},
       });
+    },
+    // 关闭视频上传功能
+    onCloseVideoUpload() {
+      this.uploadVideoShow = false;
+    },
+    // 关闭图片上传功能
+    onCloseImgUpload() {
+      this.uploadImgShow = false;
+      this.$store.dispatch('publisher/setUploadImg', []);
+    },
+    // 点击图片上传
+    onUploadImg() {
+      if (this.uploadMediaId !== '') {
+        this.$confirm(this.$t('publisher.imgDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
+        })
+          .then(() => {
+            this.$refs.uploadV.deleteVideo();
+            this.uploadImgShow = true;
+            this.uploadVideoShow = false;
+          })
+          .catch(() => {});
+      } else {
+        this.uploadVideoShow = false;
+        this.uploadImgShow = true;
+      }
+    },
+    // 点击视频上传
+    onUploadVideo() {
+      if (this.getUploadImg.length > 0) {
+        this.$confirm(this.$t('publisher.imgDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
+        })
+          .then(() => {
+            this.uploadImgShow = false;
+            this.uploadVideoShow = true;
+            this.$store.dispatch('publisher/setUploadImg', []);
+          })
+          .catch(() => {});
+      } else {
+        this.uploadVideoShow = true;
+        this.uploadImgShow = false;
+      }
+    },
+    // 图片上传成功回调
+    onUploadImgSuccess() {
+      this.draftSave();
+    },
+    // 视频上传成功回调
+    onUploadVideoSuccess() {
+      this.draftSave();
     },
   },
 };

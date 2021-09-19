@@ -11,9 +11,9 @@
       <div class="text-bottom flex-align">
         <p class="time">
           {{
-            `${$moment(new Date(data.lastModifyTime)).format('DD/MM/YYYY HH:mm ')} · ${$t(
-              'draftData.power',
-            )}`
+            `${$moment(new Date(data.lastModifyTime)).format('DD/MM/YYYY HH:mm ')} 
+            · 
+            ${$t(draftData.power)}`
           }}
         </p>
         <span class="btn-del" @click="onDeleteConfirm">
@@ -21,17 +21,27 @@
         </span>
       </div>
     </div>
-    <div class="img" v-if="data.imgUrls && data.imgUrls.length > 0">
-      <img :src="data.imgUrls[0].url" />
-      <div class="cover" v-if="data.imgUrls.length >= 9" dir="ltr">
+    <div class="img" v-if="draftData.img && draftData.img.length > 0">
+      <img
+        :src="`${uploadImgUrl}/orj1080/${draftData.img[0].pid}.jpg`"
+        :onerror="
+          `this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'`
+        "
+      />
+      <div class="cover" v-if="draftData.img.length >= 9" dir="ltr">
         +9
       </div>
-      <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" />
+      <!-- <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" /> -->
     </div>
-    <div class="video" v-if="data.video">
-      <img :src="data.video.url" />
+    <div class="video" v-if="draftData.video && draftData.video.fid">
+      <img
+        :src="`${uploadImgUrl}/orj1080/${draftData.video.pid}.jpg`"
+        :onerror="
+          `this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'`
+        "
+      />
       <span class="time">
-        {{ data.video.time }}
+        {{ parseInt(draftData.video.duration) }}
       </span>
     </div>
   </div>
@@ -49,6 +59,9 @@ export default {
   computed: {
     draftData() {
       return JSON.parse(this.data.content);
+    },
+    uploadImgUrl() {
+      return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
   },
   data() {
@@ -222,4 +235,3 @@ html[lang='ar'] {
   }
 }
 </style>
-
