@@ -4,7 +4,7 @@ import request from '../utils/request';
 import { sendReport } from '../server/index';
 import i18n from '../utils/i18n';
 import { Message } from 'element-ui';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';;
 
 Vue.use(Vuex);
 const modulesFiles = require.context('./modules', true, /\.js$/);
@@ -75,6 +75,10 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-empty-pattern
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
+      let retry = 0;
+      if (param.scene == 'upload_video') {
+        retry = 3;
+      }
       sendReport(param, {
         onSuccess: () => {
           // console.log(res, 'res');
@@ -84,6 +88,12 @@ export default new Vuex.Store({
         },
         onComplete: () => {
           // console.log('完成');
+        },
+        onNetworkError: () => {
+          if (retry > 1) {
+            retry--;
+            ctx.dispatch('send', obj);
+          }
         },
       });
     },
@@ -134,7 +144,7 @@ export default new Vuex.Store({
             }
             payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
           } catch (err) {
-            console.log(err)
+            console.log(err);
           }
         })
         .catch(err => {
@@ -183,6 +193,36 @@ export default new Vuex.Store({
           onComplete: () => {},
           onError: () => {
             resolve(false);
+          },
+        });
+      });
+    },
+    // 获取权限
+    async getTab(ctx) {
+      return new Promise((rs, rj)  => {
+        ctx.dispatch('ajax', {
+          req: {
+            method: 'get',
+            url: `api/pc/login/tab/display`,
+          },
+          onSuccess: res => {
+            let arr = [];
+            for (let key in res.data.allTab) {
+              let obj = {};
+              obj.key = key;
+              obj.name = res.data.allTab[key];
+              obj.show = res.data.tab[key];
+              arr.push(obj);
+            }
+            arr.sort((a, b) => {
+              return b.key - a.key;
+            });
+            Cookies.set('tabs', JSON.stringify(arr));
+            rs(arr);
+          },
+          onFail: res => {
+            console.log(res);
+            rj();
           },
         });
       });

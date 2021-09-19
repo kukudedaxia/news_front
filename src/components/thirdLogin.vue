@@ -136,7 +136,7 @@ export default {
           }
 
           await this.$store.dispatch('getUser', uid);
-          await this.getTab();
+          await this.$store.dispatch('getTab', uid);
           this.$router.push({ path: '/publisher' });
         },
         onFail: res => {
@@ -298,31 +298,31 @@ export default {
     },
 
     //new
-    getTab() {
-      this.$store.dispatch('ajax', {
-        req: {
-          method: 'get',
-          url: `api/pc/login/tab/display`,
-        },
-        onSuccess: res => {
-          let arr = [];
-          for (let key in res.data.allTab) {
-            let obj = {};
-            obj.key = key;
-            obj.name = res.data.allTab[key];
-            obj.show = res.data.tab[key];
-            arr.push(obj);
-          }
-          arr.sort((a, b) => {
-            return b.key - a.key;
-          });
-           Cookies.set('tabs', JSON.stringify(arr));
-        },
-        onFail: res => {
-          console.log(res);
-        },
-      });
-    },
+    // getTab() {
+    //   this.$store.dispatch('ajax', {
+    //     req: {
+    //       method: 'get',
+    //       url: `api/pc/login/tab/display`,
+    //     },
+    //     onSuccess: res => {
+    //       let arr = [];
+    //       for (let key in res.data.allTab) {
+    //         let obj = {};
+    //         obj.key = key;
+    //         obj.name = res.data.allTab[key];
+    //         obj.show = res.data.tab[key];
+    //         arr.push(obj);
+    //       }
+    //       arr.sort((a, b) => {
+    //         return b.key - a.key;
+    //       });
+    //        Cookies.set('tabs', JSON.stringify(arr));
+    //     },
+    //     onFail: res => {
+    //       console.log(res);
+    //     },
+    //   });
+    // },
   },
 };
 </script>
