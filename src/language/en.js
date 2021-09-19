@@ -133,6 +133,7 @@ const message = {
     suppotsImg: 'Format supports JPG / JPEG / PNG / tiff / webp / heic / gif',
     uploadImage: 'Upload image',
     imgDialogTitle: 'Are you sure to give up uploading the image?',
+    videoDialogTitle: 'Are you sure to give up uploading the video?',
     drageDialogTitle: 'Are you sure to delete this draft?',
     confirm: 'Confirm',
     cancel: 'Cancel',

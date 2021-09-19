@@ -453,7 +453,7 @@ export default {
     // 点击图片上传
     onUploadImg() {
       if (this.uploadMediaId !== '') {
-        this.$confirm(this.$t('publisher.imgDialogTitle'), '', {
+        this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
           confirmButtonText: this.$t('publisher.confirm'),
           cancelButtonText: this.$t('publisher.cancel'),
         })

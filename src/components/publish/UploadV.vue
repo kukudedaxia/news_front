@@ -9,7 +9,10 @@
     <div class="icon-close-big" @click="onClose"></div>
     <div id="drop">
       <!-- <img id="video_button_upload" class="more" :src="require('../../assets/images/more.png')" /> -->
-      <div class="uploader-icon" id="video_button_upload" v-show="status == 0"></div>
+      <div id="video_button_upload" class="target" v-show="status == 0">
+        <div class="uploader-icon"></div>
+      </div>
+
       <div class="icon-close" @click="deleteVideo" v-if="status !== 0"></div>
       <div class="reset" v-if="status == 2">
         <div class="icon-reset" @click="retry"></div>
@@ -55,7 +58,7 @@ export default {
       imgSrc: '',
       quotaTime: 0,
       duration: 0,
-      mediaId: '',
+      mediaId: '11222',
     };
   },
   computed: {
@@ -207,14 +210,27 @@ export default {
       }
       this.status = 0;
       this.count = 0;
-      this.$store.commit('video/setStatus', 0);
-      this.$store.commit('video/setMediaId', '');
-      this.$store.commit('video/setPid', '');
+      this.$store.commit('video/setData', {
+        ...this.videos,
+        status: 0,
+        media_id: '',
+        pid: '',
+      });
     },
 
     onClose() {
-      this.deleteVideo();
-      this.$emit('onClose');
+      if (this.mediaId) {
+        this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
+        })
+          .then(() => {
+            this.deleteVideo();
+            this.$emit('onClose');
+          })
+          .catch(() => {});
+        return;
+      }
     },
   },
 };
@@ -223,6 +239,10 @@ export default {
 .wrap {
   padding: 13px 20px;
   position: relative;
+}
+.target {
+  width: 100%;
+  height: 100%;
 }
 .top {
   text-align: left;

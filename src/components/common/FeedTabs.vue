@@ -164,4 +164,7 @@ html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
   justify-content: space-between;
   align-items: center;
 }
+html[lang='ar'] .com-feed-tabs .el-tabs .el-tabs__header .el-tabs__nav-wrap::after {
+  height: 2px;
+}
 </style>

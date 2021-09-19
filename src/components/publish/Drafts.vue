@@ -41,13 +41,14 @@
         "
       />
       <span class="time">
-        {{ parseInt(draftData.video.duration) }}
+        {{ transformVideoTime(draftData.video.duration) }}
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: 'ComDrafts',
   props: {
@@ -96,6 +97,21 @@ export default {
           this.$message.error(error);
         },
       });
+    },
+
+    transformVideoTime(seconds) {
+      const duration = Math.ceil(seconds);
+      let m1 = moment.duration(duration, 'seconds');
+      let hours = m1.get('hours');
+      let mins = m1.get('minutes');
+      let sec = m1.get('seconds');
+      mins = mins > 9 ? mins : '0' + mins;
+      sec = sec > 9 ? sec : '0' + sec;
+      if (hours > 0) {
+        return `${hours}:${mins}:${sec}`;
+      } else {
+        return `${mins}:${sec}`;
+      }
     },
   },
 };
