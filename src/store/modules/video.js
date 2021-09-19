@@ -5,6 +5,7 @@ const state = {
     media_id: '',
     pid: '',
     duration: '',
+    count: 0,
   },
 };
 const mutations = {

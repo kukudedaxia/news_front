@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <p>{{ `${$t('publisher.uploadVideo')}(${count}/1)` }}</p>
+      <p>{{ `${$t('publisher.uploadVideo')}(${videos.count}/1)` }}</p>
       <span>
         {{ $t('publisher.suppotsVideo') }}
       </span>
@@ -9,16 +9,16 @@
     <div class="icon-close-big" @click="onClose"></div>
     <div id="drop">
       <!-- <img id="video_button_upload" class="more" :src="require('../../assets/images/more.png')" /> -->
-      <div id="video_button_upload" class="target" v-show="status == 0">
+      <div id="video_button_upload" class="target" v-show="videos.status == 0">
         <div class="uploader-icon"></div>
       </div>
 
-      <div class="icon-close" @click="deleteVideo" v-if="status !== 0"></div>
-      <div class="reset" v-if="status == 2">
+      <div class="icon-close" @click="deleteVideo" v-if="videos.status !== 0"></div>
+      <div class="reset" v-if="videos.status == 2">
         <div class="icon-reset" @click="retry"></div>
         <p class="tips">{{ $t('uploadV.try') }}</p>
       </div>
-      <div class="progress" v-if="status == 1">
+      <div class="progress" v-if="videos.status == 1">
         <el-progress
           :percentage="progress"
           :stroke-width="4"
@@ -31,8 +31,10 @@
           {{ $t('uploadV.expected') }} {{ transformVideoTime(quotaTime) }} ({{ speedk }})
         </p>
       </div>
-      <span class="duration" v-if="status == 3">{{ transformVideoTime(duration) }}</span>
-      <div :class="['shot', { shot1: status == 3 }]" v-if="status != 0">
+      <span class="duration" v-if="videos.status == 3">{{
+        transformVideoTime(videos.duration)
+      }}</span>
+      <div :class="['shot', { shot1: videos.status == 3 }]" v-if="videos.status != 0">
         <img
           :src="imgSrc"
           :onerror="
@@ -51,14 +53,15 @@ export default {
   data() {
     return {
       wbUploader: {},
-      count: 0,
-      status: 0, //0未上传 1上传中 2上传失败 3上传成功
       progress: 0,
       speedk: '',
       imgSrc: '',
       quotaTime: 0,
-      duration: 0,
-      mediaId: '11222',
+      // count: 0,
+      // status: 0, //0未上传 1上传中 2上传失败 3上传成功
+      // duration: 0,
+      // mediaId: '',
+      // pid: '',
     };
   },
   computed: {
@@ -93,7 +96,7 @@ export default {
       wbUploader.on('beforeInit', data => {
         //...
         console.log(data);
-        if (this.count == 1) {
+        if (this.videos.count == 1) {
           return false;
         }
         wbUploader.init();
@@ -112,7 +115,7 @@ export default {
           return;
         }
         wbUploader.upload();
-        this.status = 1;
+        // this.status = 1;
         this.$store.commit('video/setData', {
           ...this.videos,
           status: 1,
@@ -120,7 +123,7 @@ export default {
       });
 
       wbUploader.on('uploadStatus', data => {
-        this.status = 1;
+        // this.status = 1;
         // this.$store.commit('video/setStatus', 1);
         this.progress = data.progress;
         this.speedk = data.speed.speedk;
@@ -136,16 +139,15 @@ export default {
 
       wbUploader.on('success', ({ file }) => {
         console.log(file);
-        this.status = 3;
-        // this.$store.commit('video/setStatus', this.status);
-        // this.$store.commit('video/setMediaId', file.initRes.media_id);
-        this.mediaId = '';
-        this.count = 1;
+        // this.status = 3;
+        // this.mediaId = '';
+        // this.count = 1;
         this.$store.commit('video/setData', {
           ...this.videos,
           status: 3,
           media_id: file.initRes.media_id,
-          duration: this.duration,
+          count: 1,
+          // duration: this.duration,
         });
         this.$emit('onUploadVideoSuccess');
         //...
@@ -153,18 +155,24 @@ export default {
 
       wbUploader.on('screenshot', data => {
         console.log(data, 'screenshot');
-        this.duration = data.detail.duration;
+        // this.duration = data.detail.duration;
         if (data.screenshot && data.screenshot.length > 0) {
           this.imgSrc = data.screenshot[0].url;
           // this.imgSrc = `http://img.whale.weibo.com/orj1080/${data.screenshot[0].pid}.jpg`;
         }
+
+        this.$store.commit('video/setData', {
+          ...this.videos,
+          duration: data.detail.duration,
+        });
+
         //... 返回截图数据
       });
 
       wbUploader.on('error', msg => {
         console.log(msg);
         if (!msg.includes('init')) {
-          this.status = 2;
+          // this.status = 2;
           this.$store.commit('video/setData', {
             ...this.videos,
             status: 2,
@@ -208,13 +216,15 @@ export default {
       } else {
         this.mediaId = '';
       }
-      this.status = 0;
-      this.count = 0;
+      // this.status = 0;
+      // this.count = 0;
       this.$store.commit('video/setData', {
         ...this.videos,
         status: 0,
         media_id: '',
         pid: '',
+        duration: '',
+        count: 0,
       });
     },
 

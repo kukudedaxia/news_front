@@ -237,7 +237,7 @@ class wbUploader {
       // 重写
       let check_url = '/multimedia/2/video/pc/upload/check.json';
       let init_url = '/multimedia/2/video/pc/upload/init.json';
-      let upload_url = 'http://video.whale.weibo.com:31001/2/fileplatform/upload.json';
+      let upload_url = 'https://test.bee.to/2/fileplatform/upload.json';
       this.options.urls = { check_url, init_url, upload_url };
       // if (upload_urls) {
       //   const index = upload_urls.indexOf(upload_url);
