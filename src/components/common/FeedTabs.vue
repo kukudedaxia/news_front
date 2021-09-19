@@ -14,7 +14,12 @@
             infinite-scroll-immediate="false"
             style="overflow:auto"
           >
-            <li v-for="(item, index) in draftList" class="infinite-list-item" :key="index">
+            <li
+              v-for="(item, index) in draftList"
+              class="infinite-list-item"
+              :key="index"
+              @click="editDrafts(item)"
+            >
               <Drafts :data="item" @deleteDraftSuccess="onDeleteSuccess"></Drafts>
             </li>
           </ul>
@@ -28,6 +33,7 @@
 <script>
 import Drafts from '@/components/publish/Drafts';
 import Default from '@/components/common/Default';
+import Bus from '@/utils/bus';
 
 export default {
   name: 'ComFeedTabs',
@@ -54,6 +60,7 @@ export default {
     load() {
       this.searchDraftList();
     },
+    // 查找草稿箱历史记录
     searchDraftList() {
       this.$store.dispatch('ajax', {
         req: {
@@ -78,6 +85,17 @@ export default {
     // 删除草稿成功
     onDeleteSuccess() {
       this.searchDraftList();
+    },
+    // 编辑草稿箱
+    editDrafts(item) {
+      this.$confirm(this.$t('publisher.editDraft'), '', {
+        confirmButtonText: this.$t('publisher.confirm'),
+        cancelButtonText: this.$t('publisher.cancel'),
+      })
+        .then(() => {
+          Bus.$emit('editDraft', item);
+        })
+        .catch(() => {});
     },
   },
 };
@@ -141,8 +159,6 @@ export default {
     }
   }
 }
-
-
 </style>
 
 <style lang="less">

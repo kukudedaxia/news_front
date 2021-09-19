@@ -135,6 +135,7 @@ const message = {
     imgDialogTitle: 'Are you sure to give up uploading the image?',
     videoDialogTitle: 'Are you sure to give up uploading the video?',
     drageDialogTitle: 'Are you sure to delete this draft?',
+    editDraft: 'Do you want to edit this draft?',
     confirm: 'Confirm',
     cancel: 'Cancel',
     drafts: 'Drafts',

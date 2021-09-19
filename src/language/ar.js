@@ -132,6 +132,7 @@ const message = {
     imgDialogTitle: 'هل أنت متأكد من إلغاء رفع الصورة؟',
     videoDialogTitle: 'هل أنت متأكد من إلغاء رفع الصورة؟',
     drageDialogTitle: 'هل أنت متأكد من حذف هذه المسودة؟',
+    editDraft: 'هل تريد تعديل هذه المسودة؟',
     confirm: 'تأكيد',
     cancel: 'إلغاء',
     drafts: 'المسودات',

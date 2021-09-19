@@ -16,7 +16,7 @@
             ${$t(draftData.power)}`
           }}
         </p>
-        <span class="btn-del" @click="onDeleteConfirm">
+        <span class="btn-del" @click.stop="onDeleteConfirm">
           {{ $t('publisher.delete') }}
         </span>
       </div>

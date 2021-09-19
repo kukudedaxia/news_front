@@ -36,6 +36,7 @@
           action="#"
           ref="upload"
           drag
+          accept=".jpg, .jpeg, .png, .gif, .tiff, .webp, .heic"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
           v-if="fileList.length <= 18"
@@ -62,6 +63,9 @@ export default {
     user() {
       return this.$store.state.userInfo;
     },
+    fileList() {
+      return this.$store.state.publisher.imgList;
+    },
   },
   watch: {
     fileList: {
@@ -80,7 +84,7 @@ export default {
     return {
       file: '', // 待上传的文件
       uploadLoading: false,
-      fileList: [],
+      // fileList: [],
       myArray: [],
     };
   },

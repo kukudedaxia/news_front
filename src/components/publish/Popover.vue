@@ -10,19 +10,18 @@
       {{ $t('publisher.searching') }}
     </div>
     <!-- 创建话题 -->
-    <div
+    <!-- <div
       class="topic-create"
       v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
     >
       <p>
-        <!-- 话题名 -->
         Visual frequency
       </p>
       <span>
         {{ $t('publisher.topic') }}
       </span>
-    </div>
-    <div class="user-result" v-else-if="!searchLoading && type === 'user' && userList.length === 0">
+    </div> -->
+    <div class="user-result" v-else-if="!searchLoading && userList.length === 0">
       <p>
         {{ $t('publisher.noResults') }}
       </p>

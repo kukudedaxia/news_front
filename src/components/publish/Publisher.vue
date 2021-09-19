@@ -99,6 +99,8 @@ import { editClass } from '@/directive/arFocusTools';
 import '../../assets/sdk/jquery.caret';
 import $ from 'jquery';
 import { mapGetters } from 'vuex';
+import Bus from '@/utils/bus';
+
 export default {
   components: {
     Popover,
@@ -118,7 +120,7 @@ export default {
           name: 'publisher.public',
         },
         {
-          id: 4,
+          id: 3,
           name: 'publisher.friends',
         },
         {
@@ -214,7 +216,7 @@ export default {
           }
         }
       });
-      // this.draftSave();
+      this.draftSave();
     },
   },
   computed: {
@@ -237,6 +239,30 @@ export default {
       top: $('#textareaId').offset().top,
       left: $('#textareaId').offset().left,
     };
+    // 监听编辑草稿箱事件
+    Bus.$on('editDraft', data => {
+      const content = JSON.parse(data.content);
+      this.draftId = data.id;
+      this.formalV = data.v;
+      this.textarea = content.text;
+      this.selectVal = {
+        id: this.selectList.find(item => item.name === content.power).id,
+        name: content.power,
+      };
+      if (content.img.length > 0) {
+        this.$store.dispatch('publisher/setUploadImg', content.img);
+        this.uploadImgShow = true;
+      } else if (content.video.fid != '') {
+        this.$store.commit('video/setData', {
+          status: 3, //上传状态 0， 1，2，3
+          media_id: content.video.fid,
+          pid: content.video.pid,
+          duration: content.video.duration,
+          count: 1,
+        });
+        this.uploadVideoShow = true;
+      }
+    });
   },
   methods: {
     handleCommand(item) {
@@ -406,8 +432,8 @@ export default {
         const list = this.getUploadImg.map(item => {
           return {
             type: 1,
-            id: item,
-            fid: item,
+            id: item.pid,
+            fid: item.pid,
             height: 1080,
             width: 1080,
           };

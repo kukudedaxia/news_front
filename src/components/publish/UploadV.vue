@@ -36,7 +36,9 @@
       }}</span>
       <div :class="['shot', { shot1: videos.status == 3 }]" v-if="videos.status != 0">
         <img
-          :src="imgSrc"
+          :src="
+            videos.status == 3 && videos.pid ? `${uploadImgUrl}/orj1080/${videos.pid}.jpg` : imgSrc
+          "
           :onerror="
             `this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'`
           "
@@ -70,6 +72,9 @@ export default {
     },
     user() {
       return this.$store.state.userInfo;
+    },
+    uploadImgUrl() {
+      return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
   },
   mounted() {
