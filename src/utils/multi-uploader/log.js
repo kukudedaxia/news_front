@@ -1,5 +1,5 @@
-import axios from 'axios';
-import qs from 'qs';
+// import axios from 'axios';
+// import qs from 'qs';
 
 import store from '../../store';
 
@@ -90,43 +90,43 @@ const logs = {
   },
   //新增
   push() {
-    console.log('上报视频日志')
-    // store.dispatch('send', { action: '5335', extend: this.uploadLog });
+    // console.log('上报视频日志')
+    store.dispatch('send', { extend: JSON.stringify(this.uploadLog), scene: 'upload_video' });
     return false;
 
-    var bodyFormData = new FormData();
-    let retry = 1;
-    bodyFormData.set('data', encodeURIComponent(JSON.stringify(this.uploadLog)));
-    axios
-      .post(
-        // `${location.origin}/ajax/multimedia/post_log`,
-        'https://multimedia.api.weibo.com/2/multimedia/post_log.json',
-        qs.stringify({
-          source: 339644097,
-          data: JSON.stringify(this.uploadLog),
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Up-Auth': this.initRes && this.initRes.auth,
-          },
-        },
-      )
-      .then(
-        () => {
-          // console.log(res);
-        },
-        e => {
-          if (e.message === 'Network Error') {
-            if (retry > 0) {
-              setTimeout(() => {
-                retry -= 1;
-                this.push();
-              }, 10000);
-            }
-          }
-        },
-      );
+    // var bodyFormData = new FormData();
+    // let retry = 1;
+    // bodyFormData.set('data', encodeURIComponent(JSON.stringify(this.uploadLog)));
+    // axios
+    //   .post(
+    //     // `${location.origin}/ajax/multimedia/post_log`,
+    //     'https://multimedia.api.weibo.com/2/multimedia/post_log.json',
+    //     qs.stringify({
+    //       source: 339644097,
+    //       data: JSON.stringify(this.uploadLog),
+    //     }),
+    //     {
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //         'X-Up-Auth': this.initRes && this.initRes.auth,
+    //       },
+    //     },
+    //   )
+    //   .then(
+    //     () => {
+    //       // console.log(res);
+    //     },
+    //     e => {
+    //       if (e.message === 'Network Error') {
+    //         if (retry > 0) {
+    //           setTimeout(() => {
+    //             retry -= 1;
+    //             this.push();
+    //           }, 10000);
+    //         }
+    //       }
+    //     },
+    //   );
   },
 };
 
