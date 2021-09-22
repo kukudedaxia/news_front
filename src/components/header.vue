@@ -12,7 +12,7 @@
         @click="goHome"
       ></div>
       <div class="menus" v-if="showMenu && tabs">
-        <el-tabs :value="path" @tab-click="onTabClick" class="flip-over"  ref="tabs">
+        <el-tabs :value="path" @tab-click="onTabClick" class="flip-over" ref="tabs">
           <template v-for="(item, index) in tabs">
             <el-tab-pane
               :key="index"
@@ -82,8 +82,8 @@ export default {
   },
   watch: {
     lang() {
-      if(this.$refs.tabs.$el) {
-      this.renderTab(this.$refs.tabs.$el);
+      if (this.$refs.tabs.$el) {
+        this.renderTab(this.$refs.tabs.$el);
       }
     },
   },
@@ -230,6 +230,9 @@ html[lang='ar'] .el-message-box__headerbtn {
   transform: translate(-50%, -50%);
   .el-dialog__header {
     display: none;
+  }
+  .el-tabs__nav {
+    direction: inherit;
   }
 
   .el-tabs__header {

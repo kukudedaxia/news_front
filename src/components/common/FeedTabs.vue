@@ -55,6 +55,12 @@ export default {
     this.loading = true;
     this.searchDraftList();
   },
+  mounted() {
+    Bus.$on('refreshDraft', () => {
+      this.loading = true;
+      this.searchDraftList();
+    });
+  },
   methods: {
     handleClick() {},
     load() {

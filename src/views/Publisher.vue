@@ -5,7 +5,7 @@
 <template>
   <div class="publisher">
     <!-- 发布器 -->
-    <publisher></publisher>
+    <publisher ref="publisher"></publisher>
     <!-- Feed流 - tab组件 -->
     <feed-tabs></feed-tabs>
   </div>
@@ -24,6 +24,11 @@ export default {
     return {
       textarea: '',
     };
+  },
+  beforeRouteLeave(next) {
+    // 当离开发布页时，需要弹窗提醒用户手动保存草稿
+    // ...todo
+    next();
   },
 };
 </script>

@@ -229,6 +229,7 @@ export default {
           }
         }
       });
+      // 自动保存草稿
       this.draftSave();
       if (val.length > 0 && val.length <= 10000) {
         this.btnClick = true;
@@ -438,41 +439,47 @@ export default {
     },
     // 草稿箱上报
     draftSave() {
-      // 如果保存草稿状态为完成，则可以走2s延迟保存草稿操作
+      // 如果保存草稿状态为完成，并且满足文本、图片、视频任意条件，则可以走2s延迟保存草稿操作
       if (this.draftSaveFinish) {
         this.draftSaveFinish = false;
         this.draftSaveTimes = setTimeout(() => {
-          const params = {
-            content: JSON.stringify({
-              text: this.textarea,
-              power: this.selectVal.name,
-              img: this.getUploadImg,
-              video: {
-                fid: this.uploadMediaId,
-                pid: this.$store.state.video.attr.pid,
-                duration: this.$store.state.video.attr.duration,
+          if (
+            this.textarea.length > 0 ||
+            this.getUploadImg.length > 0 ||
+            this.uploadMediaId !== ''
+          ) {
+            const params = {
+              content: JSON.stringify({
+                text: this.textarea,
+                power: this.selectVal.name,
+                img: this.getUploadImg,
+                video: {
+                  fid: this.uploadMediaId,
+                  pid: this.$store.state.video.attr.pid,
+                  duration: this.$store.state.video.attr.duration,
+                },
+              }),
+              formalV: this.formalV,
+            };
+            Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
+            this.$store.dispatch('ajax', {
+              req: {
+                method: 'post',
+                url: 'api/pc/draft/save',
+                data: params,
               },
-            }),
-            formalV: this.formalV,
-          };
-          Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
-          this.$store.dispatch('ajax', {
-            req: {
-              method: 'post',
-              url: 'api/pc/draft/save',
-              data: params,
-            },
-            onSuccess: ({ data }) => {
-              this.draftId = data.id;
-              this.formalV = data.v;
-            },
-            onFail: ({ error }) => {
-              this.$message.error(error);
-            },
-            onComplete: () => {
-              this.draftSaveFinish = true;
-            },
-          });
+              onSuccess: ({ data }) => {
+                this.draftId = data.id;
+                this.formalV = data.v;
+              },
+              onFail: ({ error }) => {
+                this.$message.error(error);
+              },
+              onComplete: () => {
+                this.draftSaveFinish = true;
+              },
+            });
+          }
         }, 2000);
       }
     },
@@ -502,6 +509,8 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
+        draftId: this.draftId,
+        v: this.formalV,
       };
       this.$store.dispatch('ajax', {
         req: {
@@ -518,6 +527,7 @@ export default {
           this.$store.dispatch('publisher/setUploadImg', []);
           this.uploadImgShow = false;
           this.uploadVideoShow = false;
+          Bus.$emit('refreshDraft');
         },
         onFail: ({ error }) => {
           this.$message.error(error);
