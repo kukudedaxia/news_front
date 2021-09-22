@@ -28,8 +28,8 @@
           `this.onerror=null;this.src='https://img.bee-cdn.com/images/default_w_orj1080.gif#110'`
         "
       />
-      <div class="cover" v-if="draftData.img.length >= 9" dir="ltr">
-        +9
+      <div class="cover" v-if="draftData.img.length > 1" dir="ltr">
+        {{ `+${draftData.img.length - 1}` }}
       </div>
       <!-- <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" /> -->
     </div>

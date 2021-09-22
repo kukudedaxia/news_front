@@ -10,17 +10,18 @@
       {{ $t('publisher.searching') }}
     </div>
     <!-- 创建话题 -->
-    <!-- <div
+    <div
       class="topic-create"
       v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
+      @click="createTopic"
     >
       <p>
-        Visual frequency
+        {{ text }}
       </p>
       <span>
         {{ $t('publisher.topic') }}
       </span>
-    </div> -->
+    </div>
     <div class="user-result" v-else-if="!searchLoading && userList.length === 0">
       <p>
         {{ $t('publisher.noResults') }}
@@ -88,7 +89,7 @@ export default {
   },
   watch: {
     text: {
-      handler(v) {
+      handler() {
         if (this.type === 'user') {
           this.searchUser();
           return;
@@ -131,7 +132,7 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          this.userList = data.users;
+          this.userList = data.users.splice(0, 10);
         },
         onFail: ({ error }) => {
           this.$message.error(error);
@@ -155,7 +156,7 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          this.topicList = data.topics;
+          this.topicList = data.topics.splice(0, 10);
         },
         onFail: ({ error }) => {
           this.$message.error(error);
@@ -164,6 +165,10 @@ export default {
           this.searchLoading = false;
         },
       });
+    },
+    // 创建话题
+    createTopic() {
+      this.$emit('onCreateTopic');
     },
   },
 };

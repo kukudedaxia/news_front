@@ -280,7 +280,6 @@ const joinLivingRoomAsAudience = async roomId => {
     rtcClient
       .joinLivingRoomAsAudience(String(roomId), RCLivingType.AUDIO_VIDEO)
       .then(({ code, room }) => {
-        debugger;
         if (code === RCRTCCode.SUCCESS) {
           console.log('加入房间成功', roomId);
           // 返回房间实例
