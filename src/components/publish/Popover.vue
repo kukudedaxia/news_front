@@ -22,7 +22,7 @@
         {{ $t('publisher.topic') }}
       </span>
     </div>
-    <div class="user-result" v-else-if="!searchLoading && userList.length === 0">
+    <div class="user-result" v-else-if="!searchLoading && type === 'user' && userList.length === 0">
       <p>
         {{ $t('publisher.noResults') }}
       </p>

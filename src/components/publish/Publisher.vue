@@ -272,10 +272,6 @@ export default {
     uploadMediaId() {
       return this.$store.state.video.attr.media_id;
     },
-    ...mapGetters('publisher', ['getUploadImg', 'getUploadVideo']),
-    uploadMediaId() {
-      return this.$store.state.video.attr.media_id;
-    },
   },
   mounted() {
     // 设置textarea不检查单词拼写
