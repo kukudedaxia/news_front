@@ -19,19 +19,10 @@
     </el-input>
     <div class="bottom flex-align">
       <ul class="operation-box flex-align">
-        <<<<<<< Updated upstream
-        <li @click="uploadImgShow = true">
-          <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
-        </li>
-        <li @click="uploadVideoShow = true">
-          =======
-        </li>
-
         <li @click="onUploadImg">
           <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
         </li>
         <li @click="onUploadVideo">
-          >>>>>>> Stashed changes
           <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
         </li>
         <li @click="addMention">
