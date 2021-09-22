@@ -4,17 +4,32 @@
  -->
 <template>
   <div class="default">
-    <img
-      src="https://img.bee-cdn.com/large/3b9ae203lz1gsxmvmcom0j20e606c75m.jpg"
-      class="default-img"
-    />
-    <p>{{ $t('live.default') }}</p>
+    <template v-if="type === 'dark-1'">
+      <img
+        src="https://img.bee-cdn.com/large/3b9ae203lz1gsxmvmcom0j20e606c75m.jpg"
+        class="default-img"
+      />
+      <p>{{ $t('live.default') }}</p>
+    </template>
+    <template v-if="type === 1">
+      <img
+        src="https://img.bee-cdn.com/large/3b9ae203lz1gkggi9zo77j20hu08040d.jpg"
+        class="default-img"
+      />
+      <p>{{ $t('publisher.noResults') }}</p>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Default',
+  props: {
+    type: {
+      type: [String, Number],
+      default: 1,
+    },
+  },
   data() {
     return {};
   },

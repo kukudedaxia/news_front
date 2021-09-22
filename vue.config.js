@@ -1,5 +1,6 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const entryGenerator = require('./generator/entryGenerator');
+const webpack = require('webpack');
 
 module.exports = {
   publicPath: process.env.PUBLIC_PATH,
@@ -43,6 +44,11 @@ module.exports = {
             web: res,
           };
         },
+      }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'windows.jQuery': 'jquery',
       }),
     );
   },
@@ -95,6 +101,7 @@ module.exports = {
       '/multimedia': {
         target: 'https://test.bee.to/',
       },
+
       '/upload': {
         // target: 'https://upimg.bee.to/',
         target: 'https://img.whale.weibo.com/',

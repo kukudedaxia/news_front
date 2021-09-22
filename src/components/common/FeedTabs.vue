@@ -1,0 +1,186 @@
+<!--
+ * @Author: jianbang
+ * @Description: Feed流 tabs组件
+-->
+<template>
+  <div id="feed-tab" class="com-feed-tabs">
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <!-- <el-tab-pane label="Beets" name="Beets">Beets</el-tab-pane> -->
+      <el-tab-pane :label="`${$t('publisher.drafts')}(${draftList.length})`" name="Drafts">
+        <template v-if="!loading">
+          <ul
+            class="infinite-list"
+            v-infinite-scroll="load"
+            infinite-scroll-immediate="false"
+            style="overflow:auto"
+          >
+            <li
+              v-for="(item, index) in draftList"
+              class="infinite-list-item"
+              :key="index"
+              @click="editDrafts(item)"
+            >
+              <Drafts :data="item" @deleteDraftSuccess="onDeleteSuccess"></Drafts>
+            </li>
+          </ul>
+          <default class="default" v-if="draftList.length === 0"></default>
+        </template>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+</template>
+
+<script>
+import Drafts from '@/components/publish/Drafts';
+import Default from '@/components/common/Default';
+import Bus from '@/utils/bus';
+
+export default {
+  name: 'ComFeedTabs',
+  components: {
+    Drafts,
+    Default,
+  },
+  data() {
+    return {
+      activeName: 'Drafts',
+      // 草稿箱参数
+      draftStart: 1,
+      draftSize: 20,
+      draftList: [],
+      loading: false,
+    };
+  },
+  created() {
+    this.loading = true;
+    this.searchDraftList();
+  },
+  methods: {
+    handleClick() {},
+    load() {
+      this.searchDraftList();
+    },
+    // 查找草稿箱历史记录
+    searchDraftList() {
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'get',
+          url: 'api/pc/draft/page',
+          params: {
+            start: this.draftStart,
+            size: this.draftSize,
+          },
+        },
+        onSuccess: ({ data }) => {
+          this.draftList = data;
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+        onComplete: () => {
+          this.loading = false;
+        },
+      });
+    },
+    // 删除草稿成功
+    onDeleteSuccess() {
+      this.searchDraftList();
+    },
+    // 编辑草稿箱
+    editDrafts(item) {
+      this.$confirm(this.$t('publisher.editDraft'), '', {
+        confirmButtonText: this.$t('publisher.confirm'),
+        cancelButtonText: this.$t('publisher.cancel'),
+      })
+        .then(() => {
+          Bus.$emit('editDraft', item);
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.com-feed-tabs {
+  width: 782px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  .el-tabs {
+    /deep/.el-tabs__header {
+      padding: 20px 0 0 0;
+      margin-bottom: 0;
+      .el-tabs__nav-wrap {
+        .el-tabs__nav-scroll {
+          padding-left: 40px;
+        }
+        &::after {
+          background-color: #f6f6f6;
+          height: 1px;
+        }
+      }
+      .el-tabs__nav {
+        height: 40px;
+        .el-tabs__active-bar {
+          height: 3px;
+          background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+          border-radius: 2px;
+        }
+        .el-tabs__item {
+          font-family: SFUIText-Regular;
+          font-size: 16px;
+          color: #333333;
+          letter-spacing: 0;
+          text-align: center;
+          height: 20px;
+          line-height: 20px;
+        }
+        .is-active {
+          font-family: SFUIText-Semibold;
+          color: #ff536c;
+        }
+      }
+    }
+  }
+  /deep/.default {
+    margin: 60px auto;
+    .default-img {
+      width: 214px;
+      height: 96px;
+    }
+    p {
+      font-family: SFUIText-Regular;
+      font-size: 14px;
+      color: #777f8e;
+      text-align: center;
+      margin-top: 6px;
+    }
+  }
+}
+</style>
+
+<style lang="less">
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+  width: auto;
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__item {
+  transform: scaleX(-1);
+}
+
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__item:last-child {
+  flex: 1;
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__header {
+  transform: scaleX(-1);
+}
+html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+html[lang='ar'] .com-feed-tabs .el-tabs .el-tabs__header .el-tabs__nav-wrap::after {
+  height: 2px;
+}
+</style>

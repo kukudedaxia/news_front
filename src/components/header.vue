@@ -1,36 +1,44 @@
 <template>
-  <div class="header com-header">
-    <div
-      :class="[
-        'header-icon',
-        {
-          'ar-logo-icon': lang == 'ar',
-          'logo-icon': lang !== 'ar',
-        },
-      ]"
-      @click="goHome"
-    ></div>
-    <div class="header-right">
-      <span
-        v-if="Object.keys(user).length > 0 && path == '/live'"
-        class="menu-item"
-        @click="logout"
-        >{{ $t('login.logout') }}</span
-      >
-      <router-link v-if="path && path !== '/live'" to="/live" class="menu-item">{{
-        $t('lives')
-      }}</router-link>
-      <router-link to="/" class="menu-item">{{ $t('home') }}</router-link>
-      <!-- <div class="user" v-if="Object.keys(user).length > 0">
-        <el-dropdown @command="handleCommand">
-          <span class="el-dropdown-link">{{ user.nickname }} </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="logout">{{ $t('login.logout') }}</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div> -->
+  <div :class="{ bg: path != '/login' && path != '/' }">
+    <div class="header com-header">
+      <div
+        :class="[
+          'header-icon',
+          {
+            'ar-logo-icon': lang == 'ar',
+            'logo-icon': lang !== 'ar',
+          },
+        ]"
+        @click="goHome"
+      ></div>
+      <div class="menus" v-if="showMenu && tabs">
+        <el-tabs :value="path" @tab-click="onTabClick" class="flip-over"  ref="tabs">
+          <template v-for="(item, index) in tabs">
+            <el-tab-pane
+              :key="index"
+              :label="$t('nav_' + item.name)"
+              :name="`/${item.name}`"
+              class="flip-over"
+              v-if="item.show"
+            >
+            </el-tab-pane>
+          </template>
+          <!-- <el-tab-pane :label="$t('nav2')" name="/live" class="flip-over"> </el-tab-pane> -->
+        </el-tabs>
+      </div>
+      <div class="header-right">
+        <router-link
+          v-if="path && (path == '/' || path == '/login')"
+          to="/publisher"
+          class="menu-item create"
+          >{{ $t('lives') }}</router-link
+        >
+        <router-link to="/" class="menu-item">{{ $t('home') }}</router-link>
 
-      <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
+        <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
+
+        <span v-if="showMenu" class="menu-item" @click="logout">{{ $t('login.logout') }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +61,9 @@ export default {
     user() {
       return this.$store.state.userInfo;
     },
+    tabs() {
+      return this.$store.state.tab;
+    },
     path() {
       return this.$route.path;
     },
@@ -65,15 +76,16 @@ export default {
     living() {
       return this.$store.state.live.living;
     },
+    showMenu() {
+      return Object.keys(this.user).length > 0 && this.path !== '/login' && this.path !== '/';
+    },
   },
   watch: {
-    // uid(v) {
-    //   if (v) {
-    //     this.$store.dispatch('getUser');
-    //   } else {
-    //     this.$store.commit('setUser', {});
-    //   }
-    // },
+    lang() {
+      if(this.$refs.tabs.$el) {
+      this.renderTab(this.$refs.tabs.$el);
+      }
+    },
   },
   methods: {
     changeLanuage() {
@@ -150,7 +162,9 @@ export default {
             Cookies.remove('SUB');
           }
           Cookies.remove('userInfo');
+          Cookies.remove('tab');
           this.$store.commit('setUser', {});
+          this.$store.commit('setTab', {});
           if (this.loginType == 'google') {
             this.signOutGoogle();
           }
@@ -180,6 +194,23 @@ export default {
         });
       }
     },
+    // new
+    onTabClick(tab) {
+      // console.log(tab);
+      this.$router.push({ path: tab.name });
+    },
+    renderTab($el) {
+      this.$nextTick(() => {
+        const activeEl = $el.querySelector('.el-tabs__item.is-active');
+        const lineEl = $el.querySelector('.el-tabs__active-bar');
+        const style = getComputedStyle(activeEl);
+        const pl = style.paddingLeft.match(/\d+/)[0] * 1;
+        const pr = style.paddingRight.match(/\d+/)[0] * 1;
+        const w = style.width.match(/\d+/)[0] * 1;
+        lineEl.style.transform = 'translateX(' + (activeEl.offsetLeft + pl) + 'px)';
+        lineEl.style.width = w - pl - pr + 'px';
+      });
+    },
   },
 };
 </script>
@@ -191,20 +222,91 @@ html[lang='ar'] .el-message-box__headerbtn {
   right: auto;
   left: 15px;
 }
+
+.menus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  .el-dialog__header {
+    display: none;
+  }
+
+  .el-tabs__header {
+    padding-left: 20px;
+    margin: 0;
+    .el-tabs__nav-wrap::after {
+      height: 0;
+      // background: #000000;
+      // border-radius: 10px 0 0 0;
+      // height: 1px;
+    }
+    .el-tabs__item {
+      font-family: SFUIText-Regular;
+      font-size: 18px;
+      color: #333333;
+      height: 78px;
+      line-height: 78px;
+      padding: 0 30px;
+    }
+    .el-tabs__item.is-disabled {
+      color: rgba(221, 221, 221, 0.2);
+    }
+    .el-tabs__item.is-active {
+      font-family: SFUIText-Bold;
+      color: #ff536c;
+    }
+    .el-tabs__active-bar {
+      height: 3px;
+      background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+      border-radius: 2px;
+    }
+
+    &::after {
+      content: '';
+      width: 100%;
+      // height: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      // background-color: #000000;
+      // border-radius: 10px 0 0 0;
+    }
+  }
+}
+.dark .menus .el-tabs__header .el-tabs__item:not(.is-active) {
+  color: #dddddd;
+}
+html[lang='ar'] {
+  .menus {
+    .el-tabs__item {
+      transform: scaleX(-1) !important;
+      padding: 0 30px !important;
+    }
+  }
+}
 </style>
 <style lang="less">
+.bg {
+  background: #fff;
+}
+.dark .bg {
+  background: transparent;
+}
 .header {
   display: flex;
   max-width: 1130px;
   justify-content: space-between;
   position: relative;
-  padding-top: 23px;
-  padding-bottom: 22px;
+  // padding-top: 23px;
+  // padding-bottom: 22px;
   // left: 0;
   // right: 0;
   z-index: 99;
   // top: 23px;
   margin: auto;
+  align-items: center;
+  height: 78px;
 }
 .header-icon {
   width: 110px;
@@ -235,6 +337,7 @@ html[lang='ar'] .el-message-box__headerbtn {
   transform: scale(0.83);
   -webkit-text-size-adjust: none;
   -webkit-transform: scale(0.83, 0.83);
+  margin: 0 20px;
 }
 .header-right {
   display: flex;
@@ -250,6 +353,11 @@ html[lang='ar'] .lanuage {
 .menu-item {
   color: #333333;
   text-decoration: none;
+  // margin-right: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.create {
   margin-right: 20px;
 }
 html[lang='ar'] .menu-item {

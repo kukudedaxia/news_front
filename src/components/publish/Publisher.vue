@@ -1,0 +1,696 @@
+<!--
+ * @Author: jianbang
+ * @Description: 发布器组件
+-->
+<template>
+  <div class="com-publisher">
+    <el-input
+      type="textarea"
+      :autosize="{ minRows: 5, maxRows: 10 }"
+      :placeholder="$t('publisher.express')"
+      ref="textareaId"
+      id="textareaId"
+      v-model="textarea"
+      class="textarea"
+      v-arInput
+      @blur="onInputBlur"
+      @focus="onInputFocus"
+    >
+    </el-input>
+    <div class="bottom flex-align">
+      <ul class="operation-box flex-align">
+        <<<<<<< Updated upstream
+        <li @click="uploadImgShow = true">
+          <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
+        </li>
+        <li @click="uploadVideoShow = true">
+          =======
+        </li>
+
+        <li @click="onUploadImg">
+          <img src="@/assets/images/publisher/compose_toolbar_picture@3x.png" />
+        </li>
+        <li @click="onUploadVideo">
+          >>>>>>> Stashed changes
+          <img src="@/assets/images/publisher/compose_toolbar_video@3x.png" />
+        </li>
+        <li @click="addMention">
+          <img src="@/assets/images/publisher/compose_toolbar_mention@3x.png" />
+        </li>
+        <li @click="addTopics">
+          <img src="@/assets/images/publisher/compose_toolbar_topics@3x.png" />
+        </li>
+      </ul>
+      <div class="inform-box">
+        <span class="text-length" v-show="textareaLen >= 9990">{{ 10000 - textareaLen }}</span>
+        <el-dropdown
+          trigger="click"
+          @command="handleCommand"
+          @visible-change="visibleChangeHandler"
+          class="select"
+        >
+          <span class="el-dropdown-link">
+            <i class="el-icon-arrow-down el-icon--right" ref="dropdownId"></i
+            >{{ $t(selectVal.name) }}
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item :command="item" v-for="item in selectList" :key="item.id">{{
+              $t(item.name)
+            }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-button
+          type="primary"
+          round
+          size="small"
+          :disabled="btnDisabled"
+          class="inform-box_btn"
+          @click="sendBlog"
+          >{{ $t('publisher.release') }}</el-button
+        >
+      </div>
+    </div>
+    <el-divider v-if="uploadImgShow"></el-divider>
+    <transition name="fade_top">
+      <upload-image
+        @onCloseImgUpload="onCloseImgUpload"
+        @onUploadImgSuccess="onUploadImgSuccess"
+        v-if="uploadImgShow"
+      ></upload-image>
+    </transition>
+    <el-divider v-if="uploadVideoShow"></el-divider>
+    <transition name="fade_top">
+      <UploadV
+        ref="uploadV"
+        v-if="uploadVideoShow"
+        @onClose="onCloseVideoUpload"
+        @onUploadVideoSuccess="onUploadVideoSuccess"
+      ></UploadV>
+    </transition>
+    <transition name="fade">
+      <Popover
+        v-show="popoverShow"
+        :type="popoverType"
+        class="popover"
+        id="popoverId"
+        :text="searchText"
+        @onItemClick="onItemClick"
+      ></Popover>
+    </transition>
+  </div>
+</template>
+
+<script>
+import Popover from '@/components/publish/Popover';
+import UploadImage from '@/components/publish/UploadImage';
+import UploadV from '@/components/publish/UploadV';
+import { editClass } from '@/directive/arFocusTools';
+import '../../assets/sdk/jquery.caret';
+import $ from 'jquery';
+import { mapGetters } from 'vuex';
+import Bus from '@/utils/bus';
+
+export default {
+  components: {
+    Popover,
+    'upload-image': UploadImage,
+    UploadV,
+  },
+  data() {
+    return {
+      textarea: '',
+      selectVal: {
+        id: 0,
+        name: 'publisher.public',
+      },
+      selectList: [
+        {
+          id: 0,
+          name: 'publisher.public',
+        },
+        {
+          id: 3,
+          name: 'publisher.friends',
+        },
+        {
+          id: 2,
+          name: 'publisher.fans',
+        },
+        {
+          id: 1,
+          name: 'publisher.onlyMe',
+        },
+      ],
+      // 发布器光标离 @ # 最近的坐标
+      cursorCoordinate: {
+        left: 0,
+        top: 0,
+      },
+      popoverShow: false,
+      popoverType: '', // # topic 、 @ user
+      uploadImgShow: false,
+      // 输入框的偏移量
+      textareaOffset: {
+        top: 0,
+        left: 0,
+      },
+      // 输入框的光标所在下标
+      focusIndex: 0,
+      startIndex: 0, // @、# 所在的下标
+      searchText: null, // @、# 检索文本
+      // ------ 草稿 ------ //
+      draftId: null, // 草稿箱id,如果没有传则会新建
+      formalV: '', // 草稿箱修改时必须带上，上一版本版本号
+      // 草稿保存接口是否请求完成  默认是完成态，当在请求时设为false
+      draftSaveFinish: true,
+      // 草稿保存定时器实例
+      draftSaveTimes: null,
+      uploadVideoShow: false,
+    };
+  },
+  watch: {
+    // 监听发布器文本变化
+    textarea(val) {
+      /**
+       * 1. 获取光标所在下标
+       * 2. 检测光标的前一位字符是否为 @、# ; 如果是并且后面字符无空格，则弹出对应的popover
+       * 3. 选择完成后，需要在后面增加一个空格，以表示完成输入
+       * // ---- 待完善 ---- //
+       * 1. 需要监听光标的移动
+       * 2. 当光标在@、#后一位，则弹出popover
+       * 3. 如果光标在@、#后不存在空格的字符串中的任意位置。则提示敲击空格完成输入
+       * 4. popover选项支持键盘选择
+       */
+      this.$nextTick(() => {
+        this.getFocusIndex(); // 获取文本变化时的实时光标下标
+        const letter = val.charAt(this.focusIndex - 1); //获取光标的上一个字符
+        // 如果上个字符是空格或者为空，不显示任何
+        // if (letter === ' ' || letter === '') {
+        //   this.popoverShow = false;
+        //   return;
+        // }
+        if (letter === '@' || letter === '#') {
+          // // 当光标上一个字符是@、#时，需要检测后续的字符串是否包含空格，如果包含则判定这是个已完成的检索结果，不展示popover；如果不包含空格，则会截取@、#到空格之间的字符串，作为检索文本，并展示popover
+          // // 截取@、# 开始往后的所有字符串
+          // const str = this.textarea.slice(this.focusIndex);
+          // debugger;
+          // if (str !== '') {
+          //   // 匹配空格之前的文本
+          //   const text = str.split(' ');
+          //   debugger;
+          // }
+          this.startIndex = this.focusIndex;
+          this.searchText = '';
+          this.popoverType = letter === '@' ? 'user' : 'topic';
+          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+          this.$nextTick(() => {
+            this.popoverPosition();
+            setTimeout(() => {
+              this.popoverShow = true;
+            }, 100);
+          });
+        } else {
+          // 说明@、#存在
+          if (this.startIndex !== 0) {
+            const str = this.textarea.slice(this.startIndex, this.focusIndex);
+            // 检索结束
+            if (str.charAt(str.length - 1) === ' ' || str.charAt(str.length - 1) === '') {
+              this.popoverShow = false;
+            } else {
+              Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+              this.popoverPosition();
+              //  未检测空格，所以检索还在继续
+              this.searchText = str;
+            }
+          }
+        }
+      });
+      this.draftSave();
+    },
+  },
+  computed: {
+    textareaLen() {
+      return this.textarea.length;
+    },
+    btnDisabled() {
+      return this.textareaLen > 0 ? false : true;
+    },
+    ...mapGetters('publisher', ['getUploadImg', 'getUploadVideo']),
+    uploadMediaId() {
+      return this.$store.state.video.attr.media_id;
+    },
+  },
+  mounted() {
+    // 设置textarea不检查单词拼写
+    this.$refs.textareaId.$el.spellcheck = false;
+    // 获取textarea的左、上偏移量
+    this.textareaOffset = {
+      top: $('#textareaId').offset().top,
+      left: $('#textareaId').offset().left,
+    };
+    // 监听编辑草稿箱事件
+    Bus.$on('editDraft', data => {
+      const content = JSON.parse(data.content);
+      this.draftId = data.id;
+      this.formalV = data.v;
+      this.textarea = content.text;
+      this.selectVal = {
+        id: this.selectList.find(item => item.name === content.power).id,
+        name: content.power,
+      };
+      if (content.img.length > 0) {
+        this.$store.dispatch('publisher/setUploadImg', content.img);
+        this.uploadImgShow = true;
+      } else if (content.video.fid != '') {
+        this.$store.commit('video/setData', {
+          status: 3, //上传状态 0， 1，2，3
+          media_id: content.video.fid,
+          pid: content.video.pid,
+          duration: content.video.duration,
+          count: 1,
+        });
+        this.uploadVideoShow = true;
+      }
+    });
+  },
+  methods: {
+    handleCommand(item) {
+      this.selectVal = item;
+    },
+    visibleChangeHandler(val) {
+      const dropdownId = this.$refs.dropdownId;
+      if (val) {
+        dropdownId.classList.add('select-icon_up');
+        dropdownId.classList.remove('select-icon_down');
+      } else {
+        dropdownId.classList.remove('select-icon_up');
+        dropdownId.classList.add('select-icon_down');
+      }
+    },
+    // 点击@图标
+    addMention() {
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + '@' + this.textarea.slice(this.focusIndex);
+      this.setFocusIndex(this.focusIndex + 1);
+      this.$refs.textareaId.focus();
+    },
+    // 点击#图标
+    addTopics() {
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + '#' + this.textarea.slice(this.focusIndex);
+      this.setFocusIndex(this.focusIndex + 1);
+      this.$refs.textareaId.focus();
+    },
+    // 输入框失去焦点
+    onInputBlur() {
+      // 失去焦点，更新光标下标
+      this.getFocusIndex();
+      if (this.popoverShow) {
+        setTimeout(() => {
+          this.popoverShow = false;
+        }, 200);
+      }
+    },
+    // 输入框获得焦点
+    onInputFocus() {
+      // 获得焦点，更新光标下标
+      setTimeout(() => {
+        this.getFocusIndex();
+        // 光标的上一个字符
+        const letter = this.textarea.charAt(this.focusIndex - 1);
+        if (letter === '@' || letter === '#') {
+          this.popoverType = letter === '@' ? 'user' : 'topic';
+          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+          this.popoverShow = true;
+          this.$nextTick(() => {
+            this.popoverPosition();
+          });
+        }
+      }, 0);
+    },
+    // 获取发布器输入框中光标的下标位置
+    getFocusIndex() {
+      const dom = $('#textareaId')[0];
+      // IE
+      if (document.selection) {
+        var range = document.selection.createRange();
+        range.moveStart('character', -dom.value.length);
+        this.focusIndex = range.text.length;
+      } else if (dom.selectionStart || dom.selectionStart == 0) {
+        // another support
+        this.focusIndex = dom.selectionStart;
+      }
+    },
+    // 设置发布器输入框中光标的下标位置
+    setFocusIndex(index) {
+      const dom = $('#textareaId')[0];
+      if (this.focusIndex < 0) this.focusIndex = this.textarea.length;
+      if (dom.setSelectionRange) {
+        setTimeout(() => {
+          dom.setSelectionRange(index, index);
+        }, 0);
+      } else if (dom.createTextRange) {
+        dom.createTextRange().move('character', this.focusIndex);
+      }
+    },
+    // 获取popover DOM
+    getPopoverDom() {
+      return document.querySelector('#popoverId');
+    },
+    // 定位popover的位置
+    popoverPosition() {
+      const dom = this.getPopoverDom();
+      dom.style.top = `${this.cursorCoordinate.top +
+        2.5 * this.cursorCoordinate.height -
+        this.textareaOffset.top}px `;
+      // 如果是阿语，从右定位
+      if (this.tools.checkAr(this.textarea)) {
+        dom.style.left = '';
+        dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      } else {
+        // 英语从左定位
+        dom.style.right = '';
+        dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      }
+    },
+    // popover选中事件
+    onItemClick(data) {
+      this.getFocusIndex();
+      this.textarea =
+        this.textarea.slice(0, this.focusIndex) + data + ' ' + this.textarea.slice(this.focusIndex);
+      this.popoverShow = false;
+      // 设置光标的位置为选中数据空格的后一位
+      this.focusIndex = this.focusIndex + data.length + 1;
+      $('#textareaId').val(this.textarea);
+      editClass($('#textareaId')[0]);
+      setTimeout(() => {
+        this.searchText = null;
+      }, 300);
+    },
+    // 草稿箱上报
+    draftSave() {
+      // 如果保存草稿状态为完成，则可以走2s延迟保存草稿操作
+      if (this.draftSaveFinish) {
+        this.draftSaveFinish = false;
+        this.draftSaveTimes = setTimeout(() => {
+          const params = {
+            content: JSON.stringify({
+              text: this.textarea,
+              power: this.selectVal.name,
+              img: this.getUploadImg,
+              video: {
+                fid: this.uploadMediaId,
+                pid: this.$store.state.video.attr.pid,
+                duration: this.$store.state.video.attr.duration,
+              },
+            }),
+            formalV: this.formalV,
+          };
+          Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
+          this.$store.dispatch('ajax', {
+            req: {
+              method: 'post',
+              url: 'api/pc/draft/save',
+              data: params,
+            },
+            onSuccess: ({ data }) => {
+              this.draftId = data.id;
+              this.formalV = data.v;
+            },
+            onFail: ({ error }) => {
+              this.$message.error(error);
+            },
+            onComplete: () => {
+              this.draftSaveFinish = true;
+            },
+          });
+        }, 2000);
+      }
+    },
+    // 发博
+    sendBlog() {
+      const media = [];
+      if (this.uploadMediaId !== '') {
+        media.push({
+          type: 2,
+          id: this.uploadMediaId,
+          fid: this.uploadMediaId,
+          duration: this.$store.state.video.attr.duration,
+        });
+      } else if (this.getUploadImg.length > 0) {
+        const list = this.getUploadImg.map(item => {
+          return {
+            type: 1,
+            id: item.pid,
+            fid: item.pid,
+            height: 1080,
+            width: 1080,
+          };
+        });
+        media.push(...list);
+      }
+      const params = {
+        text: this.textarea,
+        visible: this.selectVal.id,
+        media: JSON.stringify(media),
+      };
+      this.$store.dispatch('ajax', {
+        req: {
+          method: 'post',
+          url: 'api/pc/status/create',
+          data: params,
+        },
+        onSuccess: () => {
+          this.$message.success(this.$t('publisher.successed'));
+          this.textarea = '';
+          if (this.$refs.uploadV) {
+            this.$refs.uploadV.deleteVideo();
+          }
+          this.$store.dispatch('publisher/setUploadImg', []);
+          this.uploadImgShow = false;
+          this.uploadVideoShow = false;
+        },
+        onFail: ({ error }) => {
+          this.$message.error(error);
+        },
+        onComplete: () => {},
+      });
+    },
+    // 关闭视频上传功能
+    onCloseVideoUpload() {
+      this.uploadVideoShow = false;
+    },
+    // 关闭图片上传功能
+    onCloseImgUpload() {
+      this.uploadImgShow = false;
+      this.$store.dispatch('publisher/setUploadImg', []);
+    },
+    // 点击图片上传
+    onUploadImg() {
+      if (this.uploadMediaId !== '') {
+        this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
+        })
+          .then(() => {
+            this.$refs.uploadV.deleteVideo();
+            this.uploadImgShow = true;
+            this.uploadVideoShow = false;
+          })
+          .catch(() => {});
+      } else {
+        this.uploadVideoShow = false;
+        this.uploadImgShow = true;
+      }
+    },
+    // 点击视频上传
+    onUploadVideo() {
+      if (this.getUploadImg.length > 0) {
+        this.$confirm(this.$t('publisher.imgDialogTitle'), '', {
+          confirmButtonText: this.$t('publisher.confirm'),
+          cancelButtonText: this.$t('publisher.cancel'),
+        })
+          .then(() => {
+            this.uploadImgShow = false;
+            this.uploadVideoShow = true;
+            this.$store.dispatch('publisher/setUploadImg', []);
+          })
+          .catch(() => {});
+      } else {
+        this.uploadVideoShow = true;
+        this.uploadImgShow = false;
+      }
+    },
+    // 图片上传成功回调
+    onUploadImgSuccess() {
+      this.draftSave();
+    },
+    // 视频上传成功回调
+    onUploadVideoSuccess() {
+      this.draftSave();
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.com-publisher {
+  background: #ffffff;
+  border-radius: 6px;
+  width: 782px;
+  position: relative;
+  margin: 20px auto;
+  .textarea {
+    padding: 20px 20px 12px 20px;
+    /deep/.el-textarea__inner {
+      background: #f6f6f9 !important;
+      border-radius: 6px;
+      border-color: transparent;
+      resize: none;
+      padding: 12px 16px;
+      font-family: SFUIText-Regular;
+      font-size: 16px;
+      color: #333333;
+      // text-align: justify;
+      line-height: 20px;
+
+      &::placeholder {
+        font-family: SFUIText-Regular;
+        font-size: 16px;
+        color: #636363;
+      }
+      &:focus {
+        border-color: #ff536c;
+      }
+    }
+  }
+  .bottom {
+    justify-content: space-between;
+    padding: 0 20px 12px 13px;
+    .operation-box {
+      li {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 19px;
+        cursor: pointer;
+        transition: 0.3s;
+        img {
+          width: 24px;
+          height: 24px;
+          position: relative;
+        }
+        &:hover {
+          background: #f6f6f9;
+          border-radius: 50%;
+        }
+      }
+    }
+    .inform-box {
+      .text-length {
+        font-family: SFUIText-Regular;
+        font-size: 14px;
+        color: #ee3b23;
+        text-align: center;
+      }
+      .select {
+        margin: 0 20px;
+        padding: 9px 12px 9px 8px;
+        height: 34px;
+        font-family: SFUIText-Medium;
+        font-size: 14px;
+        color: #777f8e;
+        letter-spacing: 0;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          border-radius: 17px;
+          background: #f6f6f9;
+        }
+        i {
+          margin-right: 4px;
+          &::before {
+            content: '';
+            display: inline-block;
+            background: url('../../assets/images/publisher/public_icon_details_down@3x.png')
+              no-repeat;
+            background-size: 100% 100%;
+            width: 14px;
+            height: 14px;
+            vertical-align: -2px;
+          }
+        }
+        .select-icon_down {
+          transform: rotateX(0deg);
+        }
+        .select-icon_up {
+          transform: rotateX(180deg);
+        }
+      }
+      .inform-box_btn {
+        font-family: SFUIText-Medium;
+        font-size: 14px;
+        color: #ffffff;
+        letter-spacing: 0;
+        text-align: center;
+        background-color: #ff536c;
+        border-color: #ff536c;
+        &:active {
+          background-color: #ef4c63;
+          border-color: #ef4c63;
+        }
+        &:disabled {
+          opacity: 0.4;
+        }
+      }
+    }
+  }
+  .textarea-hide {
+    border-radius: 6px;
+    border-color: transparent;
+    resize: none;
+    padding: 12px 16px;
+    font-family: SFUIText-Regular;
+    font-size: 16px;
+    color: #333333;
+    text-align: justify;
+    line-height: 20px;
+    white-space: pre-wrap;
+    visibility: hidden;
+  }
+  .popover {
+    position: absolute;
+  }
+  .el-divider {
+    margin: 0;
+    background-color: #f1f1f3;
+  }
+}
+.el-dropdown-menu {
+  min-width: 160px;
+  background: #ffffff;
+  border: 1px solid #eff1f5;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  .el-dropdown-menu__item {
+    height: 40px;
+    font-family: SFUIText-Regular;
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+  .el-dropdown-menu__item:focus,
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background-color: transparent;
+  }
+  .el-dropdown-menu__item:focus,
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background-color: transparent;
+  }
+  /deep/.popper__arrow {
+    display: none;
+  }
+}
+</style>

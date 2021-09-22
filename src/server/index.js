@@ -30,6 +30,9 @@ export const sendReport = (params, callbacks) => {
     url: 'api/log/r?enc=0',
     data: data,
   };
+  if (params.scene == 'upload_video') {
+    req.url = 'api/log/m?enc=0';
+  }
+
   return store.dispatch('ajax', { req, ...callbacks });
 };
-

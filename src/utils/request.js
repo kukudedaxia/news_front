@@ -46,7 +46,7 @@ request.interceptors.response.use(
     return Promise.resolve(response);
   },
   function(error) {
-    console.log(error, '返回1');
+    console.log(error);
     // 对响应错误做点什么
     if (error.response) {
       switch (error.response.status) {
@@ -54,6 +54,7 @@ request.interceptors.response.use(
           // 返回 401 清除token信息并跳转到登录页面
           Cookies.remove('uid');
           Cookies.remove('userInfo');
+          Cookies.remove('tab');
           if (process.env.NODE_ENV === 'production') {
             Cookies.remove('SUB', {
               domain: process.env.VUE_APP_DOMAIN,
@@ -62,6 +63,7 @@ request.interceptors.response.use(
             Cookies.remove('SUB');
           }
           store.commit('setUser', {});
+          store.commit('setTab', {})
           window.location.href =
             window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
         // router.replace({
