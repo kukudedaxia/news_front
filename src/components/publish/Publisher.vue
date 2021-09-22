@@ -230,7 +230,7 @@ export default {
         }
       });
       this.draftSave();
-      if (val > 0 && val <= 10000) {
+      if (val.length > 0 && val.length <= 10000) {
         this.btnClick = true;
       } else {
         this.btnClick = false;
