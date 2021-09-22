@@ -124,6 +124,7 @@ export default {
         this.$store.commit('video/setData', {
           ...this.videos,
           status: 1,
+          count: 1,
         });
       });
 
