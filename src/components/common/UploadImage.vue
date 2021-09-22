@@ -12,7 +12,7 @@
       filter=".uploader"
     >
       <transition-group name="fade_top1" class="grid">
-        <div class="img-list-box" v-for="(item, index) in fileList" :key="item.pid">
+        <div class="img-list-box" v-for="(item, index) in fileList" :key="index">
           <img
             :src="`${uploadImgUrl}/orj1080/${item.pid}.jpg`"
             :onerror="
@@ -21,13 +21,13 @@
             class="img"
           />
           <!-- loading\faile 蒙层 -->
-          <div class="mantle" v-if="item.pid == ''">
+          <div class="mantle" v-if="item.loading != undefined && item.pid == ''">
             <img
               src="@/assets/images/publisher/media_icon_loading@3x.png"
               class="icon-loading"
               v-if="item.loading"
             />
-            <div class="icon-reset" v-if="item.pid == ''" @click="onImgReset"></div>
+            <div class="icon-reset" v-if="!item.loading" @click="onImgReset"></div>
           </div>
           <div class="icon-close" @click="onimgClose(index)"></div>
         </div>
@@ -36,6 +36,7 @@
           action="#"
           ref="upload"
           drag
+          multiple
           accept=".jpg, .jpeg, .png, .gif, .tiff, .webp, .heic"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
@@ -83,7 +84,6 @@ export default {
   data() {
     return {
       file: '', // 待上传的文件
-      uploadLoading: false,
       // fileList: [],
       myArray: [],
     };
@@ -93,15 +93,24 @@ export default {
     beforeAvatarUpload(file) {
       // 上传图片不能大于30M
       if (file.size > 1024 * 1024 * 30) {
-        this.$message.error('This image is more than 60m');
+        // ...todo  待补充文案
+        this.$message.error('This image is more than 30m');
+      } else if (this.fileList.length >= 18) {
+        // ...todo  待补充文案
+        this.$message.error('已超过最大图片上传数');
       } else {
-        this.uploadLoading = true;
         this.uploadImg(file);
       }
       return false;
     },
     // 图片上传
     async uploadImg(file) {
+      const imgObj = {
+        id: new Date().getTime(), // 每张上传中的图片都会设置一个唯一的以毫秒为单位的时间戳
+        pid: '',
+        loading: true,
+      };
+      this.fileList.push(imgObj);
       try {
         this.file = file;
         const base64 = await fileByBase64(file);
@@ -126,11 +135,15 @@ export default {
             Accept: 'application/json',
           },
           success: res => {
-            this.uploadLoading = false;
             if (res.ret) {
-              this.fileList.push({
+              // 通过上面的时间戳为id，在数组中找到对应数据，并替换
+              const index = this.fileList.findIndex(item => item.id === imgObj.id);
+              this.fileList.splice(index, 1, {
                 pid: res.pic.pid,
               });
+              // this.fileList.push({
+              //   pid: res.pic.pid,
+              // });
               // let reader = new FileReader();
               // reader.onload = function(e) {
               //   let txt = e.target.result;
@@ -148,7 +161,6 @@ export default {
             }
           },
           error: () => {
-            this.uploadLoading = false;
             this.$message.error(this.$t('live.uploadErr'));
           },
         });
@@ -227,6 +239,7 @@ export default {
     overflow: hidden;
     position: relative;
     .img {
+      object-fit: cover;
       width: 100%;
       height: 100%;
     }

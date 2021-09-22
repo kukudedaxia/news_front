@@ -15,6 +15,7 @@
       v-arInput
       @blur="onInputBlur"
       @focus="onInputFocus"
+      @keydown.native="onKeyDown"
     >
     </el-input>
     <div class="bottom flex-align">
@@ -33,7 +34,11 @@
         </li>
       </ul>
       <div class="inform-box">
-        <span class="text-length" v-show="textareaLen >= 9990">{{ 10000 - textareaLen }}</span>
+        <span
+          :class="['text-length', { red: textareaLen >= 10000 }]"
+          v-show="textareaLen >= 9990"
+          >{{ 10000 - textareaLen }}</span
+        >
         <el-dropdown
           trigger="click"
           @command="handleCommand"
@@ -54,7 +59,7 @@
           type="primary"
           round
           size="small"
-          :disabled="btnDisabled"
+          :disabled="!btnClick"
           class="inform-box_btn"
           @click="sendBlog"
           >{{ $t('publisher.release') }}</el-button
@@ -86,6 +91,7 @@
         id="popoverId"
         :text="searchText"
         @onItemClick="onItemClick"
+        @onCreateTopic="onCreateTopic"
       ></Popover>
     </transition>
   </div>
@@ -132,6 +138,8 @@ export default {
           name: 'publisher.onlyMe',
         },
       ],
+      // 发布按钮点击
+      btnClick: false,
       // 发布器光标离 @ # 最近的坐标
       cursorCoordinate: {
         left: 0,
@@ -204,8 +212,13 @@ export default {
           // 说明@、#存在
           if (this.startIndex !== 0) {
             const str = this.textarea.slice(this.startIndex, this.focusIndex);
+            console.log(str.length, this.popoverType);
+            // 如果超过30个字符，则关闭@模式，#则不受限制
+            if (str.length === 30 && this.popoverType === 'user') {
+              this.onItemClick('');
+            }
             // 检索结束
-            if (str.charAt(str.length - 1) === ' ' || str.charAt(str.length - 1) === '') {
+            else if (str.charAt(str.length - 1) === ' ' || str.charAt(str.length - 1) === '') {
               this.popoverShow = false;
             } else {
               Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
@@ -217,16 +230,45 @@ export default {
         }
       });
       this.draftSave();
+      if (val > 0 && val <= 10000) {
+        this.btnClick = true;
+      } else {
+        this.btnClick = false;
+      }
+    },
+    // 监听上传图片列表变化
+    '$store.state.publisher.imgList': {
+      handler(list) {
+        // 不存在上传中的图片，可点击
+        const len = list.length;
+        for (let i = 0; i < len; i++) {
+          // 如果存在loading，则不可点击
+          if (this.getUploadImg[i].loading) {
+            this.btnClick = false;
+            break;
+          }
+          this.btnClick = true;
+        }
+      },
+      deep: true,
+    },
+    // 监听上传视频变化
+    '$store.state.video.attr': {
+      handler({ status }) {
+        if (status === 3) {
+          this.btnClick = true;
+        } else {
+          this.btnClick = false;
+        }
+      },
+      deep: true,
     },
   },
   computed: {
+    ...mapGetters('publisher', ['getUploadImg', 'getUploadVideo']),
     textareaLen() {
       return this.textarea.length;
     },
-    btnDisabled() {
-      return this.textareaLen > 0 ? false : true;
-    },
-    ...mapGetters('publisher', ['getUploadImg', 'getUploadVideo']),
     uploadMediaId() {
       return this.$store.state.video.attr.media_id;
     },
@@ -292,6 +334,10 @@ export default {
       this.setFocusIndex(this.focusIndex + 1);
       this.$refs.textareaId.focus();
     },
+    // 创建新话题
+    onCreateTopic() {
+      this.onItemClick('');
+    },
     // 输入框失去焦点
     onInputBlur() {
       // 失去焦点，更新光标下标
@@ -318,6 +364,17 @@ export default {
           });
         }
       }, 0);
+    },
+    // 输入框点击回车
+    onKeyDown(event) {
+      if (event.keyCode === 13) {
+        // 如果是在@、#模式下，点击回车会自动在尾部增加空格，然后回车换行
+        if (this.startIndex !== 0) {
+          this.onItemClick('');
+          // event.preventDefault();
+          // return false;
+        }
+      }
     },
     // 获取发布器输入框中光标的下标位置
     getFocusIndex() {
@@ -376,6 +433,7 @@ export default {
       editClass($('#textareaId')[0]);
       setTimeout(() => {
         this.searchText = null;
+        $('#textareaId').focus();
       }, 300);
     },
     // 草稿箱上报
@@ -583,8 +641,11 @@ export default {
       .text-length {
         font-family: SFUIText-Regular;
         font-size: 14px;
-        color: #ee3b23;
         text-align: center;
+        color: #777f8e;
+      }
+      .red {
+        color: #ee3b23;
       }
       .select {
         margin: 0 20px;
