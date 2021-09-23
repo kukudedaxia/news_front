@@ -40,7 +40,7 @@
           accept=".jpg, .jpeg, .png, .gif, .tiff, .webp, .heic"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
-          v-if="fileList.length <= 18"
+          v-if="fileList.length < 18"
           key="uploader"
         >
           <div class="uploader-icon"></div>
@@ -84,15 +84,18 @@ export default {
   data() {
     return {
       file: '', // 待上传的文件
-      // fileList: [],
       myArray: [],
     };
   },
   methods: {
     // 图片上传前拦截函数
     beforeAvatarUpload(file) {
+      // 检查网络
+      if (!navigator.onLine) {
+        this.$message.error(this.$t('netError'));
+      }
       // 上传图片不能大于30M
-      if (file.size > 1024 * 1024 * 30) {
+      else if (file.size > 1024 * 1024 * 30) {
         // ...todo  待补充文案
         this.$message.error('This image is more than 30m');
       } else if (this.fileList.length >= 18) {
@@ -108,7 +111,7 @@ export default {
       const imgObj = {
         id: new Date().getTime(), // 每张上传中的图片都会设置一个唯一的以毫秒为单位的时间戳
         pid: '',
-        loading: true,
+        loading: true, // 上传中
       };
       this.fileList.push(imgObj);
       try {
@@ -138,24 +141,12 @@ export default {
             if (res.ret) {
               // 通过上面的时间戳为id，在数组中找到对应数据，并替换
               const index = this.fileList.findIndex(item => item.id === imgObj.id);
-              this.fileList.splice(index, 1, {
-                pid: res.pic.pid,
-              });
-              // this.fileList.push({
-              //   pid: res.pic.pid,
-              // });
-              // let reader = new FileReader();
-              // reader.onload = function(e) {
-              //   let txt = e.target.result;
-              //   let img = document.createElement('img');
-              //   img.src = txt;
-              //   img.onload = function() {
-              //     console.log('宽度：', img.width);
-              //     console.log('高度：', img.height);
-              //   };
-              //   reader.readAsDataURL(file);
-              // };
-              this.$emit('onUploadImgSuccess');
+              if (index !== -1) {
+                this.fileList.splice(index, 1, {
+                  pid: res.pic.pid,
+                });
+                this.$emit('onUploadImgSuccess');
+              }
             } else {
               this.$message.error(this.$t('live.uploadErr'));
             }
