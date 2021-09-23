@@ -25,11 +25,11 @@ export default {
       textarea: '',
     };
   },
-  beforeRouteLeave(next) {
-    // 当离开发布页时，需要弹窗提醒用户手动保存草稿
-    // ...todo
-    next();
-  },
+  // beforeRouteLeave(next) {
+  //   // 当离开发布页时，需要弹窗提醒用户手动保存草稿
+  //   // ...todo
+  //   next();
+  // },
 };
 </script>
 
