@@ -16,9 +16,13 @@
             ${$t(draftData.power)}`
           }}
         </p>
-        <span class="btn-del" @click.stop="onDeleteConfirm">
-          {{ $t('publisher.delete') }}
-        </span>
+        <el-button
+          type="text"
+          class="btn-del"
+          :loading="delLoading"
+          @click.stop="onDeleteConfirm"
+          >{{ $t('publisher.delete') }}</el-button
+        >
       </div>
     </div>
     <div class="img" v-if="draftData.img && draftData.img.length > 0">
@@ -66,7 +70,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      delLoading: false, // 删除时的loading
+    };
   },
   methods: {
     // 删除草稿
@@ -76,6 +82,7 @@ export default {
         cancelButtonText: this.$t('publisher.cancel'),
       })
         .then(() => {
+          this.delLoading = true;
           this.onDelete();
         })
         .catch(() => {});
@@ -95,6 +102,9 @@ export default {
         },
         onFail: ({ error }) => {
           this.$message.error(error);
+        },
+        onComplete: () => {
+          this.delLoading = false;
         },
       });
     },
@@ -156,6 +166,7 @@ export default {
         color: #b9bdc7;
         letter-spacing: 0;
         line-height: 16px;
+        padding: 0;
         cursor: pointer;
         transition: 0.3s;
         &:hover {

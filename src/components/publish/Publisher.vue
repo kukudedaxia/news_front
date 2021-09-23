@@ -230,7 +230,7 @@ export default {
         }
       });
       // 自动保存草稿
-      this.draftSave();
+      this.draftSaveTime();
       if (val.length > 0 && val.length <= 10000) {
         this.btnClick = true;
       } else {
@@ -277,6 +277,10 @@ export default {
     uploadMediaId() {
       return this.$store.state.video.attr.media_id;
     },
+    uploadMediaStatus() {
+      //0未上传 1上传中 2上传失败 3上传成功
+      return this.$store.state.video.attr.status;
+    },
   },
   mounted() {
     // 设置textarea不检查单词拼写
@@ -292,6 +296,8 @@ export default {
       this.draftId = data.id;
       this.formalV = data.v;
       this.textarea = content.text;
+      $('#textareaId').val(this.textarea);
+      editClass($('#textareaId')[0]);
       this.selectVal = {
         id: this.selectList.find(item => item.name === content.power).id,
         name: content.power,
@@ -310,6 +316,14 @@ export default {
         this.uploadVideoShow = true;
       }
     });
+    // 监听浏览器关闭事件
+    window.onbeforeunload = () => {
+      if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
+        // 调用保存草稿接口
+        this.draftSave();
+        return false;
+      }
+    };
   },
   methods: {
     handleCommand(item) {
@@ -441,50 +455,50 @@ export default {
         $('#textareaId').focus();
       }, 300);
     },
-    // 草稿箱上报
-    draftSave() {
+    // 草稿箱延迟上报
+    draftSaveTime() {
       // 如果保存草稿状态为完成，并且满足文本、图片、视频任意条件，则可以走2s延迟保存草稿操作
       if (this.draftSaveFinish) {
         this.draftSaveFinish = false;
         this.draftSaveTimes = setTimeout(() => {
-          if (
-            this.textarea.length > 0 ||
-            this.getUploadImg.length > 0 ||
-            this.uploadMediaId !== ''
-          ) {
-            const params = {
-              content: JSON.stringify({
-                text: this.textarea,
-                power: this.selectVal.name,
-                img: this.getUploadImg,
-                video: {
-                  fid: this.uploadMediaId,
-                  pid: this.$store.state.video.attr.pid,
-                  duration: this.$store.state.video.attr.duration,
-                },
-              }),
-              formalV: this.formalV,
-            };
-            Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
-            this.$store.dispatch('ajax', {
-              req: {
-                method: 'post',
-                url: 'api/pc/draft/save',
-                data: params,
-              },
-              onSuccess: ({ data }) => {
-                this.draftId = data.id;
-                this.formalV = data.v;
-              },
-              onFail: ({ error }) => {
-                this.$message.error(error);
-              },
-              onComplete: () => {
-                this.draftSaveFinish = true;
-              },
-            });
-          }
+          this.draftSave();
         }, 2000);
+      }
+    },
+    // 草稿箱保存接口
+    draftSave() {
+      if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
+        const params = {
+          content: JSON.stringify({
+            text: this.textarea,
+            power: this.selectVal.name,
+            img: this.getUploadImg,
+            video: {
+              fid: this.uploadMediaId,
+              pid: this.$store.state.video.attr.pid,
+              duration: this.$store.state.video.attr.duration,
+            },
+          }),
+          formalV: this.formalV,
+        };
+        Object.assign(params, this.draftId ? { draftId: this.draftId } : {});
+        this.$store.dispatch('ajax', {
+          req: {
+            method: 'post',
+            url: 'api/pc/draft/save',
+            data: params,
+          },
+          onSuccess: ({ data }) => {
+            this.draftId = data.id;
+            this.formalV = data.v;
+          },
+          onFail: ({ error }) => {
+            this.$message.error(error);
+          },
+          onComplete: () => {
+            this.draftSaveFinish = true;
+          },
+        });
       }
     },
     // 发博
@@ -553,7 +567,7 @@ export default {
     },
     // 点击图片上传
     onUploadImg() {
-      if (this.uploadMediaId !== '') {
+      if (this.uploadMediaStatus === 1 || this.uploadMediaStatus === 3) {
         this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
           confirmButtonText: this.$t('publisher.confirm'),
           cancelButtonText: this.$t('publisher.cancel'),

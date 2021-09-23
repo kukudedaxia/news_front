@@ -135,7 +135,7 @@ const message = {
     editDraft: 'هل تريد تعديل هذه المسودة؟',
     confirm: 'تأكيد',
     cancel: 'إلغاء',
-    drafts: 'المسودات',
+    drafts: 'المسودات({0})\u200F',
     delete: 'حذف',
     beets: 'بيتات',
     uploadVideo: 'رفع فيديو',

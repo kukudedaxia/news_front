@@ -25,11 +25,21 @@ export default {
       textarea: '',
     };
   },
-  // beforeRouteLeave(next) {
-  //   // 当离开发布页时，需要弹窗提醒用户手动保存草稿
-  //   // ...todo
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    // 当离开发布页时，需要弹窗提醒用户手动保存草稿
+    this.$refs.publisher.draftSave();
+    next();
+    // this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
+    //   confirmButtonText: this.$t('publisher.confirm'),
+    //   cancelButtonText: this.$t('publisher.cancel'),
+    // })
+    //   .then(() => {
+    //     this.$refs.publisher.draftSave();
+    //     // next();
+    //   })
+    //   .catch(() => {});
+    // ...todo
+  },
 };
 </script>
 
