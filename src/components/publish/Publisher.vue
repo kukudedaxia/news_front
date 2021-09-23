@@ -707,6 +707,9 @@ export default {
             vertical-align: -2px;
           }
         }
+        .el-dropdown-link {
+          outline: none;
+        }
         .select-icon_down {
           transform: rotateX(0deg);
         }

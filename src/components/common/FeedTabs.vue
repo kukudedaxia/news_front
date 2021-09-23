@@ -6,7 +6,7 @@
   <div id="feed-tab" class="com-feed-tabs">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <!-- <el-tab-pane label="Beets" name="Beets">Beets</el-tab-pane> -->
-      <el-tab-pane :label="`${$t('publisher.drafts', [10])}`" name="Drafts">
+      <el-tab-pane :label="`${$t('publisher.drafts', [draftList.length])}`" name="Drafts">
         <template v-if="!loading">
           <ul
             class="infinite-list"
