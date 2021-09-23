@@ -138,7 +138,7 @@ const message = {
     editDraft: 'Do you want to edit this draft?',
     confirm: 'Confirm',
     cancel: 'Cancel',
-    drafts: 'Drafts',
+    drafts: 'Drafts({0})',
     delete: 'Delete',
     beets: 'Beets',
     uploadVideo: 'Upload video',
