@@ -240,6 +240,10 @@ export default {
     // 监听上传图片列表变化
     '$store.state.publisher.imgList': {
       handler(list) {
+        if (list.length === 0) {
+          this.btnClick = false;
+          return;
+        }
         // 不存在上传中的图片，可点击
         const len = list.length;
         for (let i = 0; i < len; i++) {
@@ -498,7 +502,7 @@ export default {
           return {
             type: 1,
             id: item.pid,
-            fid: item.pid,
+            pid: item.pid,
             height: 1080,
             width: 1080,
           };
@@ -509,9 +513,12 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
-        draftId: this.draftId,
-        v: this.formalV,
       };
+      Object.assign(
+        params,
+        this.draftId ? { draftId: this.draftId } : {},
+        this.formalV ? { v: this.formalV } : {},
+      );
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
@@ -668,6 +675,7 @@ export default {
         text-align: center;
         cursor: pointer;
         transition: 0.3s;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         &:hover {
           border-radius: 17px;
           background: #f6f6f9;

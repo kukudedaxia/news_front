@@ -99,6 +99,7 @@ export default {
         cancelButtonText: this.$t('publisher.cancel'),
       })
         .then(() => {
+          this.searchDraftList();
           Bus.$emit('editDraft', item);
         })
         .catch(() => {});
