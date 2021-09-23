@@ -27,7 +27,7 @@ export function setI18nLanguage(lang) {
   if (lang == 'ar') {
     document.querySelector('html').setAttribute('dir', 'rtl');
   } else {
-    document.querySelector('html').removeAttribute('dir');
+    document.querySelector('html').setAttribute('dir', 'ltr');
   }
   appendMeta();
   return lang;

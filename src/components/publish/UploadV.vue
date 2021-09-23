@@ -246,6 +246,8 @@ export default {
           })
           .catch(() => {});
         return;
+      } else {
+         this.$emit('onClose');
       }
     },
   },

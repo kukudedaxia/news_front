@@ -232,7 +232,7 @@ html[lang='ar'] .el-message-box__headerbtn {
     display: none;
   }
   .el-tabs__nav {
-    direction: inherit;
+    direction: initial;
   }
 
   .el-tabs__header {
