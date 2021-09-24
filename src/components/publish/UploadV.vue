@@ -80,6 +80,16 @@ export default {
   mounted() {
     this.init();
   },
+  destroyed() {
+    this.$store.commit('video/setData', {
+      ...this.videos,
+      status: 0,
+      media_id: '',
+      pid: '',
+      duration: '',
+      count: 0,
+    });
+  },
   methods: {
     init() {
       window.$CONFIG = window.$CONFIG || {};
@@ -235,7 +245,7 @@ export default {
     },
 
     onClose() {
-      if (this.mediaId) {
+      if (this.videos.status == 1 || this.videos.status == 3) {
         this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
           confirmButtonText: this.$t('publisher.confirm'),
           cancelButtonText: this.$t('publisher.cancel'),
@@ -247,7 +257,7 @@ export default {
           .catch(() => {});
         return;
       } else {
-         this.$emit('onClose');
+        this.$emit('onClose');
       }
     },
   },

@@ -60,6 +60,7 @@
           round
           size="small"
           :disabled="!btnClick"
+          :loading="releaseLoading"
           class="inform-box_btn"
           @click="sendBlog"
           >{{ $t('publisher.release') }}</el-button
@@ -138,6 +139,7 @@ export default {
           name: 'publisher.onlyMe',
         },
       ],
+      releaseLoading: false,
       // 发布按钮点击
       btnClick: false,
       // 发布器光标离 @ # 最近的坐标
@@ -145,7 +147,7 @@ export default {
         left: 0,
         top: 0,
       },
-      popoverShow: false,
+      popoverShow: false, // 检索弹窗显示
       popoverType: '', // # topic 、 @ user
       uploadImgShow: false,
       // 输入框的偏移量
@@ -153,10 +155,11 @@ export default {
         top: 0,
         left: 0,
       },
-      // 输入框的光标所在下标
-      focusIndex: 0,
+      focusIndex: 0, // 输入框的光标所在下标
       startIndex: 0, // @、# 所在的下标
       searchText: null, // @、# 检索文本
+      searchStrtIndex: 0, // 检索文本的起始下标
+      searchEndIndex: 0, // 检索文本的终止下标
       // ------ 草稿 ------ //
       draftId: null, // 草稿箱id,如果没有传则会新建
       formalV: '', // 草稿箱修改时必须带上，上一版本版本号
@@ -170,65 +173,7 @@ export default {
   watch: {
     // 监听发布器文本变化
     textarea(val) {
-      /**
-       * 1. 获取光标所在下标
-       * 2. 检测光标的前一位字符是否为 @、# ; 如果是并且后面字符无空格，则弹出对应的popover
-       * 3. 选择完成后，需要在后面增加一个空格，以表示完成输入
-       * // ---- 待完善 ---- //
-       * 1. 需要监听光标的移动
-       * 2. 当光标在@、#后一位，则弹出popover
-       * 3. 如果光标在@、#后不存在空格的字符串中的任意位置。则提示敲击空格完成输入
-       * 4. popover选项支持键盘选择
-       */
-      this.$nextTick(() => {
-        this.getFocusIndex(); // 获取文本变化时的实时光标下标
-        const letter = val.charAt(this.focusIndex - 1); //获取光标的上一个字符
-        // 如果上个字符是空格或者为空，不显示任何
-        // if (letter === ' ' || letter === '') {
-        //   this.popoverShow = false;
-        //   return;
-        // }
-        if (letter === '@' || letter === '#') {
-          // // 当光标上一个字符是@、#时，需要检测后续的字符串是否包含空格，如果包含则判定这是个已完成的检索结果，不展示popover；如果不包含空格，则会截取@、#到空格之间的字符串，作为检索文本，并展示popover
-          // // 截取@、# 开始往后的所有字符串
-          // const str = this.textarea.slice(this.focusIndex);
-          // debugger;
-          // if (str !== '') {
-          //   // 匹配空格之前的文本
-          //   const text = str.split(' ');
-          //   debugger;
-          // }
-          this.startIndex = this.focusIndex;
-          this.searchText = '';
-          this.popoverType = letter === '@' ? 'user' : 'topic';
-          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-          this.$nextTick(() => {
-            this.popoverPosition();
-            setTimeout(() => {
-              this.popoverShow = true;
-            }, 100);
-          });
-        } else {
-          // 说明@、#存在
-          if (this.startIndex !== 0) {
-            const str = this.textarea.slice(this.startIndex, this.focusIndex);
-            console.log(str.length, this.popoverType);
-            // 如果超过30个字符，则关闭@模式，#则不受限制
-            if (str.length === 30 && this.popoverType === 'user') {
-              this.onItemClick('');
-            }
-            // 检索结束
-            else if (str.charAt(str.length - 1) === ' ' || str.charAt(str.length - 1) === '') {
-              this.popoverShow = false;
-            } else {
-              Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-              this.popoverPosition();
-              //  未检测空格，所以检索还在继续
-              this.searchText = str;
-            }
-          }
-        }
-      });
+      this.textareaChange();
       // 自动保存草稿
       this.draftSaveTime();
       if (val.length > 0 && val.length <= 10000) {
@@ -326,6 +271,93 @@ export default {
     };
   },
   methods: {
+    // 输入框监听事件
+    /**
+     * 1. 获取光标所在的下标
+     * 2. 以光标所在下标为中心向左查找，如果不存在空格且有@、#，则记录@、#的下标，并判定左侧满足检索待定值
+     * 3. 以光标所在下标为中心向右查找，如果存在空格则判定右侧不满足检索判定
+     * 4. 如果右侧不存在空格，并查找到@、#字符，则判定右侧满足条件，记录@、#符前一字符下标
+     * 5. 如果右侧查找到尾部，未发现空格、@、#，则判定满足条件，记录尾部下标
+     * 6. 如果左右侧都满足条件，那么将左右侧记录的下标截取的字符串作为检索值
+     */
+    textareaChange() {
+      // 如果文本为空，关闭弹窗
+      if (this.textarea === '') {
+        this.popoverShow = false;
+        return;
+      }
+      this.getFocusIndex(); // 获取文本变化时的实时光标下标
+      // let leftIndex = this.focusIndex; // 左侧指针
+      // let rightIndex = this.focusIndex; // 右侧指针
+      let searchStrtIndex = this.focusIndex; // 检索值的起始下标
+      let searchEndIndex = this.focusIndex; // 检索值的结尾下标
+      const leftStr = this.textarea.slice(0, this.focusIndex); // 左侧待检索字符串
+      const rightStr = this.textarea.slice(this.focusIndex); // 右侧待检索字符串
+      let leftResult = false; //左侧是否满足
+      let rightResult = false; // 右侧是否满足
+      // 如果左侧文本为空，关闭弹窗
+      if (leftStr === '') {
+        this.popoverShow = false;
+        return;
+      }
+      // 检索左侧
+      for (let i = this.focusIndex; i > 0; i--) {
+        const li = i - 1;
+        // 如果在左侧检索的过程中先遇到空格，直接判定失败并跳出循环
+        if (leftStr[li] === ' ') {
+          this.popoverShow = false;
+          break;
+        }
+        // 在未发现空格的情况下查找到@、#，则判定成功，并记录下标值
+        else if (leftStr[li] === '@' || leftStr[li] === '#') {
+          leftResult = true;
+          searchStrtIndex = i;
+          break;
+        }
+      }
+      // 检索右侧
+      // 如果右侧文本为空，不会进入循环，判定右侧符合条件
+      if (rightStr === '') {
+        rightResult = true;
+        searchEndIndex = leftStr.length;
+      }
+      const len = rightStr !== '' ? rightStr.length : 0;
+      for (let j = 0; j < len; j++) {
+        // 如果在右侧检索的过程中先遇到空格，直接判定失败并跳出循环
+        if (rightStr[j] === ' ') {
+          this.popoverShow = false;
+          break;
+        }
+        // 在未发现空格的情况下查找到@、#，则判定成功，并记录下标值
+        else if (rightStr[j] === '@' || rightStr[j] === '#') {
+          rightResult = true;
+          searchEndIndex = j + leftStr.length;
+          break;
+        }
+        // 未发现空格，@、#，并查找到了尾部，则判定成功，记录下标
+        else if (j === len - 1) {
+          rightResult = true;
+          searchEndIndex = j + leftStr.length;
+        }
+      }
+      // 满足检索条件，弹出popover
+      if (leftResult && rightResult) {
+        this.popoverType = this.textarea[searchStrtIndex - 1] === '@' ? 'user' : 'topic';
+        this.searchText = this.textarea.slice(searchStrtIndex, searchEndIndex);
+        this.searchStrtIndex = searchStrtIndex;
+        this.searchEndIndex = searchEndIndex;
+        Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
+        console.log($('.el-textarea__inner').caret('offset'));
+        this.$nextTick(() => {
+          this.popoverPosition();
+          setTimeout(() => {
+            this.popoverShow = true;
+          }, 100);
+        });
+      } else {
+        this.searchText = null;
+      }
+    },
     handleCommand(item) {
       this.selectVal = item;
     },
@@ -355,43 +387,34 @@ export default {
     },
     // 创建新话题
     onCreateTopic() {
-      this.onItemClick('');
+      this.onItemClick(this.searchText);
     },
     // 输入框失去焦点
     onInputBlur() {
+      this.popoverShow = false;
       // 失去焦点，更新光标下标
       this.getFocusIndex();
-      if (this.popoverShow) {
-        setTimeout(() => {
-          this.popoverShow = false;
-        }, 200);
-      }
+      // 为什么失去焦点200ms后再去关闭弹窗？
+      // if (this.popoverShow) {
+      //   setTimeout(() => {
+      //     this.popoverShow = false;
+      //   }, 200);
+      // }
     },
     // 输入框获得焦点
     onInputFocus() {
-      // 获得焦点，更新光标下标
       setTimeout(() => {
-        this.getFocusIndex();
-        // 光标的上一个字符
-        const letter = this.textarea.charAt(this.focusIndex - 1);
-        if (letter === '@' || letter === '#') {
-          this.popoverType = letter === '@' ? 'user' : 'topic';
-          Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-          this.popoverShow = true;
-          this.$nextTick(() => {
-            this.popoverPosition();
-          });
-        }
+        this.textareaChange();
       }, 0);
     },
     // 输入框点击回车
     onKeyDown(event) {
       if (event.keyCode === 13) {
         // 如果是在@、#模式下，点击回车会自动在尾部增加空格，然后回车换行
-        if (this.startIndex !== 0) {
-          this.onItemClick('');
-          // event.preventDefault();
-          // return false;
+        if (this.searchText !== null) {
+          event.preventDefault();
+          this.onItemClick(this.searchText);
+          return false;
         }
       }
     },
@@ -426,28 +449,68 @@ export default {
     },
     // 定位popover的位置
     popoverPosition() {
+      /**
+       * problems
+       * 1. 在英语模式下，popover的定位没问题
+       * 2. 在阿语环境下，英语的定位有问题()
+       */
+      // 获取环境的语言
+      const lang = localStorage.getItem('lanuage');
       const dom = this.getPopoverDom();
+      // 设置弹窗的top属性，top值在任何语言环境下都是一致的
       dom.style.top = `${this.cursorCoordinate.top +
         2.5 * this.cursorCoordinate.height -
         this.textareaOffset.top}px `;
-      // 如果是阿语，从右定位
-      if (this.tools.checkAr(this.textarea)) {
-        dom.style.left = '';
-        dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
-      } else {
-        // 英语从左定位
+      if (lang === 'en') {
+        //默认从左定位
         dom.style.right = '';
         dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+        // 如果是英语，从左定位
+        if (this.tools.checkLan(this.textarea) === 'en') {
+          dom.style.right = '';
+          dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+        } //如果是阿语，从右定位
+        else if (this.tools.checkLan(this.textarea) === 'ar') {
+          dom.style.left = '';
+          dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+        }
+      } else {
+        //默认从左定位
+        dom.style.right = '';
+        dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+        // 如果是英语，从右定位
+        if (this.tools.checkLan(this.textarea) === 'en') {
+          dom.style.left = '';
+          dom.style.right = `${this.cursorCoordinate.left - 220 - this.textareaOffset.left}px`;
+        } //如果是阿语，从左定位
+        else if (this.tools.checkLan(this.textarea) === 'ar') {
+          dom.style.right = '';
+          dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+        }
       }
+
+      // // 如果是阿语，从右定位
+      // if (this.tools.checkAr(this.textarea)) {
+      //   dom.style.left = '';
+      //   dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      //   // 阿语
+      // } else {
+      //   // 英语从左定位
+      //   dom.style.right = '';
+      //   dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
+      //   console.log(this.cursorCoordinate.left);
+      // }
     },
     // popover选中事件
     onItemClick(data) {
       this.getFocusIndex();
       this.textarea =
-        this.textarea.slice(0, this.focusIndex) + data + ' ' + this.textarea.slice(this.focusIndex);
-      this.popoverShow = false;
+        this.textarea.slice(0, this.searchStrtIndex) +
+        data +
+        ' ' +
+        this.textarea.slice(this.searchEndIndex);
       // 设置光标的位置为选中数据空格的后一位
-      this.focusIndex = this.focusIndex + data.length + 1;
+      this.setFocusIndex(this.searchStrtIndex + data.length + 1);
       $('#textareaId').val(this.textarea);
       editClass($('#textareaId')[0]);
       setTimeout(() => {
@@ -504,6 +567,7 @@ export default {
     // 发博
     sendBlog() {
       const media = [];
+      this.releaseLoading = true;
       if (this.uploadMediaId !== '') {
         media.push({
           type: 2,
@@ -553,7 +617,9 @@ export default {
         onFail: ({ error }) => {
           this.$message.error(error);
         },
-        onComplete: () => {},
+        onComplete: () => {
+          this.releaseLoading = false;
+        },
       });
     },
     // 关闭视频上传功能

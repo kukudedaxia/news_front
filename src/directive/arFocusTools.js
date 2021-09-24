@@ -9,7 +9,7 @@ import tools from '@/utils/tools';
 export function editClass(dom) {
   const lang = localStorage.getItem('lanuage');
   // 如果输入框请空，在阿语下右排列，英文下左排列
-  if (dom.value === '') {
+  if (dom.value === '' || tools.checkLan(dom.value) === '') {
     if (lang === 'ar') {
       // dom.classList.add('pub-rtl');
       dom.classList.remove('pub-ltr');
@@ -20,13 +20,13 @@ export function editClass(dom) {
   }
 
   // 如果首字母是阿语，则输入右排列
-  if (tools.checkAr(dom.value) === true) {
+  if (tools.checkLan(dom.value) === 'ar') {
     dom.classList.add('pub-rtl');
     dom.classList.remove('pub-ltr');
     return true;
   }
   // 如果首字母是英文，则输入左排列
-  if (tools.checkAr(dom.value) === false) {
+  if (tools.checkLan(dom.value) === 'en') {
     dom.classList.remove('pub-rtl');
     dom.classList.add('pub-ltr');
     return false;

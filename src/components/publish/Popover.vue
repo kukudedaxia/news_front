@@ -11,13 +11,11 @@
     </div>
     <!-- 创建话题 -->
     <div
-      class="topic-create"
+      class="topic-create text-right"
       v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
       @click="createTopic"
     >
-      <p>
-        {{ text }}
-      </p>
+      <p :class="tools.checkLan(text) === 'ar' ? 'pub-rtl' : 'pub-ltr'">#{{ text }}</p>
       <span>
         {{ $t('publisher.topic') }}
       </span>
@@ -28,7 +26,7 @@
       </p>
     </div>
     <div class="list-content" v-else>
-      <p class="top-title" v-if="topicList.length > 0 || userList.length > 0">
+      <p class="top-title text-right" v-if="topicList.length > 0 || userList.length > 0">
         {{ topTitle }}
       </p>
       <ul class="list-box" v-infinite-scroll="onLoadTopic" v-if="type === 'topic'">
@@ -78,13 +76,16 @@ export default {
       let msg = '';
       switch (this.type) {
         case 'topic':
-          msg = 'Select or enter the topic you want to use.';
+          msg = this.$t('publisher.selectTopic');
           break;
         case 'user':
-          msg = 'Select or enter the person you want to @';
+          msg = this.$t('publisher.selectUser');
           break;
       }
       return msg;
+    },
+    lang() {
+      return this.$store.state.lanuage;
     },
   },
   watch: {
@@ -150,7 +151,8 @@ export default {
           method: 'get',
           url: 'api/pc/status/search/topic',
           params: {
-            keyword: this.text ? this.text.replaceAll('#', '') : this.text,
+            keyword: this.text,
+            // keyword: this.text ? this.text.replaceAll('#', '') : this.text,
             page: this.topicPage,
             count: 50,
           },

@@ -202,6 +202,32 @@ const tools = {
     return result;
   },
   /**
+   * @title 判断传入的字符串的首字母是阿语还是英语
+   * @result en 英语  ar 阿语
+   */
+  checkLan(str) {
+    str = String(str);
+    let result = '';
+    // eslint-disable-next-line no-misleading-character-class
+    let pattAr = /[\u0600-\u06FF\u0750-\u077F\u08A0—\u08FF\uFB50—\uFDFF\uFE70—\uFEFF]/;
+    // eslint-disable-next-line no-unused-vars
+    let parrEn = /[A-Za-z]/;
+    for (let i = 0; i < str.length; i++) {
+      let initials = str.charAt(i);
+      // 如果遇到英文，则返回false
+      if (parrEn.test(initials)) {
+        result = 'en';
+        break;
+      }
+      // 遇到阿语返回true
+      if (pattAr.test(initials)) {
+        result = 'ar';
+        break;
+      }
+    }
+    return result;
+  },
+  /**
    * @title 限制input只能输入数字
    * @description 若有非数字字符，则过滤
    */
