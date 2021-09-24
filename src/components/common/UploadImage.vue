@@ -138,9 +138,9 @@ export default {
             Accept: 'application/json',
           },
           success: res => {
+            const index = this.fileList.findIndex(item => item.id === imgObj.id);
             if (res.ret) {
               // 通过上面的时间戳为id，在数组中找到对应数据，并替换
-              const index = this.fileList.findIndex(item => item.id === imgObj.id);
               if (index !== -1) {
                 this.fileList.splice(index, 1, {
                   pid: res.pic.pid,
@@ -148,6 +148,16 @@ export default {
                 this.$emit('onUploadImgSuccess');
               }
             } else {
+              // 如果图片上传失败，应该如何处理？
+              if (index !== -1) {
+                this.fileList.splice(
+                  index,
+                  1,
+                  Object.assign(imgObj, {
+                    loading: false,
+                  }),
+                );
+              }
               this.$message.error(this.$t('live.uploadErr'));
             }
           },
@@ -160,6 +170,7 @@ export default {
       }
     },
     // 上传失败，再次尝试上传
+    // 需要存储失败的file信息，...todo
     onImgReset() {},
     // 删除已上传的单张图片
     onimgClose(index) {

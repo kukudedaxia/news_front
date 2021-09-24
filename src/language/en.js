@@ -145,6 +145,8 @@ const message = {
     suppotsVideo:
       'Format supports mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
     successed: 'Successed',
+    selectTopic: 'Select or enter the topic you want to use.',
+    selectUser: 'Select or enter the person you want to @',
   },
   uploadV: {
     error1: 'This video is larger than 4GB',

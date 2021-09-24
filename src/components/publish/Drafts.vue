@@ -84,6 +84,8 @@ export default {
         .then(() => {
           this.delLoading = true;
           this.onDelete();
+          // 将删除中的事件暴露给上级组件，为了防止删除中可再次编辑
+          this.$emit('draftNotEdit');
         })
         .catch(() => {});
     },
@@ -102,6 +104,8 @@ export default {
         },
         onFail: ({ error }) => {
           this.$message.error(error);
+          // 如果删除失败，则将草稿设为可编辑状态
+          this.$emit('draftCanEdit');
         },
         onComplete: () => {
           this.delLoading = false;

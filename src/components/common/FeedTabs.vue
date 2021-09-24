@@ -18,9 +18,14 @@
               v-for="(item, index) in draftList"
               class="infinite-list-item"
               :key="index"
-              @click="editDrafts(item)"
+              @click="item.disabled ? '' : editDrafts(item)"
             >
-              <Drafts :data="item" @deleteDraftSuccess="onDeleteSuccess"></Drafts>
+              <Drafts
+                :data="item"
+                @deleteDraftSuccess="onDeleteSuccess"
+                @draftNotEdit="onDraftNotEdit(item)"
+                @draftCanEdit="onDraftCanEdit(item)"
+              ></Drafts>
             </li>
           </ul>
           <default class="default" v-if="draftList.length === 0"></default>
@@ -78,7 +83,7 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          this.draftList = data;
+          this.draftList = data.reverse();
         },
         onFail: ({ error }) => {
           this.$message.error(error);
@@ -103,6 +108,14 @@ export default {
           Bus.$emit('editDraft', item);
         })
         .catch(() => {});
+    },
+    // 草稿不可编辑
+    onDraftNotEdit(item) {
+      item.disabled = true;
+    },
+    // 草稿可编辑
+    onDraftCanEdit(item) {
+      item.disabled = false;
     },
   },
 };
