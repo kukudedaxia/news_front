@@ -12,7 +12,7 @@
       filter=".uploader"
     >
       <transition-group name="fade_top1" class="grid">
-        <div class="img-list-box" v-for="(item, index) in fileList" :key="index">
+        <div class="img-list-box" v-for="(item, index) in fileList" :key="'img' + index">
           <img
             :src="`${uploadImgUrl}/orj1080/${item.pid}.jpg`"
             :onerror="
@@ -142,10 +142,15 @@ export default {
             if (res.ret) {
               // 通过上面的时间戳为id，在数组中找到对应数据，并替换
               if (index !== -1) {
-                this.fileList.splice(index, 1, {
-                  pid: res.pic.pid,
+                this.readImgInform(file).then(({ width, height }) => {
+                  this.fileList.splice(index, 1, {
+                    pid: res.pic.pid,
+                    width,
+                    height,
+                    piiic: this.verifyLongPic({ width, height }),
+                  });
+                  this.$emit('onUploadImgSuccess');
                 });
-                this.$emit('onUploadImgSuccess');
               }
             } else {
               // 如果图片上传失败，应该如何处理？
@@ -183,6 +188,31 @@ export default {
       //不允许拖拽
       if (e.draggedContext.index == this.fileList.length) return false;
       return true;
+    },
+    // 读取图片宽高
+    readImgInform(file) {
+      return new Promise(resolve => {
+        //读取图片数据
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          console.log(e);
+          const data = e.target.result;
+          // //加载图片获取图片真实宽度和高度
+          const image = new Image();
+          image.onload = function() {
+            const width = image.width;
+            const height = image.height;
+            console.log(width, height);
+            resolve({ width, height });
+          };
+          image.src = data;
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+    // 验证长图
+    verifyLongPic({ width, height }) {
+      return height / width > 16 / 9;
     },
   },
 };

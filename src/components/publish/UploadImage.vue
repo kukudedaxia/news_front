@@ -53,6 +53,9 @@ export default {
       this.$emit('onUploadImgSuccess');
     },
   },
+  destroyed() {
+    this.$store.dispatch('publisher/setUploadImg', []);
+  },
 };
 </script>
 

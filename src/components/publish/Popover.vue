@@ -84,13 +84,10 @@ export default {
       }
       return msg;
     },
-    lang() {
-      return this.$store.state.lanuage;
-    },
   },
   watch: {
     text: {
-      handler(v) {
+      handler() {
         if (this.type === 'user') {
           this.searchUser();
           return;
@@ -110,9 +107,7 @@ export default {
       userpage: 1,
     };
   },
-  mounted() {
-    // this.searchUser();
-  },
+  mounted() {},
   methods: {
     onLoadTopic() {},
     onLoadUser() {},
