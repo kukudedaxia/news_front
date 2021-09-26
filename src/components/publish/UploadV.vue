@@ -108,25 +108,26 @@ export default {
           area: '#drop',
         },
       });
-      wbUploader.on('beforeInit', data => {
+      wbUploader.on('beforeInit', () => {
         //...
-        console.log(data);
         if (this.videos.count == 1) {
           return false;
         }
         wbUploader.init();
       });
       wbUploader.on('beforeUpload', data => {
-        console.log(data);
         //... to do在这里做一些视频大小，长度限制
         if (data.size > 1024 * 1024 * 1024 * 4) {
           this.$message.info(this.$t('uploadV.error1'));
+          wbUploader.clearFile();
           return;
         } else if (data.detail.duration > 60 * 60) {
           this.$message.error(this.$t('uploadV.error2'));
+          wbUploader.clearFile();
           return;
         } else if (data.detail.duration < 4) {
           this.$message.error(this.$t('uploadV.error3'));
+          wbUploader.clearFile();
           return;
         }
         wbUploader.upload();
@@ -139,6 +140,7 @@ export default {
       });
 
       wbUploader.on('uploadStatus', data => {
+        // console.log(data.progress, 2222)
         // this.status = 1;
         // this.$store.commit('video/setStatus', 1);
         this.progress = data.progress;
@@ -318,6 +320,9 @@ export default {
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
+
+  user-select: none;
+
   position: relative;
   .uploader-icon {
     width: 20px;
@@ -371,11 +376,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+  z-index: 10;
 }
 .progress {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 100%;
   .progress-bar {
     width: 78%;

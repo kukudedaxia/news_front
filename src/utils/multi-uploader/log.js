@@ -91,7 +91,7 @@ const logs = {
   //新增
   push() {
     // console.log('上报视频日志')
-    store.dispatch('send', { extend: JSON.stringify(this.uploadLog), scene: 'upload_video' });
+    store.dispatch('send', { extend: JSON.stringify(this.uploadLog), scene: 'upload_video', retry: 3 });
     return false;
 
     // var bodyFormData = new FormData();

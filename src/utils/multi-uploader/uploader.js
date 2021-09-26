@@ -115,6 +115,7 @@ class wbUploader {
     if (opts.inputEle && opts.inputEle.area) {
       let obj = opts.inputEle;
       const ele = document.querySelector(obj.area);
+      ele.accept && ele.setAttribute('accept', obj.accept);
       ele.addEventListener(
         'dragenter',
         e => {
@@ -133,21 +134,14 @@ class wbUploader {
         'drop',
         e => {
           console.log(e);
+          const file = e.dataTransfer.files[0];
+          const reg = new RegExp(/^video\/(mp4|flv|avi|wmv|mov|webm|mpeg4|ts|mpg|rm|rmvb|mkv|m4v)$/);
           e.preventDefault();
-          this.addFiles({
-            target: e.dataTransfer,
-          });
-        },
-        false,
-      );
-      ele.addEventListener(
-        'drop',
-        e => {
-          console.log(e);
-          e.preventDefault();
-          this.addFiles({
-            target: e.dataTransfer,
-          });
+          if (reg.test(file.type)) {
+            this.addFiles({
+              target: e.dataTransfer,
+            });
+          }
         },
         false,
       );
@@ -266,6 +260,11 @@ class wbUploader {
       (evt && evt.path && evt.path[0] && evt.path[0].files);
     this.fileList.push(...files);
     this.emit('beforeInit', 'beforeInit');
+  }
+  async clearFile() {
+    this.currFile = {};
+    this.fileList.splice(0, 1);
+    this.successIndex = [];
   }
   // 初始化
   async init() {
