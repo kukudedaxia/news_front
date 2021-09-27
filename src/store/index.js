@@ -114,7 +114,6 @@ export default new Vuex.Store({
         method: 'get',
         headers: {
           'content-type': 'application/json',
-          auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -126,7 +125,6 @@ export default new Vuex.Store({
       payload.onFail = payload.onFail || emptyFunc;
       payload.onComplete = payload.onComplete || emptyFunc;
       payload.onError = payload.onError || emptyFunc;
-
       request(reqConf)
         .then(res => {
           try {

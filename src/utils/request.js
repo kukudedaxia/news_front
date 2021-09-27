@@ -46,7 +46,7 @@ request.interceptors.response.use(
     return Promise.resolve(response);
   },
   function(error) {
-    console.log(error);
+    // console.log(error.response);
     // 对响应错误做点什么
     if (error.response) {
       switch (error.response.status) {
@@ -63,7 +63,7 @@ request.interceptors.response.use(
             Cookies.remove('SUB');
           }
           store.commit('setUser', {});
-          store.commit('setTab', {})
+          store.commit('setTab', {});
           window.location.href =
             window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
         // router.replace({

@@ -34,11 +34,15 @@
         </li>
       </ul>
       <div class="inform-box">
-        <span
-          :class="['text-length', { red: textareaLen >= 10000 }]"
-          v-show="textareaLen >= 9990"
-          >{{ textareaLen >= 11000 ? -1000 : 10000 - textareaLen }}</span
-        >
+        <div class="text-length" v-show="textareaLen >= 9990">
+          <span :class="[{ red: textareaLen >= 10000 }]">{{
+            textareaLen >= 11000 ? -1000 : 10000 - textareaLen
+          }}</span>
+          <div class="tips">
+            {{ $t('publisher.maxTextTips') }}
+            <div class="arrow"></div>
+          </div>
+        </div>
         <el-dropdown
           trigger="click"
           @command="handleCommand"
@@ -59,7 +63,7 @@
           type="primary"
           round
           size="small"
-          :disabled="!btnClick && textarea.length <= 10000"
+          :disabled="!btnClick || textarea.length > 10000"
           :loading="releaseLoading"
           class="inform-box_btn"
           @click="sendBlog"
@@ -84,17 +88,17 @@
         @onUploadVideoSuccess="onUploadVideoSuccess"
       ></UploadV>
     </transition>
-    <transition name="fade">
-      <Popover
-        v-show="popoverShow"
-        :type="popoverType"
-        class="popover"
-        id="popoverId"
-        :text="searchText"
-        @onItemClick="onItemClick"
-        @onCreateTopic="onCreateTopic"
-      ></Popover>
-    </transition>
+    <!-- <transition name="fade"> -->
+    <Popover
+      v-show="popoverShow"
+      :type="popoverType"
+      class="popover"
+      id="popoverId"
+      :text="searchText"
+      @onItemClick="onItemClick"
+      @onCreateTopic="onCreateTopic"
+    ></Popover>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -390,15 +394,11 @@ export default {
     },
     // 输入框失去焦点
     onInputBlur() {
-      this.popoverShow = false;
       // 失去焦点，更新光标下标
       this.getFocusIndex();
-      // 为什么失去焦点200ms后再去关闭弹窗？
-      // if (this.popoverShow) {
-      //   setTimeout(() => {
-      //     this.popoverShow = false;
-      //   }, 200);
-      // }
+      setTimeout(() => {
+        this.popoverShow = false;
+      }, 200);
     },
     // 输入框获得焦点
     onInputFocus() {
@@ -613,6 +613,7 @@ export default {
           this.$message.error(error);
         },
         onComplete: () => {
+          console.log(1);
           this.releaseLoading = false;
         },
       });
@@ -731,14 +732,41 @@ export default {
     }
     .inform-box {
       .text-length {
-        font-family: SFUIText-Regular;
-        font-size: 14px;
-        text-align: center;
-        color: #777f8e;
+        display: inline-block;
+        position: relative;
+        span {
+          font-family: SFUIText-Regular;
+          font-size: 14px;
+          text-align: center;
+          color: #777f8e;
+        }
+        .red {
+          color: #ee3b23;
+        }
+        .tips {
+          position: absolute;
+          bottom: -60px;
+          left: -10px;
+          background: #303133;
+          color: #fff;
+          border-radius: 4px;
+          padding: 5px 10px;
+          font-size: 12px;
+          width: 200px;
+          .arrow {
+            position: absolute;
+            display: block;
+            left: 10px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent #303133 transparent;
+          }
+        }
       }
-      .red {
-        color: #ee3b23;
-      }
+
       .select {
         margin: 0 20px;
         padding: 9px 12px 9px 8px;

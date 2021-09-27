@@ -99,8 +99,7 @@ export default {
         // ...todo  待补充文案
         this.$message.error('This image is more than 30m');
       } else if (this.fileList.length >= 18) {
-        // ...todo  待补充文案
-        this.$message.error('已超过最大图片上传数');
+        this.$message.error(this.$t('publisher.maxImg'));
       } else {
         this.uploadImg(file);
       }

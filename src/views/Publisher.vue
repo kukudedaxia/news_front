@@ -27,7 +27,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     // 当离开发布页时，需要弹窗提醒用户手动保存草稿
-    this.$refs.publisher.draftSave();
+    this.$refs.publisher.draftSaveNoTime();
     next();
     // this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
     //   confirmButtonText: this.$t('publisher.confirm'),

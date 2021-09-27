@@ -147,6 +147,8 @@ const message = {
     successed: 'Successed',
     selectTopic: 'Select or enter the topic you want to use.',
     selectUser: 'Select or enter the person you want to @',
+    maxImg: '18 images only',
+    maxTextTips: 'Text above 10k cannot be sent and saved in draft box.',
   },
   uploadV: {
     error1: 'This video is larger than 4GB',
