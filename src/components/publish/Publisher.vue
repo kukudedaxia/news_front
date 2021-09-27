@@ -37,7 +37,7 @@
         <span
           :class="['text-length', { red: textareaLen >= 10000 }]"
           v-show="textareaLen >= 9990"
-          >{{ 10000 - textareaLen }}</span
+          >{{ textareaLen >= 11000 ? -1000 : 10000 - textareaLen }}</span
         >
         <el-dropdown
           trigger="click"
@@ -59,7 +59,7 @@
           type="primary"
           round
           size="small"
-          :disabled="!btnClick"
+          :disabled="!btnClick && textarea.length <= 10000"
           :loading="releaseLoading"
           class="inform-box_btn"
           @click="sendBlog"
@@ -527,7 +527,7 @@ export default {
       if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
         const params = {
           content: JSON.stringify({
-            text: this.textarea,
+            text: this.textarea.slice(0, 10000),
             power: this.selectVal.name,
             img: this.getUploadImg,
             video: {
