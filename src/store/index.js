@@ -139,7 +139,7 @@ export default new Vuex.Store({
             } else {
               payload.onFail && payload.onFail(res.data, reqConf, res);
               if (res.data.error_code == 31000) {
-                window.location.reload();
+                window.location.href = window.location.origin;
               }
             }
             payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
@@ -150,7 +150,7 @@ export default new Vuex.Store({
         .catch(err => {
           if (!navigator.onLine) {
             payload.onNetworkError && payload.onNetworkError(err, reqConf);
-            if (req.url !== 'api/log/m?enc=0') {
+            if (reqConf.url !== 'api/log/m?enc=0') {
               Message.error(i18n.t('netError'));
             }
             payload.onComplete && payload.onComplete();

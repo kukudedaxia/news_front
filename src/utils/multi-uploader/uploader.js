@@ -135,7 +135,9 @@ class wbUploader {
         e => {
           console.log(e);
           const file = e.dataTransfer.files[0];
-          const reg = new RegExp(/^video\/(mp4|flv|avi|wmv|mov|webm|mpeg4|ts|mpg|rm|rmvb|mkv|m4v)$/);
+          const reg = new RegExp(
+            /^video\/(mp4|flv|avi|wmv|mov|webm|mpeg4|ts|mpg|rm|rmvb|mkv|m4v)$/,
+          );
           e.preventDefault();
           if (reg.test(file.type)) {
             this.addFiles({
@@ -206,6 +208,8 @@ class wbUploader {
   uploadArr = [];
   uploadProgress = 0;
   needFontEndScreenshot = true;
+  //
+  cancel = false;
   // 调度
   async dispatch(params) {
     this.time.discovery.start = new Date();
@@ -263,6 +267,7 @@ class wbUploader {
   }
   async clearFile() {
     this.currFile = {};
+    console.log(22)
     this.fileList.splice(0, 1);
     this.successIndex = [];
   }
@@ -542,23 +547,25 @@ class wbUploader {
     console.log(threadsArr, '准备好切片后 uploadFile');
     threadsArr.forEach(async (item, thIndex) => {
       for (let index = 0; index < item.length; index++) {
-        // 上传切片
-        let chunkIndex = item[index];
-        const start = chunkIndex * chunkSize;
-        const end =
-          (chunkIndex + 1) * chunkSize >= file.size ? file.size : (chunkIndex + 1) * chunkSize;
-        const chunkFile = file.slice(start, end);
-        const chunkMd5 = await calChunkMd5(file, start, end);
-        let chunkDetail = {
-          chunkIndex,
-          chunkCount,
-          chunkFile,
-          chunkMd5,
-          end,
-          start,
-        };
-        console.log(chunkDetail, 'chunkDetail', index);
-        await this.uploadChunk(file, chunkDetail, currentMax, thIndex);
+        if (Object.keys(this.currFile).length > 0) {
+          // 上传切片
+          let chunkIndex = item[index];
+          const start = chunkIndex * chunkSize;
+          const end =
+            (chunkIndex + 1) * chunkSize >= file.size ? file.size : (chunkIndex + 1) * chunkSize;
+          const chunkFile = file.slice(start, end);
+          const chunkMd5 = await calChunkMd5(file, start, end);
+          let chunkDetail = {
+            chunkIndex,
+            chunkCount,
+            chunkFile,
+            chunkMd5,
+            end,
+            start,
+          };
+          console.log(chunkDetail, 'chunkDetail', index);
+          await this.uploadChunk(file, chunkDetail, currentMax, thIndex);
+        }
       }
     });
     return true;
@@ -668,7 +675,7 @@ class wbUploader {
       // });
     } catch (err) {
       console.log(err);
-      this.emit('error', '网络问题');
+      this.emit('error', err.message);
       throw new NetErrExpection(err);
     }
     if (!postVideoRes) {
@@ -676,7 +683,10 @@ class wbUploader {
     }
     this.successIndex.push(chunkIndex);
     // let checkRes = await this.checkFileMd5(initRes, file, true);
-    this.uploadCallback(file, chunkIndex, chunkCount, postVideoRes.data, currentMax, threads);
+    console.log(this.currFile, 1234123);
+    if (Object.keys(this.currFile).length > 1) {
+      this.uploadCallback(file, chunkIndex, chunkCount, postVideoRes.data, currentMax, threads);
+    }
     return postVideoRes.data;
   }
   // 上传进度处理
@@ -752,10 +762,12 @@ class wbUploader {
         is_success: true,
         check_time: (this.time.check.end - this.time.check.start) / 1000,
       });
-      this.emit('success', { file: file });
-      if (this.options.default.autoLog) {
-        // 上传成功打印日志
-        this.uploadLog();
+      if (Object.keys(this.currFile).length > 1) {
+        this.emit('success', { file: file });
+        if (this.options.default.autoLog) {
+          // 上传成功打印日志
+          this.uploadLog();
+        }
       }
 
       if (
@@ -987,6 +999,7 @@ class wbUploader {
       is_cancel: true,
     });
     this.currFile = {};
+    console.log(this.currFile)
     this.fileList.splice(0, 1);
     this.successIndex = [];
     this.emit('error', 'cancel');
