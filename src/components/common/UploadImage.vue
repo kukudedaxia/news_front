@@ -38,8 +38,10 @@
           drag
           multiple
           accept=".jpg, .jpeg, .png, .gif, .tiff, .webp, .heic"
+          :limit="18"
           :show-file-list="false"
           :before-upload="beforeAvatarUpload"
+          :on-exceed="onExceed"
           v-if="fileList.length < 18"
           key="uploader"
         >
@@ -93,6 +95,10 @@ export default {
     };
   },
   methods: {
+    // 超过最大上传数钩子
+    onExceed() {
+      this.$message.error(this.$t('publisher.maxImg'));
+    },
     // 图片上传前拦截函数
     beforeAvatarUpload(file) {
       // 检查网络

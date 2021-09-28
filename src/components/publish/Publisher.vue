@@ -636,7 +636,6 @@ export default {
           this.$message.error(error);
         },
         onComplete: () => {
-          console.log(1);
           this.releaseLoading = false;
         },
       });
