@@ -35,7 +35,7 @@
       <div class="cover" v-if="draftData.img.length > 1" dir="ltr">
         {{ `+${draftData.img.length - 1}` }}
       </div>
-      <!-- <img src="@/assets/images/pic_piiic@3x.png" class="piiic" v-if="data.imgUrls[0].piiic" /> -->
+      <img :src="lang === 'en' ? piiic : piiicAr" class="piiic" v-if="draftData.img[0].piiic" />
     </div>
     <div class="video" v-if="draftData.video && draftData.video.fid">
       <img
@@ -53,6 +53,9 @@
 
 <script>
 import moment from 'moment';
+import piiic from '@/assets/images/pic_piiic@3x.png';
+import piiicAr from '@/assets/images/pic_piiic_A@3x.png';
+
 export default {
   name: 'ComDrafts',
   props: {
@@ -68,10 +71,15 @@ export default {
     uploadImgUrl() {
       return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
+    lang() {
+      return this.$store.state.lanuage;
+    },
   },
   data() {
     return {
       delLoading: false, // 删除时的loading
+      piiic,
+      piiicAr,
     };
   },
   methods: {

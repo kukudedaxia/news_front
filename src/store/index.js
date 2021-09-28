@@ -4,7 +4,7 @@ import request from '../utils/request';
 import { sendReport } from '../server/index';
 import i18n from '../utils/i18n';
 import { Message } from 'element-ui';
-import Cookies from 'js-cookie';;
+import Cookies from 'js-cookie';
 
 Vue.use(Vuex);
 const modulesFiles = require.context('./modules', true, /\.js$/);
@@ -75,10 +75,7 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-empty-pattern
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
-      let retry = 0;
-      if (param.scene == 'upload_video') {
-        retry = 3;
-      }
+
       sendReport(param, {
         onSuccess: () => {
           // console.log(res, 'res');
@@ -90,8 +87,8 @@ export default new Vuex.Store({
           // console.log('完成');
         },
         onNetworkError: () => {
-          if (retry > 1) {
-            retry--;
+          if (param.scene == 'upload_video' && param.retry > 1) {
+            obj.retry -= 1;
             ctx.dispatch('send', obj);
           }
         },
@@ -117,7 +114,6 @@ export default new Vuex.Store({
         method: 'get',
         headers: {
           'content-type': 'application/json',
-          auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -129,7 +125,6 @@ export default new Vuex.Store({
       payload.onFail = payload.onFail || emptyFunc;
       payload.onComplete = payload.onComplete || emptyFunc;
       payload.onError = payload.onError || emptyFunc;
-
       request(reqConf)
         .then(res => {
           try {
@@ -141,6 +136,9 @@ export default new Vuex.Store({
               payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
             } else {
               payload.onFail && payload.onFail(res.data, reqConf, res);
+              if (res.data.error_code == 31000) {
+                window.location.href = window.location.origin;
+              }
             }
             payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
           } catch (err) {
@@ -150,7 +148,9 @@ export default new Vuex.Store({
         .catch(err => {
           if (!navigator.onLine) {
             payload.onNetworkError && payload.onNetworkError(err, reqConf);
-            Message.error(i18n.t('netError'));
+            if (reqConf.url !== 'api/log/m?enc=0') {
+              Message.error(i18n.t('netError'));
+            }
             payload.onComplete && payload.onComplete();
           } else {
             if (err == 'Internal Server Error') {
@@ -199,7 +199,7 @@ export default new Vuex.Store({
     },
     // 获取权限
     async getTab(ctx) {
-      return new Promise((rs, rj)  => {
+      return new Promise((rs, rj) => {
         ctx.dispatch('ajax', {
           req: {
             method: 'get',

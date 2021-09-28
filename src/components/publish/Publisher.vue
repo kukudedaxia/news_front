@@ -34,11 +34,15 @@
         </li>
       </ul>
       <div class="inform-box">
-        <span
-          :class="['text-length', { red: textareaLen >= 10000 }]"
-          v-show="textareaLen >= 9990"
-          >{{ 10000 - textareaLen }}</span
-        >
+        <div class="text-length" v-show="textareaLen >= 9990">
+          <span :class="[{ red: textareaLen >= 10000 }]">{{
+            textareaLen >= 11000 ? -1000 : 10000 - textareaLen
+          }}</span>
+          <div class="tips">
+            {{ $t('publisher.maxTextTips') }}
+            <div class="arrow"></div>
+          </div>
+        </div>
         <el-dropdown
           trigger="click"
           @command="handleCommand"
@@ -59,7 +63,7 @@
           type="primary"
           round
           size="small"
-          :disabled="!btnClick"
+          :disabled="btnDiasbled"
           :loading="releaseLoading"
           class="inform-box_btn"
           @click="sendBlog"
@@ -84,17 +88,17 @@
         @onUploadVideoSuccess="onUploadVideoSuccess"
       ></UploadV>
     </transition>
-    <transition name="fade">
-      <Popover
-        v-show="popoverShow"
-        :type="popoverType"
-        class="popover"
-        id="popoverId"
-        :text="searchText"
-        @onItemClick="onItemClick"
-        @onCreateTopic="onCreateTopic"
-      ></Popover>
-    </transition>
+    <!-- <transition name="fade"> -->
+    <Popover
+      v-show="popoverShow"
+      :type="popoverType"
+      class="popover"
+      id="popoverId"
+      :text="searchText"
+      @onItemClick="onItemClick"
+      @onCreateTopic="onCreateTopic"
+    ></Popover>
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -168,6 +172,10 @@ export default {
       // 草稿保存定时器实例
       draftSaveTimes: null,
       uploadVideoShow: false,
+      // 允许点击
+      textAllow: false,
+      imgAllow: false,
+      videoAllow: false,
     };
   },
   watch: {
@@ -177,27 +185,30 @@ export default {
       // 自动保存草稿
       this.draftSaveTime();
       if (val.length > 0 && val.length <= 10000) {
-        this.btnClick = true;
+        this.textAllow = true;
       } else {
-        this.btnClick = false;
+        this.textAllow = false;
       }
     },
     // 监听上传图片列表变化
     '$store.state.publisher.imgList': {
       handler(list) {
         if (list.length === 0) {
-          this.btnClick = false;
+          this.imgAllow = false;
           return;
         }
         // 不存在上传中的图片，可点击
         const len = list.length;
         for (let i = 0; i < len; i++) {
-          // 如果存在loading，则不可点击
-          if (this.getUploadImg[i].loading) {
-            this.btnClick = false;
+          // 如果有图片正在上传或者上传完成pid为空，则不可点击
+          if (
+            this.getUploadImg[i].loading ||
+            (!this.getUploadImg[i].loading && this.getUploadImg[i].pid === '')
+          ) {
+            this.imgAllow = false;
             break;
           }
-          this.btnClick = true;
+          this.imgAllow = true;
         }
       },
       deep: true,
@@ -206,9 +217,9 @@ export default {
     '$store.state.video.attr': {
       handler({ status }) {
         if (status === 3) {
-          this.btnClick = true;
+          this.videoAllow = true;
         } else {
-          this.btnClick = false;
+          this.videoAllow = false;
         }
       },
       deep: true,
@@ -225,6 +236,22 @@ export default {
     uploadMediaStatus() {
       //0未上传 1上传中 2上传失败 3上传成功
       return this.$store.state.video.attr.status;
+    },
+    btnDiasbled() {
+      // 只存在文本并且文本满足条件,允许点击
+      if (this.textAllow && !this.uploadImgShow && !this.uploadVideoShow) {
+        return false;
+      }
+      // 存在上传完完成的视频或者图片，并且文本满足条件时，可点击
+      else if (this.textAllow && (this.imgAllow || this.videoAllow)) {
+        return false;
+      }
+      // 只存在上传完成的视频或者图片,并且文本长度=0时，可点击
+      else if (this.textarea.length === 0 && (this.imgAllow || this.videoAllow)) {
+        return false;
+      }
+      // 其余情况均不可点击
+      return true;
     },
   },
   mounted() {
@@ -265,7 +292,7 @@ export default {
     window.onbeforeunload = () => {
       if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
         // 调用保存草稿接口
-        this.draftSave();
+        this.draftSaveNoTime();
         return false;
       }
     };
@@ -340,14 +367,13 @@ export default {
           searchEndIndex = j + leftStr.length;
         }
       }
-      // 满足检索条件，弹出popover
-      if (leftResult && rightResult) {
+      // 满足检索条件，并且无断网下，弹出popover
+      if (leftResult && rightResult && navigator.onLine) {
         this.popoverType = this.textarea[searchStrtIndex - 1] === '@' ? 'user' : 'topic';
         this.searchText = this.textarea.slice(searchStrtIndex, searchEndIndex);
         this.searchStrtIndex = searchStrtIndex;
         this.searchEndIndex = searchEndIndex;
         Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
-        console.log($('.el-textarea__inner').caret('offset'));
         this.$nextTick(() => {
           this.popoverPosition();
           setTimeout(() => {
@@ -391,15 +417,11 @@ export default {
     },
     // 输入框失去焦点
     onInputBlur() {
-      this.popoverShow = false;
       // 失去焦点，更新光标下标
       this.getFocusIndex();
-      // 为什么失去焦点200ms后再去关闭弹窗？
-      // if (this.popoverShow) {
-      //   setTimeout(() => {
-      //     this.popoverShow = false;
-      //   }, 200);
-      // }
+      setTimeout(() => {
+        this.popoverShow = false;
+      }, 200);
     },
     // 输入框获得焦点
     onInputFocus() {
@@ -488,18 +510,6 @@ export default {
           dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
         }
       }
-
-      // // 如果是阿语，从右定位
-      // if (this.tools.checkAr(this.textarea)) {
-      //   dom.style.left = '';
-      //   dom.style.right = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
-      //   // 阿语
-      // } else {
-      //   // 英语从左定位
-      //   dom.style.right = '';
-      //   dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
-      //   console.log(this.cursorCoordinate.left);
-      // }
     },
     // popover选中事件
     onItemClick(data) {
@@ -518,7 +528,7 @@ export default {
         $('#textareaId').focus();
       }, 300);
     },
-    // 草稿箱延迟上报
+    // 草稿箱延迟保存（只给输入框使用）
     draftSaveTime() {
       // 如果保存草稿状态为完成，并且满足文本、图片、视频任意条件，则可以走2s延迟保存草稿操作
       if (this.draftSaveFinish) {
@@ -528,12 +538,19 @@ export default {
         }, 2000);
       }
     },
+    // 草稿箱非延迟保存
+    draftSaveNoTime() {
+      if (this.draftSaveFinish) {
+        this.draftSaveFinish = false;
+        this.draftSave();
+      }
+    },
     // 草稿箱保存接口
     draftSave() {
       if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
         const params = {
           content: JSON.stringify({
-            text: this.textarea,
+            text: this.textarea.slice(0, 10000),
             power: this.selectVal.name,
             img: this.getUploadImg,
             video: {
@@ -591,6 +608,7 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
+        annotation: '[{ publishSource: "PC" }]',
       };
       Object.assign(
         params,
@@ -618,6 +636,7 @@ export default {
           this.$message.error(error);
         },
         onComplete: () => {
+          console.log(1);
           this.releaseLoading = false;
         },
       });
@@ -669,11 +688,11 @@ export default {
     },
     // 图片上传成功回调
     onUploadImgSuccess() {
-      this.draftSave();
+      this.draftSaveNoTime();
     },
     // 视频上传成功回调
     onUploadVideoSuccess() {
-      this.draftSave();
+      this.draftSaveNoTime();
     },
   },
 };
@@ -736,14 +755,42 @@ export default {
     }
     .inform-box {
       .text-length {
-        font-family: SFUIText-Regular;
-        font-size: 14px;
-        text-align: center;
-        color: #777f8e;
+        display: inline-block;
+        position: relative;
+        span {
+          font-family: SFUIText-Regular;
+          font-size: 14px;
+          text-align: center;
+          color: #777f8e;
+        }
+        .red {
+          color: #ee3b23;
+        }
+        .tips {
+          position: absolute;
+          bottom: -60px;
+          left: -10px;
+          background: #303133;
+          color: #fff;
+          border-radius: 4px;
+          padding: 5px 10px;
+          font-size: 12px;
+          width: 200px;
+          z-index: 9;
+          .arrow {
+            position: absolute;
+            display: block;
+            left: 10px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent #303133 transparent;
+          }
+        }
       }
-      .red {
-        color: #ee3b23;
-      }
+
       .select {
         margin: 0 20px;
         padding: 9px 12px 9px 8px;

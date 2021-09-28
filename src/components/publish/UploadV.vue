@@ -81,6 +81,8 @@ export default {
     this.init();
   },
   destroyed() {
+    this.deleteVideo();
+    this.wbUploader = {};
     this.$store.commit('video/setData', {
       ...this.videos,
       status: 0,
@@ -94,7 +96,7 @@ export default {
     init() {
       window.$CONFIG = window.$CONFIG || {};
       window.$CONFIG.uid = this.user.id;
-      const wbUploader = new wbu({
+      this.wbUploader = new wbu({
         default: {
           source: 339644097,
           max_size: 4 * 1024 * 1024 * 1024, // 文件大小限制
@@ -108,28 +110,29 @@ export default {
           area: '#drop',
         },
       });
-      wbUploader.on('beforeInit', data => {
+      this.wbUploader.on('beforeInit', () => {
         //...
-        console.log(data);
         if (this.videos.count == 1) {
           return false;
         }
-        wbUploader.init();
+        this.wbUploader.init();
       });
-      wbUploader.on('beforeUpload', data => {
-        console.log(data);
+      this.wbUploader.on('beforeUpload', data => {
         //... to do在这里做一些视频大小，长度限制
         if (data.size > 1024 * 1024 * 1024 * 4) {
           this.$message.info(this.$t('uploadV.error1'));
+          this.wbUploader.clearFile();
           return;
         } else if (data.detail.duration > 60 * 60) {
           this.$message.error(this.$t('uploadV.error2'));
+          this.wbUploader.clearFile();
           return;
         } else if (data.detail.duration < 4) {
           this.$message.error(this.$t('uploadV.error3'));
+          this.wbUploader.clearFile();
           return;
         }
-        wbUploader.upload();
+        this.wbUploader.upload();
         // this.status = 1;
         this.$store.commit('video/setData', {
           ...this.videos,
@@ -138,7 +141,8 @@ export default {
         });
       });
 
-      wbUploader.on('uploadStatus', data => {
+      this.wbUploader.on('uploadStatus', data => {
+        // console.log(data.progress, 2222)
         // this.status = 1;
         // this.$store.commit('video/setStatus', 1);
         this.progress = data.progress;
@@ -153,7 +157,7 @@ export default {
         //... 返回速度 百分比
       });
 
-      wbUploader.on('success', ({ file }) => {
+      this.wbUploader.on('success', ({ file }) => {
         console.log(file);
         // this.status = 3;
         // this.mediaId = '';
@@ -169,7 +173,7 @@ export default {
         //...
       });
 
-      wbUploader.on('screenshot', data => {
+      this.wbUploader.on('screenshot', data => {
         console.log(data, 'screenshot');
         // this.duration = data.detail.duration;
         if (data.screenshot && data.screenshot.length > 0) {
@@ -185,26 +189,26 @@ export default {
         //... 返回截图数据
       });
 
-      wbUploader.on('error', msg => {
+      this.wbUploader.on('error', msg => {
         console.log(msg);
-        if (!msg.includes('init')) {
-          // this.status = 2;
-          this.$store.commit('video/setData', {
-            ...this.videos,
-            status: 2,
-          });
-        }
-        this.$message.error(msg);
+        try {
+          if (!msg.includes('init') && !msg.includes('取消')) {
+            // this.status = 2;
+            this.$store.commit('video/setData', {
+              ...this.videos,
+              status: 2,
+            });
+          }
+          // eslint-disable-next-line no-empty
+        } catch {}
       });
 
-      wbUploader.on('uploadScreen', pid => {
+      this.wbUploader.on('uploadScreen', pid => {
         this.$store.commit('video/setData', {
           ...this.videos,
           pid: pid,
         });
       });
-
-      this.wbUploader = wbUploader;
     },
 
     transformVideoTime(seconds) {
@@ -226,14 +230,16 @@ export default {
       this.wbUploader.reUpload();
     },
 
-    deleteVideo() {
-      if (this.status == 1) {
+    async deleteVideo() {
+      if (this.videos.status == 1) {
         this.wbUploader.cancel();
       } else {
         this.mediaId = '';
       }
+      this.wbUploader.clearFile();
       // this.status = 0;
       // this.count = 0;
+      console.log(111);
       this.$store.commit('video/setData', {
         ...this.videos,
         status: 0,
@@ -318,6 +324,9 @@ export default {
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
+
+  user-select: none;
+
   position: relative;
   .uploader-icon {
     width: 20px;
@@ -371,11 +380,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+  z-index: 10;
 }
 .progress {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   width: 100%;
   .progress-bar {
     width: 78%;

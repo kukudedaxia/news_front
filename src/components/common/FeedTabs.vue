@@ -46,6 +46,14 @@ export default {
     Drafts,
     Default,
   },
+  watch: {
+    draftList: {
+      handler(v) {
+        this.$store.commit('publisher/setDraftNums', v.length);
+      },
+      deep: true,
+    },
+  },
   data() {
     return {
       activeName: 'Drafts',

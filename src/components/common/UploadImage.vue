@@ -12,7 +12,7 @@
       filter=".uploader"
     >
       <transition-group name="fade_top1" class="grid">
-        <div class="img-list-box" v-for="(item, index) in fileList" :key="index">
+        <div class="img-list-box" v-for="(item, index) in fileList" :key="item.id">
           <img
             :src="`${uploadImgUrl}/orj1080/${item.pid}.jpg`"
             :onerror="
@@ -27,7 +27,7 @@
               class="icon-loading"
               v-if="item.loading"
             />
-            <div class="icon-reset" v-if="!item.loading" @click="onImgReset"></div>
+            <div class="icon-reset" v-if="!item.loading" @click="onImgReset(item.id)"></div>
           </div>
           <div class="icon-close" @click="onimgClose(index)"></div>
         </div>
@@ -64,9 +64,6 @@ export default {
     user() {
       return this.$store.state.userInfo;
     },
-    fileList() {
-      return this.$store.state.publisher.imgList;
-    },
   },
   watch: {
     fileList: {
@@ -84,7 +81,15 @@ export default {
   data() {
     return {
       file: '', // 待上传的文件
-      myArray: [],
+      // 待上传的文件参数
+      fileParams: {
+        id: '',
+        pid: '',
+        loading: true,
+      },
+      fileList: this.$store.state.publisher.imgList,
+      // 上传的图片map集合，主要是用作上传图片失败重试
+      filesMap: {},
     };
   },
   methods: {
@@ -99,23 +104,28 @@ export default {
         // ...todo  待补充文案
         this.$message.error('This image is more than 30m');
       } else if (this.fileList.length >= 18) {
-        // ...todo  待补充文案
-        this.$message.error('已超过最大图片上传数');
+        this.$message.error(this.$t('publisher.maxImg'));
       } else {
-        this.uploadImg(file);
+        // debugger;
+        setTimeout(() => {
+          const id = new Date().getTime(); // 每张上传中的图片都会设置一个唯一的以毫秒为单位的时间戳
+          this.filesMap[id] = {
+            id,
+            file,
+          };
+          this.fileList.push({
+            id,
+            pid: '',
+            loading: true,
+          });
+          this.uploadImg(file, id);
+        }, 100);
       }
       return false;
     },
     // 图片上传
-    async uploadImg(file) {
-      const imgObj = {
-        id: new Date().getTime(), // 每张上传中的图片都会设置一个唯一的以毫秒为单位的时间戳
-        pid: '',
-        loading: true, // 上传中
-      };
-      this.fileList.push(imgObj);
+    async uploadImg(file, id) {
       try {
-        this.file = file;
         const base64 = await fileByBase64(file);
         const blob = await base64ByBlob(base64);
         const md5 = await getMd5(blob);
@@ -138,25 +148,29 @@ export default {
             Accept: 'application/json',
           },
           success: res => {
-            const index = this.fileList.findIndex(item => item.id === imgObj.id);
+            const index = this.fileList.findIndex(item => item.id === id);
             if (res.ret) {
               // 通过上面的时间戳为id，在数组中找到对应数据，并替换
               if (index !== -1) {
-                this.fileList.splice(index, 1, {
-                  pid: res.pic.pid,
+                this.readImgInform(file).then(({ width, height }) => {
+                  this.fileList.splice(index, 1, {
+                    id,
+                    pid: res.pic.pid,
+                    width,
+                    height,
+                    piiic: this.verifyLongPic({ width, height }),
+                  });
+                  this.$emit('onUploadImgSuccess');
                 });
-                this.$emit('onUploadImgSuccess');
               }
             } else {
               // 如果图片上传失败，应该如何处理？
               if (index !== -1) {
-                this.fileList.splice(
-                  index,
-                  1,
-                  Object.assign(imgObj, {
-                    loading: false,
-                  }),
-                );
+                this.fileList.splice(index, 1, {
+                  id: this.filesMap[id].id,
+                  pid: '',
+                  loading: false,
+                });
               }
               this.$message.error(this.$t('live.uploadErr'));
             }
@@ -170,8 +184,15 @@ export default {
       }
     },
     // 上传失败，再次尝试上传
-    // 需要存储失败的file信息，...todo
-    onImgReset() {},
+    onImgReset(id) {
+      const index = this.fileList.findIndex(item => item.id === id);
+      this.fileList.splice(index, 1, {
+        id: this.filesMap[id].id,
+        pid: '',
+        loading: true,
+      });
+      this.uploadImg(this.filesMap[id].file, id);
+    },
     // 删除已上传的单张图片
     onimgClose(index) {
       this.fileList.splice(index, 1);
@@ -183,6 +204,29 @@ export default {
       //不允许拖拽
       if (e.draggedContext.index == this.fileList.length) return false;
       return true;
+    },
+    // 读取图片宽高
+    readImgInform(file) {
+      return new Promise(resolve => {
+        //读取图片数据
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const data = e.target.result;
+          // //加载图片获取图片真实宽度和高度
+          const image = new Image();
+          image.onload = function() {
+            const width = image.width;
+            const height = image.height;
+            resolve({ width, height });
+          };
+          image.src = data;
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+    // 验证长图
+    verifyLongPic({ width, height }) {
+      return height / width > 16 / 9;
     },
   },
 };

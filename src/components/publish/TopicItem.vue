@@ -4,10 +4,20 @@
 -->
 <template>
   <div class="com-topic-item flex-align">
-    <p class="title text-overflow-1">
+    <p
+      :class="[
+        'title text-overflow-1',
+        lang === 'en' ? 'pub-ltr pub-text_left' : 'pub-rtl pub-text_right',
+      ]"
+    >
       {{ item.desc1 }}
     </p>
-    <span>{{ item.desc2 }}</span>
+    <span
+      :class="
+        tools.checkLan(item.desc1) === 'en' ? 'pub-ltr pub-text_left' : 'pub-rtl pub-text_right'
+      "
+      >{{ item.desc2 }}</span
+    >
   </div>
 </template>
 
@@ -17,6 +27,11 @@ export default {
     item: {
       type: Object,
       default: () => {},
+    },
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
     },
   },
   data() {
@@ -47,6 +62,7 @@ export default {
     text-align: left;
   }
   & > span {
+    display: block;
     font-family: SFUIText-Regular;
     font-size: 12px;
     color: #777f8e;

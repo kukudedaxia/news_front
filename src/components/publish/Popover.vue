@@ -84,13 +84,10 @@ export default {
       }
       return msg;
     },
-    lang() {
-      return this.$store.state.lanuage;
-    },
   },
   watch: {
     text: {
-      handler() {
+      async handler() {
         if (this.type === 'user') {
           this.searchUser();
           return;
@@ -108,11 +105,13 @@ export default {
       topicPage: 1,
       userList: [],
       userpage: 1,
+      userListMap: new Map(), // 存储@检索结果的map
+      userIndex: 0,
+      topicListMap: new Map(), // 存储#检索结果的map
+      topicIndex: 0,
     };
   },
-  mounted() {
-    // this.searchUser();
-  },
+  mounted() {},
   methods: {
     onLoadTopic() {},
     onLoadUser() {},
@@ -121,6 +120,8 @@ export default {
     },
     // @ 用户检索
     searchUser() {
+      const index = ++this.userIndex;
+      this.userListMap.set(index, []);
       this.searchLoading = true;
       this.$store.dispatch('ajax', {
         req: {
@@ -133,7 +134,8 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          this.userList = data.users.splice(0, 10);
+          this.userListMap.set(index, data.users.splice(0, 10));
+          this.userList = this.userListMap.get(this.userListMap.size);
         },
         onFail: ({ error }) => {
           this.$message.error(error);
@@ -145,6 +147,8 @@ export default {
     },
     // # 话题检索
     searchTopic() {
+      const index = ++this.topicIndex;
+      this.topicListMap.set(index, []);
       this.searchLoading = true;
       this.$store.dispatch('ajax', {
         req: {
@@ -158,7 +162,8 @@ export default {
           },
         },
         onSuccess: ({ data }) => {
-          this.topicList = data.topics.splice(0, 10);
+          this.topicListMap.set(index, data.topics.splice(0, 10));
+          this.topicList = this.topicListMap.get(this.topicListMap.size);
         },
         onFail: ({ error }) => {
           this.$message.error(error);
