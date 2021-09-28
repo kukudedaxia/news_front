@@ -239,7 +239,11 @@ export default {
     },
     btnDiasbled() {
       // 只存在文本并且文本满足条件,允许点击
-      if (this.textAllow && !this.uploadImgShow && !this.uploadVideoShow) {
+      if (
+        (this.textAllow && !this.uploadImgShow && !this.uploadVideoShow) ||
+        (this.textAllow && this.uploadImgShow && this.getUploadImg.length === 0) ||
+        (this.textAllow && this.uploadVideoShow && this.$store.state.video.attr.status === 0)
+      ) {
         return false;
       }
       // 存在上传完完成的视频或者图片，并且文本满足条件时，可点击
@@ -547,7 +551,10 @@ export default {
     },
     // 草稿箱保存接口
     draftSave() {
-      if (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '') {
+      if (
+        !this.releaseLoading &&
+        (this.textarea.length > 0 || this.getUploadImg.length > 0 || this.uploadMediaId !== '')
+      ) {
         const params = {
           content: JSON.stringify({
             text: this.textarea.slice(0, 10000),
@@ -608,7 +615,7 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
-        annotation: '[{ publishSource: "PC" }]',
+        annotation: '[{ "publishSource": "PC" }]',
       };
       Object.assign(
         params,
@@ -636,6 +643,9 @@ export default {
           this.$message.error(error);
         },
         onComplete: () => {
+          this.releaseLoading = false;
+        },
+        onNetworkError: () => {
           this.releaseLoading = false;
         },
       });
