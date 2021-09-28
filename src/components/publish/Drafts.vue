@@ -107,8 +107,9 @@ export default {
           },
         },
         onSuccess: () => {
+          // 如果删除成功，手动将删除项移除，部分safari删除后不会调用查询接口
           this.$message.success(this.$t('live.success'));
-          this.$emit('deleteDraftSuccess');
+          this.$emit('deleteDraftSuccess', this.data.id);
         },
         onFail: ({ error }) => {
           this.$message.error(error);

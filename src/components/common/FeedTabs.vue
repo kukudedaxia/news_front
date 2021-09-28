@@ -102,8 +102,13 @@ export default {
       });
     },
     // 删除草稿成功
-    onDeleteSuccess() {
-      this.searchDraftList();
+    onDeleteSuccess(id) {
+      const index = this.draftList.findIndex(item => item.id === id);
+      if (index !== -1) {
+        this.draftList.splice(index, 1);
+      } else {
+        this.searchDraftList();
+      }
     },
     // 编辑草稿箱
     editDrafts(item) {
