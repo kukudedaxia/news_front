@@ -1,6 +1,8 @@
 const state = {
   imgList: [],
   videoParam: {},
+  // 草稿数
+  draftNums: 0,
 };
 
 const getters = {
@@ -18,6 +20,9 @@ const mutations = {
   },
   setUploadVideo(state, val) {
     state.videoParam = val;
+  },
+  setDraftNums(state, val) {
+    state.draftNums = val;
   },
 };
 

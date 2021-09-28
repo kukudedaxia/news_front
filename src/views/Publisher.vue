@@ -20,6 +20,11 @@ export default {
     Publisher,
     'feed-tabs': FeedTabs,
   },
+  computed: {
+    draftNums() {
+      return this.$store.state.publisher.draftNums;
+    },
+  },
   data() {
     return {
       textarea: '',
@@ -27,18 +32,11 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     // 当离开发布页时，需要弹窗提醒用户手动保存草稿
-    this.$refs.publisher.draftSaveNoTime();
+    // 如果草稿数两大于等于最大保存草稿数，则不会走保存接口
+    if (this.draftNums < 9) {
+      this.$refs.publisher.draftSaveNoTime();
+    }
     next();
-    // this.$confirm(this.$t('publisher.videoDialogTitle'), '', {
-    //   confirmButtonText: this.$t('publisher.confirm'),
-    //   cancelButtonText: this.$t('publisher.cancel'),
-    // })
-    //   .then(() => {
-    //     this.$refs.publisher.draftSave();
-    //     // next();
-    //   })
-    //   .catch(() => {});
-    // ...todo
   },
 };
 </script>

@@ -63,7 +63,7 @@
           type="primary"
           round
           size="small"
-          :disabled="!btnClick || textarea.length > 10000"
+          :disabled="btnDiasbled"
           :loading="releaseLoading"
           class="inform-box_btn"
           @click="sendBlog"
@@ -172,6 +172,10 @@ export default {
       // 草稿保存定时器实例
       draftSaveTimes: null,
       uploadVideoShow: false,
+      // 允许点击
+      textAllow: false,
+      imgAllow: false,
+      videoAllow: false,
     };
   },
   watch: {
@@ -181,27 +185,30 @@ export default {
       // 自动保存草稿
       this.draftSaveTime();
       if (val.length > 0 && val.length <= 10000) {
-        this.btnClick = true;
+        this.textAllow = true;
       } else {
-        this.btnClick = false;
+        this.textAllow = false;
       }
     },
     // 监听上传图片列表变化
     '$store.state.publisher.imgList': {
       handler(list) {
         if (list.length === 0) {
-          this.btnClick = false;
+          this.imgAllow = false;
           return;
         }
         // 不存在上传中的图片，可点击
         const len = list.length;
         for (let i = 0; i < len; i++) {
-          // 如果存在loading，则不可点击
-          if (this.getUploadImg[i].loading) {
-            this.btnClick = false;
+          // 如果有图片正在上传或者上传完成pid为空，则不可点击
+          if (
+            this.getUploadImg[i].loading ||
+            (!this.getUploadImg[i].loading && this.getUploadImg[i].pid === '')
+          ) {
+            this.imgAllow = false;
             break;
           }
-          this.btnClick = true;
+          this.imgAllow = true;
         }
       },
       deep: true,
@@ -210,9 +217,9 @@ export default {
     '$store.state.video.attr': {
       handler({ status }) {
         if (status === 3) {
-          this.btnClick = true;
+          this.videoAllow = true;
         } else {
-          this.btnClick = false;
+          this.videoAllow = false;
         }
       },
       deep: true,
@@ -229,6 +236,22 @@ export default {
     uploadMediaStatus() {
       //0未上传 1上传中 2上传失败 3上传成功
       return this.$store.state.video.attr.status;
+    },
+    btnDiasbled() {
+      // 只存在文本并且文本满足条件,允许点击
+      if (this.textAllow && !this.uploadImgShow && !this.uploadVideoShow) {
+        return false;
+      }
+      // 存在上传完完成的视频或者图片，并且文本满足条件时，可点击
+      else if (this.textAllow && (this.imgAllow || this.videoAllow)) {
+        return false;
+      }
+      // 只存在上传完成的视频或者图片,并且文本长度=0时，可点击
+      else if (this.textarea.length === 0 && (this.imgAllow || this.videoAllow)) {
+        return false;
+      }
+      // 其余情况均不可点击
+      return true;
     },
   },
   mounted() {
@@ -585,7 +608,7 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
-        annotation: "[{ publishSource: 'PC' }]",
+        annotation: '[{ publishSource: "PC" }]',
       };
       Object.assign(
         params,
@@ -753,6 +776,7 @@ export default {
           padding: 5px 10px;
           font-size: 12px;
           width: 200px;
+          z-index: 9;
           .arrow {
             position: absolute;
             display: block;
