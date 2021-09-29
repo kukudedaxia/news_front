@@ -71,7 +71,7 @@
         >
       </div>
     </div>
-    <el-divider v-if="uploadImgShow"></el-divider>
+    <el-divider v-if="uploadImgShow || uploadVideoShow"></el-divider>
     <transition name="fade_top">
       <upload-image
         @onCloseImgUpload="onCloseImgUpload"
@@ -79,7 +79,6 @@
         v-if="uploadImgShow"
       ></upload-image>
     </transition>
-    <el-divider v-if="uploadVideoShow"></el-divider>
     <transition name="fade_top">
       <UploadV
         ref="uploadV"
@@ -91,6 +90,7 @@
     <!-- <transition name="fade"> -->
     <Popover
       v-show="popoverShow"
+      :show="popoverShow"
       :type="popoverType"
       class="popover"
       id="popoverId"
@@ -281,10 +281,14 @@ export default {
         id: this.selectList.find(item => item.name === content.power).id,
         name: content.power,
       };
+      // 编辑图片草稿
       if (content.img.length > 0) {
         this.$store.dispatch('publisher/setUploadImg', content.img);
+        this.uploadVideoShow = false;
         this.uploadImgShow = true;
-      } else if (content.video.fid != '') {
+      }
+      // 编辑视频草稿
+      else if (content.video.fid != '') {
         this.$store.commit('video/setData', {
           status: 3, //上传状态 0， 1，2，3
           media_id: content.video.fid,
@@ -292,6 +296,7 @@ export default {
           duration: content.video.duration,
           count: 1,
         });
+        this.uploadImgShow = false;
         this.uploadVideoShow = true;
       }
     });
@@ -383,9 +388,10 @@ export default {
         Object.assign(this.cursorCoordinate, $('.el-textarea__inner').caret('offset'));
         this.$nextTick(() => {
           this.popoverPosition();
-          setTimeout(() => {
-            this.popoverShow = true;
-          }, 100);
+          this.popoverShow = true;
+          // setTimeout(() => {
+          //   this.popoverShow = true;
+          // }, 100);
         });
       } else {
         this.searchText = null;
@@ -427,7 +433,9 @@ export default {
       // 失去焦点，更新光标下标
       this.getFocusIndex();
       setTimeout(() => {
-        this.popoverShow = false;
+        if (this.popoverShow && !$('.el-textarea__inner').is(':focus')) {
+          this.popoverShow = false;
+        }
       }, 200);
     },
     // 输入框获得焦点
