@@ -142,8 +142,7 @@ const message = {
     delete: 'Delete',
     beets: 'Beets',
     uploadVideo: 'Upload video',
-    suppotsVideo:
-      'Format supports mp4 / flv / avi / wmv / mov / webm / mpeg4 / ts / mpg / rm / rmvb / mkv / m4v',
+    suppotsVideo: 'Format supports mp4 / flv / avi / wmv / mov',
     successed: 'Successed',
     selectTopic: 'Select or enter the topic you want to use.',
     selectUser: 'Select or enter the person you want to @',
@@ -152,9 +151,11 @@ const message = {
     imgMaxSize: 'Single image cannot be larger than 30M.',
   },
   uploadV: {
+    error0: 'You cannot upload more than 1 video',
     error1: 'This video is larger than 4GB',
     error2: 'This video is more than 60 minutes',
     error3: 'This video is less than 3 seconds',
+    error4: "Sorry, your web browser doesn't support this file format.",
     try: 'Click to retry',
     expected: 'Expected',
   },

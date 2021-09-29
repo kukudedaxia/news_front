@@ -126,7 +126,12 @@ router.beforeEach(async (to, from, next) => {
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
   if (Cookies.get('userInfo')) {
-    store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    if (userInfo.SUB == Cookies.get('SUB')) {
+      store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
+    } else {
+      Cookies.remove('userInfo');
+    }
   }
   if (Cookies.get('tabs')) {
     store.commit('setTab', JSON.parse(Cookies.get('tabs')));

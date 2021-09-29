@@ -641,6 +641,7 @@ export default {
         onSuccess: () => {
           this.$message.success(this.$t('publisher.successed'));
           this.textarea = '';
+          Bus.$emit('postblog', this.uploadMediaId);
           if (this.$refs.uploadV) {
             this.$refs.uploadV.deleteVideo();
           }
