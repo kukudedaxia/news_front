@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     lang() {
-      if (this.$refs.tabs.$el) {
+      if (this.$refs.tabs && this.$refs.tabs.$el) {
         this.renderTab(this.$refs.tabs.$el);
       }
     },
@@ -392,5 +392,10 @@ html[lang='ar'] .lanuage {
 
 html[lang='ar'] .logout {
   margin-right: 20px;
+}
+
+html[lang='ar'] .create {
+  margin-left: 20px;
+  margin-right: 0;
 }
 </style>

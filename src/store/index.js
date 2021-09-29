@@ -136,7 +136,7 @@ export default new Vuex.Store({
               payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
             } else {
               payload.onFail && payload.onFail(res.data, reqConf, res);
-              if (res.data.error_code == 31000) {
+              if (res.data.error_code == 50001) {
                 window.location.href = window.location.origin;
               }
             }
