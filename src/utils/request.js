@@ -13,7 +13,6 @@ request.interceptors.request.use(req => {
 
 request.interceptors.response.use(
   response => {
-    // console.log(response);
 
     if (response.data.error_code) {
       switch (response.data.error_code) {
@@ -28,25 +27,30 @@ request.interceptors.response.use(
             Cookies.remove('SUB');
           }
           Cookies.remove('userInfo');
-          // 解决退出时候 还有权限接口仍在访问
-          if (router.currentRoute.meta.auth) {
-            // console.log(router.currentRoute)
-            window.location.href =
-              window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
-            // router.replace({
-            //   path: '/login',
-            //   query: {
-            //     redirect: router.currentRoute.fullPath,
-            //   },
-            // });
-          }
+          store.commit('setUser', {});
+          store.commit('setTab', {});
+
+          window.location.href =
+          window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+          // // 解决退出时候 还有权限接口仍在访问
+          // if (router.currentRoute.meta.auth) {
+          //   // console.log(router.currentRoute)
+          //   window.location.href =
+          //     window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+          //   // router.replace({
+          //   //   path: '/login',
+          //   //   query: {
+          //   //     redirect: router.currentRoute.fullPath,
+          //   //   },
+          //   // });
+          // }
           return Promise.reject(response);
       }
     }
     return Promise.resolve(response);
   },
   function(error) {
-    // console.log(error.response);
+    console.log(error, 1);
     // 对响应错误做点什么
     if (error.response) {
       switch (error.response.status) {

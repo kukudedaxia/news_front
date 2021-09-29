@@ -1,6 +1,8 @@
 const message = {
   netError: 'الشبكة ضعيفة حاول مرة اخرى',
   ar: 'عربى',
+  en1: 'English',
+  ar1: 'Arabic',
   beeto: 'Beeto - عبر براحتك',
   home: 'الصفحة الرئيسية',
   lives: 'مركز صناع المحتوى',

@@ -863,6 +863,7 @@ export default {
         text-align: center;
         background-color: #ff536c;
         border-color: #ff536c;
+        min-width: 78px;
         &:active {
           background-color: #ef4c63;
           border-color: #ef4c63;
