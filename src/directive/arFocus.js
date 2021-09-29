@@ -16,11 +16,11 @@ Vue.directive('arInput', {
       let domTextArea = el.querySelector('textarea');
       domTextArea.value = checkSpecial(domTextArea.value);
     }
-    el.addEventListener('keyup', event => {
-      if (event.key == '#') {
-        event.target.value = checkSpecial(event.target.value);
-      }
-    });
+    // el.addEventListener('keyup', event => {
+    //   if (event.key == '#') {
+    //     event.target.value = checkSpecial(event.target.value);
+    //   }
+    // });
 
     // input事件触发
     el.addEventListener('input', () => {
