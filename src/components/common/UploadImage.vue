@@ -107,8 +107,7 @@ export default {
       }
       // 上传图片不能大于30M
       else if (file.size > 1024 * 1024 * 30) {
-        // ...todo  待补充文案
-        this.$message.error('This image is more than 30m');
+        this.$message.error(this.$t('publisher.imgMaxSize'));
       } else if (this.fileList.length >= 18) {
         this.$message.error(this.$t('publisher.maxImg'));
       } else {

@@ -33,7 +33,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     // 当离开发布页时，需要弹窗提醒用户手动保存草稿
     // 如果草稿数两大于等于最大保存草稿数，则不会走保存接口
-    if (this.draftNums < 9) {
+    if (this.draftNums < 10) {
       this.$refs.publisher.draftSaveNoTime();
     }
     next();

@@ -4,13 +4,13 @@
  */
 
 import tools from '@/utils/tools';
+import store from '../store';
 
 // 给输入元素(input, textarea)添加/删除右对其类
 export function editClass(dom) {
-  const lang = localStorage.getItem('lanuage');
   // 如果输入框请空，在阿语下右排列，英文下左排列
   if (dom.value === '' || tools.checkLan(dom.value) === '') {
-    if (lang === 'ar') {
+    if (store.state.lang === 'ar') {
       // dom.classList.add('pub-rtl');
       dom.classList.remove('pub-ltr');
     } else {

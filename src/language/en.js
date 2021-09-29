@@ -149,6 +149,7 @@ const message = {
     selectUser: 'Select or enter the person you want to @',
     maxImg: '18 images only',
     maxTextTips: 'Text above 10k cannot be sent and saved in draft box.',
+    imgMaxSize: 'Single image cannot be larger than 30M.',
   },
   uploadV: {
     error1: 'This video is larger than 4GB',
