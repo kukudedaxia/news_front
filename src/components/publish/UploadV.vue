@@ -31,7 +31,7 @@
           {{ $t('uploadV.expected') }} {{ transformVideoTime(quotaTime) }} ({{ speedk }})
         </p>
       </div>
-      <span class="duration" v-if="videos.status == 3">{{
+      <span class="duration" v-if="videos.status == 3 && videos.duration">{{
         transformVideoTime(videos.duration)
       }}</span>
       <div :class="['shot', { shot1: videos.status == 3 }]" v-if="videos.status != 0">
@@ -48,6 +48,7 @@
   </div>
 </template>
 <script>
+import Bus from '@/utils/bus';
 import moment from 'moment';
 import wbu from '@/utils/multi-uploader/uploader';
 export default {
@@ -79,6 +80,9 @@ export default {
   },
   mounted() {
     this.init();
+    Bus.$on('postblog', media_id => {
+      this.onClear(media_id);
+    });
   },
   destroyed() {
     this.deleteVideo();
@@ -100,24 +104,29 @@ export default {
         default: {
           source: 339644097,
           max_size: 4 * 1024 * 1024 * 1024, // 文件大小限制
-          dispatchUrl: 'https://www.weibo.com/api/i/fileplatform/dispatch', // 调度
-          batchScreenshotUrl: 'https://www.weibo.com/ajax/multimedia/output', // 后端截图
-          batchDetailUrl: 'https://www.weibo.com/ajax/multimedia/batch', // 获取视频宽高
+          dispatchUrl: '', // 调度
+          batchScreenshotUrl: '', // 后端截图
+          batchDetailUrl: '/multimedia/2/video/pc/upload/show_batch.json',
         },
         inputEle: {
           target: '#video_button_upload',
-          accept: 'video/mp4,video/x-m4v,video/*,.mkv',
+          accept: 'video/mp4,video/x-m4v,video/*,.mkv,.flv',
           area: '#drop',
         },
       });
-      this.wbUploader.on('beforeInit', () => {
+      this.wbUploader.on('beforeInit', data => {
         //...
+        if (data == 'overLength') {
+          this.$message.info(this.$t('uploadV.error0'));
+          return false;
+        }
         if (this.videos.count == 1) {
           return false;
         }
         this.wbUploader.init();
       });
       this.wbUploader.on('beforeUpload', data => {
+        console.log(data);
         //... to do在这里做一些视频大小，长度限制
         if (data.size > 1024 * 1024 * 1024 * 4) {
           this.$message.info(this.$t('uploadV.error1'));
@@ -127,8 +136,13 @@ export default {
           this.$message.error(this.$t('uploadV.error2'));
           this.wbUploader.clearFile();
           return;
-        } else if (data.detail.duration < 4) {
+        } else if (data.detail.duration < 3) {
           this.$message.error(this.$t('uploadV.error3'));
+          this.wbUploader.clearFile();
+          return;
+        } else if (!data.detail.duration) {
+          this.$message.error(this.$t('uploadV.error4'));
+          console.log('无法识别');
           this.wbUploader.clearFile();
           return;
         }
@@ -231,15 +245,17 @@ export default {
     },
 
     async deleteVideo() {
-      if (this.videos.status == 1) {
-        this.wbUploader.cancel();
-      } else {
-        this.mediaId = '';
-      }
+      try {
+        if (this.videos.status == 1) {
+          this.wbUploader.cancel();
+        } else {
+          this.wbUploader.cancel();
+          this.mediaId = '';
+        }
+        // eslint-disable-next-line no-empty
+      } catch {}
       this.wbUploader.clearFile();
-      // this.status = 0;
-      // this.count = 0;
-      console.log(111);
+      this.progress = 0;
       this.$store.commit('video/setData', {
         ...this.videos,
         status: 0,
@@ -263,8 +279,13 @@ export default {
           .catch(() => {});
         return;
       } else {
+        this.progress = 0;
         this.$emit('onClose');
       }
+    },
+    //清楚localstorage
+    onClear(media_id) {
+      this.wbUploader.updateMd5(media_id, true, true);
     },
   },
 };

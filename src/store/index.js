@@ -183,6 +183,7 @@ export default new Vuex.Store({
             ctx.state.userInfo = {
               id: res.data.user.id,
               nickname: res.data.user.nickname,
+              SUB: Cookies.get('SUB'),
             };
             Cookies.set('userInfo', JSON.stringify(ctx.state.userInfo));
             resolve(res.data);
