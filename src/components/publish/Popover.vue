@@ -15,7 +15,9 @@
       v-else-if="!searchLoading && type === 'topic' && topicList.length === 0"
       @click="createTopic"
     >
-      <p :class="tools.checkLan(text) === 'ar' ? 'pub-rtl' : 'pub-ltr'">#{{ text }}</p>
+      <p :class="['text-overflow-1', tools.checkLan(text) === 'ar' ? 'pub-rtl' : 'pub-ltr']">
+        #{{ text }}
+      </p>
       <span>
         {{ $t('publisher.topic') }}
       </span>
