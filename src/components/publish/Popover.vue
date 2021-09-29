@@ -59,6 +59,7 @@ import TopicItem from '@/components/publish/TopicItem';
 
 export default {
   props: {
+    show: Boolean,
     // 类型  topic、user
     type: {
       type: String,
@@ -87,15 +88,24 @@ export default {
   },
   watch: {
     text: {
-      async handler() {
-        if (this.type === 'user') {
+      async handler(newv) {
+        if (this.type === 'user' && newv !== '') {
           this.searchUser();
           return;
         }
-        if (this.type === 'topic') {
+        if (this.type === 'topic' && newv !== '') {
           this.searchTopic();
         }
       },
+    },
+    type(newv, oldv) {
+      if ((oldv === 'topic' || oldv === '') && newv === 'user' && this.text === '') {
+        this.searchUser();
+        return;
+      }
+      if ((oldv === 'user' || oldv === '') && newv === 'topic' && this.text === '') {
+        this.searchTopic();
+      }
     },
   },
   data() {

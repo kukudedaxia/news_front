@@ -6,7 +6,14 @@
   <div class="com-user-item flex-align">
     <img :src="item.avatar_hd" />
     <div class="info flex-align">
-      <p class="text-overflow-1">{{ item.nickname }}</p>
+      <p
+        :class="[
+          ' text-overflow-1',
+          lang === 'en' ? 'pub-ltr pub-text_left' : 'pub-rtl pub-text_right',
+        ]"
+      >
+        {{ item.nickname }}
+      </p>
       <span> @{{ item.username }} </span>
     </div>
   </div>
@@ -18,6 +25,11 @@ export default {
     item: {
       type: Object,
       default: () => {},
+    },
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
     },
   },
   data() {
@@ -47,6 +59,7 @@ export default {
     align-items: flex-start;
     justify-content: center;
     margin-left: 10px;
+    margin-right: 10px;
     flex: 1;
     & > p {
       font-family: SFUIText-Regular;
