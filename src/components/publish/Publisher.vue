@@ -615,7 +615,7 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
-        annotation: '[{ "publishSource": "PC" }]',
+        annotations: '[{ "publishSource": "PC" }]',
       };
       Object.assign(
         params,
