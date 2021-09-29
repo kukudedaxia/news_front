@@ -299,6 +299,11 @@ export default {
         this.uploadImgShow = false;
         this.uploadVideoShow = true;
       }
+      // 编辑纯文本
+      else {
+        this.uploadImgShow = false;
+        this.uploadVideoShow = false;
+      }
     });
     // 监听浏览器关闭事件
     window.onbeforeunload = () => {
