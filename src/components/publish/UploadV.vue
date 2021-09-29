@@ -84,7 +84,7 @@ export default {
       this.onClear(media_id);
     });
   },
-  destroyed() {
+  beforeDestroy() {
     this.deleteVideo();
     this.wbUploader = {};
     this.$store.commit('video/setData', {
