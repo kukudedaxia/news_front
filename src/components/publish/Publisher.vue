@@ -359,6 +359,11 @@ export default {
           break;
         }
       }
+      // 如果左侧存在文案，并且无@、#、空格时
+      if (this.popoverShow && !leftResult) {
+        this.popoverShow = false;
+        return;
+      }
       // 检索右侧
       // 如果右侧文本为空，不会进入循环，判定右侧符合条件
       if (rightStr === '') {

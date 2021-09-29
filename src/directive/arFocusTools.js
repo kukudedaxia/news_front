@@ -10,7 +10,7 @@ import store from '../store';
 export function editClass(dom) {
   // 如果输入框请空，在阿语下右排列，英文下左排列
   if (dom.value === '' || tools.checkLan(dom.value) === '') {
-    if (store.state.lang === 'ar') {
+    if (store.state.language === 'ar') {
       // dom.classList.add('pub-rtl');
       dom.classList.remove('pub-ltr');
     } else {
