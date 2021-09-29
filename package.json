@@ -33,6 +33,7 @@
     "swiper": "5.4.5",
     "typed.js": "^2.0.11",
     "uglify-es": "^3.3.9",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "utf8": "^3.0.0",
     "vant": "^2.12.27",
     "vue": "^2.6.11",
