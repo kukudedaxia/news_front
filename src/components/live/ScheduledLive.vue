@@ -66,7 +66,7 @@
         </div>
       </li>
     </ul>
-    <default class="default" v-if="liveList.length === 0"></default>
+    <default type="dark-1" class="default" v-if="liveList.length === 0"></default>
   </div>
 </template>
 

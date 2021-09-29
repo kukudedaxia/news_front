@@ -28,7 +28,9 @@ const tools = {
         res.push(d);
         const next = { type: 'normal' };
         next.indices =
-          i == arr.length - 1 ? [d.indices[1] + 1, item.text.length] : [d.indices[1] + 1, arr[i + 1].indices[0]];
+          i == arr.length - 1
+            ? [d.indices[1] + 1, item.text.length]
+            : [d.indices[1] + 1, arr[i + 1].indices[0]];
         next.text = item.text.substring(next.indices[0], next.indices[1]);
         if (next.text !== '') {
           res.push(next);
@@ -200,6 +202,32 @@ const tools = {
     return result;
   },
   /**
+   * @title 判断传入的字符串的首字母是阿语还是英语
+   * @result en 英语  ar 阿语
+   */
+  checkLan(str) {
+    str = String(str);
+    let result = '';
+    // eslint-disable-next-line no-misleading-character-class
+    let pattAr = /[\u0600-\u06FF\u0750-\u077F\u08A0—\u08FF\uFB50—\uFDFF\uFE70—\uFEFF]/;
+    // eslint-disable-next-line no-unused-vars
+    let parrEn = /[A-Za-z]/;
+    for (let i = 0; i < str.length; i++) {
+      let initials = str.charAt(i);
+      // 如果遇到英文，则返回false
+      if (parrEn.test(initials)) {
+        result = 'en';
+        break;
+      }
+      // 遇到阿语返回true
+      if (pattAr.test(initials)) {
+        result = 'ar';
+        break;
+      }
+    }
+    return result;
+  },
+  /**
    * @title 限制input只能输入数字
    * @description 若有非数字字符，则过滤
    */
@@ -323,10 +351,14 @@ const tools = {
       'q+': Math.floor((date.getMonth() + 3) / 3), //季度
       S: date.getMilliseconds(), //毫秒
     };
-    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    if (/(y+)/.test(fmt))
+      fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     for (var k in o)
       if (new RegExp('(' + k + ')').test(fmt))
-        fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length));
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
+        );
     return fmt;
   },
 

@@ -26,7 +26,11 @@ export default new Vuex.Store({
     loginType: 'normal', //facebook, google, apple, normal
     // uid: '',
     userInfo: {},
+    tab: [],
     pageLoading: false,
+  },
+  getters: {
+    video: state => state.video.attr,
   },
   mutations: {
     setLanguage(state, lang) {
@@ -52,6 +56,9 @@ export default new Vuex.Store({
     setUser(state, data) {
       state.userInfo = data;
     },
+    setTab(state, data) {
+      state.tab = data;
+    },
     setPageLoading() {},
   },
   actions: {
@@ -68,6 +75,7 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-empty-pattern
     send(ctx, obj) {
       const param = { uicode: ctx.state.uicode, luicode: ctx.state.luicode, ...obj };
+
       sendReport(param, {
         onSuccess: () => {
           // console.log(res, 'res');
@@ -77,6 +85,12 @@ export default new Vuex.Store({
         },
         onComplete: () => {
           // console.log('完成');
+        },
+        onNetworkError: () => {
+          if (param.scene == 'upload_video' && param.retry > 1) {
+            obj.retry -= 1;
+            ctx.dispatch('send', obj);
+          }
         },
       });
     },
@@ -100,7 +114,6 @@ export default new Vuex.Store({
         method: 'get',
         headers: {
           'content-type': 'application/json',
-          auth_uid: 1000003338,
         },
       };
       let reqConf = Object.assign({}, req, payload.req);
@@ -112,20 +125,32 @@ export default new Vuex.Store({
       payload.onFail = payload.onFail || emptyFunc;
       payload.onComplete = payload.onComplete || emptyFunc;
       payload.onError = payload.onError || emptyFunc;
-
       request(reqConf)
         .then(res => {
-          if (res && res.data && (res.data.error_code === 10000 || res.data.error === 'success')) {
-            payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
-          } else {
-            payload.onFail && payload.onFail(res.data, reqConf, res);
+          try {
+            if (
+              res &&
+              res.data &&
+              (res.data.error_code === 10000 || res.data.error === 'success')
+            ) {
+              payload.onSuccess && payload.onSuccess(res.data, reqConf, res);
+            } else {
+              payload.onFail && payload.onFail(res.data, reqConf, res);
+              if (res.data.error_code == 50001) {
+                window.location.href = window.location.origin;
+              }
+            }
+            payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
+          } catch (err) {
+            console.log(err);
           }
-          payload.onComplete && payload.onComplete(null, res.data, reqConf, res);
         })
         .catch(err => {
           if (!navigator.onLine) {
             payload.onNetworkError && payload.onNetworkError(err, reqConf);
-            Message.error(i18n.t('netError'));
+            if (reqConf.url !== 'api/log/m?enc=0') {
+              Message.error(i18n.t('netError'));
+            }
             payload.onComplete && payload.onComplete();
           } else {
             if (err == 'Internal Server Error') {
@@ -158,6 +183,7 @@ export default new Vuex.Store({
             ctx.state.userInfo = {
               id: res.data.user.id,
               nickname: res.data.user.nickname,
+              SUB: Cookies.get('SUB'),
             };
             Cookies.set('userInfo', JSON.stringify(ctx.state.userInfo));
             resolve(res.data);
@@ -168,6 +194,36 @@ export default new Vuex.Store({
           onComplete: () => {},
           onError: () => {
             resolve(false);
+          },
+        });
+      });
+    },
+    // 获取权限
+    async getTab(ctx) {
+      return new Promise((rs, rj) => {
+        ctx.dispatch('ajax', {
+          req: {
+            method: 'get',
+            url: `api/pc/login/tab/display`,
+          },
+          onSuccess: res => {
+            let arr = [];
+            for (let key in res.data.allTab) {
+              let obj = {};
+              obj.key = key;
+              obj.name = res.data.allTab[key];
+              obj.show = res.data.tab[key];
+              arr.push(obj);
+            }
+            arr.sort((a, b) => {
+              return b.key - a.key;
+            });
+            Cookies.set('tabs', JSON.stringify(arr));
+            rs(arr);
+          },
+          onFail: res => {
+            console.log(res);
+            rj();
           },
         });
       });

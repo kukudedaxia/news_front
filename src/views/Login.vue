@@ -66,7 +66,7 @@
           <el-divider
             ><span class="continue">{{ $t('login.continue') }}</span></el-divider
           >
-          <ThirdLogin v-if="activeName == 'phone'" />
+          <ThirdLogin v-show="activeName == 'phone'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
             <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
@@ -146,7 +146,7 @@
           <el-divider
             ><span class="continue">{{ $t('login.continue') }}</span></el-divider
           >
-          <ThirdLogin v-if="activeName == 'account'" />
+          <ThirdLogin v-show="activeName == 'account'" />
           <p class="info" v-if="lang == 'en'">
             I've read and agreed to the <br />
             <a href="/terms" target="_blank">Terms of Use</a>,<a href="/community" target="_blank"
@@ -267,7 +267,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: '/api/web/country/list',
+          url: '/api/web/country/list/',
         },
         onSuccess: res => {
           this.areaList = res.data;
@@ -352,8 +352,9 @@ export default {
             Cookies.set('SUB', res.data.gsid);
           }
           await this.$store.dispatch('getUser', uid);
+          await this.$store.dispatch('getTab', uid);
           this.$store.commit('setLoginType', 'normal');
-          this.$router.push({ path: 'live' });
+          this.$router.push({ path: '/publisher' });
         },
         onFail: res => {
           if (res.error_code == 30070 || res.error_code == 30071) {
@@ -389,6 +390,31 @@ export default {
       console.log(rsaPassWord, 'rsa');
       return rsaPassWord;
     },
+    // getTab() {
+    //   this.$store.dispatch('ajax', {
+    //     req: {
+    //       method: 'get',
+    //       url: `api/pc/login/tab/display`,
+    //     },
+    //     onSuccess: res => {
+    //       let arr = [];
+    //       for (let key in res.data.allTab) {
+    //         let obj = {};
+    //         obj.key = key;
+    //         obj.name = res.data.allTab[key];
+    //         obj.show = res.data.tab[key];
+    //         arr.push(obj);
+    //       }
+    //       arr.sort((a, b) => {
+    //         return b.key - a.key;
+    //       });
+    //       Cookies.set('tabs', JSON.stringify(arr));
+    //     },
+    //     onFail: res => {
+    //       console.log(res);
+    //     },
+    //   });
+    // },
   },
 };
 </script>
