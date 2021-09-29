@@ -267,7 +267,7 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',
-          url: '/api/web/country/list',
+          url: '/api/web/country/list/',
         },
         onSuccess: res => {
           this.areaList = res.data;

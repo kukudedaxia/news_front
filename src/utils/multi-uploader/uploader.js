@@ -133,12 +133,17 @@ class wbUploader {
       ele.addEventListener(
         'drop',
         e => {
-          console.log(e);
-          const file = e.dataTransfer.files[0];
-          const reg = new RegExp(
-            /^video\/(mp4|flv|avi|wmv|mov|webm|mpeg4|ts|mpg|rm|rmvb|mkv|m4v)$/,
-          );
           e.preventDefault();
+          const file = e.dataTransfer.files[0];
+          var fileList = Array.from(e.dataTransfer.files);
+          if (fileList.length > 1) {
+            this.emit('beforeInit', 'overLength');
+            return false;
+          }
+          const reg = new RegExp(
+            /^video\/(mp4|.*?\bflv|avi|.*?\bwmv|mov|webm|mpeg4|ts|mpg|rm|rmvb|mkv|m4v|x-msvideo|.*?)$/,
+          );
+
           if (reg.test(file.type)) {
             this.addFiles({
               target: e.dataTransfer,
@@ -164,7 +169,8 @@ class wbUploader {
       max_size: 15 * 1024 * 1024 * 1024,
       dispatchUrl: 'https://www.weibo.com/ajax/multimedia/dispatch',
       batchScreenshotUrl: 'https://www.weibo.com/ajax/multimedia/output',
-      batchDetailUrl: 'https://www.weibo.com/ajax/multimedia/batch',
+      // batchDetailUrl: 'https://www.weibo.com/ajax/multimedia/batch',
+      batchDetailUrl: '/multimedia/2/video/pc/upload/batch.json',
       autoLog: true,
     },
     urls: {
@@ -267,7 +273,7 @@ class wbUploader {
   }
   async clearFile() {
     this.currFile = {};
-    console.log(22)
+    console.log(22);
     this.fileList.splice(0, 1);
     this.successIndex = [];
   }
@@ -298,32 +304,38 @@ class wbUploader {
             if (item.publish !== undefined) {
               let checkRes = await this.checkFileMd5(item.initRes, file, true);
               console.log(checkRes, '=============checkRes============');
-              if (checkRes.result) {
-                const res = await this.batchDetailsSync({ ids: item.initRes.media_id });
+              if (checkRes.data.result) {
+                // const res = await this.batchDetailsSync({ ids: item.initRes.media_id });
                 if (
-                  (res && res.request_id && Object.keys(res).length !== 1) ||
-                  (checkRes.received &&
-                    this.options.strategy.chunk_size * 1024 * checkRes.received.length < file.size)
+                  checkRes.data.received &&
+                  this.options.strategy.chunk_size * 1024 * checkRes.data.received.length <
+                    file.size
                 ) {
-                  this.successIndex = this.successIndex.concat(...checkRes.received);
+                  this.successIndex = this.successIndex.concat(...checkRes.data.received);
                   file.initRes = item.initRes;
-                  checkRes.received && (file.received = checkRes.received);
+                  checkRes.data.received && (file.received = checkRes.data.received);
                   file.initRes = item.initRes;
                   this.options.strategy = item.initRes.strategy;
                   const fileSize = file.size;
                   const chunkSize = this.options.strategy.chunk_size * 1024;
                   const chunkCount = Math.ceil(fileSize / chunkSize);
-                  if (checkRes.received[checkRes.received.length - 1] === chunkCount - 1) {
+                  if (
+                    checkRes.data.received[checkRes.data.received.length - 1] ===
+                    chunkCount - 1
+                  ) {
                     let pro =
-                      this.options.strategy.chunk_size * 1024 * (checkRes.received.length - 1) +
+                      this.options.strategy.chunk_size *
+                        1024 *
+                        (checkRes.data.received.length - 1) +
                       (fileSize - this.options.strategy.chunk_size * 1024 * (chunkCount - 1));
                     this.currFile.progress = [pro];
                   } else {
                     this.currFile.progress = [
-                      this.options.strategy.chunk_size * 1024 * checkRes.received.length,
+                      this.options.strategy.chunk_size * 1024 * checkRes.data.received.length,
                     ];
                   }
-                  this.needFontEndScreenshot = false; // ?
+                  this.needFontEndScreenshot = false;
+                  file.detail = await getVideoInfo(file);
                   this.emit('beforeUpload', file);
                   return;
                 }
@@ -332,7 +344,7 @@ class wbUploader {
           }
         }
       } catch (e) {
-        wbUploader = {};
+        // wbUploader = {};
         console.log(e);
       }
     }
@@ -841,6 +853,7 @@ class wbUploader {
           item.publish = false;
           k = key;
           wbUploader[k].isUpload = !isCancel;
+          console.log(isCancel, '22222');
           if (isDelete) {
             delete wbUploader[k];
           }
@@ -999,7 +1012,7 @@ class wbUploader {
       is_cancel: true,
     });
     this.currFile = {};
-    console.log(this.currFile)
+    console.log(this.currFile);
     this.fileList.splice(0, 1);
     this.successIndex = [];
     this.emit('error', 'cancel');
@@ -1083,6 +1096,7 @@ class wbUploader {
     });
     let checkRes = await this.checkFileMd5(this.currFile.initRes, this.currFile, true);
     this.updateMd5(this.currFile.initRes.media_id, false); //更新md5
+
     if (checkRes.result) {
       // file.initRes = item.initRes;
       checkRes.received && (this.currFile.received = checkRes.received);
@@ -1178,11 +1192,13 @@ const NetErrExpection = err => {
  */
 const getVideoInfo = file => {
   return new Promise(resolve => {
+    console.log(file);
     let url = URL.createObjectURL(file);
     let video = document.createElement('video');
     video.src = url;
     let load = false;
     video.onloadeddata = () => {
+      console.log(url, 'url');
       load = true;
       let info = {
         width: video.videoWidth,
