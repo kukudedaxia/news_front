@@ -257,6 +257,9 @@ export default {
       // 其余情况均不可点击
       return true;
     },
+    lang() {
+      return this.$store.state.language;
+    },
   },
   mounted() {
     // 设置textarea不检查单词拼写
@@ -481,13 +484,12 @@ export default {
        * 2. 在阿语环境下，英语的定位有问题()
        */
       // 获取环境的语言
-      const lang = localStorage.getItem('lanuage');
       const dom = this.getPopoverDom();
       // 设置弹窗的top属性，top值在任何语言环境下都是一致的
       dom.style.top = `${this.cursorCoordinate.top +
         2.5 * this.cursorCoordinate.height -
         this.textareaOffset.top}px `;
-      if (lang === 'en') {
+      if (this.lang === 'en') {
         //默认从左定位
         dom.style.right = '';
         dom.style.left = `${this.cursorCoordinate.left + 20 - this.textareaOffset.left}px`;
@@ -615,7 +617,7 @@ export default {
         text: this.textarea,
         visible: this.selectVal.id,
         media: JSON.stringify(media),
-        annotation: '[{ "publishSource": "PC" }]',
+        annotations: '[{ "publishSource": "PC" }]',
       };
       Object.assign(
         params,
