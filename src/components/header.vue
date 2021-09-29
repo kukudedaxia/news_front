@@ -33,11 +33,27 @@
           class="menu-item create"
           >{{ $t('lives') }}</router-link
         >
-        <router-link to="/" class="menu-item">{{ $t('home') }}</router-link>
+        <!-- <router-link to="/" class="menu-item">{{ $t('home') }}</router-link> -->
 
-        <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span>
+        <span
+          :class="['menu-item lang', { active: lang == 'ar' }]"
+          @click="changeLanuage"
+          title="language"
+          >{{ $t('ar1') }}</span
+        >
+        <el-divider direction="vertical"></el-divider>
+        <span
+          :class="['menu-item lang', { active: lang == 'en' }]"
+          @click="changeLanuage"
+          title="language"
+          >{{ $t('en1') }}</span
+        >
 
-        <span v-if="showMenu" class="menu-item" @click="logout">{{ $t('login.logout') }}</span>
+        <!-- <span class="lanuage" @click="changeLanuage" title="language">{{ $t(lang) }}</span> -->
+
+        <span v-if="showMenu" class="menu-item logout" @click="logout">{{
+          $t('login.logout')
+        }}</span>
       </div>
     </div>
   </div>
@@ -363,7 +379,18 @@ html[lang='ar'] .lanuage {
 .create {
   margin-right: 20px;
 }
-html[lang='ar'] .menu-item {
-  margin-left: 20px;
+.lang {
+  margin: 0 5px;
+  color: #777f8e;
+}
+.lang.active {
+  color: #333333;
+}
+.logout {
+  margin-left: 40px;
+}
+
+html[lang='ar'] .logout {
+  margin-right: 20px;
 }
 </style>

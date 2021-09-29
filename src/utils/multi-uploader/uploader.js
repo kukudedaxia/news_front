@@ -305,11 +305,11 @@ class wbUploader {
               let checkRes = await this.checkFileMd5(item.initRes, file, true);
               console.log(checkRes, '=============checkRes============');
               if (checkRes.data.result) {
-                // const res = await this.batchDetailsSync({ ids: item.initRes.media_id });
+                const res = await this.batchDetailsSync({ ids: item.initRes.media_id });
                 if (
-                  checkRes.data.received &&
-                  this.options.strategy.chunk_size * 1024 * checkRes.data.received.length <
-                    file.size
+                  (res && res.request_id && Object.keys(res).length !== 1) ||
+                  (checkRes.received &&
+                    this.options.strategy.chunk_size * 1024 * checkRes.received.length < file.size)
                 ) {
                   this.successIndex = this.successIndex.concat(...checkRes.data.received);
                   file.initRes = item.initRes;
@@ -334,7 +334,7 @@ class wbUploader {
                       this.options.strategy.chunk_size * 1024 * checkRes.data.received.length,
                     ];
                   }
-                  this.needFontEndScreenshot = false;
+                  this.needFontEndScreenshot = true;
                   file.detail = await getVideoInfo(file);
                   this.emit('beforeUpload', file);
                   return;

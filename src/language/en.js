@@ -1,6 +1,8 @@
 const message = {
   netError: 'Network error, try again',
   en: 'EN',
+  en1: 'English',
+  ar1: 'Arabic',
   beeto: 'Beeto-Express freely',
   home: 'Home',
   lives: 'Creator Center',

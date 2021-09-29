@@ -16,6 +16,7 @@
 .bottom {
   display: flex;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
 }
 .bottom-link {
   flex: 1;
