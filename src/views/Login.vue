@@ -190,7 +190,7 @@ export default {
       areaList: [],
       verifyCode: '',
       account: '',
-      password: '',
+      password: '1@@22',
       codeLoading: false,
       loginLoading: false,
       send: false, // 是否已经发送过验证码了
@@ -234,13 +234,6 @@ export default {
     },
   },
   watch: {
-    password(val) {
-      // eslint-disable-next-line no-useless-escape
-      let str = val.replace(/[^\w\.\/]/gi, '');
-      // eslint-disable-next-line no-useless-escape
-      str = str.replace(/[`~!@#$%^&*+<>{}/\'[\]]/im, '').replace(/\s+/g, '');
-      this.password = str;
-    },
     lang() {
       this.getArea();
     },

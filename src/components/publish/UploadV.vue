@@ -132,7 +132,7 @@ export default {
           this.$message.info(this.$t('uploadV.error1'));
           this.wbUploader.clearFile();
           return;
-        } else if (data.detail.duration > 60 * 60) {
+        } else if (data.detail.duration > 60 * 60 * 2) {
           this.$message.error(this.$t('uploadV.error2'));
           this.wbUploader.clearFile();
           return;
