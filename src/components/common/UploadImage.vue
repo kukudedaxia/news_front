@@ -141,7 +141,7 @@ export default {
           type: 'post',
           data: form.get('file'),
           // eslint-disable-next-line prettier/prettier
-              url: `${process.env.VUE_APP_UPLOAD_URL}/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}`,
+              url: `${process.env.VUE_APP_UPLOAD_URL}/upload.json?file_source=1&cs=${cs}&ent=alpha&appid=339644097&uid=${this.user.id}&raw_md5=${md5}&mpos=1&logo=1&nick=${this.$store.state.userInfo.username}`,
           async: true,
           contentType: 'application/x-www-form-urlencoded',
           processData: false,

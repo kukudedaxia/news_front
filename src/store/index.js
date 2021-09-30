@@ -183,6 +183,7 @@ export default new Vuex.Store({
             ctx.state.userInfo = {
               id: res.data.user.id,
               nickname: res.data.user.nickname,
+              username: res.data.user.username,
               SUB: Cookies.get('SUB'),
             };
             Cookies.set('userInfo', JSON.stringify(ctx.state.userInfo));
@@ -219,6 +220,7 @@ export default new Vuex.Store({
               return b.key - a.key;
             });
             Cookies.set('tabs', JSON.stringify(arr));
+            ctx.commit('setTab', JSON.parse(Cookies.get('tabs')));
             rs(arr);
           },
           onFail: res => {

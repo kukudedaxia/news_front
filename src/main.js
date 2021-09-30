@@ -32,12 +32,12 @@ Vue.prototype.tools = tools;
 
 setI18nLanguage(i18n.locale);
 
-// if (process.env.NODE_ENV === 'development') {
-//   document.cookie =
-//     'SUB=_2Aijyav0qurQ7DaonC0fcSpHvzEeuX30mZK4OT4L6nawzs3Wy53M7lZLLGMyvWxwVt5IxwGkZ5ARsM_H5eFItG5g-dhDg;path=/;';
+if (process.env.NODE_ENV === 'development') {
+  document.cookie =
+    'SUB=_2Ayjz5ZTUrrQvCqonC0fYSZfszkeda01HMWoEloXqnqw2s3Sz5BlKlvasGcirWw_mapttfy9hxu_w82OzzKCXXZ52;path=/;';
 
-//   Vue.config.detools = true;
-// }
+  Vue.config.detools = true;
+}
 
 new Vue({
   router,

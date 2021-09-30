@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
+import store from '../../store';
 import qs from 'qs';
 import SparkMD5 from 'spark-md5';
-import Cookies from 'js-cookie';
+
 import logs from './log';
 import { calChunkMd5, calFileMd5 } from './chunk';
 
@@ -241,8 +242,8 @@ class wbUploader {
       // 重写
       let check_url = '/multimedia/2/video/pc/upload/check.json';
       let init_url = '/multimedia/2/video/pc/upload/init.json';
-      let upload_url = 'https://test.bee.to/2/fileplatform/upload.json'; //test
-      // let upload_url = 'https://video.bee.to/2/fileplatform/upload.json'; //env
+      // let upload_url = 'https://test.bee.to/2/fileplatform/upload.json'; //test
+      let upload_url = 'https://video.bee.to/2/fileplatform/upload.json'; //env
       this.options.urls = { check_url, init_url, upload_url };
       // if (upload_urls) {
       //   const index = upload_urls.indexOf(upload_url);
@@ -963,9 +964,9 @@ class wbUploader {
       authKey: '1197330635',
     };
     // 重写
-    const user = JSON.parse(Cookies.get('userInfo'));
+    const username = store.state.userInfo.username;
     let biz_file = {
-      mediaprops: `{"action":"pre_upload","ori":0,"pri":0,"createtype":"localfile","raw_md5": '${md5}' ,"print_mark":1,"video_type":"whale","width":1920,"height":1080,"duration":8.439000129699707,"screenshot":0,"trans_version":1,"trans_config":{"whale_drawtext":"@${user.nickname}"}}`,
+      mediaprops: `{"action":"pre_upload","ori":0,"pri":0,"createtype":"localfile","raw_md5": '${md5}' ,"print_mark":1,"video_type":"whale","width":1920,"height":1080,"duration":8.439000129699707,"screenshot":0,"trans_version":1,"trans_config":{"whale_drawtext":"@${username}"}}`,
       c: 'other',
       size: file.size,
       name: file.name,

@@ -59,7 +59,7 @@ module.exports = {
           uglifyOptions: {
             compress: {
               drop_debugger: true,
-              drop_console: true, //生产环境自动删除console
+              drop_console: false, //生产环境自动删除console
             },
             warnings: false,
           },
@@ -113,10 +113,10 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'http://m.whale.weibo.com/',
+        target: 'http://bee.to/',
       },
       '/multimedia': {
-        target: 'https://test.bee.to/',
+        target: 'https://bee.to/',
       },
       '/upload': {
         // target: 'https://upimg.bee.to/',
