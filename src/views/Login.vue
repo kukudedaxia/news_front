@@ -190,7 +190,7 @@ export default {
       areaList: [],
       verifyCode: '',
       account: '',
-      password: '1@@22',
+      password: '',
       codeLoading: false,
       loginLoading: false,
       send: false, // 是否已经发送过验证码了
