@@ -123,26 +123,42 @@ export default {
         if (this.videos.count == 1) {
           return false;
         }
+        this.$store.commit('video/setData', {
+          status: 1,
+        });
         this.wbUploader.init();
       });
       this.wbUploader.on('beforeUpload', data => {
-        console.log(data);
+        console.log(data, 'berfore');
+        let detail = data.detail || {};
         //... to do在这里做一些视频大小，长度限制
         if (data.size > 1024 * 1024 * 1024 * 4) {
           this.$message.info(this.$t('uploadV.error1'));
           this.wbUploader.clearFile();
+          this.$store.commit('video/setData', {
+            status: 0,
+          });
           return;
-        } else if (data.detail.duration > 60 * 60 * 2) {
+        } else if (detail.detail.duration > 60 * 60 * 2) {
           this.$message.error(this.$t('uploadV.error2'));
           this.wbUploader.clearFile();
+          this.$store.commit('video/setData', {
+            status: 0,
+          });
           return;
-        } else if (data.detail.duration < 3) {
+        } else if (detail.detail.duration < 3) {
           this.$message.error(this.$t('uploadV.error3'));
           this.wbUploader.clearFile();
+          this.$store.commit('video/setData', {
+            status: 0,
+          });
           return;
-        } else if (!data.detail.duration) {
+        } else if (!detail.detail.duration) {
           this.$message.error(this.$t('uploadV.error4'));
           console.log('无法识别');
+          this.$store.commit('video/setData', {
+            status: 0,
+          });
           this.wbUploader.clearFile();
           return;
         }
@@ -256,6 +272,7 @@ export default {
       } catch {}
       this.wbUploader.clearFile();
       this.progress = 0;
+      this.imgSrc = '';
       this.$store.commit('video/setData', {
         ...this.videos,
         status: 0,

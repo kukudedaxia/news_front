@@ -337,7 +337,8 @@ class wbUploader {
                     ];
                   }
                   this.needFontEndScreenshot = true;
-                  file.detail = await getVideoInfo(file);
+                  file.detail = file.detail || {};
+                  file.detail.detail = await getVideoInfo(file);
                   this.emit('beforeUpload', file);
                   return;
                 }
@@ -398,8 +399,8 @@ class wbUploader {
 
       initRes.strategy.chunk_retry = 2;
       this.options.strategy = initRes.strategy;
-
-      file.detail = await getVideoInfo(file);
+      file.detail = file.detail || {};
+      file.detail.detail = await getVideoInfo(file);
       this.emit('beforeUpload', file);
     }
   }
@@ -855,7 +856,6 @@ class wbUploader {
           item.publish = false;
           k = key;
           wbUploader[k].isUpload = !isCancel;
-          console.log(isCancel, '22222');
           if (isDelete) {
             delete wbUploader[k];
           }
@@ -1100,23 +1100,23 @@ class wbUploader {
     let checkRes = await this.checkFileMd5(this.currFile.initRes, this.currFile, true);
     this.updateMd5(this.currFile.initRes.media_id, false); //更新md5
 
-    if (checkRes.result) {
+    if (checkRes.data.result) {
       // file.initRes = item.initRes;
-      checkRes.received && (this.currFile.received = checkRes.received);
+      checkRes.data.received && (this.currFile.received = checkRes.data.received);
       // file.initRes = item.initRes;
       // this.options.strategy = item.initRes.strategy;
       // 起始位置添加
       const fileSize = this.currFile.size;
       const chunkSize = this.options.strategy.chunk_size * 1024;
       const chunkCount = Math.ceil(fileSize / chunkSize);
-      if (checkRes.received[checkRes.received.length - 1] === chunkCount - 1) {
+      if (checkRes.data.received[checkRes.data.received.length - 1] === chunkCount - 1) {
         let pro =
-          this.options.strategy.chunk_size * 1024 * (checkRes.received.length - 1) +
+          this.options.strategy.chunk_size * 1024 * (checkRes.data.received.length - 1) +
           (fileSize - this.options.strategy.chunk_size * 1024 * (chunkCount - 1));
         this.currFile.progress = [pro];
       } else {
         this.currFile.progress = [
-          this.options.strategy.chunk_size * 1024 * checkRes.received.length,
+          this.options.strategy.chunk_size * 1024 * checkRes.data.received.length,
         ];
       }
 
