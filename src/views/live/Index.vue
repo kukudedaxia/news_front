@@ -731,10 +731,14 @@ export default {
       border-radius: 10px 0 0 0;
     }
   }
-  html[lang='ar'] {
-    .el-tabs__item {
-      transform: scaleX(-1) !important;
-      padding: 0 15px !important;
+}
+html[lang='ar'] {
+  .live {
+    .el-tabs__nav {
+      .el-tabs__item {
+        transform: scaleX(-1) !important;
+        padding: 0 15px !important;
+      }
     }
   }
 }
