@@ -305,14 +305,15 @@ export default {
            * @param tracks 新发布的音轨与视轨数据列表，包含新发布的 RCRemoteAudioTrack 与 RCRemoteVideoTrack 实例
            */
           async onTrackPublish(tracks) {
-            console.log('onTrackPublish', tracks);
-            // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
-            _this.room.subscribe(tracks).then(({ code }) => {
-              console.log(code);
-              if (state === 1) {
-                _this.mcuConfig();
-              }
-            });
+            if (`${_this.user.id}_pc` === tracks[0]._userId) {
+              // 按业务需求选择需要订阅资源，通过 room.subscribe 接口进行订阅
+              _this.room.subscribe(tracks).then(({ code }) => {
+                console.log(code);
+                if (state === 1) {
+                  _this.mcuConfig();
+                }
+              });
+            }
           },
           /**
            * 房间用户取消发布资源
@@ -327,15 +328,17 @@ export default {
            * @param track RCRemoteTrack 类实例
            */
           onTrackReady(track) {
-            if (track.isAudioTrack()) {
-              // 音轨不需要传递播放控件
-              track.play();
-            } else {
-              // 视轨需要一个 video 标签才可进行播放
-              const videoNode = document.querySelector('#videoNode');
-              track.play(videoNode);
-              _this.liveState = 1; // 设置为直播中
-              _this.goLiveBtnLoading = false;
+            if (`${_this.user.id}_pc` === track._userId) {
+              if (track.isAudioTrack()) {
+                // 音轨不需要传递播放控件
+                track.play();
+              } else {
+                // 视轨需要一个 video 标签才可进行播放
+                const videoNode = document.querySelector('#videoNode');
+                track.play(videoNode);
+                _this.liveState = 1; // 设置为直播中
+                _this.goLiveBtnLoading = false;
+              }
             }
           },
           /**
@@ -354,6 +357,7 @@ export default {
           },
         });
         // 如果是续播，初始化完room实例后需要订阅远端流
+        // 只订阅主播的流，如果是观众上播的流，需要从数组中过滤掉
         if (state === 2) {
           // 弹窗是因为用户无操作没法直接播放流
           this.$alert(this.$t('live.msg4'), '', {
@@ -361,9 +365,11 @@ export default {
             showClose: false,
             callback: () => {
               const remoteTracks = this.room.getRemoteTracks();
-              console.log(remoteTracks);
               if (remoteTracks.length > 0) {
-                this.room.subscribe(remoteTracks);
+                const remoteTracksArr = remoteTracks.filter(item => {
+                  return item._userId === `${_this.user.id}_pc`;
+                });
+                this.room.subscribe(remoteTracksArr);
                 this.liveState = 1; // 设置为直播中
                 if (this.startSource === 1) {
                   this.$store.commit('live/setLiving', true);
