@@ -41,6 +41,7 @@ const message = {
   },
   desc: {
     about: 'About Us',
+    news: 'Newsroom',
     concat: 'Contact Us',
     community: 'Community Guidelines',
     terms: 'Terms of Use',

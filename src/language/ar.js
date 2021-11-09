@@ -38,6 +38,7 @@ const message = {
   },
   desc: {
     about: 'حول بيتو',
+    news: 'Newsroom',
     concat: 'تواصل معنا',
     community: 'قواعد المجتمع',
     terms: 'تعليمات الاستخدام',

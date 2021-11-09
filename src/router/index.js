@@ -65,6 +65,22 @@ const routes = [
       title: 'beeto',
     },
   },
+  {
+    path: '/newsroom',
+    name: 'Newsroom',
+    component: () => import('../views/News.vue'),
+    meta: {
+      title: 'beeto',
+    },
+  },
+  {
+    path: '/newsroom/:id',
+    name: 'newsroomItem',
+    component: () => import('../views/NewsItem.vue'),
+    meta: {
+      title: 'beeto',
+    },
+  },
   // ---- 直播 ---- //
   {
     path: '/live',
