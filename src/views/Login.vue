@@ -320,6 +320,9 @@ export default {
     login() {
       // const that = this;
       this.loginLoading = true;
+      if (this.type == 1 && !this.verifyCode) {
+        return false;
+      }
       this.$store.dispatch('ajax', {
         req: {
           method: 'post',

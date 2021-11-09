@@ -27,6 +27,7 @@ export default new Vuex.Store({
     // uid: '',
     userInfo: {},
     tab: [],
+    access: false, //利雅德白名单
     pageLoading: false,
   },
   getters: {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
       state.tab = data;
     },
     setPageLoading() {},
+    setRiyadhAcess(state, data) {
+      state.access = data;
+    }
   },
   actions: {
     changeLanguage({ commit }, lang) {
@@ -221,6 +225,7 @@ export default new Vuex.Store({
             });
             Cookies.set('tabs', JSON.stringify(arr));
             ctx.commit('setTab', JSON.parse(Cookies.get('tabs')));
+            ctx.commit('setRiyadhAcess', res.data.bd);
             rs(arr);
           },
           onFail: res => {

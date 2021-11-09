@@ -34,7 +34,7 @@ setI18nLanguage(i18n.locale);
 
 if (process.env.NODE_ENV === 'development') {
   document.cookie =
-    'SUB=_2Ayjz5ZTUrrQvCqonC0fYSZfszkeda01HMWoEloXqnqw2s3Sz5BlKlvasGcirWw_mapttfy9hxu_w82OzzKCXXZ52;path=/;';
+    'SUB=_2AijzqpvturQ7DaklCUXeSJDqy0mtWH0mZK4Pj-Q9nawzs3Wy53M7lY2ZGMyvWxwVtwBMlKWDH_spGNYisUZvZU51l_pl;path=/;';
 
   Vue.config.detools = true;
 }
@@ -45,3 +45,4 @@ new Vue({
   i18n,
   render: h => h(App),
 }).$mount('#app');
+

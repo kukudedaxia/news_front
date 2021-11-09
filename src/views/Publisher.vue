@@ -8,10 +8,14 @@
     <publisher ref="publisher"></publisher>
     <!-- Feed流 - tab组件 -->
     <feed-tabs></feed-tabs>
+    <a v-if="access" :href="url"
+      >Riyadh Online</a
+    >
   </div>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import Publisher from '@/components/publish/Publisher.vue';
 import FeedTabs from '@/components/common/FeedTabs.vue';
 
@@ -23,6 +27,12 @@ export default {
   computed: {
     draftNums() {
       return this.$store.state.publisher.draftNums;
+    },
+    access() {
+      return this.$store.state.access;
+    },
+    url() {
+      return `http://m.whale.weibo.com/riyadh/blindDate?hideHeader=true&SUB=${Cookies.get('SUB')}`;
     },
   },
   data() {

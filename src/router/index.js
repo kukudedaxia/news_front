@@ -126,6 +126,7 @@ router.beforeEach(async (to, from, next) => {
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
   if (Cookies.get('userInfo')) {
+    console.log(Cookies.get('SUB'))
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     if (userInfo.SUB == Cookies.get('SUB')) {
       store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
