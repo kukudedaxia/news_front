@@ -113,7 +113,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'http://m.whale.weibo.com/',
+        target: 'http://bee.to/',
       },
       '/multimedia': {
         target: 'https://test.bee.to/',

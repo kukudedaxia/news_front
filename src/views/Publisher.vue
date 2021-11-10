@@ -32,7 +32,7 @@ export default {
       return this.$store.state.access;
     },
     url() {
-      return `http://m.whale.weibo.com/riyadh/blindDate?hideHeader=true&SUB=${Cookies.get('SUB')}`;
+      return `https://m.bee.to/riyadh/blindDate?hideHeader=true&SUB=${Cookies.get('SUB')}`;
     },
   },
   data() {
