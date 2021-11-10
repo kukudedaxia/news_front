@@ -6,13 +6,15 @@
       <div class="img" v-if="item.img">
         <img :src="item.img" />
       </div>
-      <div class="desc">{{ item.desc }}</div>
+      <div class="desc pub-rtl">
+        <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
+      </div>
       <div class="btns">
         <button class="prev btn" @click="prev" :disabled="id == 0">
-          <i class="icon prev-icon" />Previous
+          <i class="icon prev-icon" />{{ $t('previous') }}
         </button>
         <button class="next btn" @click="next" :disabled="id == list.length - 1">
-          Next<i class="icon next-icon" />
+          {{ $t('next') }}<i class="icon next-icon" />
         </button>
       </div>
     </div>
@@ -80,6 +82,9 @@ export default {
     margin-bottom: 30px;
     img {
       width: 100%;
+      border-radius: 10px;
+      max-height: 616px;
+      object-fit: cover;
     }
   }
   .desc {
@@ -89,6 +94,8 @@ export default {
     letter-spacing: -0.38px;
     text-align: justify;
     line-height: 30px;
+    white-space: pre-line;
+    word-break: break-word;
     margin-bottom: 60px;
   }
 }
@@ -182,6 +189,9 @@ html[lang='ar'] {
   .prev-icon {
     margin-left: 3px;
     margin-right: 0;
+  }
+  .con .time {
+    text-align: right;
   }
 }
 </style>

@@ -2,9 +2,11 @@
   <div class="wrap">
     <div class="item" v-for="(item, index) in list" :key="index" @click="go(item)">
       <h2 class="text-overflow-2">{{ item.title }}</h2>
-      <div class="con">
+      <div class="content">
         <div>
-          <div class="desc text-overflow-3">{{ item.desc }}</div>
+          <div class="desc text-overflow-3 pub-rtl">
+            <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
+          </div>
           <div class="time">{{ item.time }}</div>
         </div>
         <div class="img" v-if="item.img">
@@ -17,13 +19,15 @@
       background
       :page-size="10"
       layout="prev, pager, next, slot"
-      :total="list.length + 10"
+      :total="list.length"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
     >
-      <el-input type="number" v-model="jumpNum" class="custom-input"></el-input>
-      <div class="jump" @click="jump">Jump to</div>
+      <template v-if="list.length > 10">
+        <el-input type="number" v-model="jumpNum" class="custom-input"></el-input>
+        <div class="jump" @click="jump">{{$t('jump')}}</div>
+      </template>
       <!-- <input type="number" class="custom-input" /> -->
     </el-pagination>
   </div>
@@ -96,6 +100,12 @@ export default {
   color: #d3d3d3;
   border: 1px solid #d3d3d3;
 }
+html[lang='ar'] {
+  .el-pagination .btn-prev .el-icon,
+  .el-pagination .btn-next .el-icon {
+    transform: scaleX(-1);
+  }
+}
 </style>
 <style lang="less" scoped>
 .wrap {
@@ -113,7 +123,7 @@ export default {
     letter-spacing: -0.5px;
     margin-bottom: 14px;
   }
-  .con {
+  .content {
     display: flex;
   }
   .desc {
@@ -124,6 +134,9 @@ export default {
     text-align: justify;
     line-height: 30px;
     margin-bottom: 14px;
+    white-space: pre-line;
+    word-break: break-word;
+    height: 90px;
   }
   .time {
     font-family: SFUIText-Regular;
@@ -190,9 +203,9 @@ html[lang='ar'] {
     .time {
       text-align: right;
     }
-  }
-  /deep/.el-pagination .btn-prev .el-icon {
-    transform: scaleX(-1);
+    h2 {
+      text-align: right;
+    }
   }
 }
 </style>

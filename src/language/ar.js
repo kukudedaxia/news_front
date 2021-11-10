@@ -10,6 +10,7 @@ const message = {
   publish: 'مركز صناع المحتوى',
   nav_publisher: 'انشر بيته',
   nav_live: 'ابدأ البث المباشر',
+  newsroom: 'غرفة الأخبار',
   slide1: {
     beeto: 'محتوى يقدم لك كل ',
     born: 'ما هو جديد حولك على الطريقة ',
@@ -159,5 +160,8 @@ const message = {
     try: 'انقر لإعادة المحاولة',
     expected: 'الوقت المتوقع',
   },
+  next: 'التالي',
+  previous: 'السابق',
+  jump: 'انتقال إلى',
 };
 export default message;

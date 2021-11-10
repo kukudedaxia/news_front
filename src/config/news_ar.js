@@ -1,57 +1,38 @@
-const en = [
+const ar = [
   {
-      id: 0,
-    time: '02/20/2020 14:45',
-    img: 'https://img.bee-cdn.com/mw2048/3b9ae29clz1gw16lb8lgvj211u11utxc.jpg',
-    title:
-      'Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in …European Talent to Help Buid the Metaverse',
-    desc: `BEIJING - The 19th Central Committee of the Communist Party of China (CPC) started its sixth plenary session in Beijing on Monday.
-    Xi Jinping, general secretary of the CPC Central Committee, delivered a work report on behalf of the Political Bureau of the CPC Central Committee and made explanations on a draft resolution on the major achievements and historical experience of the CPC's 100 years of endeavors.
-    The plenum is scheduled to last until Thursday, according to a decision made at a meeting of the CPC Central Committee Political Bureau on Oct. 18.
-    The Political Bureau meeting also decided to submit the draft resolution to the plenum for deliberation.
-    The CPC has led all ethnic groups of the country in making remarkable achievements over the past 100 years in the history of human development, according to a statement issued after the October meeting.
-    Chinese people who had suffered subjugation and bullying since the advent of modern times had stood up. The Chinese nation is advancing toward modernization on all fronts and socialism has blazed a successful trail in the world's most populous country, the statement said.
-    It also said that China is taking strides to keep abreast with the times, and the Chinese nation is embracing a bright prospect of national rejuvenation.
-    It noted that Chinese Communists, with Mao Zedong, Deng Xiaoping, Jiang Zemin, and Hu Jintao as chief representatives, led the whole Party and people of all ethnic groups in achieving vital progress in the revolution, construction and reform, with precious experience accumulated.
-    Since the 18th CPC National Congress in 2012, the CPC Central Committee with Xi Jinping at the core has led the whole Party and people of all ethnic groups in making new notable achievements and accumulating new precious experience.
-    Socialism with Chinese characteristics has demonstrated its strong vitality. The Party, the military, and the public have become united as never before. China has further consolidated its international status. All these factors have provided the cause of national rejuvenation with more robust institutions, stronger material foundations, and a source of inspiration for taking greater initiative, the statement said.
-    Through tenacious struggle, the Party and the Chinese people have shown the world that the Chinese nation has achieved the tremendous transformation from standing up and growing prosperous to becoming strong, and that China's national rejuvenation has become a historical inevitability, the statement said.`,
+    id: 0,
+    time: '2021/10/24',
+    img: 'https://img.bee-cdn.com/large/3b9ae203lz1gwa70chtg9j20zk0k0acy.jpg',
+    title: 'فعالية Rush',
+    desc: [
+      'تزامنًا مع تدشين موسم الرياض الأضخم بعد انقطاعه في العام الماضي إذ يعود هذا العام  تحت شعار "تخيل أكثر" لتنطلق أولى فعاليات الموسم “Rush”  لمحبي الألعاب و الرياضات الإلكترونية،  في يوم الجمعة الموافق ٢٢ من أكتوبر ٢٠٢١، والتي تقام في واجهة الرياض ولأربعة أيام.',
+      'وصرح معالي رئيس مجلس إدارة الهيئة العامة للترفيه تركي ال الشيخ عن كون فعالية “Rush” أكبر فعاليات الموسم للألعاب. فيما ستقدم منصة بيتو الراعي الاستراتيجي لموسم الرياض ٢٠٢١  العديد من التذاكر الحصرية لهذه الفعالية لمستخدمي التطبيق.',
+      'وتضم فعاليات Rush  العديد من المسابقات،  والألعاب،  والبطولات لمختلف اللاعبين من مستخدمي أجهزة الكومبيوتر، والكاونسل، وحتى الهواتف المحمولة، لمختلف الألعاب منها بطولة للعبة فيفا 22، وإقامة بطولة ببجي موبايل، والتي سيتم تنظيمها بالتعاون مع الاتحاد العالمي للرياضات الإلكترونية والاتحاد السعودي للرياضات الإلكترونية، وذلك بمشاركة 16 فريقًا فريقًا من العديد من دول العالم والذين يتنافسون على جوائز مجموعها مليون ريال سعودي، فضلًا عن  معرض أزياء الشخصيات والمشاهير “كوسبلاي”.',
+      'ومن المنتظر أن تشهد الفعالية استضافة أهم رموز الألعاب الالكترونية و صناع المحتوى على مستوى المملكة العربية السعودية، وكذلك العديد من مشاهير وسائل التواصل الاجتماعي.',
+    ],
   },
   {
     id: 1,
-    time: '02/20/2020 14:45',
-    img: 'https://img.bee-cdn.com/mw2048/3b9ae29clz1gw16lb8lgvj211u11utxc.jpg',
-    title:
-      'Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in …European Talent to Help Buid the Metaverse',
-    desc: `BEIJING - The 19th Central Committee of the Communist Party of China (CPC) started its sixth plenary session in Beijing on Monday.
-    Xi Jinping, general secretary of the CPC Central Committee, delivered a work report on behalf of the Political Bureau of the CPC Central Committee and made explanations on a draft resolution on the major achievements and historical experience of the CPC's 100 years of endeavors.
-    The plenum is scheduled to last until Thursday, according to a decision made at a meeting of the CPC Central Committee Political Bureau on Oct. 18.
-    The Political Bureau meeting also decided to submit the draft resolution to the plenum for deliberation.
-    The CPC has led all ethnic groups of the country in making remarkable achievements over the past 100 years in the history of human development, according to a statement issued after the October meeting.
-    Chinese people who had suffered subjugation and bullying since the advent of modern times had stood up. The Chinese nation is advancing toward modernization on all fronts and socialism has blazed a successful trail in the world's most populous country, the statement said.
-    It also said that China is taking strides to keep abreast with the times, and the Chinese nation is embracing a bright prospect of national rejuvenation.
-    It noted that Chinese Communists, with Mao Zedong, Deng Xiaoping, Jiang Zemin, and Hu Jintao as chief representatives, led the whole Party and people of all ethnic groups in achieving vital progress in the revolution, construction and reform, with precious experience accumulated.
-    Since the 18th CPC National Congress in 2012, the CPC Central Committee with Xi Jinping at the core has led the whole Party and people of all ethnic groups in making new notable achievements and accumulating new precious experience.
-    Socialism with Chinese characteristics has demonstrated its strong vitality. The Party, the military, and the public have become united as never before. China has further consolidated its international status. All these factors have provided the cause of national rejuvenation with more robust institutions, stronger material foundations, and a source of inspiration for taking greater initiative, the statement said.
-    Through tenacious struggle, the Party and the Chinese people have shown the world that the Chinese nation has achieved the tremendous transformation from standing up and growing prosperous to becoming strong, and that China's national rejuvenation has become a historical inevitability, the statement said.`,
+    time: '2021/10/23',
+    img: 'https://img.bee-cdn.com/large/3b9ae203lz1gwa70nv0i5j20xc0o5wld.jpg',
+    title: 'مقال انطلاق موسم الرياض ',
+    desc: [
+      'بعد انقطاع طويل عن الفعاليات في جميع دول العالم. ووسط وترقبٍ وانتظار طويلين، وتحديدًا منذ أن ازدانت شوارع المملكة العربية السعودية بشعار، نعوضك عن سنتين، عادت فعاليات موسم الرياض، الأضخم في الشرق الأوسط يوم الاربعاء ٢٠ من أكتوبر ٢٠٢١، بحضور جماهري هائل يفوق ٧٥٠ الف زائر.  اذ نفدت جميع تذاكر افتتاح موسم الرياض في أقل من ساعة.',
+      ' ضمت الانطلاقة 6 مواقع لإطلاق الألعاب النارية، ومسيرة استعراضية هي الأولى من نوعها على المستوى الترفيهي إقليميًّا، إذ تضم أكثر من 1500 مؤدٍ بأزياء تنكرية، و2760 طائرة درون، إضافة إلى عروض شعبية، وحفلٍ للمغني العالمي الشهير “بيتبول”. في أجواء تعكس مدى الإقبال الكبير على فعاليات موسم الرياض.',
+      'كما تابع الملايين الانطلاقة عبر البث الحي على عدة قنواتٍ تلفزيونية و مواقع و حسابات إلكترونية. وتضمنت كلمة معالي رئيس مجلس إدارة الهيئة العامة للترفيه تركي آل الشيخ  الشكر لخادم الحرمين الشريفين الملك سلمان بن عبدالعزيز، وولي العهد، الأمير محمد بن سلمان بن عبدالعزيز على الدعم السخي و المستمر لقطاع الترفيه في المملكة العربية السعودية، قبل أن تنطلق الفعاليات وسط تجمهر وتفاعل كبيرين، للموسم الذي ينتظر أن يستمر لعدة أشهر، فيما فعلت منصة بيتو الشريك الاستراتيجي لموسم الرياض نافذة خاصة للموسم، تمكن المستخدمين من  الوصول إلـى أخبار الموسم بشكل أسهل، فضلًا عن الحصول على عدد من التذاكر الحصرية لمختلف الفعاليات والمهرجانات الخاصة بالموسم .',
+    ],
   },
   {
     id: 2,
-    time: '02/20/2020 14:45',
-    title:
-      'Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in European Talent to Help Buid the Metaverse Investing in …European Talent to Help Buid the Metaverse',
-    desc: `BEIJING - The 19th Central Committee of the Communist Party of China (CPC) started its sixth plenary session in Beijing on Monday.
-    Xi Jinping, general secretary of the CPC Central Committee, delivered a work report on behalf of the Political Bureau of the CPC Central Committee and made explanations on a draft resolution on the major achievements and historical experience of the CPC's 100 years of endeavors.
-    The plenum is scheduled to last until Thursday, according to a decision made at a meeting of the CPC Central Committee Political Bureau on Oct. 18.
-    The Political Bureau meeting also decided to submit the draft resolution to the plenum for deliberation.
-    The CPC has led all ethnic groups of the country in making remarkable achievements over the past 100 years in the history of human development, according to a statement issued after the October meeting.
-    Chinese people who had suffered subjugation and bullying since the advent of modern times had stood up. The Chinese nation is advancing toward modernization on all fronts and socialism has blazed a successful trail in the world's most populous country, the statement said.
-    It also said that China is taking strides to keep abreast with the times, and the Chinese nation is embracing a bright prospect of national rejuvenation.
-    It noted that Chinese Communists, with Mao Zedong, Deng Xiaoping, Jiang Zemin, and Hu Jintao as chief representatives, led the whole Party and people of all ethnic groups in achieving vital progress in the revolution, construction and reform, with precious experience accumulated.
-    Since the 18th CPC National Congress in 2012, the CPC Central Committee with Xi Jinping at the core has led the whole Party and people of all ethnic groups in making new notable achievements and accumulating new precious experience.
-    Socialism with Chinese characteristics has demonstrated its strong vitality. The Party, the military, and the public have become united as never before. China has further consolidated its international status. All these factors have provided the cause of national rejuvenation with more robust institutions, stronger material foundations, and a source of inspiration for taking greater initiative, the statement said.
-    Through tenacious struggle, the Party and the Chinese people have shown the world that the Chinese nation has achieved the tremendous transformation from standing up and growing prosperous to becoming strong, and that China's national rejuvenation has become a historical inevitability, the statement said.`,
+    time: '2021/10/15',
+    img: 'https://img.bee-cdn.com/large/3b9ae203lz1gwa6zolrj6j20sg0sgt9q.jpg',
+    title: 'بيتو شريكاً استراتيجياً لموسم الرياض',
+    desc: [
+      'بيتو شريكاً استراتيجياً لموسم الرياض. بدأت شركة بيتو العربية بناء دورها الاستراتجي في المجتمع العربي، بشراكة استراتيجية مع الهيئة العامة للترفية، لرعاية فعاليات موسم الرياض لعام ٢٠٢١ - ٢٠٢٢، والتي تتضمن ١٥٠ فعالية خلال الستة أشهر القادمة، في مختلف المجالات. كما ذكر معالي المستشار تركي آل الشيخ في حسابه عبر تويتر، شكره لتطبيق بيتو كونه راعي استراتيجي لموسم الرياض، متوقعاً للتطبيق نجاحاً  قوياً في الفترات القادمة.',
+      'كما يملك بيتو العديد من التذاكر لجميع فعاليات موسم الرياض والتي يسعى لمشاركتها عبر التطبيق من خلال المسابقات والعديد من الفعاليات الداخلية، مثل جمع النقاط عبر دعوة الأصدقاء للإنضمام الى تطبيق. يمكن بعد ذلك، استبدال النقاط بتذاكر لحضور الفعاليات المتاحة لديهم. كما يمكن قراءة أخر الأخبار ومشاهدة التغطيات الحصرية لفعاليات موسم الرياض عبر حساباتهم الرسمية داخل التطبيق.',
+      '“عبر براحتك” هي العبارة التي وضعها بيتو أساساً ثقافياً لتطبيقه. حيث يتطلع تطبيق بيتو لاحتلال منصة التطبيقات الأولى المفضلة في الشرق الأوسط، وذلك بنشر ثقافة التعبير الحر في المجتمعات العربية.',
+    ],
   },
 ];
 
-export default en;
+export default ar;
