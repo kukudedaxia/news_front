@@ -9,6 +9,7 @@ const message = {
   loginpage: 'log in',
   publish: 'Creator Center',
   nav_publisher: 'Post a Beet',
+  newsroom: 'Newsroom',
   nav_live: 'Start live broadcast',
   slide1: {
     beeto: 'Freshly delivered',
@@ -41,6 +42,7 @@ const message = {
   },
   desc: {
     about: 'About Us',
+    news: 'Newsroom',
     concat: 'Contact Us',
     community: 'Community Guidelines',
     terms: 'Terms of Use',
@@ -161,5 +163,8 @@ const message = {
     try: 'Click to retry',
     expected: 'Expected',
   },
+  next: 'Next',
+  previous: 'Previous',
+  jump: 'Jump to',
 };
 export default message;

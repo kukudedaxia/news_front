@@ -1,0 +1,197 @@
+<template>
+  <div class="wrap">
+    <div class="con">
+      <h2>{{ item.title }}</h2>
+      <div class="time">{{ item.time }}</div>
+      <div class="img" v-if="item.img">
+        <img :src="item.img" />
+      </div>
+      <div class="desc pub-rtl">
+        <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
+      </div>
+      <div class="btns">
+        <button class="prev btn" @click="prev" :disabled="id == 0">
+          <i class="icon prev-icon" />{{ $t('previous') }}
+        </button>
+        <button class="next btn" @click="next" :disabled="id == list.length - 1">
+          {{ $t('next') }}<i class="icon next-icon" />
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import news_ar from '@/config/news_ar';
+export default {
+  name: 'NewsItem',
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+    lang() {
+      return this.$store.state.language;
+    },
+    list() {
+      return this.lang == 'en' ? news_ar : news_ar;
+    },
+    item() {
+      return this.list.find(item => item.id == this.id);
+    },
+  },
+  methods: {
+    prev() {
+      this.$router.push({
+        name: 'newsroomItem',
+        params: {
+          id: Number(this.id) - 1,
+        },
+      });
+    },
+    next() {
+      this.$router.push({
+        name: 'newsroomItem',
+        params: {
+          id: Number(this.id) + 1,
+        },
+      });
+    },
+  },
+};
+</script>
+<style lang="less">
+.con {
+  max-width: 1100px;
+  margin: 0 auto;
+  h2 {
+    font-family: SFUIText-Bold;
+    font-size: 30px;
+    color: #333333;
+    letter-spacing: -0.62px;
+    text-align: justify;
+    margin: 40px 0 30px;
+  }
+  .time {
+    font-family: SFUIText-Regular;
+    font-size: 14px;
+    color: #939393;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  .img {
+    width: 100%;
+    margin-bottom: 30px;
+    img {
+      width: 100%;
+      border-radius: 10px;
+      max-height: 616px;
+      object-fit: cover;
+    }
+  }
+  .desc {
+    font-family: SFUIText-Regular;
+    font-size: 18px;
+    color: #666666;
+    letter-spacing: -0.38px;
+    text-align: justify;
+    line-height: 30px;
+    white-space: pre-line;
+    word-break: break-word;
+    margin-bottom: 60px;
+  }
+}
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.btn {
+  background: #ffffff;
+  border: 1px solid hsl(0, 0%, 63%);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-family: SFUIText-Regular;
+  font-size: 14px;
+  color: #939393;
+  min-width: 100px;
+  cursor: pointer;
+  margin: 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:disabled {
+  border: 1px solid #d3d3d3;
+  color: #d3d3d3;
+}
+
+.prev {
+  &:hover {
+    color: #ff536c;
+    border: 1px solid #ff536c;
+    .prev-icon {
+      background: url('../assets/images/web_newsroom_page_icon_Previous_highlight.png') no-repeat;
+    }
+  }
+}
+.prev:disabled {
+  cursor: not-allowed;
+  .prev-icon {
+    background: url('../assets/images/web_newsroom_page_icon_Previous_disabled.png') no-repeat;
+  }
+  &:hover {
+    border: 1px solid #d3d3d3;
+    color: #d3d3d3;
+  }
+}
+
+.next {
+  &:hover {
+    color: #ff536c;
+    border: 1px solid #ff536c;
+    .next-icon {
+      background: url('../assets/images/web_newsroom_page_icon_next_highlight.png') no-repeat;
+    }
+  }
+}
+.next:disabled {
+  .next-icon {
+    background: url('../assets/images/web_newsroom_page_icon_next_disabled.png') no-repeat;
+  }
+  &:hover {
+    border: 1px solid #d3d3d3;
+    color: #d3d3d3;
+  }
+}
+
+.icon {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+.prev-icon {
+  background: url('../assets/images/web_newsroom_page_icon_Previous_normal.png') no-repeat;
+  background-size: 100% 100%;
+  margin-right: 3px;
+}
+.next-icon {
+  background: url('../assets/images/web_newsroom_page_icon_next_normal.png') no-repeat;
+  background-size: 100% 100%;
+  margin-left: 3px;
+}
+html[lang='ar'] {
+  .icon {
+    transform: scaleX(-1);
+  }
+  .next-icon {
+    margin-left: 0;
+    margin-right: 3px;
+  }
+  .prev-icon {
+    margin-left: 3px;
+    margin-right: 0;
+  }
+  .con .time {
+    text-align: right;
+  }
+}
+</style>

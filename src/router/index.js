@@ -31,6 +31,7 @@ const routes = [
     component: () => import('../views/About.vue'),
     meta: {
       title: 'beeto',
+      hideMenu: true,
     },
   },
   {
@@ -39,6 +40,7 @@ const routes = [
     component: () => import('../views/Concat.vue'),
     meta: {
       title: 'beeto',
+      hideMenu: true,
     },
   },
   {
@@ -47,6 +49,7 @@ const routes = [
     component: () => import('../views/Community.vue'),
     meta: {
       title: 'beeto',
+      hideMenu: true,
     },
   },
   {
@@ -55,6 +58,7 @@ const routes = [
     component: () => import('../views/Term.vue'),
     meta: {
       title: 'beeto',
+      hideMenu: true,
     },
   },
   {
@@ -63,6 +67,25 @@ const routes = [
     component: () => import('../views/Policy.vue'),
     meta: {
       title: 'beeto',
+      hideMenu: true,
+    },
+  },
+  {
+    path: '/newsroom',
+    name: 'Newsroom',
+    component: () => import('../views/News.vue'),
+    meta: {
+      title: 'newsroom',
+      hideMenu: true,
+    },
+  },
+  {
+    path: '/newsroom/:id',
+    name: 'newsroomItem',
+    component: () => import('../views/NewsItem.vue'),
+    meta: {
+      title: 'newsroom',
+      hideMenu: true,
     },
   },
   // ---- 直播 ---- //

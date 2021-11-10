@@ -4,6 +4,7 @@
       <span class="power">{{ $t('desc.power') }}</span>
       <div class="bottom-link">
         <a href="/about" target="_blank">{{ $t('desc.about') }}</a>
+        <a href="/newsroom" target="_blank">{{ $t('desc.news') }}</a>
         <a href="/concat" target="_blank">{{ $t('desc.concat') }}</a>
         <a href="/community" target="_blank">{{ $t('desc.community') }}</a>
         <a href="/terms" target="_blank">{{ $t('desc.terms') }}</a>

@@ -93,7 +93,7 @@ export default {
       return this.$store.state.live.living;
     },
     showMenu() {
-      return Object.keys(this.user).length > 0 && this.path !== '/login' && this.path !== '/';
+      return Object.keys(this.user).length > 0 && this.path !== '/login' && this.path !== '/' && !this.$route.meta.hideMenu;
     },
   },
   watch: {
