@@ -2,6 +2,7 @@ const ar = [
   {
     id: '2022_001',
     time: '2022/01/06',
+    img: 'https://img.bee-cdn.com/webp720/3b9ae203lz1gy4238rtnyj20ku0bujz0.jpg',
     video: 'https://static.bee-cdn.com/static-resource/h5-cdn/beeto_news.mp4',
     title: 'مرت سنة !',
     desc: [

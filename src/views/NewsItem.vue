@@ -3,11 +3,11 @@
     <div class="con">
       <h2>{{ item.title }}</h2>
       <div class="time">{{ item.time }}</div>
-      <div class="img" v-if="item.img">
-        <img :src="item.img" />
-      </div>
       <div class="video" v-if="item.video">
         <video :src="item.video" controls="controls"></video>
+      </div>
+      <div class="img" v-else-if="item.img">
+        <img :src="item.img" />
       </div>
       <div class="desc pub-rtl">
         <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
