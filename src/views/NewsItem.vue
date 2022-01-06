@@ -6,14 +6,17 @@
       <div class="img" v-if="item.img">
         <img :src="item.img" />
       </div>
+      <div class="video" v-if="item.video">
+        <video :src="item.video" controls="controls"></video>
+      </div>
       <div class="desc pub-rtl">
         <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
       </div>
       <div class="btns">
-        <button class="prev btn" @click="prev" :disabled="id == 0">
+        <button class="prev btn" @click="prev" :disabled="newsId == list[0].id">
           <i class="icon prev-icon" />{{ $t('previous') }}
         </button>
-        <button class="next btn" @click="next" :disabled="id == list.length - 1">
+        <button class="next btn" @click="next" :disabled="newsId == list[list.length - 1].id">
           {{ $t('next') }}<i class="icon next-icon" />
         </button>
       </div>
@@ -25,7 +28,7 @@ import news_ar from '@/config/news_ar';
 export default {
   name: 'NewsItem',
   computed: {
-    id() {
+    newsId() {
       return this.$route.params.id;
     },
     lang() {
@@ -35,7 +38,10 @@ export default {
       return this.lang == 'en' ? news_ar : news_ar;
     },
     item() {
-      return this.list.find(item => item.id == this.id);
+      return this.list.find(item => item.id == this.newsId);
+    },
+    itemIndex() {
+      return this.list.findIndex(item => item.id == this.newsId);
     },
   },
   methods: {
@@ -43,7 +49,7 @@ export default {
       this.$router.push({
         name: 'newsroomItem',
         params: {
-          id: Number(this.id) - 1,
+          id: this.list[this.itemIndex - 1].id,
         },
       });
     },
@@ -51,7 +57,7 @@ export default {
       this.$router.push({
         name: 'newsroomItem',
         params: {
-          id: Number(this.id) + 1,
+          id: this.list[this.itemIndex + 1].id,
         },
       });
     },
@@ -85,6 +91,12 @@ export default {
       border-radius: 10px;
       max-height: 616px;
       object-fit: cover;
+    }
+  }
+  .video {
+    margin-bottom: 30px;
+    video {
+      width: 100%;
     }
   }
   .desc {
