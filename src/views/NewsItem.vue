@@ -12,6 +12,9 @@
       <div class="desc pub-rtl">
         <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
       </div>
+      <div class="video" v-if="item.video1">
+        <video :src="item.video1" controls="controls"></video>
+      </div>
       <div class="btns">
         <button class="prev btn" @click="prev" :disabled="newsId == list[0].id">
           <i class="icon prev-icon" />{{ $t('previous') }}
