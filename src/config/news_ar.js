@@ -5,6 +5,7 @@ const ar = [
     img: 'https://img.bee-cdn.com/large/3b9ae1b7lz1gycfhyhk4aj20m80jbq7d.jpg',
     video: 'https://beeto-src.oss-ap-southeast-1.aliyuncs.com/video/144233.mp4',
     video1: 'https://beeto-src.oss-ap-southeast-1.aliyuncs.com/video/144230.mp4',
+    img1: 'https://img.bee-cdn.com/large/3b9ae1b7lz1gycgkylvccj20nb0ofgp4.jpg',
     title: 'أوتوڤيل الرياض - مكان واحد يجمع الحماس والشغف!',
     desc: [
       'أوتوڤيل الرياض، كرنفال السيارات الأقوى في الشرق الأوسط. مكان يجمع بين الشغف والإثارة،  ويقدم تجارب متنوعة للزوار بطريقة تجسد جوهر المكان.',

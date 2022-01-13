@@ -4,7 +4,7 @@
       <h2>{{ item.title }}</h2>
       <div class="time">{{ item.time }}</div>
       <div class="video" v-if="item.video">
-        <video :src="item.video" controls="controls"></video>
+        <video :src="item.video" controls="controls" :poster="item.img"></video>
       </div>
       <div class="img" v-else-if="item.img">
         <img :src="item.img" />
@@ -13,7 +13,7 @@
         <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
       </div>
       <div class="video" v-if="item.video1">
-        <video :src="item.video1" controls="controls"></video>
+        <video :src="item.video1" controls="controls" :poster="item.img1"></video>
       </div>
       <div class="btns">
         <button class="prev btn" @click="prev" :disabled="newsId == list[0].id">
@@ -100,6 +100,8 @@ export default {
     margin-bottom: 30px;
     video {
       width: 100%;
+      height: 618px;
+      object-fit: cover;
     }
   }
   .desc {
