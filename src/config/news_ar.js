@@ -5,6 +5,11 @@ const ar = [
     title: 'من إسبانيا الى الرياض الكلاسيكو بعيون برتقالية',
     cover: 'https://img.bee-cdn.com/orj1080/3b9ae1b7lz1gyk6vldxfzj20zk0npe82.jpg',
     content: {
+      video_1: {
+        cover: 'https://img.bee-cdn.com/orj1080/3b9ae1b7lz1gykbzbdmdpj21h80u0hdz.jpg',
+        src:
+          'https://beeto-src.oss-ap-southeast-1.aliyuncs.com/video/spain_super_in_riyadhaoutro_cta.mp4',
+      },
       p_1:
         'أُختتمت يوم الأحد الماضي أحداث بطولة السوبر الإسباني على أرض المملكة العربية السعودية، تحديدًا في الرياض، وذلك ضمن الفعاليات العالمية التي تستضيفها المنطقة العربية والشرق الأوسط في الجانب الرياضي لتجمع عشاق الرياضة لمتابعة شغفهم و مؤازرة أنديتهم في تجربة مختلفة ومثيرة تجمع فيها كل متابع رياضي من شتى أنحاء الوطن العربي والعالم أيضاً في مكان واحد.',
       img_1: 'https://img.bee-cdn.com/orj1080/3b9ae1b7lz1gyk6s3mojhj20u013nnpd.jpg',
