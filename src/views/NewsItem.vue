@@ -3,18 +3,17 @@
     <div class="con">
       <h2>{{ item.title }}</h2>
       <div class="time">{{ item.time }}</div>
-      <div class="video" v-if="item.video">
-        <video :src="item.video" controls="controls" :poster="item.img"></video>
-      </div>
-      <div class="img" v-else-if="item.img">
-        <img :src="item.img" />
-      </div>
-      <div class="desc pub-rtl">
-        <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
-      </div>
-      <div class="video" v-if="item.video1">
-        <video :src="item.video1" controls="controls" :poster="item.img1"></video>
-      </div>
+      <template v-for="(itemc, key, index) in item.content">
+        <div class="video" v-if="key.split('_')[0] === 'video'" :key="index">
+          <video :src="itemc.src" controls="controls" :poster="itemc.cover"></video>
+        </div>
+        <div class="img" v-else-if="key.split('_')[0] === 'img'" :key="index">
+          <img :src="itemc" />
+        </div>
+        <div class="desc pub-rtl" v-else-if="key.split('_')[0] === 'p'" :key="index">
+          {{ itemc }}
+        </div>
+      </template>
       <div class="btns">
         <button class="prev btn" @click="prev" :disabled="newsId == list[0].id">
           <i class="icon prev-icon" />{{ $t('previous') }}
@@ -89,6 +88,7 @@ export default {
   .img {
     width: 100%;
     margin-bottom: 30px;
+    margin-top: 30px;
     img {
       width: 100%;
       border-radius: 10px;
@@ -98,6 +98,7 @@ export default {
   }
   .video {
     margin-bottom: 30px;
+    margin-top: 30px;
     video {
       width: 100%;
       height: 618px;
@@ -113,13 +114,14 @@ export default {
     line-height: 30px;
     white-space: pre-line;
     word-break: break-word;
-    margin-bottom: 60px;
+    // margin-bottom: 60px;
   }
 }
 .btns {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  margin-top: 30px;
 }
 .btn {
   background: #ffffff;

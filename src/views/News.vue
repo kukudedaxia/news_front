@@ -5,12 +5,14 @@
       <div class="content">
         <div>
           <div class="desc text-overflow-3 pub-rtl">
-            <div v-for="(oItem, index) in item.desc" :key="index">{{ oItem }}</div>
+            <div v-for="(oItem, key, index) in item.content" :key="index">
+              {{ key.split('_')[0] === 'p' ? oItem : '' }}
+            </div>
           </div>
           <div class="time">{{ item.time }}</div>
         </div>
-        <div class="img" v-if="item.img">
-          <img :src="item.img" />
+        <div class="img" v-if="item.cover">
+          <img :src="item.cover" />
         </div>
       </div>
     </div>
@@ -26,7 +28,7 @@
     >
       <template v-if="list.length > 10">
         <el-input type="number" v-model="jumpNum" class="custom-input"></el-input>
-        <div class="jump" @click="jump">{{$t('jump')}}</div>
+        <div class="jump" @click="jump">{{ $t('jump') }}</div>
       </template>
       <!-- <input type="number" class="custom-input" /> -->
     </el-pagination>
