@@ -157,7 +157,7 @@ const message = {
   uploadV: {
     error0: 'You cannot upload more than 1 video',
     error1: 'This video is larger than 4GB',
-    error2: 'This video is more than 60 minutes',
+    error2: 'This video is more than 120 minutes',
     error3: 'This video is less than 3 seconds',
     error4: "Sorry, your web browser doesn't support this file format.",
     try: 'Click to retry',

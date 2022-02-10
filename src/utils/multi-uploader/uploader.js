@@ -353,6 +353,7 @@ class wbUploader {
     }
     this.time.md5.start = new Date();
     let md5 = await this.handleUploadFileMd5(file, file.hash); // ?md5在哪里使用的
+    console.log(md5);
     this.time.md5.end = new Date();
     let { initParams, biz_file } = this.handleParams(file, md5);
     let { blob, contentType } = this.handleMultipartMixed(biz_file);
@@ -364,10 +365,9 @@ class wbUploader {
       blob,
       contentType,
     );
+    console.log(initRes, 'initRes');
 
     if (!initRes) return;
-
-    console.log(initRes, 'initRes');
 
     logs.updateLog({
       md5_time: (this.time.md5.end - this.time.md5.start) / 1000,
@@ -1048,6 +1048,7 @@ class wbUploader {
     const md5 = await calFileMd5(file).catch(err => {
       throw new Error(`计算视频MD5失败(${err.message})`);
     });
+    console.log(md5, 'end3');
     return md5;
   };
   events = {};
