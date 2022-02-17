@@ -46,6 +46,9 @@ export default {
       return this.list.findIndex(item => item.id == this.newsId);
     },
   },
+  mounted() {
+    document.title = this.item.title;
+  },
   methods: {
     prev() {
       this.$router.push({

@@ -5,7 +5,7 @@ const genEntry = path.resolve(__dirname, './entry.js');
 const webDir = path.resolve(__dirname, '../beeto/');
 
 // 版本号
-const webEntry = path.resolve(webDir, `entry20220215_1.js`);
+const webEntry = path.resolve(webDir, `entry20220215_3.js`);
 const hasWebEntry = fs.existsSync(webDir);
 !hasWebEntry && fs.mkdirSync(webDir);
 

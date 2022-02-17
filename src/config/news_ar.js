@@ -3,8 +3,9 @@ const ar = [
     id: '2022_010',
     time: '2022/02/15',
     title: '"و كأن العالم كله عالق في بئر"',
-    cover: 'https://img.bee-cdn.com/orj1080/3b9ae1b7lz1gzea4uo1baj20le0e9dh6.jpg',
+    cover: 'https://img.bee-cdn.com/large/3b9ae203lz1gzecff7jqej20le0e9dh6.jpg',
     content: {
+      img_1: 'https://img.bee-cdn.com/large/3b9ae203lz1gzecff7jqej20le0e9dh6.jpg',
       p_1:
         'قصة الطفل ريان التي أحزنت الناس من جميع أنحاء العالم، تخيّل طفل صغير عالق في بئر قريب من بيته وبحسب وسائل الإعلام المحلية يصل عمق البئر الى 60 مترا، إلا أنه علق عند عمق 32 مترًا. شغلت الأحداث أذهان الناس وتابعوا الأخبار أولًا بأول من خلال البث المباشر الذي عرضته وزارة الإعلام في المغرب.',
       p_2:
