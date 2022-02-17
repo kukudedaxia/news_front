@@ -1,0 +1,37 @@
+#!/usr/bin/expect
+set timeout 30
+set host 10.138.1.11
+set username root
+set password B3ett0@com!@#
+set src_file [lindex $argv 0]
+set dest_file /root/www/htdocs/apk
+spawn scp $src_file $username@$host:$dest_file
+scp /Users/lenghui/Desktop/demo.apk root@10.138.1.11:/root/www/htdocs/apk
+expect {
+ # 初次登录会询问"yes/no"，所以如果截取的是"yes/no"就 send 发送一个yes，\r是回车的意思，exp_continue表示继续
+ "(yes/no"
+  {
+    send "yes\n"
+    expect "*assword:" { send "$password\n"}
+  }
+ "*assword:"
+  {
+    send "$password\n"
+  }
+}
+expect 100%
+expect eof
+spawn ssh $username@$host
+expect {
+ "*assword:"
+  {
+    send "$password\n"
+  }
+}
+expect "#"
+send "cd /usr/local/ossutil/\r"
+expect "\r"
+send "sh upload_APK.sh\r"
+send "exit\r"
+expect eof
+interact

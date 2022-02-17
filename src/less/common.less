@@ -1,0 +1,517 @@
+html[lang='ar'] .text-right {
+  text-align: right !important;
+}
+html[lang='ar'] .text-left {
+  text-align: left !important;
+}
+
+html[lang='ar'] {
+  .el-message__icon {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  .el-message-box {
+    text-align: right;
+  }
+  .el-message-box__btns button:nth-child(2) {
+    margin-right: 10px;
+    margin-left: 0;
+  }
+}
+
+html[data-theme='dark'] .swiper-pagination-bullet {
+  background: #fff;
+}
+
+@font-face {
+  font-family: 'SFUIText-Regular';
+  src: url('../assets/fonts/SF-UI-Text-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF-UI-Text-Heavy';
+  src: url('../assets/fonts/SF-UI-Text-Heavy.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SFUIText-Bold';
+  src: url('../assets/fonts/SF-UI-Text-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SFUIText-Semibold';
+  src: url('../assets/fonts/SF-UI-Text-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SFUIText-Medium';
+  src: url('../assets/fonts/SF-UI-Text-Medium.otf') format('opentype');
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f9f9fb;
+  height: 100%;
+  //   overflow: auto;
+  //   min-width: 1068px;
+  height: 100%;
+  width: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+a,
+abbr,
+address,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+u,
+ul,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+// 适配
+// @media screen and (min-width: 1900px) and (max-width: 1920px){
+//     .slide {
+//         height: 900px;
+//     }
+// }
+@media screen and (max-width: 1440px) {
+  html {
+    zoom: 1;
+  }
+  .slide {
+    height: 735px !important;
+  }
+  #login {
+    height: 735px !important;
+  }
+  .page {
+    margin-top: inherit !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #login {
+    height: 1268px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  #login {
+    height: 924px !important;
+  }
+}
+@media screen and(min-width: 1441px) {
+  html {
+    zoom: 1;
+  }
+}
+
+// 针对文档
+.docs {
+  width: 900px;
+  text-align: left;
+  margin: 41px auto 0;
+  font-size: 18px;
+  color: #666666;
+  letter-spacing: -0.38px;
+  h1 {
+    font-family: SFUIText-Bold;
+    font-size: 30px;
+    color: #333333;
+    margin: 20px 0;
+  }
+  > p {
+    line-height: 30px;
+  }
+  li {
+    margin-bottom: 10px;
+    span {
+      margin-right: 10px;
+    }
+  }
+  .normal li::before {
+    content: '\2022';
+    box-sizing: border-box;
+    display: inline-block;
+    width: 0;
+    font-size: 18px;
+    -webkit-transform: scale(1.25);
+    -ms-transform: scale(1.25);
+    transform: scale(1.25);
+    text-align: right;
+    color: #3370ff;
+    margin-right: 18px;
+  }
+  .indent-li {
+    margin-left: 2em;
+  }
+  .normal .indent-li::before {
+    content: '\25E6';
+    box-sizing: border-box;
+    display: inline-block;
+    width: 0;
+    font-size: 20px;
+    transform: scale(1.25);
+    font-weight: 700;
+    text-align: right;
+    color: #3370ff;
+    margin-right: 18px;
+  }
+}
+
+html[lang='ar'] .flip-over {
+  transform: scaleX(-1);
+}
+
+// 部分文档支持阿语
+html[lang='ar'] .ardocs h1 {
+  text-align: right;
+}
+html[lang='ar'] .ardocs .title-2 {
+  text-align: right;
+}
+html[lang='ar'] .ardocs .bold,
+.oil {
+  text-align: right;
+}
+html[lang='ar'] .docs .oil {
+  text-align: right;
+}
+html[lang='ar'] .ardocs h2 {
+  text-align: right;
+}
+html[lang='ar'] .ardocs p {
+  text-align: right;
+}
+html[lang='ar'] .ardocs li {
+  text-align: right;
+}
+html[lang='ar'] .ardocs li span {
+  margin-left: 10px;
+  margin-right: 0;
+}
+html[lang='ar'] .ardocs li::before {
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+html[lang='ar'] .el-tabs__nav {
+  direction: ltr;
+}
+
+html[lang='ar'] {
+  .text-right {
+    text-align: right;
+  }
+}
+
+.pub-rtl {
+  direction: rtl;
+}
+.pub-ltr {
+  direction: ltr;
+}
+.pub-text_right {
+  text-align: right !important;
+}
+.pub-text_left {
+  text-align: left !important;
+}
+
+/** 通用的 Mssagebox弹窗，无title **/
+.el-message-box {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 56px 40px 30px 40px !important;
+  border-radius: 6px;
+  width: 380px;
+  .el-message-box__header {
+    display: none;
+  }
+  .el-message-box__content {
+    padding: 0 !important;
+    padding-bottom: 46px !important;
+    font-family: SFUIText-Regular;
+    font-size: 16px;
+    color: #333333;
+    letter-spacing: 0;
+    text-align: center;
+  }
+  .el-message-box__btns {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 !important;
+    .el-button {
+      width: 140px;
+      background: #f6f6f9;
+      border-color: #f6f6f9;
+      border-radius: 17px;
+      font-family: SFUIText-Medium;
+      font-size: 14px;
+      color: #333333;
+      letter-spacing: 0;
+      text-align: center;
+      height: 34px;
+    }
+    .el-button--primary {
+      background: #ff536c;
+      border-color: #ff536c;
+      color: #ffffff;
+      &:active {
+        background-color: #ef4c63;
+        border-color: #ef4c63;
+      }
+      &:disabled {
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+// 修改element - msaage
+.el-message {
+  min-width: 200px;
+  height: 36px;
+  font-family: SFUIText-Regular;
+  font-size: 14px;
+  border-radius: 18px;
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+.el-message--success {
+  background: rgba(81, 165, 252, 0.96);
+  .el-message__content {
+    color: #ffffff;
+  }
+  .el-icon-success {
+    color: #ffffff;
+    margin-right: 6px;
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: url('../assets/images/live/toast_icon_finish.png') no-repeat;
+      background-size: 15px;
+    }
+  }
+}
+
+// element - message-box
+.el-message-box {
+  max-width: 380px;
+  padding-top: 0;
+  .el-message-box__header {
+    padding: 0px;
+    padding-top: 30px;
+    .el-message-box__title {
+      color: #dddddd;
+      font-family: SFUIText-Semibold;
+      font-size: 16px;
+      letter-spacing: 0;
+      text-align: center;
+    }
+    .el-message-box__headerbtn {
+      right: 0;
+    }
+  }
+  .el-message-box__content {
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .el-message-box__btns {
+    button {
+      border-radius: 16.5px;
+    }
+    // .el-button--default {
+    //   background: #474b55;
+    //   border-color: #474b55;
+    // }
+    // .el-button--primary {
+    //   background: #e74059;
+    //   border-color: #e74059;
+    // }
+  }
+}
+
+// element - button
+.el-button.el-button--small {
+  font-family: SFUIText-Medium;
+  font-size: 14px;
+  color: #dddddd;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.el-message--warning {
+  padding: 30px 60px;
+  border-radius: 30px;
+  background: rgba(24, 24, 24, 0.84);
+}
+.el-message .el-icon-warning {
+  display: none;
+}
+.el-message--warning .el-message__content {
+  color: #fff;
+}
+// button 样式
+.be-btn--dark {
+  background: #474b55;
+  border-color: #474b55;
+  font-family: SFUIText-Medium;
+  font-size: 14px;
+  color: #dddddd;
+  &:hover {
+    background: rgba(71, 75, 85, 0.7) !important;
+    border-color: rgba(71, 75, 85, 0.7) !important;
+    color: rgba(211, 211, 211, 0.7) !important;
+  }
+  &:active,
+  &:focus {
+    background: rgba(71, 75, 85, 0.7) !important;
+    border-color: rgba(71, 75, 85, 0.7) !important;
+    color: rgba(211, 211, 211, 0.7) !important;
+  }
+}
+.be-btn--dark.is-disabled,
+.be-btn--dark.is-disabled:hover {
+  background: rgba(71, 75, 85, 0.2) !important;
+  border: none;
+  color: rgba(102, 102, 102, 0.4) !important;
+}
+
+// 一行省略号
+.text-overflow-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 两行省略号
+.text-overflow-2 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+// 三行省略号
+.text-overflow-3 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+.flex-align {
+  display: flex;
+  align-items: center;
+}
+
+.custom_toast {
+  padding: 24px 60px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: justify;
+  line-height: 20px;
+  font-family: SFUIText-Regular;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: justify;
+  line-height: 20px;
+  background: rgba(24, 24, 24, 0.84);
+  border-radius: 34px;
+}
+
+/* 谷歌 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none; 
+    margin: 0; 
+}
+/* 火狐 */
+input{
+    -moz-appearance:textfield;
+}   
