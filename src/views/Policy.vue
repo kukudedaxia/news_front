@@ -784,4 +784,24 @@ p {
 .no-indent {
   text-indent: 0;
 }
+
+@media screen and (max-width: 760px) {
+  .docs {
+    width: 100%;
+    padding: 0 10px;
+    margin: 20px 0;
+    li {
+      font-size: 14px;
+    }
+  }
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
 </style>

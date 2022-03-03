@@ -71,6 +71,15 @@ const routes = [
     },
   },
   {
+    path: '/en/privacy',
+    name: 'Policy',
+    component: () => import('../views/Policy.vue'),
+    meta: {
+      title: 'beeto',
+      hideMenu: true,
+    },
+  },
+  {
     path: '/newsroom',
     name: 'Newsroom',
     component: () => import('../views/News.vue'),
@@ -149,7 +158,7 @@ router.beforeEach(async (to, from, next) => {
   store.commit('changeFromPage', from);
   store.commit('changeToPage', to);
   if (Cookies.get('userInfo')) {
-    console.log(Cookies.get('SUB'))
+    console.log(Cookies.get('SUB'));
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     if (userInfo.SUB == Cookies.get('SUB')) {
       store.commit('setUser', JSON.parse(Cookies.get('userInfo')));

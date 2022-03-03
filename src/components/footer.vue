@@ -58,4 +58,9 @@ html[lang='ar'] .power {
   margin-left: 200px;
   margin-right: 0;
 }
+@media screen and (max-width: 760px) {
+  .bottom-info .power {
+    display: none;
+  }
+}
 </style>
