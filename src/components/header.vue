@@ -136,7 +136,6 @@ export default {
         })
           .then(() => {
             this.logout();
-            window.localStorage.removeItem('wbUploader');
           })
           .catch(() => {});
       }
@@ -193,6 +192,7 @@ export default {
           if (this.loginType == 'facebook') {
             this.signOutFaceBook();
           }
+          window.localStorage.removeItem('wbUploader');
           window.location.href = window.location.origin;
           // this.$router.push('/');
         },
