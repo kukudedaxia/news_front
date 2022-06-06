@@ -428,17 +428,17 @@ export default {
   }
   .el-tabs__item {
     font-size: 20px;
-    font-family: 'SF-UI-Text-Regular';
+    color: var(--color-14);
   }
   .el-tabs__active-bar {
     bottom: -15px;
     height: 3px;
-    background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+    background: var(--color-1);
     border-radius: 2px;
   }
   .el-tabs__item.is-active {
     font-family: 'SFUIText-Bold';
-    color: '#FF536C';
+    color: var(--color-16);
   }
   .el-tabs__nav-wrap::after {
     display: none;
@@ -483,7 +483,7 @@ export default {
     background-color: #eeeeee;
   }
   .el-divider--horizontal {
-    margin: 38px 0;
+    margin: 48px 0 28px 0;
   }
   .el-divider__text {
     color: #777f8e;
@@ -535,17 +535,27 @@ html[lang='ar'] #login .el-tabs__nav {
   align-items: center;
 }
 .el-select-dropdown__item {
-  color: #333;
-  font-family: SFUIText-Medium;
+  color: var(--color-16);
+  padding: 0 10px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+.el-select-dropdown__list {
+  padding: 0 10px;
 }
 .el-select-dropdown__item.selected {
-  color: #ff563c;
+  background: var(--color-1);
+  border-radius: 8px;
+  font-weight: normal;
+  color: var(--color-16);
 }
 </style>
 
 <style lang="less" scoped>
 #login {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat;
   background-size: 100% 100%;
   margin-top: -80px;
   height: 980px;
@@ -590,6 +600,9 @@ html[lang='ar'] .tabs {
     text-decoration: none;
     font-family: SFUIText-Medium;
   }
+}
+.con {
+  margin-bottom: 30px;
 }
 .send {
   cursor: pointer;

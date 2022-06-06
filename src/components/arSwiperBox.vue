@@ -110,19 +110,24 @@ export default {
 }
 .custom-prev,
 .custom-next {
-  color: #fff;
   outline: none;
-  opacity: 0.6;
+  width: 60px;
+  height: 60px;
 }
 .custom-prev::after,
 .custom-next::after {
   font-size: 30px;
+  display: none;
 }
 .custom-prev {
   left: calc((100% - 1068px) / 2 - 30px);
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye38rgjhj20e80e0aa0.jpg');
+  background-size: 100% 100%;
 }
 .custom-next {
   right: calc((100% - 1068px) / 2 - 30px);
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye4mbdtwj20e80e03yg.jpg');
+  background-size: 100% 100%;
 }
 // 背景
 .slide-bg-1 {

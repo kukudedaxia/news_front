@@ -283,7 +283,8 @@ html[lang='ar'] .el-message-box__headerbtn {
     }
     .el-tabs__active-bar {
       height: 3px;
-      background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+      // background-image: linear-gradient(90deg, #ff9e39 1%, #ff536c 100%);
+      background: var(--color-1);
       border-radius: 2px;
     }
 

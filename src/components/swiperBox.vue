@@ -112,23 +112,31 @@ export default {
 }
 .custom-prev,
 .custom-next {
-  color: #fff;
+  // color: #fff;
+  width: 60px;
+  height: 60px;
   outline: none;
-  opacity: 0.6;
+  // opacity: 0.6;
 }
 .custom-prev::after,
 .custom-next::after {
   font-size: 30px;
+  display: none;
 }
 .custom-prev {
   left: calc((100% - 1068px) / 2 - 30px);
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye38rgjhj20e80e0aa0.jpg');
+  background-size: 100% 100%;
 }
 .custom-next {
   right: calc((100% - 1068px) / 2 - 30px);
+
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye4mbdtwj20e80e03yg.jpg');
+  background-size: 100% 100%;
 }
 // 背景
 .slide-bg-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju7k2bhbj21hc0oo7pk.jpg') no-repeat; //webp720
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat; //webp720
   background-size: 100% 100%;
 }
 .slide-bg-2 {

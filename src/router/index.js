@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import store from '../store';
 import Cookies from 'js-cookie';
 import { loadLanguageAsync } from '../utils/i18n';
+import { initTheme } from '@/utils/theme';
 
 Vue.use(VueRouter);
 
@@ -146,6 +147,12 @@ router.beforeEach(async (to, from, next) => {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 
+  if (localStorage.getItem('theme')) {
+    const theme = localStorage.getItem('theme');
+    await initTheme(theme);
+  } else {
+    await initTheme('light');
+  }
   // 持续保持语言
   if (localStorage.getItem('lanuage')) {
     const lang = localStorage.getItem('lanuage');
