@@ -41,7 +41,7 @@
           title="language"
           >{{ $t('ar1') }}</span
         >
-        <el-divider direction="vertical"></el-divider>
+        <el-divider direction="vertical" class="devider"></el-divider>
         <span
           :class="['menu-item lang', { active: lang == 'en' }]"
           @click="changeLanuage"
@@ -267,7 +267,7 @@ html[lang='ar'] .el-message-box__headerbtn {
       // height: 1px;
     }
     .el-tabs__item {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 18px;
       color: #333333;
       height: 78px;
@@ -278,7 +278,7 @@ html[lang='ar'] .el-message-box__headerbtn {
       color: rgba(221, 221, 221, 0.2);
     }
     .el-tabs__item.is-active {
-      font-family: SFUIText-Bold;
+      font-family: Tahoma-Bold;
       color: #ff536c;
     }
     .el-tabs__active-bar {
@@ -335,16 +335,16 @@ html[lang='ar'] {
   height: 78px;
 }
 .header-icon {
-  width: 110px;
-  height: 33px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
 }
 .ar-logo-icon {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm2z2o377j209602rt8m.jpg') no-repeat;
+  background: url('http://localhost:8080/dev-assets/img/logo.39a47231.png') no-repeat;
   background-size: 100% 100%;
 }
 .logo-icon {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmm2xst0yhj209602r0sn.jpg') no-repeat;
+  background: url('http://localhost:8080/dev-assets/img/logo.39a47231.png') no-repeat;
   background-size: 100% 100%;
 }
 
@@ -404,5 +404,8 @@ html[lang='ar'] .logout {
 html[lang='ar'] .create {
   margin-left: 20px;
   margin-right: 0;
+}
+.devider {
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 </style>

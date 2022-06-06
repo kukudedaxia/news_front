@@ -769,7 +769,7 @@ export default {
 h2 {
   font-size: 20px;
   margin: 10px 0;
-  font-family: SFUIText-Bold;
+  font-family: Tahoma-Bold;
   color: #333333;
 }
 .bold {

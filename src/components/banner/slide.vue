@@ -159,7 +159,7 @@ export default {
 }
 
 .page-info {
-  font-family: SFUIText-Regular;
+  font-family: Tahoma;
   font-size: 14px;
   color: #333333;
   letter-spacing: 0;

@@ -40,7 +40,7 @@ export default {
     isEmpty: { type: Boolean, default: false },
     color: {
       type: String,
-      default: '#FF536C',
+      default: '#FFDC10',
     },
   },
 };

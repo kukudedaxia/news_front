@@ -323,14 +323,14 @@ export default {
     display: block;
   }
   & > p {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 16px;
     color: #333333;
     letter-spacing: 0;
     margin-bottom: 8px;
   }
   & > span {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 12px;
     color: #b9bdc7;
   }

@@ -74,7 +74,7 @@ export default {
   max-width: 1100px;
   margin: 0 auto;
   h2 {
-    font-family: SFUIText-Bold;
+    font-family: Tahoma-Bold;
     font-size: 30px;
     color: #333333;
     letter-spacing: -0.62px;
@@ -82,7 +82,7 @@ export default {
     margin: 40px 0 30px;
   }
   .time {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 14px;
     color: #939393;
     text-align: left;
@@ -109,7 +109,7 @@ export default {
     }
   }
   .desc {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 18px;
     color: #666666;
     letter-spacing: -0.38px;
@@ -131,7 +131,7 @@ export default {
   border: 1px solid hsl(0, 0%, 63%);
   border-radius: 6px;
   padding: 8px 14px;
-  font-family: SFUIText-Regular;
+  font-family: Tahoma;
   font-size: 14px;
   color: #939393;
   min-width: 100px;
@@ -148,8 +148,8 @@ export default {
 
 .prev {
   &:hover {
-    color: #ff536c;
-    border: 1px solid #ff536c;
+    color: #ffdc10;
+    border: 1px solid #ffdc10;
     .prev-icon {
       background: url('../assets/images/web_newsroom_page_icon_Previous_highlight.png') no-repeat;
     }
@@ -168,8 +168,8 @@ export default {
 
 .next {
   &:hover {
-    color: #ff536c;
-    border: 1px solid #ff536c;
+    color: #ffdc10;
+    border: 1px solid #ffdc10;
     .next-icon {
       background: url('../assets/images/web_newsroom_page_icon_next_highlight.png') no-repeat;
     }

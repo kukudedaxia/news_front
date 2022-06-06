@@ -75,8 +75,21 @@ export default {
 </script>
 <style lang="less">
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background-color: transparent;
-  color: #ff536c;
+  background-color: #ffdc10;
+  color: #ffdc10;
+  border-radius: 50%;
+  color: #333;
+  width: 30px;
+  height: 30px;
+  line-height: 31px;
+  margin: 0 10px;
+}
+.el-pager {
+  display: flex;
+  align-items: center;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #333333;
 }
 .el-pagination.is-background .el-pager li {
   background-color: transparent;
@@ -93,8 +106,8 @@ export default {
   width: 34px;
   height: 34px;
   &:hover {
-    border: 1px solid #ff536c;
-    color: #ff536c;
+    border: 1px solid #ffdc10;
+    color: #ffdc10;
   }
 }
 .el-pagination.is-background .btn-prev:disabled,
@@ -119,7 +132,7 @@ html[lang='ar'] {
   margin-top: 40px;
   cursor: pointer;
   h2 {
-    font-family: SFUIText-Bold;
+    font-family: Tahoma-Bold;
     font-size: 24px;
     color: #333333;
     letter-spacing: -0.5px;
@@ -129,7 +142,7 @@ html[lang='ar'] {
     display: flex;
   }
   .desc {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 18px;
     color: #666666;
     letter-spacing: -0.38px;
@@ -141,7 +154,7 @@ html[lang='ar'] {
     height: 90px;
   }
   .time {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 14px;
     color: #939393;
   }
@@ -170,10 +183,10 @@ html[lang='ar'] {
   overflow: hidden;
 
   &:focus {
-    border: 1px solid #ff536c;
+    border: 1px solid #ffdc10;
   }
   &:hover {
-    border: 1px solid #ff536c;
+    border: 1px solid #ffdc10;
   }
   /deep/.el-input__inner {
     padding: 0 7px;
@@ -192,8 +205,8 @@ html[lang='ar'] {
   cursor: pointer;
   height: 34px;
   &:hover {
-    color: #ff536c;
-    border: 1px solid #ff536c;
+    color: #ffdc10;
+    border: 1px solid #ffdc10;
   }
 }
 html[lang='ar'] {

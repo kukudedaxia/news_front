@@ -707,7 +707,7 @@ export default {
       height: 1px;
     }
     .el-tabs__item {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 16px;
       color: #dddddd;
       height: 50px;
@@ -718,7 +718,7 @@ export default {
       color: rgba(221, 221, 221, 0.2);
     }
     .el-tabs__item.is-active {
-      font-family: SFUIText-Bold;
+      font-family: Tahoma-Bold;
       color: #ff536c;
     }
     .el-tabs__active-bar {

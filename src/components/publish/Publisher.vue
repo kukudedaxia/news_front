@@ -743,14 +743,14 @@ export default {
       border-color: transparent;
       resize: none;
       padding: 12px 16px;
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 16px;
       color: #333333;
       // text-align: justify;
       line-height: 20px;
 
       &::placeholder {
-        font-family: SFUIText-Regular;
+        font-family: Tahoma;
         font-size: 16px;
         color: #636363;
       }
@@ -788,7 +788,7 @@ export default {
         display: inline-block;
         position: relative;
         span {
-          font-family: SFUIText-Regular;
+          font-family: Tahoma;
           font-size: 14px;
           text-align: center;
           color: #777f8e;
@@ -884,7 +884,7 @@ export default {
     border-color: transparent;
     resize: none;
     padding: 12px 16px;
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 16px;
     color: #333333;
     text-align: justify;
@@ -908,7 +908,7 @@ export default {
   border-radius: 6px;
   .el-dropdown-menu__item {
     height: 40px;
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 16px;
     letter-spacing: 0;
   }

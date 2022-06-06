@@ -347,7 +347,7 @@ export default {
     .desc {
       display: block;
       margin-top: 6px;
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 12px;
       color: #666666;
       letter-spacing: 0;
@@ -390,7 +390,7 @@ export default {
     .upload-tips {
       display: block;
       height: 30px;
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       color: #dddddd;
       text-align: center;
       background: #202022;
@@ -487,11 +487,11 @@ html[lang='ar'] {
 .item-input {
   input {
     border-radius: 20px;
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 14px;
     color: #dddddd;
     &::placeholder {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 14px;
     }
   }

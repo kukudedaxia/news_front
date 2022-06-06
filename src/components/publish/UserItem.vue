@@ -62,7 +62,7 @@ export default {
     margin-right: 10px;
     flex: 1;
     & > p {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 16px;
       color: #333333;
       letter-spacing: 0;
@@ -72,7 +72,7 @@ export default {
       text-align: left;
     }
     & > span {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 12px;
       color: #777f8e;
       letter-spacing: 0;

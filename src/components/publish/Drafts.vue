@@ -157,7 +157,7 @@ export default {
     justify-content: space-between;
     height: 89px;
     .blog-text {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 16px;
       color: #333333;
       letter-spacing: 0;
@@ -169,12 +169,12 @@ export default {
       width: 100%;
       justify-content: space-between;
       .time {
-        font-family: SFUIText-Regular;
+        font-family: Tahoma;
         font-size: 12px;
         color: #777f8e;
       }
       .btn-del {
-        font-family: SFUIText-Regular;
+        font-family: Tahoma;
         font-size: 12px;
         color: #b9bdc7;
         letter-spacing: 0;
@@ -207,7 +207,7 @@ export default {
       background: rgba(0, 0, 0, 0.3);
       border: 0 solid rgba(0, 0, 0, 0.03);
       border-radius: 6px;
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 28px;
       color: #ffffff;
       letter-spacing: 0;

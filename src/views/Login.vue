@@ -98,12 +98,6 @@
                   @focus="errorHide"
                   type="text"
                 />
-                <!-- <img
-                src="@/assets/images/icon_clear.png"
-                class="icon icon-clear"
-                v-show="account != ''"
-                @mousedown.prevent="account = ''"
-              /> -->
               </div>
               <p class="tip_info tip_1" v-if="errorMsg && this.tip == '1'">
                 <img src="@/assets/images/icon_warn1.png" class="icon_warn" />
@@ -417,6 +411,7 @@ export default {
 <style lang="less">
 .el-tabs__item {
   color: #333333;
+  outline: none;
 }
 #login {
   .el-tabs__header {
@@ -437,7 +432,7 @@ export default {
     border-radius: 2px;
   }
   .el-tabs__item.is-active {
-    font-family: 'SFUIText-Bold';
+    font-family: 'Tahoma-Bold';
     color: var(--color-16);
   }
   .el-tabs__nav-wrap::after {
@@ -591,6 +586,19 @@ html[lang='ar'] .tabs {
 .login-btn {
   width: 100%;
   border-radius: 20px;
+  border-radius: 8px;
+  background: #f5d82f;
+  color: #333333;
+  font-weight: bold;
+  border-color: #f5d82f;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+.login-btn:disabled {
+  background: #fff4b6;
+  border-color: #fff4b6;
+  color: #999999;
 }
 .info {
   font-size: 12px;

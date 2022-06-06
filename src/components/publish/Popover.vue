@@ -204,7 +204,7 @@ export default {
   z-index: 99;
   .searching {
     padding: 20px;
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 12px;
     color: #777f8e;
     justify-content: center;
@@ -220,7 +220,7 @@ export default {
     display: flex;
     flex-direction: column;
     .top-title {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 12px;
       color: #777f8e;
       text-align: left;
@@ -241,14 +241,14 @@ export default {
       display: block;
     }
     & > p {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 16px;
       color: #333333;
       letter-spacing: 0;
       margin-bottom: 2px;
     }
     & > span {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 12px;
       color: #777f8e;
       letter-spacing: 0;
@@ -258,7 +258,7 @@ export default {
     padding: 18px 19px;
     text-align: left;
     p {
-      font-family: SFUIText-Regular;
+      font-family: Tahoma;
       font-size: 12px;
       color: #777f8e;
       letter-spacing: 0;

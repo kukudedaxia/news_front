@@ -53,7 +53,7 @@ export default {
     }
   }
   .title {
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 16px;
     color: #333333;
     letter-spacing: 0;
@@ -63,7 +63,7 @@ export default {
   }
   & > span {
     display: block;
-    font-family: SFUIText-Regular;
+    font-family: Tahoma;
     font-size: 12px;
     color: #777f8e;
     letter-spacing: 0;
