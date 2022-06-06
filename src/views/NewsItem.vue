@@ -152,6 +152,7 @@ export default {
     border: 1px solid #ffdc10;
     .prev-icon {
       background: url('../assets/images/web_newsroom_page_icon_Previous_highlight.png') no-repeat;
+      background-size: 100% 100%;
     }
   }
 }
@@ -159,6 +160,7 @@ export default {
   cursor: not-allowed;
   .prev-icon {
     background: url('../assets/images/web_newsroom_page_icon_Previous_disabled.png') no-repeat;
+    background-size: 100% 100%;
   }
   &:hover {
     border: 1px solid #d3d3d3;
@@ -172,12 +174,14 @@ export default {
     border: 1px solid #ffdc10;
     .next-icon {
       background: url('../assets/images/web_newsroom_page_icon_next_highlight.png') no-repeat;
+      background-size: 100% 100%;
     }
   }
 }
 .next:disabled {
   .next-icon {
     background: url('../assets/images/web_newsroom_page_icon_next_disabled.png') no-repeat;
+    background-size: 100% 100%;
   }
   &:hover {
     border: 1px solid #d3d3d3;
@@ -186,8 +190,8 @@ export default {
 }
 
 .icon {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
 }
 .prev-icon {
