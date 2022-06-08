@@ -6,7 +6,7 @@ import store from './store';
 import VueClipboard from 'vue-clipboard2';
 
 import ElementUI from 'element-ui';
-import './theme/element/index.css';
+import './theme/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import './less/dark.less';
@@ -33,8 +33,8 @@ Vue.prototype.tools = tools;
 setI18nLanguage(i18n.locale);
 
 if (process.env.NODE_ENV === 'development') {
-  document.cookie =
-    'SUB=_2AijwkVAKurQ7DaonC0fcS5HvzUmpXXwmZK4MtC_anawzs3Wy53M7lYbjGMyvWxwVtwwKobS5IbfPLNiDJfIsbq0_Oujz;path=/;';
+  // document.cookie =
+  //   'SUB=_2AijwkVAKurQ7DaonC0fcS5HvzUmpXXwmZK4MtC_anawzs3Wy53M7lYbjGMyvWxwVtwwKobS5IbfPLNiDJfIsbq0_Oujz;path=/;';
 
   Vue.config.detools = true;
 }

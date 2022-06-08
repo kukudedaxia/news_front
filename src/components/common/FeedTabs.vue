@@ -138,13 +138,14 @@ export default {
 .com-feed-tabs {
   width: 782px;
   margin: 20px auto;
-  background: #ffffff;
+  background: var(--color-9);
   border-radius: 6px;
   overflow: hidden;
   .el-tabs {
     /deep/.el-tabs__header {
       padding: 20px 0 0 0;
       margin-bottom: 0;
+      background: var(--color-11);
       .el-tabs__nav-wrap {
         .el-tabs__nav-scroll {
           padding-left: 40px;
@@ -158,8 +159,7 @@ export default {
         height: 40px;
         .el-tabs__active-bar {
           height: 3px;
-
-          background: var(--color-1);
+          background: linear-gradient(270deg, var(--color-18) 0%, var(--color-17) 100%);
           border-radius: 2px;
         }
         .el-tabs__item {
@@ -172,8 +172,8 @@ export default {
           line-height: 20px;
         }
         .is-active {
-          font-family: SFUIText-Semibold;
-          color: #ff536c;
+          font-weight: 700;
+          color: var(--color-16);
         }
       }
     }

@@ -730,7 +730,7 @@ export default {
 
 <style lang="less" scoped>
 .com-publisher {
-  background: #ffffff;
+  background: var(--color-9);
   border-radius: 6px;
   width: 782px;
   position: relative;
@@ -738,24 +738,21 @@ export default {
   .textarea {
     padding: 20px 20px 12px 20px;
     /deep/.el-textarea__inner {
-      background: #f6f6f9 !important;
+      background: var(--color-11) !important;
       border-radius: 6px;
       border-color: transparent;
       resize: none;
       padding: 12px 16px;
-      font-family: Tahoma;
       font-size: 16px;
-      color: #333333;
-      // text-align: justify;
-      line-height: 20px;
-
+      color: var(--color-16);
+      font-weight: 400;
+      line-height: 19px;
+      font-family: 'Tahoma';
       &::placeholder {
-        font-family: Tahoma;
-        font-size: 16px;
-        color: #636363;
+        color: var(--color-14);
       }
       &:focus {
-        border-color: #ff536c;
+        border-color: var(--color-1);
       }
     }
   }
@@ -788,7 +785,6 @@ export default {
         display: inline-block;
         position: relative;
         span {
-          font-family: Tahoma;
           font-size: 14px;
           text-align: center;
           color: #777f8e;
@@ -825,16 +821,15 @@ export default {
         margin: 0 20px;
         padding: 9px 12px 9px 8px;
         height: 34px;
-        font-family: SFUIText-Medium;
         font-size: 14px;
-        color: #777f8e;
+        color: var(--color-15);
         letter-spacing: 0;
         text-align: center;
         cursor: pointer;
         transition: 0.3s;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         &:hover {
-          border-radius: 17px;
+          border-radius: 8px;
           background: #f6f6f9;
         }
         i {
@@ -861,18 +856,19 @@ export default {
         }
       }
       .inform-box_btn {
-        font-family: SFUIText-Medium;
         font-size: 14px;
         color: #ffffff;
         letter-spacing: 0;
         text-align: center;
-        background-color: #ff536c;
-        border-color: #ff536c;
+        background-color: var(--color-1);
+        border-color: var(--color-1);
         min-width: 78px;
-        &:active {
-          background-color: #ef4c63;
-          border-color: #ef4c63;
-        }
+        color: var(--color-16);
+        border-radius: 8px;
+        // &:active {
+        //   background-color: #ef4c63;
+        //   border-color: #ef4c63;
+        // }
         &:disabled {
           opacity: 0.4;
         }
@@ -884,7 +880,6 @@ export default {
     border-color: transparent;
     resize: none;
     padding: 12px 16px;
-    font-family: Tahoma;
     font-size: 16px;
     color: #333333;
     text-align: justify;
@@ -908,7 +903,6 @@ export default {
   border-radius: 6px;
   .el-dropdown-menu__item {
     height: 40px;
-    font-family: Tahoma;
     font-size: 16px;
     letter-spacing: 0;
   }
