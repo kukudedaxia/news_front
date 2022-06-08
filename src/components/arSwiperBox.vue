@@ -13,6 +13,8 @@
     <swiper-slide class="slide slide-bg-3"><Slides index="3"/></swiper-slide>
     <swiper-slide class="slide slide-bg-4"><Slides index="4"/></swiper-slide>
     <swiper-slide class="slide slide-bg-5"> <Slides index="5"/></swiper-slide>
+    <swiper-slide class="slide slide-bg-6"> <Slides index="6"/></swiper-slide>
+    <swiper-slide class="slide slide-bg-7"> <Slides index="7"/></swiper-slide>
     <div class="swiper-button-prev custom-next" slot="button-prev"></div>
     <div class="swiper-button-next custom-prev" slot="button-next"></div>
   </swiper>
@@ -53,9 +55,9 @@ export default {
             if (this.swiper) {
               const index = this.swiper.activeIndex;
               if (index == 0) {
-                this.swiper.slideTo(5, 0);
+                this.swiper.slideTo(7, 0);
               }
-              if (index == 6) {
+              if (index == 8) {
                 this.swiper.slideTo(1, 0);
               }
               // if (index == 0) {
@@ -100,6 +102,8 @@ export default {
 <style lang="less" scoped>
 .swiper {
   width: 100%;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat; //webp720
+  background-size: 100% 100%;
 }
 .slide {
   box-sizing: border-box;
@@ -120,34 +124,22 @@ export default {
   display: none;
 }
 .custom-prev {
-  left: calc((100% - 1068px) / 2 - 30px);
+  left: calc((100% - 1330px) / 2 - 30px);
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye38rgjhj20e80e0aa0.jpg');
   background-size: 100% 100%;
 }
 .custom-next {
-  right: calc((100% - 1068px) / 2 - 30px);
+  right: calc((100% - 1330px) / 2 - 30px);
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ye4mbdtwj20e80e03yg.jpg');
   background-size: 100% 100%;
 }
+@media screen and (max-width: 1440px) {
+  .custom-next {
+    right: calc((100% - 1068px) / 2 - 30px);
+  }
+  .custom-prev {
+    left: calc((100% - 1068px) / 2 - 30px);
+  }
+}
 // 背景
-.slide-bg-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju7k2bhbj21hc0oo7pk.jpg') no-repeat; //webp720
-  background-size: 100% 100%;
-}
-.slide-bg-2 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9x4tg8j21hc0oo7wh.jpg') no-repeat;
-  background-size: 100% 100%;
-}
-.slide-bg-3 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmju9hsro1j21hc0oo1kx.jpg') no-repeat;
-  background-size: 100% 100%;
-}
-.slide-bg-4 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuc12qltj21hc0ooe3u.jpg') no-repeat;
-  background-size: 100% 100%;
-}
-.slide-bg-5 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gnahq5pdkhj21hc0u0wod.jpg') no-repeat;
-  background-size: 100% 100%;
-}
 </style>

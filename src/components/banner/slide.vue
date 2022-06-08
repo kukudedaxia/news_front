@@ -3,29 +3,29 @@
     <div class="page-left">
       <p :class="['page-title', 'text-right', `page-title-${index}`]">
         <template v-if="index == 1">
-          <span data-swiper-parallax="-100">{{ $t('slide1.beeto') }}</span>
-          <span data-swiper-parallax="-200">{{ $t('slide1.born') }}</span>
-          <span data-swiper-parallax="-300">{{ $t('slide1.for') }}</span>
+          <span data-swiper-parallax="-50">{{ $t('slide1.title') }}</span>
         </template>
         <template v-if="index == 2">
-          <span data-swiper-parallax="-100">{{ $t('slide2.borowse') }}</span>
-          <span data-swiper-parallax="-300">{{ $t('slide2.express') }}</span>
+          <span data-swiper-parallax="-50">{{ $t('slide2.title') }}</span>
         </template>
         <template v-if="index == 3">
-          <span data-swiper-parallax="-100">{{ $t('slide3.beet') }}</span>
-          <span data-swiper-parallax="-300">{{ $t('slide3.meet') }}</span>
+          <span data-swiper-parallax="-50">{{ $t('slide3.title') }}</span>
         </template>
         <template v-if="index == 4">
-          <span data-swiper-parallax="-100">{{ $t('slide4.be') }}</span>
-          <span data-swiper-parallax="-200">{{ $t('slide4.gift') }}</span>
-          <span data-swiper-parallax="-300">{{ $t('slide4.features') }}</span>
+          <span data-swiper-parallax="-50">{{ $t('slide4.title') }}</span>
         </template>
         <template v-if="index == 5">
-          <span data-swiper-parallax="-100">{{ $t('slide5.let') }}</span>
+          <span data-swiper-parallax="-50">{{ $t('slide5.title') }}</span>
+        </template>
+        <template v-if="index == 6">
+          <span data-swiper-parallax="-50">{{ $t('slide6.title') }}</span>
+        </template>
+        <template v-if="index == 7">
+          <span data-swiper-parallax="-50">{{ $t('slide7.title') }}</span>
         </template>
       </p>
       <template>
-        <p :class="['page-info', 'text-right', `page-info-${index}`]">
+        <p :class="['page-info', 'text-right', `page-info-${index}`]" data-swiper-parallax="-100">
           {{ $t(`slide${index}.info`) }}
         </p>
       </template>
@@ -121,15 +121,16 @@ export default {
 </script>
 <style lang="less">
 .page {
-  width: 900px;
+  width: 1020px;
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -67px;
+  // margin-top: -67px;
 }
 .page-left {
   // margin-right: 30px;
+  padding-left: 20px;
   flex: 1;
 }
 .page-title {
@@ -203,31 +204,60 @@ export default {
 }
 // 手机图
 .page-image {
-  width: 276px;
-  height: 530px;
+  width: 388px;
+  height: 632px;
   position: relative;
   // margin-top: 30px;
 }
 .web-phone-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvh0cp8j20n0183gs5.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzas3c1j20wv1h742w.jpg') no-repeat; //webp720
   background-size: 100% 100%;
 }
 .web-phone-2 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvyg0ryj20n0183wjr.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzr6at4j20wv1h845o.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-3 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxafp5zj20n018379m.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzxvw3nj20wv1h778p.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-4 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxmngexj20n0183dmf.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v06x41dj20wv1h8wge.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-5 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneyd8xce1j20n0183dhf.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0fq1zlj20wv1h7doa.jpg') no-repeat;
   background-size: 100% 100%;
 }
+.web-phone-6 {
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0opvzvj20wv1h8470.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.web-phone-7 {
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0x3h3yj20wv1h70wx.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+
+// .web-phone-1 {
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvh0cp8j20n0183gs5.jpg') no-repeat;
+//   background-size: 100% 100%;
+// }
+// .web-phone-2 {
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvyg0ryj20n0183wjr.jpg') no-repeat;
+//   background-size: 100% 100%;
+// }
+// .web-phone-3 {
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxafp5zj20n018379m.jpg') no-repeat;
+//   background-size: 100% 100%;
+// }
+// .web-phone-4 {
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxmngexj20n0183dmf.jpg') no-repeat;
+//   background-size: 100% 100%;
+// }
+// .web-phone-5 {
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneyd8xce1j20n0183dhf.jpg') no-repeat;
+//   background-size: 100% 100%;
+// }
 .code {
   width: 100%;
   height: 100%;
@@ -246,27 +276,47 @@ html[lang='ar'] .page-btn {
 
 html[lang='ar'] .web-phone-1 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvc1xi5j207o0epgoi.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtywxx8ljj20n0183q9c.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30wzsnwy7j20wv1h7dia.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-2 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmfbndj207o0epadu.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyy54pyoj20n0183wj8.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x035wfaj20wv1h7wji.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-3 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvz791xj207o0epada.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxkki75j20n0183dl7.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x0iivhoj20wv1h778b.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-4 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxyycdyj20n0183q9j.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x0tfzhej20wv1h741f.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-5 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneycilbekj20n0183dhk.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x212oq8j20wv1h77d2.jpg') no-repeat;
   background-size: 100% 100%;
+}
+html[lang='ar'] .web-phone-6 {
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x2gc76ej20wv1h7te2.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+html[lang='ar'] .web-phone-7 {
+  // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x2xrbanj20wv1h7n3o.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+
+@media screen and (max-width: 1440px) {
+  .page {
+    width: 900px;
+    margin-top: -67px;
+  }
+  .page-image {
+    zoom: 0.9;
+  }
 }
 </style>

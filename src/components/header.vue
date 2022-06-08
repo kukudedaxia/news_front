@@ -320,7 +320,7 @@ html[lang='ar'] {
 }
 .header {
   display: flex;
-  max-width: 1130px;
+  max-width: 1100px;
   justify-content: space-between;
   position: relative;
   // padding-top: 23px;
@@ -334,16 +334,16 @@ html[lang='ar'] {
   height: 78px;
 }
 .header-icon {
-  width: 40px;
-  height: 40px;
+  width: 150px;
+  height: 34px;
   cursor: pointer;
 }
 .ar-logo-icon {
-  background: url('http://localhost:8080/dev-assets/img/logo.39a47231.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30xh9v9elj20ci03et8k.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .logo-icon {
-  background: url('http://localhost:8080/dev-assets/img/logo.39a47231.png') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30utxzfusj20ci02rt8k.jpg') no-repeat;
   background-size: 100% 100%;
 }
 
