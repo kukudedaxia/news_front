@@ -2,29 +2,30 @@
   <div class="wrap docs" id="docs" v-if="lang == 'en'">
     <h1>Privacy policy</h1>
     <div id="policy_1">
-      <h2>Beeto Privacy Policy</h2>
+      <h2>Hektar Privacy Policy</h2>
       <p>
-        In order to effectively protect Beeto users' privacy and optimize the user experience, Beeto
-        has formulated this Privacy Policy in accordance with current privacy laws and regulations
-        and to give you control over how we use the information you provide to us. Beeto takes your
-        privacy extremely serious and has written this Privacy Policy to describe how we collect and
-        use your information, sets out details of the safeguards and measures adopted by Beeto in
-        the collection, management and protection of users' personal information and gives
-        information about the choices you can make with respect to the use of your Personal
-        Information. The Privacy Policy is applicable to all the services provided to you by Beeto,
-        whether you access the services on a computer, a mobile terminal or any other device (the
-        “Services”).
+        In order to effectively protect Hektar users' privacy and optimize the user experience,
+        Hektar has formulated this Privacy Policy in accordance with current privacy laws and
+        regulations and to give you control over how we use the information you provide to us.
+        Hektar takes your privacy extremely serious and has written this Privacy Policy to describe
+        how we collect and use your information, sets out details of the safeguards and measures
+        adopted by Hektar in the collection, management and protection of users' personal
+        information and gives information about the choices you can make with respect to the use of
+        your Personal Information. The Privacy Policy is applicable to all the services provided to
+        you by Hektar, whether you access the services on a computer, a mobile terminal or any other
+        device (the “Services”).
       </p>
     </div>
     <div id="policy_2">
       <h2>Collection of Personal Information</h2>
       <p>
-        You acknowledge and agree that when you sign up for Beeto account or use the Services, Beeto
-        will collect personal information provided by you, such as: name, email address, cell phone
-        number,your photograph,credit card or other payment information, age, location, and any
-        other information you choose to provide as well as log information (device information, IP
-        address, page visited). This includes technical and behavioural information about your use
-        of the platform and such personal information is used to allow you to obtain the Services.
+        You acknowledge and agree that when you sign up for Hektar account or use the Services,
+        Hektar will collect personal information provided by you, such as: name, email address, cell
+        phone number,your photograph,credit card or other payment information, age, location, and
+        any other information you choose to provide as well as log information (device information,
+        IP address, page visited). This includes technical and behavioural information about your
+        use of the platform and such personal information is used to allow you to obtain the
+        Services.
       </p>
     </div>
     <div id="policy_3">
@@ -83,31 +84,31 @@
         </div>
       </ul>
       <p>
-        In addition, for the purpose of optimizing users’ experience, Beeto may gather additional
-        information associated with the update of the Services, for example, when you access Beeto,
+        In addition, for the purpose of optimizing users’ experience, Hektar may gather additional
+        information associated with the update of the Services, for example, when you access Hektar,
         we collect information to allow us to understand the popularity of certain services, as well
         as the information on browser software, in order to optimize the Services.
       </p>
       <div class="bold">Personal information management</div>
       <p>
         In order to provide the Services to you and to improve and enhance the Services and our
-        products, Beeto may use your personal information provided such use:
+        products, Hektar may use your personal information provided such use:
       </p>
       <p class="no-indent">1) is required by law or regulations;</p>
       <p class="no-indent">2) is authorized by you (by your consent in clear terms);</p>
       <p class="no-indent">
-        3) complies with <a href="/terms" target="_blank">Beeto's Terms of Service</a>, and the
+        3) complies with <a href="/terms" target="_blank">Hektar's Terms of Service</a>, and the
         provisions set forth in the licensing agreement.
       </p>
       <p>
         In addition, you acknowledge and agree that to the extent permitted by current laws and
-        regulations, Beeto may use your personal information for marketing purposes, including but
+        regulations, Hektar may use your personal information for marketing purposes, including but
         not limited to presenting or providing you with the advertising and promotional materials on
-        the Beeto platform, notifying you of or recommending the Services or product information to
+        the Hektar platform, notifying you of or recommending the Services or product information to
         you, and/or any other information that might be of interest to you based on your use of the
         Services. Such advertising and promotional materials might also include the options that you
         select for Information Sharing during the authorization related activities, for example,
-        when you are adding a friend, or adding a dynamic new landmark, or using the Beeto Contacts
+        when you are adding a friend, or adding a dynamic new landmark, or using the Hektar Contacts
         Import tools.
       </p>
     </div>
@@ -115,7 +116,7 @@
       <h2>Sharing your personal information</h2>
       <p>
         We may share personal information about you with service providers which provide services to
-        us. Beeto shares personal information with cloud storage providers and content moderation
+        us. Hektar shares personal information with cloud storage providers and content moderation
         services in order to notify users about changes to our services; to provide user support; to
         personalise the content users receive and to communicate with users.
       </p>
@@ -134,21 +135,21 @@
         identify you.
       </p>
       <p>
-        Without your permission, Beeto will not disclose your personal information to any other
+        Without your permission, Hektar will not disclose your personal information to any other
         third party, except in the following circumstances:
       </p>
       <ul>
-        <li>1) Beeto has obtained the authorization from you;</li>
+        <li>1) Hektar has obtained the authorization from you;</li>
         <li>
-          2) Beeto is required to disclose your personal information when required by a legal
+          2) Hektar is required to disclose your personal information when required by a legal
           authority or regulatory entity in order to comply with a court order or legal process;
         </li>
         <li>
-          3) Beeto is involved in legal action and in order to safeguard its own legitimate rights
+          3) Hektar is involved in legal action and in order to safeguard its own legitimate rights
           and interests;
         </li>
         <li>
-          4) In compliance with Beeto's Terms of Service, and the provisions set forth in the
+          4) In compliance with Hektar's Terms of Service, and the provisions set forth in the
           licensing agreement;
         </li>
         <li>5) In other circumstances as required by law.</li>
@@ -157,8 +158,8 @@
     <div id="policy_5">
       <h2>Personal Information Protection</h2>
       <p>
-        Beeto will use all reasonable efforts to safeguard and ensure the protection of your
-        personal information. Beeto has and will continue to take the following measures to protect
+        Hektar will use all reasonable efforts to safeguard and ensure the protection of your
+        personal information. Hektar has and will continue to take the following measures to protect
         your personal information:
       </p>
       <ul>
@@ -171,10 +172,10 @@
           3) Restriction of access to personal information to authorized personnel who are subject
           to duties of confidentiality in connection with their role; and
         </li>
-        <li>4) Other security measures which Beeto considers reasonable and necessary.</li>
+        <li>4) Other security measures which Hektar considers reasonable and necessary.</li>
       </ul>
       <p>
-        Even though Beeto has taken the above reasonable and effective measures and such standards
+        Even though Hektar has taken the above reasonable and effective measures and such standards
         meet relevant laws and regulations, there is no guarantee that your personal information
         will be secure when it is used in communications over an insecure channel. Therefore, users
         should take active measures individually to ensure the security of personal information,
@@ -182,9 +183,9 @@
         information, such as the account password to any other person.
       </p>
       <p>
-        You acknowledge that the personal information protection measures provided by Beeto only
-        apply to Beeto platform, and once you leave Beeto’s site, including where you click on a
-        link and browse or use other third-party websites, services and content resources, Beeto
+        You acknowledge that the personal information protection measures provided by Hektar only
+        apply to Hektar platform, and once you leave Beeto’s site, including where you click on a
+        link and browse or use other third-party websites, services and content resources, Hektar
         will have no ability and obligation to protect the personal information that you submit to
         such third-party websites.
       </p>
@@ -192,8 +193,8 @@
     <div id="policy_6">
       <h2>Access to and modifying Personal Information</h2>
       <p>
-        When you have completed the account registration with Beeto, you can access, update or
-        modify the personal information you have submitted to Beeto. For example, if your personal
+        When you have completed the account registration with Hektar, you can access, update or
+        modify the personal information you have submitted to Hektar. For example, if your personal
         information changes, including that you update your email address, you are responsible for
         notifying us of those changes. Under normal circumstances, you can browse and modify the
         information submitted by you at any time, but for security considerations and identification
@@ -251,7 +252,7 @@
     <div id="policy_9">
       <h2>California Residents Privacy Rights</h2>
       <p>
-        During the preceding 12 months, Beeto has collected, used, and shared the categories of
+        During the preceding 12 months, Hektar has collected, used, and shared the categories of
         personal information described above in this Privacy Policy. California residents have
         certain rights to access and delete their personal information and to request transparency
         about our privacy practices. If you would like to access or delete your information, or
@@ -292,24 +293,24 @@
       <p>
         Cookies can help a website to identify registered users, calculate the number of users and
         the frequency with which they visit the website. They can also be used by websites to
-        determine whether the registered user has logged in. Beeto only uses cookie information for
+        determine whether the registered user has logged in. Hektar only uses cookie information for
         the purposes of enhancing the quality of the Services and our products and optimizing the
         user experience.
       </p>
       <p>
         If you don't want to store your personal information in a cookie, you can change your
         browser settings to "Reject Cookies" or "notify me when the website sends cookies". However,
-        if you deactivate cookies, this may affect your ability to access Beeto or fully enjoy the
+        if you deactivate cookies, this may affect your ability to access Hektar or fully enjoy the
         Services. If you do not disable cookies, you may receive the following message: whether the
         user information should be retained to simplify the registration procedures when next time
         you enter into this site (such as one- key login).
       </p>
-      <p>Beeto uses web beacons in the same way as it uses cookies.</p>
+      <p>Hektar uses web beacons in the same way as it uses cookies.</p>
     </div>
     <div id="policy_13">
       <h2>Disclaimers</h2>
       <p>
-        Beeto, its officers, directors, employees, or agencies, affiliates, service providers and
+        Hektar, its officers, directors, employees, or agencies, affiliates, service providers and
         internal service providers shall in no circumstances be liable for any direct, indirect,
         incidental, punitive, special, consequential or exemplary damages, including but not limited
         to, damages for loss of profits, goodwill, use, data or other intangible losses arising (in
@@ -325,25 +326,25 @@
     <div id="policy_14">
       <h2>Special Protection of Children's Personal Information</h2>
       <p>
-        Beeto attaches great importance to the protection of children's personal information. If you
-        are under 13 years of age, before using the Services, you should obtain the prior consent of
-        the guardian. If you have applied for a registered user account on Beeto, Beeto will presume
-        that you already have the required consent. If we knowingly obtain personal information from
-        users who are under 13 we will delete it. In addition, Beeto will protect children's
-        Personal Information in accordance with relevant laws and regulations and the provisions in
-        this Privacy Policy.
+        Hektar attaches great importance to the protection of children's personal information. If
+        you are under 13 years of age, before using the Services, you should obtain the prior
+        consent of the guardian. If you have applied for a registered user account on Hektar, Hektar
+        will presume that you already have the required consent. If we knowingly obtain personal
+        information from users who are under 13 we will delete it. In addition, Hektar will protect
+        children's Personal Information in accordance with relevant laws and regulations and the
+        provisions in this Privacy Policy.
       </p>
     </div>
     <div id="policy_15">
       <h2>Changes to the Privacy Policy</h2>
       <p>
-        Beeto reserves the right to change this Privacy Policy at any time, and to post any changes
-        on Beeto’ website. By doing this, Beeto is considered to have notified you of the content
-        changes. Beeto can also use other appropriate methods to notify users whenever there are
-        content changes. If you don't agree with changes made by Beeto to the terms in our Privacy
+        Hektar reserves the right to change this Privacy Policy at any time, and to post any changes
+        on Beeto’ website. By doing this, Hektar is considered to have notified you of the content
+        changes. Hektar can also use other appropriate methods to notify users whenever there are
+        content changes. If you don't agree with changes made by Hektar to the terms in our Privacy
         Policy, you should stop using the Services. If you continue to use the Services, your use
-        shall be deemed to confirm your acceptance of the changes made by Beeto to the related terms
-        of this Privacy Policy.
+        shall be deemed to confirm your acceptance of the changes made by Hektar to the related
+        terms of this Privacy Policy.
       </p>
     </div>
     <div id="policy_16">
@@ -360,25 +361,25 @@
     <h1>سياسة الخصوصية</h1>
     <div id="policy_1">
       <p>
-        قامت "بيتو Beeto" بصياغة سياسة الخصوصية هذه وفقًا لقوانين ولوائح الخصوصية الحالية وذلك لكي
+        قامت "هكتار Hektar" بصياغة سياسة الخصوصية هذه وفقًا لقوانين ولوائح الخصوصية الحالية وذلك لكي
         تمنحك السيطرة على كيفية استخدام المعلومات التي تقدمها لنا. تصف سياسة الخصوصية هذه كيفية
-        جمعنا لمعلوماتك واستخدامها. إن بيتو تأخذ مسألة الخصوصية على محمل الجد وقد قامت بصياغة سياسة
-        الخصوصية لكي تحدد تفاصيل الضمانات والتدابير التي اعتمدتها "بيتو Beeto" في جمع وإدارة وحماية
-        المعلومات الشخصية للمستخدمين. كما أنها توفر معلومات حول الخيارات التي يمكنك القيام بها فيما
-        يتعلق باستخدام معلوماتك الشخصية. تنطبق سياسة الخصوصية على جميع الخدمات المقدمة لك من قبل
-        "بيتو Beeto"، سواء قمت بالوصول إلى الخدمات عبر جهاز كمبيوتر أو جهاز محمول أو أي جهاز آخر
-        ويشار إليها جميعا بلفظ ("الخدمات").
+        جمعنا لمعلوماتك واستخدامها. إن هكتار تأخذ مسألة الخصوصية على محمل الجد وقد قامت بصياغة سياسة
+        الخصوصية لكي تحدد تفاصيل الضمانات والتدابير التي اعتمدتها "هكتار Hektar" في جمع وإدارة
+        وحماية المعلومات الشخصية للمستخدمين. كما أنها توفر معلومات حول الخيارات التي يمكنك القيام
+        بها فيما يتعلق باستخدام معلوماتك الشخصية. تنطبق سياسة الخصوصية على جميع الخدمات المقدمة لك
+        من قبل "هكتار Hektar"، سواء قمت بالوصول إلى الخدمات عبر جهاز كمبيوتر أو جهاز محمول أو أي
+        جهاز آخر ويشار إليها جميعا بلفظ ("الخدمات").
       </p>
     </div>
     <div id="policy_2">
       <h2>جمع المعلومات الشخصية</h2>
       <p>
-        أنت تقر وتوافق على أنه عند التسجيل في حساب "بيتو Beeto" أو استخدام الخدمات، فإن "بيتو Beeto"
-        ستجمع المعلومات الشخصية التي تقدمها، مثل: الاسم وعنوان البريد الإلكتروني، والعنوان البريدي،
-        ورقم الهاتف المحمول وصورتك الفوتوغرافية وبطاقة الائتمان أو معلومات الدفع الأخرى والعمر
-        والموقع وأي معلومات أخرى تختار تقديمها بالإضافة إلى معلومات التسجيل (معلومات الجهاز، عنوان
-        IP، الصفحة التي تمت زيارتها). تتضمن عملية الجمع هذه المعلومات الفنية والسلوكية حول استخدامك
-        للمنصة وتستخدم هذه المعلومات الشخصية للسماح لك بالحصول على الخدمات.
+        أنت تقر وتوافق على أنه عند التسجيل في حساب "هكتار Hektar" أو استخدام الخدمات، فإن "هكتار
+        Hektar" ستجمع المعلومات الشخصية التي تقدمها، مثل: الاسم وعنوان البريد الإلكتروني، والعنوان
+        البريدي، ورقم الهاتف المحمول وصورتك الفوتوغرافية وبطاقة الائتمان أو معلومات الدفع الأخرى
+        والعمر والموقع وأي معلومات أخرى تختار تقديمها بالإضافة إلى معلومات التسجيل (معلومات الجهاز،
+        عنوان IP، الصفحة التي تمت زيارتها). تتضمن عملية الجمع هذه المعلومات الفنية والسلوكية حول
+        استخدامك للمنصة وتستخدم هذه المعلومات الشخصية للسماح لك بالحصول على الخدمات.
       </p>
     </div>
     <div id="policy_3">
@@ -434,10 +435,10 @@
         </div>
       </ul>
       <p>
-        بالإضافة إلى ذلك، قد تجمع "بيتو Beeto" معلومات إضافية مرتبطة بتحديث الخدمات لغرض تحسين تجربة
-        المستخدمين، على سبيل المثال، عند دخولك على منصة "بيتو Beeto"، فإننا نقوم بجمع المعلومات
-        للسماح لنا بفهم مدى انتشار خدمات معينة، وكذلك المعلومات الموجودة على برنامج المتصفح، من أجل
-        تحسين الخدمات.
+        بالإضافة إلى ذلك، قد تجمع "هكتار Hektar" معلومات إضافية مرتبطة بتحديث الخدمات لغرض تحسين
+        تجربة المستخدمين، على سبيل المثال، عند دخولك على منصة "هكتار Hektar"، فإننا نقوم بجمع
+        المعلومات للسماح لنا بفهم مدى انتشار خدمات معينة، وكذلك المعلومات الموجودة على برنامج
+        المتصفح، من أجل تحسين الخدمات.
       </p>
       <div class="bold">إدارة المعلومات الشخصية</div>
       <p>
@@ -447,24 +448,24 @@
       <p class="no-indent">1. مطلوب بموجب القانون أو اللوائح التنظيمية؛</p>
       <p class="no-indent">2. مخول بواسطتك (بموافقتك وبشروط واضحة)؛</p>
       <p class="no-indent">
-        3. متوافق مع <a href="terms" target="_blank"> شروط خدمة "بيتو Beeto"</a>، والأحكام المنصوص
+        3. متوافق مع <a href="terms" target="_blank"> شروط خدمة "هكتار Hektar"</a>، والأحكام المنصوص
         عليها في اتفاقية الترخيص.
       </p>
       <p>
         بالإضافة إلى ذلك، فإنك تقر وتوافق على أنه إلى الحد الذي تسمح به القوانين واللوائح الحالية،
-        يجوز لبيتو Beeto استخدام معلوماتك الشخصية لأغراض تسويقية، بما في ذلك على سبيل المثال لا
-        الحصر تقديم أو توفير الإعلانات والمواد الترويجية إليك على منصة "بيتو Beeto"، وإخطارك أو
+        يجوز لبيتو Hektar استخدام معلوماتك الشخصية لأغراض تسويقية، بما في ذلك على سبيل المثال لا
+        الحصر تقديم أو توفير الإعلانات والمواد الترويجية إليك على منصة "هكتار Hektar"، وإخطارك أو
         التوصية بالخدمات أو معلومات المنتج، و/أو أي معلومات أخرى قد تهمك استناداً إلى استخدامك
         للخدمات. قد تتضمن هذه المواد الإعلانية والترويجية أيضًا الخيارات التي تحددها أنت لمشاركة
         المعلومات أثناء الأنشطة المتعلقة بالترخيص، على سبيل المثال، عند إضافة صديق، أو إضافة مَعْلم
-        ديناميكي جديد، أو استخدام أدوات "بيتو Beeto" لاستيراد جهات الاتصال.
+        ديناميكي جديد، أو استخدام أدوات "هكتار Hektar" لاستيراد جهات الاتصال.
       </p>
     </div>
     <!-- <div id="policy_4">
       <h2>مشاركة معلوماتك الشخصية</h2>
       <p>
-        قد نشارك المعلومات الشخصية الخاصة بك مع مزودي الخدمة الذين يقدمون خدمات لنا. تشارك "بيتو
-        Beeto" المعلومات الشخصية مع موفري خدمات التخزين السحابي وخدمات الإشراف على المحتوى لإعلام
+        قد نشارك المعلومات الشخصية الخاصة بك مع مزودي الخدمة الذين يقدمون خدمات لنا. تشارك "هكتار
+        Hektar" المعلومات الشخصية مع موفري خدمات التخزين السحابي وخدمات الإشراف على المحتوى لإعلام
         المستخدمين بالتغييرات التي تطرأ على خدماتنا؛ ولتوفير دعم المستخدم؛ ولتخصيص المحتوى الذي
         يتلقاه المستخدمين والتواصل معهم.
       </p>
@@ -481,19 +482,19 @@
         هويتك.
       </p>
       <p>
-        لن تكشف "بيتو Beeto"، بدون إذنك، عن معلوماتك الشخصية لأي طرف ثالث، إلا في الحالات التالية:
+        لن تكشف "هكتار Hektar"، بدون إذنك، عن معلوماتك الشخصية لأي طرف ثالث، إلا في الحالات التالية:
       </p>
       <ul>
-        <li>1. حصول "بيتو Beeto" على إذن منك؛</li>
+        <li>1. حصول "هكتار Hektar" على إذن منك؛</li>
         <li>
-          2. إذا طُلِب من "بيتو Beeto" الكشف عن معلوماتك الشخصية بموجب طلب من سلطة قانونية أو كيان
+          2. إذا طُلِب من "هكتار Hektar" الكشف عن معلوماتك الشخصية بموجب طلب من سلطة قانونية أو كيان
           تنظيمي من أجل الامتثال لأمر محكمة أو إجراء قانوني.
         </li>
         <li>
-          3. اشتراك "بيتو Beeto" في أي إجراءات قانونية ومن أجل حماية حقوقها ومصالحها المشروعة؛
+          3. اشتراك "هكتار Hektar" في أي إجراءات قانونية ومن أجل حماية حقوقها ومصالحها المشروعة؛
         </li>
         <li>
-          4. وفقًا لشروط خدمة "بيتو Beeto"، والأحكام المنصوص عليها في اتفاقية الترخيص؛
+          4. وفقًا لشروط خدمة "هكتار Hektar"، والأحكام المنصوص عليها في اتفاقية الترخيص؛
         </li>
         <li>5. في أية ظروف أخرى بمقتضى القانون.</li>
       </ul>
@@ -501,8 +502,8 @@
     <div id="policy_5">
       <h2>حماية المعلومات الشخصية</h2>
       <p>
-        تبذل "بيتو Beeto" كل الجهود المعقولة لحماية وضمان حماية معلوماتك الشخصية. قامت "بيتو Beeto"
-        وستواصل اتخاذ التدابير التالية لحماية معلوماتك الشخصية:
+        تبذل "هكتار Hektar" كل الجهود المعقولة لحماية وضمان حماية معلوماتك الشخصية. قامت "هكتار
+        Hektar" وستواصل اتخاذ التدابير التالية لحماية معلوماتك الشخصية:
       </p>
       <ul>
         <li>
@@ -516,24 +517,24 @@
         </li>
       </ul>
       <p>
-        على الرغم من أن "بيتو Beeto" قد اتخذت التدابير المعقولة والفعالة المذكورة أعلاه وأن هذه
+        على الرغم من أن "هكتار Hektar" قد اتخذت التدابير المعقولة والفعالة المذكورة أعلاه وأن هذه
         المعايير تلبي القوانين واللوائح ذات الصلة، فلا يوجد ضمان بأن معلوماتك الشخصية ستكون آمنة عند
         استخدامها في الاتصالات عبر قناة غير آمنة. لذلك، يجب على المستخدمين اتخاذ إجراءات وتدابير
         فعالة بشكل فردي لضمان أمان المعلومات الشخصية، مثل: تغيير كلمة مرور حسابك بشكل منتظم، وعدم
         الكشف عن معلوماتك الشخصية، مثل كلمة مرور الحساب لأي شخص آخر.
       </p>
       <p>
-        أنت تقر بأن إجراءات حماية المعلومات الشخصية التي توفرها "بيتو Beeto" تنطبق فقط على منصتها،
+        أنت تقر بأن إجراءات حماية المعلومات الشخصية التي توفرها "هكتار Hektar" تنطبق فقط على منصتها،
         وبمجرد مغادرة المنصة، بما في ذلك المكان الذي تنقر فيه على رابط وتتصفح أو تستخدم مواقع ويب
-        وخدمات وموارد محتوى أخرى تابعة لجهات خارجية، لن يكون لدى "بيتو Beeto" القدرة على والالتزام
+        وخدمات وموارد محتوى أخرى تابعة لجهات خارجية، لن يكون لدى "هكتار Hektar" القدرة على والالتزام
         بحماية المعلومات الشخصية التي ترسلها إلى مواقع الويب الخاصة بهذه الأطراف الثالثة.
       </p>
     </div>
     <div id="policy_6">
       <h2>الوصول إلى المعلومات الشخصية وتعديلها</h2>
       <p>
-        عند الانتهاء من تسجيل الحساب على منصة "بيتو Beeto"، يمكنك الوصول إلى المعلومات الشخصية التي
-        قدمتها إلى "بيتو Beeto" أو تحديثها أو تعديلها. على سبيل المثال، إذا ما طرأ تغيير على
+        عند الانتهاء من تسجيل الحساب على منصة "هكتار Hektar"، يمكنك الوصول إلى المعلومات الشخصية
+        التي قدمتها إلى "هكتار Hektar" أو تحديثها أو تعديلها. على سبيل المثال، إذا ما طرأ تغيير على
         معلوماتك الشخصية، بما في ذلك تحديث عنوان بريدك الإلكتروني، فأنت مسؤول عن إخطارنا بهذه
         التغييرات. في ظل الظروف العادية، يمكنك تصفح المعلومات التي قدمتها وتعديلها في أي وقت، ولكن
         لاعتبارات أمنية وأغراض تحديد الهوية (مثل خدمات شكاوى الحساب)، قد لا تتمكن من تعديل بعض
@@ -587,7 +588,7 @@
     <div id="policy_9">
       <h2>حقوق الخصوصية للمقيمين في كاليفورنيا</h2>
       <p>
-        خلال الاثني عشر شهرًا السابقة، قامت "بيتو Beeto" بجمع واستخدام ومشاركة فئات المعلومات
+        خلال الاثني عشر شهرًا السابقة، قامت "هكتار Hektar" بجمع واستخدام ومشاركة فئات المعلومات
         الشخصية الموضحة أعلاه في سياسة الخصوصية هذه. يتمتع سكان كاليفورنيا بحقوق معينة للوصول إلى
         معلوماتهم الشخصية وحذفها وطلب الشفافية حول ممارسات الخصوصية لدينا. إذا كنت ترغب في الوصول
         إلى معلوماتك أو حذفها، أو ممارسة حقوقك بموجب قانون حماية المستهلك في كاليفورنيا، يرجى
@@ -624,27 +625,27 @@
       <p>
         تساعد ملفات تعريف الإرتباط موقع الويب في تحديد المستخدمين المسجلين، وحساب عدد المستخدمين
         وعدد مرات زيارتهم للموقع. يمكن أيضًا استخدامها بواسطة مواقع الويب لتحديد ما إذا كان المستخدم
-        المسجل قد قام بتسجيل الدخول أم لا. تستخدم "بيتو Beeto" معلومات ملفات تعريف الارتباط فقط
+        المسجل قد قام بتسجيل الدخول أم لا. تستخدم "هكتار Hektar" معلومات ملفات تعريف الارتباط فقط
         لأغراض تحسين جودة الخدمات ومنتجاتنا وتحسين تجربة المستخدم
       </p>
       <p>
         إذا كنت لا ترغب في تخزين معلوماتك الشخصية في ملف تعريف ارتباط، يمكنك تغيير إعدادات متصفحك
         إلى "رفض ملفات تعريف الارتباط" أو "إعلامي عند إرسال موقع الويب ملفات تعريف الارتباط". ومع
         ذلك، إذا قمت بإلغاء تفعيل ملفات تعريف الارتباط ، فقد يؤثر ذلك على قدرتك على الوصول إلى منصة
-        "بيتو Beeto" أو الاستمتاع الكامل بالخدمات. إذا لم تقم بتعطيل ملفات تعريف الارتباط ، فقد
+        "هكتار Hektar" أو الاستمتاع الكامل بالخدمات. إذا لم تقم بتعطيل ملفات تعريف الارتباط ، فقد
         تتلقى الرسالة التالية: هل يجب الاحتفاظ بمعلومات المستخدم لتبسيط إجراءات التسجيل عند الدخول
         إلى هذا الموقع في المرة القادمة (مثل تسجيل الدخول بمفتاح واحد).
       </p>
-      <p>تستخدم "بيتو Beeto" إشارات الويب بنفس الطريقة التي تستخدم بها ملفات تعريف الارتباط.</p>
+      <p>تستخدم "هكتار Hektar" إشارات الويب بنفس الطريقة التي تستخدم بها ملفات تعريف الارتباط.</p>
     </div>
     <div id="policy_13">
       <h2>إخلاء المسؤولية</h2>
       <p>
-        لا تتحمل "بيتو Beeto" ولا مسؤوليها ومديريها وموظفيها أو وكالاتها والشركات التابعة لها ومقدمي
-        الخدمات ومقدمي الخدمة الداخليين بأي حال من الأحوال المسؤولية عن أي أضرار مباشرة أو غير
-        مباشرة أو عرضية أو عقابية أو خاصة أو تبعية أو تحذيرية، بما في ذلك على سبيل المثال لا الحصر،
-        الأضرار الناتجة عن خسارة الأرباح أو السمعة أو الاستخدام أو البيانات أو الخسائر غير الملموسة
-        الأخرى الناشئة (بأي طريقة كانت) عن انتهاك سياسة الخصوصية هذه.
+        لا تتحمل "هكتار Hektar" ولا مسؤوليها ومديريها وموظفيها أو وكالاتها والشركات التابعة لها
+        ومقدمي الخدمات ومقدمي الخدمة الداخليين بأي حال من الأحوال المسؤولية عن أي أضرار مباشرة أو
+        غير مباشرة أو عرضية أو عقابية أو خاصة أو تبعية أو تحذيرية، بما في ذلك على سبيل المثال لا
+        الحصر، الأضرار الناتجة عن خسارة الأرباح أو السمعة أو الاستخدام أو البيانات أو الخسائر غير
+        الملموسة الأخرى الناشئة (بأي طريقة كانت) عن انتهاك سياسة الخصوصية هذه.
       </p>
       <p>
         إذا كنت تستخدم الخدمات في ولاية قضائية تفرض متطلبات توطين على فئات معينة من البيانات، فأنت
@@ -655,9 +656,9 @@
     <div id="policy_14">
       <h2>الحماية الخاصة بمعلومات الأطفال الشخصية</h2>
       <p>
-        تولي "بيتو Beeto" أهمية كبيرة لحماية المعلومات الشخصية للأطفال. إذا كان عمرك أقل من 13
+        تولي "هكتار Hektar" أهمية كبيرة لحماية المعلومات الشخصية للأطفال. إذا كان عمرك أقل من 13
         عامًا، يجب عليك قبل استخدام الخدمات الحصول على موافقة مسبقة من الوصي عليك أو ولي أمرك. إذا
-        كنت قد تقدمت بطلب للحصول على حساب مستخدم مسجل على المنصة، فستفترض "بيتو Beeto" أن لديك
+        كنت قد تقدمت بطلب للحصول على حساب مستخدم مسجل على المنصة، فستفترض "هكتار Hektar" أن لديك
         بالفعل الموافقة المطلوبة، وإذا حصلنا عن عمد على معلومات شخصية من المستخدمين الذين تقل
         أعمارهم عن 13 عامًا فإننا سنقوم بحذف تلك المعلومات. بالإضافة إلى ذلك، سنعمل على حماية
         المعلومات الشخصية للأطفال وفقًا للقوانين واللوائح ذات الصلة والأحكام الواردة في سياسة
@@ -667,13 +668,13 @@
     <div id="policy_15">
       <h2>تغيير سياسة الخصوصية</h2>
       <p>
-        تحتفظ "بيتو Beeto" بالحق في تغيير سياسة الخصوصية هذه في أي وقت، ونشر أي تغييرات على موقع
-        "بيتو Beeto"، وبقيامها بذلك، تعتبر "بيتو Beeto" أنها قد أخطرتك بتغييرات المحتوى. يمكن لـ
-        "بيتو Beeto" أيضًا استخدام طرق أخرى مناسبة لإعلام المستخدمين عند حدوث تغييرات في المحتوى.
-        إذا كنت لا توافق على التغييرات التي أجرتها "بيتو Beeto" على الشروط الواردة في سياسة الخصوصية
-        الخاصة بنا، فيجب عليك التوقف عن استخدام الخدمات. إذا واصلت استخدام الخدمات، فسيعتبر استخدامك
-        تأكيدًا على موافقتك على التغييرات التي أجرتها "بيتو Beeto" على الشروط ذات الصلة في سياسة
-        الخصوصية هذه
+        تحتفظ "هكتار Hektar" بالحق في تغيير سياسة الخصوصية هذه في أي وقت، ونشر أي تغييرات على موقع
+        "هكتار Hektar"، وبقيامها بذلك، تعتبر "هكتار Hektar" أنها قد أخطرتك بتغييرات المحتوى. يمكن لـ
+        "هكتار Hektar" أيضًا استخدام طرق أخرى مناسبة لإعلام المستخدمين عند حدوث تغييرات في المحتوى.
+        إذا كنت لا توافق على التغييرات التي أجرتها "هكتار Hektar" على الشروط الواردة في سياسة
+        الخصوصية الخاصة بنا، فيجب عليك التوقف عن استخدام الخدمات. إذا واصلت استخدام الخدمات، فسيعتبر
+        استخدامك تأكيدًا على موافقتك على التغييرات التي أجرتها "هكتار Hektar" على الشروط ذات الصلة
+        في سياسة الخصوصية هذه
       </p>
     </div>
     <div id="policy_16">
@@ -697,7 +698,7 @@ export default {
     return {
       list: [
         {
-          name: 'Beeto Privacy Policy',
+          name: 'Hektar Privacy Policy',
           link: '#policy_1',
         },
         {

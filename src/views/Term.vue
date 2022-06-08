@@ -2,15 +2,15 @@
   <div class="wrap docs" id="docs" v-if="lang == 'en'">
     <h1>Terms of Use</h1>
     <div id="term_1">
-      <h2>Beeto</h2>
+      <h2>Hektar</h2>
       <div>
-        <div>Welcome to Beeto!</div>
+        <div>Welcome to Hektar!</div>
         <p>
           These terms of use (the “
           <span class="bold">Terms of Use</span>
-          ”) govern your use of Beeto and provide information about the Beeto service (the “
-          <span class="bold">Service</span>”), outlined below. When you use Beeto, including
-          creating a Beeto account or using the Service, which includes any of its products,
+          ”) govern your use of Hektar and provide information about the Hektar service (the “
+          <span class="bold">Service</span>”), outlined below. When you use Hektar, including
+          creating a Hektar account or using the Service, which includes any of its products,
           features, apps, websites, services, technologies, and software, you agree to these Terms
           of Use unless we expressly state that different or additional terms apply.
         </p>
@@ -18,7 +18,7 @@
           Please read the following terms of use carefully and do pay attention to the respective
           definitions; if you do not fully understand and agree to all the following terms of use,
           or the privacy policy, please do not use the service. Your commencement of, or continued
-          use of the service, or registration of your own account on Beeto means that you, receipt
+          use of the service, or registration of your own account on Hektar means that you, receipt
           and sufficiency of the following terms and conditions is well acknowledged, agree to
           become a party to and to be bound by these terms of use.
         </p>
@@ -26,7 +26,7 @@
           Please read the following terms of use carefully and do pay attention to the respective
           definitions; if you do not fully understand and agree to all of the following terms and
           conditions, by selecting not clicking the "agree" button, then you may not be able to
-          register or log in your account on Beeto or access the service in furtherance in any way.
+          register or log in your account on Hektar or access the service in furtherance in any way.
           By clicking "agree" button and logging in, you consent to be bound by the hereunder terms
           and conditions. This action creates an acknowledge and consent that you become a party to
           these terms of use and agree to be bound by the following terms and conditions. Your
@@ -36,11 +36,11 @@
       </div>
     </div>
     <div id="term_2">
-      <h2>The Beeto Service</h2>
+      <h2>The Hektar Service</h2>
       <p>
-        We agree to provide you with the Beeto Service. The Service includes all of the Beeto
+        We agree to provide you with the Hektar Service. The Service includes all of the Hektar
         products, features, applications, services, technologies, and software that we provide to
-        advance Beeto's mission: To bring you closer to the people and things you love. The Service
+        advance Hektar's mission: To bring you closer to the people and things you love. The Service
         is made up of the following aspects (the Service):
       </p>
       <div class="oil">
@@ -51,8 +51,8 @@
         you actually care about. So we build systems that try to understand who and what you and
         others care about, and use that information to help you create, find, join, and share in
         experiences that matter to you. Part of that is highlighting content, features, offers, and
-        accounts you might be interested in, and offering ways for you to experience Beeto, based on
-        things you and others do on and off Beeto.
+        accounts you might be interested in, and offering ways for you to experience Hektar, based
+        on things you and others do on and off Hektar.
       </p>
       <div class="oil">Fostering a positive, inclusive, and safe environment</div>
       <p>
@@ -64,7 +64,7 @@
         information about misuse or harmful content with other WEO Technology Limited Companies or
         law enforcement. Also, we may take additional or alternative appropriate actions, which may
         include removal of content, disabling of accounts, offering assistance if needed, or
-        restricting access to certain features of the Beeto Service. Learn more in the Data Policy.
+        restricting access to certain features of the Hektar Service. Learn more in the Data Policy.
       </p>
       <div class="oil">
         Developing and using technologies that help us consistently serve our growing community
@@ -82,7 +82,7 @@
         Products
       </div>
       <p>
-        Beeto is part of the WEO Technology Limited Companies, which share technology, systems,
+        Hektar is part of the WEO Technology Limited Companies, which share technology, systems,
         insights, and information-including the information we have about you (learn more in the
         Data Policy) in order to provide services that are better, safer, and more secure. We also
         provide ways to interact across the WEO Technology Limited Company Products that you use,
@@ -100,11 +100,11 @@
         Connecting you with brands, products, and services in ways you care about
       </div>
       <p>
-        We use data from Beeto and other WEO Technology Limited Company Products, as well as from
+        We use data from Hektar and other WEO Technology Limited Company Products, as well as from
         third-party partners, to show you ads, offers, and other sponsored content that we believe
         will be meaningful to you based on information obtained directly or indirectly from you or
-        from your behavior on Beeto. We try to make that content as relevant as all your other
-        experiences on Beeto.
+        from your behavior on Hektar. We try to make that content as relevant as all your other
+        experiences on Hektar.
       </p>
       <div class="oil">Research and innovation</div>
       <p>
@@ -116,8 +116,8 @@
         Providing our Service requires collecting and using your information. The Data Policy
         explains how we collect, use, and share information across the WEO Technology Limited
         Company Products. It also explains the many ways you can control your information, including
-        in the Beeto Privacy and Security Settings. You must agree to the Data Policy to use Beeto
-        including creating a Beeto account or using the Beeto Service.
+        in the Hektar Privacy and Security Settings. You must agree to the Data Policy to use Hektar
+        including creating a Hektar account or using the Hektar Service.
       </p>
 
       <div class="bold">Your Commitments</div>
@@ -125,17 +125,17 @@
         In return for our commitment to provide the Service, we require you to make the below
         commitments to us.
       </p>
-      <div class="oil">Who Can Use Beeto</div>
+      <div class="oil">Who Can Use Hektar</div>
       <p>
         We want our Service to be as open and inclusive as possible, but we also want it to be safe,
         secure, and in accordance with the law. So, we need you to commit to the below few
-        restrictions in order to be part of the Beeto community:
+        restrictions in order to be part of the Hektar community:
       </p>
       <ul class="normal">
         <li>
-          You must be at least 13 years old or the minimum legal age in your country to use Beeto.
+          You must be at least 13 years old or the minimum legal age in your country to use Hektar.
           However, if you are under 18 years of age, you are to obtain the prior consent of your
-          guardian prior to using Beeto and its Services;
+          guardian prior to using Hektar and its Services;
         </li>
         <li>
           You must not be prohibited from receiving any aspect of our Service under applicable laws
@@ -183,33 +183,34 @@
       <div class="bold">Livestreaming</div>
       <p>
         Through the live streaming account feature, You may live stream content (the "Live Content")
-        through your Beeto account by setting up an appointment no more than seven (7) days in
-        advance and only one event a day to be hosted on the Beeto livestreaming room. You represent
-        and warrant that You have all necessary rights for the exploitation of the Live Content in
-        the Beeto livestreaming room throughout the world, including, without limitation, music
-        licensing rights from artists, record labels, pictures, movie clips, publishers (including
-        public performance licenses) and any other royalty participants. You agree to comply with
-        all applicable laws, rules and regulations regarding the Live Content including posting Live
-        Content that does not violate the Community Rules. The Live Content will constitute your
-        content and you are solely responsible for the Live Content. Any dynamic efforts provided by
-        Beeto are Beeto’s sole intellectual property and the Beeto user may utilize such dynamic
-        effects at its sole discretion. Any gifts or offers of gifts by the Beeto user or acceptance
-        of such offers or gifts is at the Beeto user’s sole discretion.
+        through your Hektar account by setting up an appointment no more than seven (7) days in
+        advance and only one event a day to be hosted on the Hektar livestreaming room. You
+        represent and warrant that You have all necessary rights for the exploitation of the Live
+        Content in the Hektar livestreaming room throughout the world, including, without
+        limitation, music licensing rights from artists, record labels, pictures, movie clips,
+        publishers (including public performance licenses) and any other royalty participants. You
+        agree to comply with all applicable laws, rules and regulations regarding the Live Content
+        including posting Live Content that does not violate the Community Rules. The Live Content
+        will constitute your content and you are solely responsible for the Live Content. Any
+        dynamic efforts provided by Hektar are Beeto’s sole intellectual property and the Hektar
+        user may utilize such dynamic effects at its sole discretion. Any gifts or offers of gifts
+        by the Hektar user or acceptance of such offers or gifts is at the Hektar user’s sole
+        discretion.
       </p>
-      <div class="bold">How You May Not Use Beeto</div>
+      <div class="bold">How You May Not Use Hektar</div>
       <p>
         Providing a safe and open Service for a broad community requires that we all do our part. As
         such, you must take into consideration the following:
       </p>
       <ul class="normal">
         <li>
-          While you do not have to disclose your identity on Beeto, you must provide us with
+          While you do not have to disclose your identity on Hektar, you must provide us with
           accurate and up to date information (including registration information). Additionally,
           you may not create an account for someone else unless you have their express permission;
         </li>
         <li>
           You agree that the sole purpose of registering on or using Service is to be a user to
-          enjoy the Service provided by Beeto or any of our products, and you shall not use Service
+          enjoy the Service provided by Hektar or any of our products, and you shall not use Service
           in any manner for any illegal purpose under the applicable law;
         </li>
         <li>You shall not engage in any of the following activities:</li>
@@ -220,7 +221,7 @@
         </li>
         <li class="indent-li">
           Violate (or help or encourage others to violate) these Terms of Use or any of our
-          policies, including, but limited to, the Beeto Community Guidelines, Beeto Platform
+          policies, including, but limited to, the Hektar Community Guidelines, Hektar Platform
           Policy, and Music Guidelines;
         </li>
         <li class="indent-li">
@@ -348,10 +349,10 @@
           with accounts, ads, offers, and other sponsored content that you follow or engage with
           that are displayed on WEO Technology Limited Company Products, without any compensation to
           you. For example, we may show that you liked a sponsored post created by a brand that has
-          paid us to display its ads on Beeto. As with actions on other content and follows of other
-          accounts, actions on sponsored content and follows of sponsored accounts can be seen only
-          by people who have permission to see that content or follow. We will also respect your ad
-          settings.
+          paid us to display its ads on Hektar. As with actions on other content and follows of
+          other accounts, actions on sponsored content and follows of sponsored accounts can be seen
+          only by people who have permission to see that content or follow. We will also respect
+          your ad settings.
         </li>
         <li>You agree that we can download and install updates to the Service on your device.</li>
       </ul>
@@ -383,7 +384,7 @@
       <p>
         By using our service and agreeing to the Terms of Service, you agree and accept the
         following: we can remove any content or information you share on the Service if we believe
-        that it violates these Terms of Use, our policies (including our Beeto Community
+        that it violates these Terms of Use, our policies (including our Hektar Community
         Guidelines), or if we are permitted or required to do so by law;
       </p>
       <ul class="normal">
@@ -391,7 +392,7 @@
           We can refuse to provide or stop providing all or part of the Service to you (including
           terminating or disabling your account) immediately to protect our community or services,
           or if you create risk or legal exposure for us, violate these Terms of Use or our policies
-          (including our Beeto Community Guidelines), if you repeatedly infringe other people’s
+          (including our Hektar Community Guidelines), if you repeatedly infringe other people’s
           intellectual property rights, or where we are permitted or required to do so by law. If we
           take actions to disable or terminate your account, we will notify you where appropriate.
           If you believe your account has been terminated in error, or you want to disable or
@@ -459,13 +460,13 @@
           even if you access them through our Service;
         </li>
         <li>
-          For any Draw Program that may be instituted by a Beeto user, you agree to release,
-          discharge, and hold harmless Beeto, its officers, directors, employees, or agencies,
+          For any Draw Program that may be instituted by a Hektar user, you agree to release,
+          discharge, and hold harmless Hektar, its officers, directors, employees, or agencies,
           affiliates, service providers and internal service providers, advertising and promotion
           agencies, and other individuals engaged in the development or execution of the Draw
           Program from any liability, claims, losses, and damages arising out of or relating to
           their participation in the Draw Program or the acceptance, use, misuse, or possession of
-          any prize received in the Draw Program. Beeto is not responsible for lost, late, stolen,
+          any prize received in the Draw Program. Hektar is not responsible for lost, late, stolen,
           incomplete, illegible, inaccurate, undelivered, delayed, or misdirected entries. We
           reserve the right, in our sole discretion, to modify or terminate the Draw Program for any
           reason that we believe would corrupt the integrity, administration, or fairness of the
@@ -481,7 +482,7 @@
           information, or account;
         </li>
         <li>
-          In no event shall Beeto, its officers, directors, employees, or agencies, affiliates,
+          In no event shall Hektar, its officers, directors, employees, or agencies, affiliates,
           service providers and internal service providers be liable for any direct, indirect,
           incidental, punitive, special, consequential or exemplary damages, including but not
           limited to, damages for loss of profits, goodwill, use, data or other intangible losses
@@ -525,7 +526,7 @@
       </p>
       <div class="bold">User Indemnity</div>
       <p>
-        You agree to defend, indemnify, and hold harmless, Beeto, its parents, subsidiaries, and
+        You agree to defend, indemnify, and hold harmless, Hektar, its parents, subsidiaries, and
         affiliates, and each of their respective officers, directors, attorneys and employees from
         any and all claims, liabilities, costs, and expenses, including, but not limited to,
         attorneys’ fees and expenses, arising out or relating to:
@@ -551,10 +552,10 @@
         </li>
         <li>
           The violation of any rights of any third party, including intellectual property, privacy,
-          publicity, or other proprietary rights by you or anyone using your account. Beeto reserves
-          the right, at its own expense, to assume the exclusive defense and control of any matter
-          otherwise subject to indemnification by the user. If we do assume the defense of such a
-          matter, you will reasonably cooperate with Beeto in such defense.
+          publicity, or other proprietary rights by you or anyone using your account. Hektar
+          reserves the right, at its own expense, to assume the exclusive defense and control of any
+          matter otherwise subject to indemnification by the user. If we do assume the defense of
+          such a matter, you will reasonably cooperate with Hektar in such defense.
         </li>
       </ul>
       <div class="bold">Updating These Terms</div>
@@ -571,45 +572,46 @@
   <div class="wrap docs ardocs" id="docs" v-else>
     <h1>شروط الاستخدام</h1>
     <div id="term_1">
-      <h2>مرحباً بك في "بيتو Beeto"</h2>
+      <h2>مرحباً بك في "هكتار Hektar"</h2>
       <div>
         <p>
-          تحكم شروط الاستخدام المبينة أدناه ("شروط الاستخدام") استخدامك لمنصة "بيتو
-          <span class="bold">Beeto</span>" وتوفر معلومات حول الخدمات التي توفرها المنصة ("الخدمة").
-          عند استخدامك للمنصة، بما في ذلك إنشاء حساب "بيتو <span class="bold">Beeto</span>" أو
+          تحكم شروط الاستخدام المبينة أدناه ("شروط الاستخدام") استخدامك لمنصة "هكتار
+          <span class="bold">Hektar</span>" وتوفر معلومات حول الخدمات التي توفرها المنصة ("الخدمة").
+          عند استخدامك للمنصة، بما في ذلك إنشاء حساب "هكتار <span class="bold">Hektar</span>" أو
           استخدام الخدمة، بما في ذلك أي من منتجات ومزايا وتطبيقات ومواقع وخدمات وتقنيات وبرمجيات
-          "بيتو <span class="bold">Beeto</span>"، فإنك توافق على شروط الاستخدام هذه، ما لم نوضح
+          "هكتار <span class="bold">Hektar</span>"، فإنك توافق على شروط الاستخدام هذه، ما لم نوضح
           صراحةً أنه يتم تطبيق شروط أخرى أو إضافية.
         </p>
         <p class="letter">
           يرجى قراءة شروط الاستخدام التالية بعناية والاهتمام بالتعريفات ذات الصلة بها. يرجى عدم
           استخدام الخدمة إذا كنت لا تفهم تمامًا وتوافق على جميع شروط الاستخدام التالية، أو سياسة
-          الخصوصية. إن بدء استخدامك للخدمة أو استمرار استخدامك لها أو تسجيل حسابك الخاص على "بيتو
-          <span class="bold">Beeto</span>" يعني استلامك وإقرارك بالاطلاع على الشروط والأحكام التالية
-          وموافقتك عليها، فضلاً عن موافقتك على أن تكون طرفًا فيها وملزماً بها. يرجى قراءة شروط
-          الاستخدام التالية بعناية والاهتمام بالتعريفات ذات الصلة بها؛ إذا كنت لا تفهم تمامًا وتوافق
-          على جميع البنود والشروط التالية، فإنك باختيار عدم النقر على زر "موافق" لن تستطيع التسجيل
-          أو الدخول إلى حسابك على "بيتو <span class="bold">Beeto</span>" أو الوصول إلى الخدمة بأي
-          طريقة أخرى. بالنقر على زر "موافق" وتسجيل الدخول، فإنك توافق على الالتزام بالشروط والأحكام
-          الواردة أدناه. يعتبر إجراء الموافقة هذا إقرارًا وموافقة منك على أنك أصبحت طرفاً في شروط
-          الاستخدام هذه وتوافق على الالتزام بالشروط والأحكام التالية. يعني استخدامك المستمر للخدمة
-          أنك على وعي كامل ومعرفة كافية بجميع البنود والشروط التالية وقبلتها ووافقت عليها.
+          الخصوصية. إن بدء استخدامك للخدمة أو استمرار استخدامك لها أو تسجيل حسابك الخاص على "هكتار
+          <span class="bold">Hektar</span>" يعني استلامك وإقرارك بالاطلاع على الشروط والأحكام
+          التالية وموافقتك عليها، فضلاً عن موافقتك على أن تكون طرفًا فيها وملزماً بها. يرجى قراءة
+          شروط الاستخدام التالية بعناية والاهتمام بالتعريفات ذات الصلة بها؛ إذا كنت لا تفهم تمامًا
+          وتوافق على جميع البنود والشروط التالية، فإنك باختيار عدم النقر على زر "موافق" لن تستطيع
+          التسجيل أو الدخول إلى حسابك على "هكتار <span class="bold">Hektar</span>" أو الوصول إلى
+          الخدمة بأي طريقة أخرى. بالنقر على زر "موافق" وتسجيل الدخول، فإنك توافق على الالتزام
+          بالشروط والأحكام الواردة أدناه. يعتبر إجراء الموافقة هذا إقرارًا وموافقة منك على أنك أصبحت
+          طرفاً في شروط الاستخدام هذه وتوافق على الالتزام بالشروط والأحكام التالية. يعني استخدامك
+          المستمر للخدمة أنك على وعي كامل ومعرفة كافية بجميع البنود والشروط التالية وقبلتها ووافقت
+          عليها.
         </p>
       </div>
     </div>
     <div id="term_2">
-      <h2>خدمة "بيتو Beeto"</h2>
+      <h2>خدمة "هكتار Hektar"</h2>
       <p>
-        نحن نوافق على تزويدك بخدمة "بيتو <span class="bold">Beeto</span>"، وتشمل الخدمة جميع منتجات
-        "بيتو <span class="bold">Beeto</span>" والمزايا والتطبيقات والخدمات والتقنيات والبرمجيات
-        التي نقدمها لتعزيز مهمة "بيتو <span class="bold">Beeto</span>" وهي تقريبك من الأشخاص
-        والأشياء التي تحبها. تتكون الخدمة من الجوانب التالية (الخدمة):
+        نحن نوافق على تزويدك بخدمة "هكتار <span class="bold">Hektar</span>"، وتشمل الخدمة جميع
+        منتجات "هكتار <span class="bold">Hektar</span>" والمزايا والتطبيقات والخدمات والتقنيات
+        والبرمجيات التي نقدمها لتعزيز مهمة "هكتار <span class="bold">Hektar</span>" وهي تقريبك من
+        الأشخاص والأشياء التي تحبها. تتكون الخدمة من الجوانب التالية (الخدمة):
       </p>
       <div class="oil">
         توفير فرص ذات طابع شخصي للإنشاء والتواصل والاكتشاف والمشاركة.
       </div>
       <p>
-        يختلف الأفراد باختلاف توجهاتهم، ونحن في "بيتو <span class="bold">Beeto</span>" نسعى إلى
+        يختلف الأفراد باختلاف توجهاتهم، ونحن في "هكتار <span class="bold">Hektar</span>" نسعى إلى
         تعزيز علاقاتك من خلال الخبرات والتجارب المشتركة التي تهتم بها فعلياً، ولذلك فإننا نبني لك
         أنظمة خاصة تحاول فهم اهتماماتك واهتمامات الآخرين من حولك. كما نستخدم تلك المعلومات لمساعدتك
         في إنشاء المحتوى من الخبرات التي تهمك وكذلك العثور على تلك الاهتمامات والانضمام إليها
@@ -627,7 +629,7 @@
         إساءة الاستخدام أو المحتوى الضار مع شركات دبليو ئي أو تكنولوجي ليمتد (WEOTechnology Limited)
         الأخرى أو جهات إنفاذ القانون، كما قد نتخذ أيضاً إجراءات مناسبة إضافية أو بديلة، والتي قد
         تشمل إزالة المحتوى أو تعطيل الحسابات أو تقديم المساعدة إذا لزم الأمر أو تقييد الوصول إلى بعض
-        مزايا خدمة "بيتو <span class="bold">Beeto</span>". (لمعرفة المزيد، يرجى الاطلاع على سياسة
+        مزايا خدمة "هكتار <span class="bold">Hektar</span>". (لمعرفة المزيد، يرجى الاطلاع على سياسة
         البيانات).
       </p>
       <div class="oil">
@@ -646,7 +648,7 @@
         Limited) الأخرى
       </div>
       <p>
-        تعد "بيتو Beeto" جزءًا من شركات دبليو ئي أو تكنولوجي ليمتد (WEO Technology Limited) ، التي
+        تعد "هكتار Hektar" جزءًا من شركات دبليو ئي أو تكنولوجي ليمتد (WEO Technology Limited) ، التي
         تشارك التكنولوجيا والأنظمة والرؤى والمعلومات، بما في بياناتك لدينا من أجل تقديم خدمات أفضل
         وأكثر أمانًا وسلامةً. (لمعرفة المزيد، يرجى الاطلاع على سياسة البيانات). نوفر أيضًا طرقًا
         للتفاعل عبر منتجات شركة دبليو ئي أو تكنولوجي ليمتد (WEO Technology Limited) التي تقوم أنت
@@ -665,12 +667,12 @@
         تمكين المستخدم من الوصول إلى العلامات والمنتجات والخدمات بالطرق التي تهمه
       </div>
       <p>
-        نحن نستخدم البيانات من منصة "بيتو <span class="bold">Beeto</span>" ومنتجات شركة دبليو ئي أو
-        تكنولوجي ليمتد (WEO Technology Limited) الأخرى والشركاء الآخرين لنعرض عليك الإعلانات والعروض
-        وغيرها من أنواع المحتوى المُموَّل، الذي نعتقد في أهميته بالنسبة لك بناءً على المعلومات التي
-        تم الحصول عليها منك بشكل مباشر أو غير مباشر أو من خلال سلوكك على منصة "بيتو
-        <span class="bold">Beeto</span>"، ونحن نحاول دائماً أن نجعل هذا المحتوى ذو صلة بجميع تجاربك
-        الأخرى على "بيتو <span class="bold">Beeto</span>".
+        نحن نستخدم البيانات من منصة "هكتار <span class="bold">Hektar</span>" ومنتجات شركة دبليو ئي
+        أو تكنولوجي ليمتد (WEO Technology Limited) الأخرى والشركاء الآخرين لنعرض عليك الإعلانات
+        والعروض وغيرها من أنواع المحتوى المُموَّل، الذي نعتقد في أهميته بالنسبة لك بناءً على
+        المعلومات التي تم الحصول عليها منك بشكل مباشر أو غير مباشر أو من خلال سلوكك على منصة "هكتار
+        <span class="bold">Hektar</span>"، ونحن نحاول دائماً أن نجعل هذا المحتوى ذو صلة بجميع تجاربك
+        الأخرى على "هكتار <span class="bold">Hektar</span>".
       </p>
       222
       <div class="oil">البحث والابتكار</div>
@@ -683,27 +685,27 @@
         يتطلب توفير منتجاتنا جمع ومعالجة معلومات عنك، وتوضح سياسة البيانات كيفية الوصول إلى البيانات
         التي نجمعها ونعالجها ونشاركها عبر منتجات شركة دبليو ئي أو تكنولوجي ليمتد (WEO Technology
         Limited). توضح سياسة البيانات أيضاً مختلف الطرق التي يمكنك من خلالها التحكم في بياناتك، بما
-        في ذلك إعدادات الخصوصية والأمان على منصة "بيتو <span class="bold">Beeto</span>". يجب أن
-        توافق على سياسة البيانات لاستخدام منصة "بيتو <span class="bold">Beeto</span>" بما في ذلك
-        إنشاء حساب "بيتو <span class="bold">Beeto</span>" أو استخدام خدمة "بيتو
-        <span class="bold">Beeto</span>".
+        في ذلك إعدادات الخصوصية والأمان على منصة "هكتار <span class="bold">Hektar</span>". يجب أن
+        توافق على سياسة البيانات لاستخدام منصة "هكتار <span class="bold">Hektar</span>" بما في ذلك
+        إنشاء حساب "هكتار <span class="bold">Hektar</span>" أو استخدام خدمة "هكتار
+        <span class="bold">Hektar</span>".
       </p>
 
-      <div class="bold">التزاماتك تجاه "بيتو "</div>
+      <div class="bold">التزاماتك تجاه "هكتار "</div>
       <p>
         نحن نطلب منك تلبية الالتزامات التالية تجاهنا في مقابل التزامنا بتوفير الخدمة إليك.
       </p>
-      <div class="oil">من الذي يمكنه استخدام "بيتو <span class="bold">Beeto</span>"</div>
+      <div class="oil">من الذي يمكنه استخدام "هكتار <span class="bold">Hektar</span>"</div>
       <p>
         نحن نطمح إلى توفير خدمات متاحة وشاملة للجميع إلى أقصى درجة ممكنة، إلا أننا نحرص أيضًا أن
         تكون هذه الخدمات محمية آمنة متوافقة مع القانون. لذلك، نريد منك الالتزام بالقيود التالية
-        لتكون جزءًا من مجتمع "بيتو <span class="bold">Beeto</span>":
+        لتكون جزءًا من مجتمع "هكتار <span class="bold">Hektar</span>":
       </p>
       <ul class="normal">
         <li>
           يجب أن يكون عمرك ثلاثة عشر (13) عامًا على الأقل أو أن تكون ضمن الحد الأدنى للسن القانوني
-          المسموح به لاستخدام منصة "بيتو <span class="bold">Beeto</span>" في بلدك. ومع ذلك، إذا كنت
-          دون سن الثامنة عشر (18)، يمكنك الحصول على موافقة مسبقة من ولي وخدماتها؛
+          المسموح به لاستخدام منصة "هكتار <span class="bold">Hektar</span>" في بلدك. ومع ذلك، إذا
+          كنت دون سن الثامنة عشر (18)، يمكنك الحصول على موافقة مسبقة من ولي وخدماتها؛
         </li>
         <li>
           يجب ألا تكون من ضمن الأشخاص المشمولين بحظر تلقي أي من عناصر خدماتنا بموجب القوانين السارية
@@ -755,21 +757,21 @@
       <div class="bold">البث المباشر</div>
       <p>
         من خلال ميزة حساب البث المباشر، يمكنك بث المحتوى على الهواء مباشرة ("محتوى البث المباشر")
-        عبر حساب "بيتو Beeto" الخاص بك، وذلك عن طريق تحديد موعد مسبق خلال فترة أقصاها سبعة (7) أيام
-        قبل البث. ويُسمَح باستضافة حدث واحد فقط في غرفة "بيتو Beeto" للبث المباشر. وتُقر وتتعهد بأنك
-        تمتلك جميع الحقوق اللازمة لاستغلال محتوى البث المباشر في غرفة "بيتو Beeto" للبث المباشر في
-        جميع أنحاء العالم، بما في ذلك على سبيل المثال وليس الحصر، حقوق ترخيص الموسيقى الخاصة
-        بالفنانين وشركات التسجيلات والأفلام ومقاطع الأفلام والناشرين (بما في ذلك تراخيص الأداء
-        العام) وأي مشاركين أو جهات متعلقة بحقوق التأليف. وتُقر أيضًا بموافقتك على الامتثال لجميع
-        القوانين والقواعد واللوائح المعمول بها فيما يتعلق بمحتوى البث المباشر، بما في ذلك نشر محتوى
-        البث المباشر الذي لا ينتهك سياسات المجتمع. وسيشكل محتوى البث المباشر المحتوى الخاص بك،
-        وستتحمل المسؤولية منفردًا عن هذا المحتوى. وتُعَد الجهود الديناميكية التي تقدمها "بيتو Beeto"
-        بمثابة ملكية فكرية خاصة بها، ويجوز لمستخدم منصة "بيتو Beeto" استخدام هذه التأثيرات
-        الديناميكية وفقًا لتقديره الخاص. وتخضع الهدايا أو عروض الهدايا من جانب مستخدم منصة "بيتو
-        Beeto" أو قبول المستخدم لهذه العروض أو الهدايا للتقدير المنفرد للمستخدم.
+        عبر حساب "هكتار Hektar" الخاص بك، وذلك عن طريق تحديد موعد مسبق خلال فترة أقصاها سبعة (7)
+        أيام قبل البث. ويُسمَح باستضافة حدث واحد فقط في غرفة "هكتار Hektar" للبث المباشر. وتُقر
+        وتتعهد بأنك تمتلك جميع الحقوق اللازمة لاستغلال محتوى البث المباشر في غرفة "هكتار Hektar"
+        للبث المباشر في جميع أنحاء العالم، بما في ذلك على سبيل المثال وليس الحصر، حقوق ترخيص
+        الموسيقى الخاصة بالفنانين وشركات التسجيلات والأفلام ومقاطع الأفلام والناشرين (بما في ذلك
+        تراخيص الأداء العام) وأي مشاركين أو جهات متعلقة بحقوق التأليف. وتُقر أيضًا بموافقتك على
+        الامتثال لجميع القوانين والقواعد واللوائح المعمول بها فيما يتعلق بمحتوى البث المباشر، بما في
+        ذلك نشر محتوى البث المباشر الذي لا ينتهك سياسات المجتمع. وسيشكل محتوى البث المباشر المحتوى
+        الخاص بك، وستتحمل المسؤولية منفردًا عن هذا المحتوى. وتُعَد الجهود الديناميكية التي تقدمها
+        "هكتار Hektar" بمثابة ملكية فكرية خاصة بها، ويجوز لمستخدم منصة "هكتار Hektar" استخدام هذه
+        التأثيرات الديناميكية وفقًا لتقديره الخاص. وتخضع الهدايا أو عروض الهدايا من جانب مستخدم منصة
+        "هكتار Hektar" أو قبول المستخدم لهذه العروض أو الهدايا للتقدير المنفرد للمستخدم.
       </p>
       <div class="bold">
-        الطرق التي لا يُسمح باستخدام "بيتو <span class="bold">Beeto</span>" بها
+        الطرق التي لا يُسمح باستخدام "هكتار <span class="bold">Hektar</span>" بها
       </div>
       <p>
         يتطلب تقديم خدمة آمنة ومتاحة لنطاق واسع من الأشخاص ضمن مجتمعنا أن نقوم جميعًا بأدوارنا، وعلى
@@ -777,7 +779,7 @@
       </p>
       <ul class="normal">
         <li>
-          بينما لا يتعين عليك الكشف عن هويتك على منصة "بيتو <span class="bold">Beeto</span>"، يجب
+          بينما لا يتعين عليك الكشف عن هويتك على منصة "هكتار <span class="bold">Hektar</span>"، يجب
           عليك تزويدنا بمعلومات دقيقة ومحدثة (بما في ذلك بيانات التسجيل). بالإضافة إلى ذلك، لا يجوز
           لك إنشاء حساب لشخص آخر ما لم تحصل على إذن صريح منه.
         </li>
@@ -794,8 +796,8 @@
         </li>
         <li class="indent-li">
           انتهاك (أو مساعدة الآخرين أو تشجيعهم على انتهاك) شروط الاستخدام هذه أو أي من سياساتنا، بما
-          في ذلك، على سبيل المثال لا الحصر، سياسات مجتمع "بيتو <span class="bold">Beeto</span>"
-          وسياسة منصة <span class="bold">Beeto</span> Platform وإرشادات الموسيقى؛.
+          في ذلك، على سبيل المثال لا الحصر، سياسات مجتمع "هكتار <span class="bold">Hektar</span>"
+          وسياسة منصة <span class="bold">Hektar</span> Platform وإرشادات الموسيقى؛.
         </li>
         <li class="indent-li">
           فعل أي شيء للتدخل في التشغيل المقصود للخدمة أو الإضرار به.
@@ -847,8 +849,8 @@
           الخاصة بالتقييم أو الإدلاء ببيانات كاذبة للقائمين بالتقييم، من أجل عرقلة تقييم مزاعم
           الممارسات الفاسدة، أو الاحتيالية، أو أنشطة غسل الأموال أو تمويل الإرهاب و/أو التهديد أو
           المضايقة أو التخويف لأي طرف لمنعه من الكشف عن معرفته بالمسائل ذات الصلة بالتقييم أو منعه
-          من القيام بالتقييم، أو (2) الأفعال التي تهدف إلى إعاقة ممارسة وصول منصة "بيتو
-          <span class="bold">Beeto</span>" بشكل مادي إلى المعلومات المطلوبة تعاقديًا فيما يتعلق
+          من القيام بالتقييم، أو (2) الأفعال التي تهدف إلى إعاقة ممارسة وصول منصة "هكتار
+          <span class="bold">Hektar</span>" بشكل مادي إلى المعلومات المطلوبة تعاقديًا فيما يتعلق
           بتقييم مزاعم ممارسات الفساد أو الممارسات الاحتيالية أو أنشطة غسل الأموال أو تمويل الإرهاب.
         </p>
         <p class="no-indent">
@@ -914,11 +916,11 @@
           والمحتوى المُموَّل الآخر الذي تتابعه أو تشترك فيه مع ذلك المحتوى المعروض على منتجات دبليو
           ئي أو تكنولوجي ليمتد (WEO Technology Limited)، دون أي تعويض لك. على سبيل المثال، قد نظهر
           أنك سجلت إعجاب بمنشور مُموَّل أنشأته علامة تجارية دفعت لنا مقابل مادي لعرض إعلاناتها على
-          منصة "بيتو <span class="bold">Beeto</span>". كما هو الحال مع الإجراءات التي تتم على عناصر
-          المحتوى الأخرى وعمليات متابعة الحسابات الأخرى، لا يمكن أن تظهر الإجراءات المتعلقة بالمحتوى
-          المُموَّل وعمليات متابعة الحسابات المُموَّلة إلا من قِبل الأشخاص الذين لديهم إذن لرؤية هذا
-          المحتوى أو متابعته، كما أننا سنحترم أيضًا إعدادات إعلانك. يمكنك معرفة المزيد هنا حول
-          إعدادات إعلانك.
+          منصة "هكتار <span class="bold">Hektar</span>". كما هو الحال مع الإجراءات التي تتم على
+          عناصر المحتوى الأخرى وعمليات متابعة الحسابات الأخرى، لا يمكن أن تظهر الإجراءات المتعلقة
+          بالمحتوى المُموَّل وعمليات متابعة الحسابات المُموَّلة إلا من قِبل الأشخاص الذين لديهم إذن
+          لرؤية هذا المحتوى أو متابعته، كما أننا سنحترم أيضًا إعدادات إعلانك. يمكنك معرفة المزيد هنا
+          حول إعدادات إعلانك.
         </li>
         <li>أنت توافق على السماح لنا بتنزيل تحديثات الخدمة على جهازك وتثبيتها.</li>
       </ul>
@@ -949,7 +951,7 @@
       <p>
         باستخدامك لخدمتنا والموافقة على شروط الخدمة، فإنك تقبل وتوافق على ما يلي:<br />يمكننا إزالة
         أي محتوى أو معلومات تشاركها خلال استخدامك للخدمة إذا ما اعتقدنا أنها تنتهك شروط الاستخدام
-        هذه، أو سياساتنا (بما في ذلك سيايات مجتمع <span class="bold">Beeto</span>) ، أو إذا سُمِح
+        هذه، أو سياساتنا (بما في ذلك سيايات مجتمع <span class="bold">Hektar</span>) ، أو إذا سُمِح
         لنا بذلك أو طُلب منا القيام بذلك بموجب القانون.
       </p>
       <ul class="normal">
@@ -957,7 +959,7 @@
           يمكننا رفض تقديم الخدمة أو وقف تقديمها إليك كلياً أو جزئياً (بما في ذلك إنهاء حسابك أو
           تعطيله) على الفور لحماية مجتمعنا أو خدماتنا، أو إذا ما تسببت في مخاطر لنا أو مسائلات
           قانونية ضدنا، والتي من شأنها أن تنتهك شروط الاستخدام هذه أو سياساتنا (بما في ذلك إرشادات
-          مجتمع <span class="bold">Beeto</span>)، أو إذا انتهكت بشكل متكرر حقوق الملكية الفكرية
+          مجتمع <span class="bold">Hektar</span>)، أو إذا انتهكت بشكل متكرر حقوق الملكية الفكرية
           لأشخاص آخرين، أو حيثما يسمح لنا القانون أو يُطلب منا القيام بذلك. إذا اتخذنا إجراءات
           لتعطيل حسابك أو إنهائه، فإننا سنخطرك عند الاقتضاء. إذا كنت تعتقد أن حسابك قد أزيل بالخطأ،
           أو كنت ترغب في تعطيل حسابك أو حذفه نهائيًا، فيمكنك الاستفسار عن ذلك خلال قنوات الملاحظات
@@ -1022,16 +1024,16 @@
           الوصول إليها من خلال خدمتنا.
         </li>
         <li>
-          بالنسبة لأي برنامج سحب قد يُنشئ من قبل مستخدم "بيتو <span class="bold">Beeto</span>"، فإنك
-          توافق على إعفاء "بيتو <span class="bold">Beeto</span>"، والإفراج عنها وإبقائها بمنأى عن
-          الضرر وكذلك مسؤوليها، ومديريها، وموظفيها، أو وكالاتها، والشركات التابعة لها، ومقدمي
-          الخدمات ومقدمي الخدمات الداخليين، ووكالات الإعلان والترويج، والأفراد الآخرون المشاركون في
-          تطوير أو تنفيذ برنامج السحب، من أي مسؤولية أو مطالبات أو خسائر أو أضرار تنشأ عن أو تتعلق
-          بمشاركتهم في برنامج السحب أو قبول أو استخدام أو إساءة استخدام أو حيازة أي جائزة تم
-          استلامها من خلال برنامج السحب. لا تعتبر "بيتو <span class="bold">Beeto</span>" مسؤولة عن
-          المشاركات (المدخلات) المفقودة أو المسروقة أو غير المكتملة أو غير المقروءة أو غير الدقيقة
-          أو التي لم يتم تسليمها أو المتأخرة أو الموجهة بشكل خاطئ. تحتفظ "بيتو
-          <span class="bold">Beeto</span>" بالحق، وفقًا لتقديرها الخاص، في تعديل برنامج السحب أو
+          بالنسبة لأي برنامج سحب قد يُنشئ من قبل مستخدم "هكتار <span class="bold">Hektar</span>"،
+          فإنك توافق على إعفاء "هكتار <span class="bold">Hektar</span>"، والإفراج عنها وإبقائها
+          بمنأى عن الضرر وكذلك مسؤوليها، ومديريها، وموظفيها، أو وكالاتها، والشركات التابعة لها،
+          ومقدمي الخدمات ومقدمي الخدمات الداخليين، ووكالات الإعلان والترويج، والأفراد الآخرون
+          المشاركون في تطوير أو تنفيذ برنامج السحب، من أي مسؤولية أو مطالبات أو خسائر أو أضرار تنشأ
+          عن أو تتعلق بمشاركتهم في برنامج السحب أو قبول أو استخدام أو إساءة استخدام أو حيازة أي
+          جائزة تم استلامها من خلال برنامج السحب. لا تعتبر "هكتار <span class="bold">Hektar</span>"
+          مسؤولة عن المشاركات (المدخلات) المفقودة أو المسروقة أو غير المكتملة أو غير المقروءة أو غير
+          الدقيقة أو التي لم يتم تسليمها أو المتأخرة أو الموجهة بشكل خاطئ. تحتفظ "هكتار
+          <span class="bold">Hektar</span>" بالحق، وفقًا لتقديرها الخاص، في تعديل برنامج السحب أو
           إنهائه لأي سبب تعتقد أنه قد يفسد نزاهة برنامج السحب أو إدارته.
         </li>
         <li>
@@ -1043,14 +1045,14 @@
           وقوعها. ويتضمن ذلك الحالات التي نقوم فيها بحذف المحتوى أو المعلومات أو الحساب الخاص بك؛
         </li>
         <li>
-          لا تتحمل "بيتو <span class="bold">Beeto</span>" بأي حال من الأحوال، أو مسؤوليها أو مديريها
-          أو موظفيها أو وكالاتها أو الشركات التابعة لها أو مقدمي الخدمات ومقدمي الخدمات الداخليين،
-          المسؤولية عن أي أضرار مباشرة أو غير مباشرة أو عرضية أو عقابية أو خاصة أو تبعية أو تحذيرية،
-          بما في ذلك على سبيل المثال لا الحصر، الأضرار الناجمة عن خسارة الأرباح أو السمعة أو
-          الاستخدام أو البيانات أو الخسائر غير الملموسة الأخرى الناشئة (بأي طريقة كانت) عن أو تتعلق
-          بـ (1) الأخطاء أو الإغفال أو حالات عدم الدقة في الخدمة؛ (2) الإصابة الشخصية أو تلف
-          الممتلكات، من أي نوع كان، والناتج عن وصولك إلى الخدمة واستخدامها؛ (3) أي وصول غير مصرح به
-          إلى خوادمك الآمنة و/أو جميع المعلومات الشخصية الموجودة فيها؛ (4) أي انقطاع أو توقف عن
+          لا تتحمل "هكتار <span class="bold">Hektar</span>" بأي حال من الأحوال، أو مسؤوليها أو
+          مديريها أو موظفيها أو وكالاتها أو الشركات التابعة لها أو مقدمي الخدمات ومقدمي الخدمات
+          الداخليين، المسؤولية عن أي أضرار مباشرة أو غير مباشرة أو عرضية أو عقابية أو خاصة أو تبعية
+          أو تحذيرية، بما في ذلك على سبيل المثال لا الحصر، الأضرار الناجمة عن خسارة الأرباح أو
+          السمعة أو الاستخدام أو البيانات أو الخسائر غير الملموسة الأخرى الناشئة (بأي طريقة كانت) عن
+          أو تتعلق بـ (1) الأخطاء أو الإغفال أو حالات عدم الدقة في الخدمة؛ (2) الإصابة الشخصية أو
+          تلف الممتلكات، من أي نوع كان، والناتج عن وصولك إلى الخدمة واستخدامها؛ (3) أي وصول غير مصرح
+          به إلى خوادمك الآمنة و/أو جميع المعلومات الشخصية الموجودة فيها؛ (4) أي انقطاع أو توقف عن
           الاستخدام أو الخدمة؛ (5) أي أخطاء أو فيروسات أو فيروسات أحصنة طروادة أو ما شابه، والتي قد
           تنتقل إلى خوادمنا أو من خلالها من قبل أي طرف ثالث؛ (6) أي خسارة أو ضرر ناتج عن استخدامك
           للخدمات؛ أو (7) أي تأخير أو إخفاق أو انقطاع أو أخطاء فيما يتعلق بالخدمة، سواء كان ذلك
@@ -1083,7 +1085,7 @@
       </p>
       <div class="bold">التعويض</div>
       <p>
-        أنت توافق على الدفاع عن "بيتو <span class="bold">Beeto</span>"، وشركاتها الأم والشركات
+        أنت توافق على الدفاع عن "هكتار <span class="bold">Hektar</span>"، وشركاتها الأم والشركات
         التابعة لها وشركاتها الفرعية، وتعويضها، وإبقائها بمنأى عن الضرر، وكذلك كل من مسؤوليها
         ومديريها ومحاميها وموظفيها من جميع المطالبات والمسؤوليات والتكاليف والنفقات أو أي منها، بما
         في ذلك على سبيل المثال وليس الحصر، أتعاب ومصاريف المحاماة الناشئة عن أو المتعلقة بما يلي:
@@ -1109,10 +1111,11 @@
         </li>
         <li>
           انتهاك أي حقوق لأي طرف ثالث، بما في ذلك حقوق الملكية الفكرية أو الخصوصية أو الدعاية أو
-          حقوق الملكية الأخرى أو من قبل أي شخص يستخدم حسابك. تحتفظ "بيتو Beeto" بالحق، على نفقتها
+          حقوق الملكية الأخرى أو من قبل أي شخص يستخدم حسابك. تحتفظ "هكتار Hektar" بالحق، على نفقتها
           الخاصة، في تولي الدفاع الحصري والتحكم في أي مسألة خاضعة، بخلاف ذلك، للتعويض من قبل
-          المستخدم، وإذا ما قمنا بالدفاع عن مثل هذه المسألة، فإنك تتعهد بالتعاون بشكل معقول مع "بيتو
-          <span class="bold">Beeto</span>" في مثل هذا الدفاع.
+          المستخدم، وإذا ما قمنا بالدفاع عن مثل هذه المسألة، فإنك تتعهد بالتعاون بشكل معقول مع
+          "هكتار
+          <span class="bold">Hektar</span>" في مثل هذا الدفاع.
         </li>
       </ul>
       <div class="bold">تحديث شروط الاستخدام هذه</div>
@@ -1133,11 +1136,11 @@ export default {
     return {
       list: [
         {
-          name: 'Beeto',
+          name: 'Hektar',
           link: '#term_1',
         },
         {
-          name: 'The Beeto Service',
+          name: 'The Hektar Service',
           link: '#term_2',
         },
       ],

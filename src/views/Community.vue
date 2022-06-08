@@ -2,26 +2,26 @@
   <div class="wrap docs" id="docs" v-if="lang == 'en'">
     <h1>Community Rule</h1>
     <p>
-      Beeto is a platform where everyone can get the newest update of what is happening around us in
-      the shortest time. With our roots in the culture and Internet ecosystem of the Arab world, our
-      goal is to connect Arabic language creators with their users, to establish a diverse and
+      Hektar is a platform where everyone can get the newest update of what is happening around us
+      in the shortest time. With our roots in the culture and Internet ecosystem of the Arab world,
+      our goal is to connect Arabic language creators with their users, to establish a diverse and
       extensive community connection, so that 450 million Arabic speakers have convenient and equal
       access to information and connect with each other.
     </p>
     <p>
-      In Beeto, you can not only get information, but you can also be the "information". Everyone
+      In Hektar, you can not only get information, but you can also be the "information". Everyone
       can make their voice to be heard by the whole world via our platform. People can feel more
       closer and communicate easier with each other on our platform. And we will also find a more
       effective and efficient way to connect people with a wealth of valuable information.
     </p>
     <p>
       To achieve our goal of establishing one of the largest social media platform in the Arabic
-      region, Beeto will keep producing high-quality, precipitable information. Meanwhile, we will
+      region, Hektar will keep producing high-quality, precipitable information. Meanwhile, we will
       also try our best to help people share their knowledge, experience and insights in a friendly
-      environment. The below Community Rules are meant as a guide to what we ask from our Beeto
+      environment. The below Community Rules are meant as a guide to what we ask from our Hektar
       users but are not meant to be a comprehensive nor a complete guide to the rules and
-      regulations of posting content. We ask that all Beeto users follow these Community Rules to
-      ensure every Beeto user’s voice is heard and at the same time keeping the Beeto platform
+      regulations of posting content. We ask that all Hektar users follow these Community Rules to
+      ensure every Hektar user’s voice is heard and at the same time keeping the Hektar platform
       community supportive and safe for all users. These rules do not deal with how we collect, use
       and share your personal information. Please refer to our Privacy Policy for details.
     </p>
@@ -29,33 +29,33 @@
       <h2>Usage Rules</h2>
       <div class="no-indent">
         <p>
-          1. After the user is successfully registered, Beeto will give each user a user account and
-          corresponding password. The user account and password should be kept by the user; the user
-          should be legally responsible for all activities and events conducted with his user
+          1. After the user is successfully registered, Hektar will give each user a user account
+          and corresponding password. The user account and password should be kept by the user; the
+          user should be legally responsible for all activities and events conducted with his user
           account, including compliance with Terms of Use.
         </p>
         <p>
           2. The user should make sure the information of registration is authentic, legal and valid
-          in Beeto. The user cannot use another person’s identity to register; should not share any
+          in Hektar. The user cannot use another person’s identity to register; should not share any
           content in the name of another person; should not maliciously use the registered account
-          to cause other users to misunderstand; otherwise Beeto has the right to immediately stop
+          to cause other users to misunderstand; otherwise Hektar has the right to immediately stop
           providing services, block the account, and the user needs to take full responsibilities.
         </p>
         <p>
           3. If users register with the names of well-known people or organizations (without
-          verification), Beeto has the right to withdraw the usernames.
+          verification), Hektar has the right to withdraw the usernames.
         </p>
         <p>
-          4. Beeto is a platform for sharing, disseminating and acquiring information. The
-          information published by users through Beeto is public information, and other third
-          parties can obtain the information published by users through Beeto. The information is
+          4. Hektar is a platform for sharing, disseminating and acquiring information. The
+          information published by users through Hektar is public information, and other third
+          parties can obtain the information published by users through Hektar. The information is
           public information and the publisher should know about this; any information that users do
-          not want to be known to the others should not be published on Beeto.
+          not want to be known to the others should not be published on Hektar.
         </p>
         <p>
           5. The user promises not to directly or indirectly engage in acts that violate laws and
-          social ethics in any way in any jurisdiction via Beeto, and Beeto has the right to delete
-          content or block the accounts that violate the above commitments.
+          social ethics in any way in any jurisdiction via Hektar, and Hektar has the right to
+          delete content or block the accounts that violate the above commitments.
         </p>
       </div>
     </div>
@@ -92,9 +92,9 @@
     <div id="community_3">
       <h2>Ethnic Rules</h2>
       <p>
-        Users in Beeto should respect Islam and all other religions and religious affiliations.
-        Beeto users should be respectful in their posting of content of every Arab country and are
-        encouraged to use the Beeto platform to help support them and their issues. Do not post the
+        Users in Hektar should respect Islam and all other religions and religious affiliations.
+        Hektar users should be respectful in their posting of content of every Arab country and are
+        encouraged to use the Hektar platform to help support them and their issues. Do not post the
         content that contains extremists and extremism in this regard.
       </p>
     </div>
@@ -128,8 +128,8 @@
       <div class="title-2">Hate Speech Policy</div>
       <p>
         Do not encourage, engage, promote or incite violence against individuals or groups based on
-        any of the attributes noted above. We do not allow any threats on Beeto, and we treat even
-        implied calls for violence as real threats for which action by Beeto will be taken.
+        any of the attributes noted above. We do not allow any threats on Hektar, and we treat even
+        implied calls for violence as real threats for which action by Hektar will be taken.
       </p>
       <div class="title-2">Violent criminal organizations</div>
       <p>
@@ -172,7 +172,7 @@
       <p>
         Do not post content that depicts genitals, breasts, or buttocks (clothed or unclothed) for
         the purpose of sexual gratification. Pornography depicting sexual acts, genitals, or
-        fetishes for the purpose of sexual gratification is prohibited. Using the Beeto site to
+        fetishes for the purpose of sexual gratification is prohibited. Using the Hektar site to
         threaten or coerce money or favors to expose sexual body parts or forced stripping is
         prohibited.
       </p>
@@ -193,7 +193,7 @@
         true or accurate. Content that has been technically manipulated or doctored in a way that
         misleads users (beyond clips taken out of context) may pose a serious risk of egregious
         harm. Comments where the sole purpose is to gather personal information from viewers,
-        misleadingly drive viewers off Beeto, or perform any of the prohibited behaviors noted
+        misleadingly drive viewers off Hektar, or perform any of the prohibited behaviors noted
         above.
       </p>
       <div class="title-2">Deceptive practices & scams policies</div>
@@ -208,7 +208,7 @@
       </p>
       <div class="title-2">Livestreaming</div>
       <p>
-        All terms in this Community Rules policy applies to livestreaming events on your Beeto
+        All terms in this Community Rules policy applies to livestreaming events on your Hektar
         account. Any behavior that is conducted in the livestream room, including any questions or
         answers, blogs, comments or other posts that violates these Community Rules will be
         immediately terminated and removed.
@@ -225,21 +225,21 @@
       </p>
       <div class="title-2">Sale of illegal or regulated goods or services</div>
       <p>
-        Do not post content on Beeto if it aims to directly sell, link to, facilitate access, trade,
-        donate or gift any of the regulated goods and services including alcohol, tobacco, bank
-        account passwords, stolen credit cards, or other financial information, pharmaceuticals,
-        non-medical drugs, , explosives ,unlicensed medical services, human smuggling, human blood,
-        historical artifacts and endangered species.
+        Do not post content on Hektar if it aims to directly sell, link to, facilitate access,
+        trade, donate or gift any of the regulated goods and services including alcohol, tobacco,
+        bank account passwords, stolen credit cards, or other financial information,
+        pharmaceuticals, non-medical drugs, , explosives ,unlicensed medical services, human
+        smuggling, human blood, historical artifacts and endangered species.
       </p>
       <p>
-        Beeto reserves the right to review and restrict the user’s usage of Beeto. If the user
-        violates any of the above regulations when using Beeto, Beeto or its authorized
+        Hektar reserves the right to review and restrict the user’s usage of Hektar. If the user
+        violates any of the above regulations when using Hektar, Hektar or its authorized
         representative has the right to request the user to take corrective action or remove the
-        content. Beeto has the right to directly take all necessary measures (including but not
+        content. Hektar has the right to directly take all necessary measures (including but not
         limited to change or delete the content posted by the user, suspend or terminate the user’s
-        right to use Beeto or disable a user’s profile) to reduce the impact of the user’s improper
-        behavior. The actions taken by Beeto for violating these Community Standards are solely
-        within the discretion of Beeto.
+        right to use Hektar or disable a user’s profile) to reduce the impact of the user’s improper
+        behavior. The actions taken by Hektar for violating these Community Standards are solely
+        within the discretion of Hektar.
       </p>
     </div>
     <!-- <Section :list="list" /> -->
@@ -247,28 +247,28 @@
   <div class="wrap docs ardocs" id="docs" v-else>
     <h1>سياسات المجتمع</h1>
     <p>
-      "بيتو" "Beeto" هي "منصة" تواصل اجتماعي تتيح لجميع مستخدميها معرفة آخر المستجدات بشأن مجريات
+      "هكتار" "Hektar" هي "منصة" تواصل اجتماعي تتيح لجميع مستخدميها معرفة آخر المستجدات بشأن مجريات
       الأحداث المحيطة في أقصر وقت ممكن. نحن نسعى وفقاً لجذورنا المتأصلة في الثقافة والنظام البيئي
       للإنترنت في العالم العربي إلى ربط صانعي المحتوي العرب بمستخدميهم مستهدفين بذلك إنشاء اتصال
       مجتمعي متنوع وواسع، بحيث يتمتع 450 مليون متحدث باللغة العربية بوصول ملائم ومتساوي للمعلومات
       والاتصال.
     </p>
     <p>
-      يمكنكم على منصة "بيتو" "Beeto" الحصول على "المعلومات"، وليس ذلك فحسب، بل يمكنكم أيضًا توفير
+      يمكنكم على منصة "هكتار" "Hektar" الحصول على "المعلومات"، وليس ذلك فحسب، بل يمكنكم أيضًا توفير
       هذه "المعلومات". يمكن للجميع إيصال أصواتهم إلى العالم بأسره عبر منصتنا، والشعور بمزيد من
       التقارب والتواصل بشكل أسهل. كما يمكنكم الوصول إلى ثروة هائلة من المعلومات القيمة بطريقة أكثر
       فعالية وكفاءة.
     </p>
     <p>
       لتحقيق هدفنا المتمثل في إنشاء واحدة من أكبر منصات التواصل الاجتماعي في المنطقة العربية، ستواصل
-      "بيتو" "Beeto" إنتاج معلومات عالية الجودة يسهل الوصول إليها في أسرع وقت ممكن، وفي الوقت ذاته،
-      سنبذل قصارى جهدنا لمساعدة الأشخاص على مشاركة معارفهم وخبراتهم وآرائهم ضمن بيئة ودية. تمثل
-      سياسات المجتمع الموضحة أدناه دليلاً للتعليمات التي نطلب من مستخدمي "بيتو" "Beeto" الالتزام بها
-      ولكن لا يُقصد بتلك المعايير أن تكون دليلاً شاملاً أو كاملاً لقواعد ولوائح نشر المحتوى. نحن
-      نطلب من جميع مستخدمي "بيتو" "Beeto" اتباع سياسات المجتمع هذه لضمان سماع صوت كل مستخدم، وفي ذات
-      الوقت، الحفاظ على منصة "بيتو" "Beeto" بوصفها مجتمع داعم وآمن لجميع المستخدمين. لا ترتبط هذه
-      المعايير بكيفية جمعنا لمعلوماتكم الشخصية واستخدامها ومشاركتها. يرجى الرجوع إلى سياسة الخصوصية
-      لمزيد من التفاصيل [أدخل رابط سياسة الخصوصية].
+      "هكتار" "Hektar" إنتاج معلومات عالية الجودة يسهل الوصول إليها في أسرع وقت ممكن، وفي الوقت
+      ذاته، سنبذل قصارى جهدنا لمساعدة الأشخاص على مشاركة معارفهم وخبراتهم وآرائهم ضمن بيئة ودية.
+      تمثل سياسات المجتمع الموضحة أدناه دليلاً للتعليمات التي نطلب من مستخدمي "هكتار" "Hektar"
+      الالتزام بها ولكن لا يُقصد بتلك المعايير أن تكون دليلاً شاملاً أو كاملاً لقواعد ولوائح نشر
+      المحتوى. نحن نطلب من جميع مستخدمي "هكتار" "Hektar" اتباع سياسات المجتمع هذه لضمان سماع صوت كل
+      مستخدم، وفي ذات الوقت، الحفاظ على منصة "هكتار" "Hektar" بوصفها مجتمع داعم وآمن لجميع
+      المستخدمين. لا ترتبط هذه المعايير بكيفية جمعنا لمعلوماتكم الشخصية واستخدامها ومشاركتها. يرجى
+      الرجوع إلى سياسة الخصوصية لمزيد من التفاصيل [أدخل رابط سياسة الخصوصية].
     </p>
     <div id="community_1">
       <h2>معايير الاستخدام</h2>
@@ -295,7 +295,7 @@
           المستخدمين على المنصة هي معلومات عامة ويمكن للأطراف الأخرى الحصول على تلك المعلومات
           المنشورة من قبل المستخدمين على المنصة. يقر المستخدم بإلمامه ومعرفته التامة فيما يتعلق بهذا
           البند حول عمومية المعلومات المنشورة على المنصة، وعليه، لا يجب نشر أي معلومات لا يرغب
-          المستخدمون في أن يعرفها آخرون على منصة "بيتو" "Beeto".
+          المستخدمون في أن يعرفها آخرون على منصة "هكتار" "Hektar".
         </p>
         <p>
           يتعهد المستخدم بعدم الانخراط بشكل مباشر أو غير مباشر في أعمال تنتهك القوانين والأخلاق
@@ -440,7 +440,7 @@
       </p>
       <div class="title-2">البث المباشر</div>
       <p>
-        تنطبق جميع الشروط الواردة في سياسات المجتمع هذه على حالات البث المباشر على حساب Beeto الخاص
+        تنطبق جميع الشروط الواردة في سياسات المجتمع هذه على حالات البث المباشر على حساب Hektar الخاص
         بك. سيتم إنهاء وإزالة أي سلوك أو ممارسات يتم إجراؤها في غرفة البث المباشر، بما في ذلك أي
         أسئلة أو إجابات أو مدونات أو تعليقات أو منشورات أخرى تنتهك سياسات المجتمع هذه.
       </p>
