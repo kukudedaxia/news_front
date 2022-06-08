@@ -267,7 +267,6 @@ html[lang='ar'] .el-message-box__headerbtn {
       // height: 1px;
     }
     .el-tabs__item {
-      font-family: Tahoma;
       font-size: 18px;
       color: #333333;
       height: 78px;
@@ -278,8 +277,8 @@ html[lang='ar'] .el-message-box__headerbtn {
       color: rgba(221, 221, 221, 0.2);
     }
     .el-tabs__item.is-active {
-      font-family: Tahoma-Bold;
-      color: #ff536c;
+      font-weight: 700;
+      color: var(--color-16);
     }
     .el-tabs__active-bar {
       height: 3px;

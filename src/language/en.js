@@ -129,7 +129,7 @@ const message = {
     friends: 'Friends(mutual fans)',
     fans: 'Fans',
     onlyMe: 'Only me',
-    release: 'Beet',
+    release: 'Release',
     express: 'Express freely…',
     searching: 'Searching…',
     topic: 'Create a topic',

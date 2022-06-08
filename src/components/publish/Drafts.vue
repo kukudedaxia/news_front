@@ -143,12 +143,12 @@ export default {
 <style lang="less" scoped>
 .com-drafts {
   padding: 18px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #f6f6f6;
+  background: var(--color-9);
+  border-bottom: 1px solid var(--color-10);
   transition: 0.3s;
   &:hover {
     cursor: pointer;
-    background: #f9f9fb;
+    background: var(--color-10);
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
   }
   .text-box {
@@ -159,7 +159,7 @@ export default {
     .blog-text {
       font-family: Tahoma;
       font-size: 16px;
-      color: #333333;
+      color: var(--color-16);
       letter-spacing: 0;
       line-height: 20px;
       width: 100%;
@@ -171,19 +171,19 @@ export default {
       .time {
         font-family: Tahoma;
         font-size: 12px;
-        color: #777f8e;
+        color: var(--color-13);
       }
       .btn-del {
         font-family: Tahoma;
         font-size: 12px;
-        color: #b9bdc7;
+        color: var(--color-13);
         letter-spacing: 0;
         line-height: 16px;
         padding: 0;
         cursor: pointer;
         transition: 0.3s;
         &:hover {
-          color: #ff536c;
+          color: var(--color-1);
         }
       }
     }

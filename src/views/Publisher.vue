@@ -8,9 +8,7 @@
     <publisher ref="publisher"></publisher>
     <!-- Feed流 - tab组件 -->
     <feed-tabs></feed-tabs>
-    <a v-if="access" :href="url"
-      >Riyadh Online</a
-    >
+    <a v-if="access" :href="url">Riyadh Online</a>
   </div>
 </template>
 

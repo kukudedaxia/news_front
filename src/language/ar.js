@@ -126,7 +126,7 @@ const message = {
     friends: 'الأصدقاء (المتابعين المشتركين)',
     fans: 'المتابعين',
     onlyMe: 'أنا فقط',
-    release: 'بيته',
+    release: 'نشر',
     express: ' عبر براحتك…',
     searching: 'بحث...',
     topic: 'قم بإنشاء موضوع',

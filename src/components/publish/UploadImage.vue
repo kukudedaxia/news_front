@@ -72,14 +72,14 @@ export default {
     & > p {
       font-family: Tahoma;
       font-size: 16px;
-      color: #333333;
+      color: var(--color-16);
       letter-spacing: 0;
       margin-bottom: 8px;
     }
     & > span {
       font-family: Tahoma;
       font-size: 12px;
-      color: #b9bdc7;
+      color: var(--color-14);
     }
   }
   .icon-close {

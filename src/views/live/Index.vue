@@ -104,7 +104,7 @@ export default {
   },
   created() {
     this.uid = Number(this.user.id);
-    this.$store.commit('route/setLoadingState', true);
+    // this.$store.commit('route/setLoadingState', true);
     this.getToken();
   },
   mounted() {},
