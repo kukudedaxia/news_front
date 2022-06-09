@@ -121,7 +121,7 @@ export default {
 </script>
 <style lang="less">
 .page {
-  width: 1020px;
+  width: 1100px;
   color: var(--text);
   display: flex;
   align-items: center;
@@ -130,7 +130,7 @@ export default {
 }
 .page-left {
   // margin-right: 30px;
-  padding-left: 20px;
+  padding-left: 0;
   flex: 1;
 }
 .page-title {

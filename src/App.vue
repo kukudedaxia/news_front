@@ -3,7 +3,7 @@
     <div id="nav">
       <Header />
     </div>
-    <div :class="['main']">
+    <div :class="['main', { homepage: path == '/' }]">
       <router-view v-wechat-title="$i18n.t($route.meta.title)" />
     </div>
     <Footer v-if="footerShow" />
@@ -23,6 +23,9 @@ export default {
   computed: {
     pageLoading() {
       return this.$store.getters['route/getLoading'];
+    },
+    path() {
+      return this.$route.path;
     },
   },
   data() {
@@ -60,5 +63,8 @@ export default {
 .main {
   border: 1px solid transparent;
   min-height: calc(100vh - 178px);
+}
+.homepage {
+  background: rgba(255, 255, 255, 0.8);
 }
 </style>

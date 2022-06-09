@@ -103,7 +103,8 @@ export default {
 .swiper {
   width: 100%;
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat; //webp720
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-size: cover;
 }
 .slide {
   box-sizing: border-box;
