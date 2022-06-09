@@ -8,23 +8,23 @@
 @INPUT-BG: #000000;
 @INPUT-BORDER-COLOR: rgba(255, 255, 255, 0.1);
 @INPUT-BORDER-COLOR-HOVER: rgba(255, 255, 255, 0.3);
-@INPUT-BORDER-COLOR-FOCUS: #e74059;
+@INPUT-BORDER-COLOR-FOCUS: #ffdc10;
 @INPUT-BG-DIS: rgba(0, 0, 0, 0.2);
 @INPUT-BORDER-COLOR-DIS: rgba(255, 255, 255, 0.01);
 @INPUT-COLOR-DIS: rgba(102, 102, 102, 0.3);
 
 // ----- button ----- //
-@BUTTON-BG: #e74059;
+@BUTTON-BG: #ffdc10;
 @BUTTON-COLOR: #dddddd;
 @BUTTON-BG-DIS: rgba(231, 64, 89, 0.2);
 @BUTTON-COLOR-DIS: rgba(102, 102, 102, 0.4);
-@BUTTON-BG-HOVER: rgba(231, 64, 89, 0.7);
-@BUTTON-BG-FOCUS: #dd2943;
+@BUTTON-BG-HOVER: #ffdc10;
+@BUTTON-BG-FOCUS: rgba(255, 180, 0, 0.7);
 
 // button - plain
 @BUTTON-PLA-BG: transparent;
-@BUTTON-PLA-COLOR: #e74059;
-@BUTTON-PLA-BORDER_COLOR: #e74059;
+@BUTTON-PLA-COLOR: #ffdc10;
+@BUTTON-PLA-BORDER_COLOR: #ffdc10;
 
 @BUTTON-PLA-BORDER-COLOR-HOVER: #dd2943;
 @BUTTON-PLA-COLOR-HOVER: #dd2943;
@@ -77,22 +77,18 @@
 
   /** button **/
   .el-button--primary {
-    &:hover {
-      background: @BUTTON-BG-HOVER;
-      border-color: @BUTTON-BG-HOVER;
-    }
-    &:active,
-    &:focus {
-      background: @BUTTON-BG-FOCUS;
-      border-color: @BUTTON-BG-FOCUS;
+    &:active {
+      opacity: 0.7;
     }
   }
 
-  .el-button--primary.is-disabled,
-  .el-button--primary.is-disabled:hover {
-    background: @BUTTON-BG-DIS;
-    border: none;
-    color: @BUTTON-COLOR-DIS !important;
+  .el-button--primary.is-disabled {
+    // background: @BUTTON-BG-DIS;
+    // border: none;
+    // color: @BUTTON-COLOR-DIS !important;
+    background: var(--color-1);
+    border-color: var(--color-1);
+    opacity: 0.5;
   }
 
   .el-button--default.is-plain {
@@ -112,7 +108,7 @@
 
   /** MessageBox 弹框 **/
   .el-message-box {
-    background: #232427;
+    background: #1e1e1e;
     border: 1px solid rgba(255, 255, 255, 0.03);
     padding: 30px;
     border-radius: 10px;
@@ -133,28 +129,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .el-button {
+      &:active {
+        opacity: 0.7;
+      }
+    }
   }
   .cancel-btn {
-    background: #474b55;
-    border-radius: 20px;
-    font-family: 'SFUIText-Medium';
+    background: #f2f2f2;
+    border-radius: 8px;
+    font-family: Tahoma-Bold;
     font-size: 14px;
     color: #dddddd;
     padding: 8px 20px;
     border: none;
   }
   .confirm-btn {
-    background: #e74059 !important;
+    background: #ffdc10 !important;
     border-radius: 20px;
-    font-family: 'SFUIText-Medium';
+    font-family: Tahoma-Bold;
     font-size: 14px;
-    color: #dddddd;
+    color: #333333;
     padding: 8px 20px;
     border: none;
     margin-left: 20px !important;
-    &:hover {
-      background: rgb(253, 126, 148) !important;
-    }
   }
 
   /** 滚动条 **/

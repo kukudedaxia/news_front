@@ -35,7 +35,7 @@
       <div class="cover" v-if="draftData.img.length > 1" dir="ltr">
         {{ `+${draftData.img.length - 1}` }}
       </div>
-      <img :src="lang === 'en' ? piiic : piiicAr" class="piiic" v-if="draftData.img[0].piiic" />
+      <img :src="lang == 'en' ? piiic : piiicAr" class="piiic" v-if="draftData.img[0].piiic" />
     </div>
     <div class="video" v-if="draftData.video && draftData.video.fid">
       <img
@@ -72,7 +72,7 @@ export default {
       return process.env.VUE_APP_UPLOAD_IMG_URL;
     },
     lang() {
-      return this.$store.state.lanuage;
+      return this.$store.state.language;
     },
   },
   data() {
@@ -142,14 +142,13 @@ export default {
 
 <style lang="less" scoped>
 .com-drafts {
-  padding: 18px 20px;
+  padding: 12px 19px;
   background: var(--color-9);
-  border-bottom: 1px solid var(--color-10);
+  border-top: 1px solid var(--color-11);
   transition: 0.3s;
   &:hover {
     cursor: pointer;
-    background: var(--color-10);
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
+    background: var(--color-11);
   }
   .text-box {
     flex: 1;
@@ -171,7 +170,7 @@ export default {
       .time {
         font-family: Tahoma;
         font-size: 12px;
-        color: var(--color-13);
+        color: var(--color-14);
       }
       .btn-del {
         font-family: Tahoma;

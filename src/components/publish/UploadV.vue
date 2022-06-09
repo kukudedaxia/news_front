@@ -378,7 +378,7 @@ export default {
     transition: 0.3s;
   }
   &:hover {
-    border-color: #ff536c;
+    border-color: var(--color-1);
     .uploader-icon {
       background-image: url('../../assets/images/publisher/conmpose_icon_morepics_red@3x.png');
     }

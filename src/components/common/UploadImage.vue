@@ -251,7 +251,7 @@ export default {
   .uploader {
     width: 100px;
     height: 100px;
-    border: 1px solid #b9bdc7;
+    border: 1px solid var(--color-13);
     border-radius: 6px;
     position: relative;
     overflow: hidden;
@@ -306,7 +306,7 @@ export default {
       background-size: 8px;
       transition: 0.3s;
       &:hover {
-        background-image: url('../../assets/images/publisher/media_icon_close_small_click@3x.png');
+        background-image: url('../../assets/images/publisher/media_icon_close_click@3x.png');
       }
     }
     .mantle {

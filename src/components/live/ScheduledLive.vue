@@ -185,7 +185,7 @@ export default {
   overflow-y: auto;
   // padding: 15px 20px;
   .title {
-    font-family: SFUIText-Semibold;
+    font-family: Tahoma;
     font-size: 14px;
     color: #dddddd;
     letter-spacing: 0;
@@ -217,7 +217,7 @@ export default {
         padding: 4px;
 
         .name {
-          font-family: SFUIText-Semibold;
+          font-family: Tahoma;
           font-size: 14px;
           color: #dddddd;
           margin-bottom: 10px;
@@ -238,23 +238,22 @@ export default {
       .btn-operation {
         display: flex;
         .btn {
-          font-family: SFUIText-Medium;
+          font-family: Tahoma;
           font-size: 12px;
-          color: #dddddd;
-          letter-spacing: 0;
-          text-align: center;
-          border-radius: 21px;
-          padding: 5px 9px;
-          height: 24px;
+          color: #333333;
+          border-radius: 6px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          padding: 4px 8px;
         }
         .is-plain {
-          border: 1px solid #6d7283;
-          color: #6d7283;
+          border: 1px solid #999999;
+          color: #999999;
           background-color: transparent;
         }
         .is-plain:hover {
-          border-color: #9098b2;
-          color: #9098b2;
+          opacity: 0.7;
         }
       }
     }

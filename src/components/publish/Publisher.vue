@@ -748,21 +748,25 @@ export default {
       font-weight: 400;
       line-height: 19px;
       font-family: 'Tahoma';
+      transition: none !important;
       &::placeholder {
         color: var(--color-14);
       }
       &:focus {
         border-color: var(--color-1);
+        background: var(--color-9) !important;
       }
     }
   }
   .bottom {
     justify-content: space-between;
     padding: 0 20px 12px 13px;
+    user-select: none;
     .operation-box {
+      padding-left: 6px;
       li {
-        width: 38px;
-        height: 38px;
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -775,12 +779,14 @@ export default {
           position: relative;
         }
         &:hover {
-          background: #f6f6f9;
-          border-radius: 50%;
+          background: var(--color-11);
+          border-radius: 6px;
         }
       }
     }
     .inform-box {
+      display: flex;
+      align-items: center;
       .text-length {
         display: inline-block;
         position: relative;
@@ -816,11 +822,10 @@ export default {
           }
         }
       }
-
       .select {
-        margin: 0 20px;
-        padding: 9px 12px 9px 8px;
-        height: 34px;
+        margin: 0 8px;
+        padding: 4px 8px 4px 4px;
+        height: 25px;
         font-size: 14px;
         color: var(--color-15);
         letter-spacing: 0;
@@ -828,12 +833,13 @@ export default {
         cursor: pointer;
         transition: 0.3s;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
         &:hover {
           border-radius: 8px;
           background: #f6f6f9;
         }
         i {
-          margin-right: 4px;
+          margin: 0px 4px !important;
           &::before {
             content: '';
             display: inline-block;
@@ -857,14 +863,15 @@ export default {
       }
       .inform-box_btn {
         font-size: 14px;
-        color: #ffffff;
-        letter-spacing: 0;
-        text-align: center;
         background-color: var(--color-1);
         border-color: var(--color-1);
-        min-width: 78px;
+        width: 75px;
+        height: 32px;
         color: var(--color-16);
         border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         // &:active {
         //   background-color: #ef4c63;
         //   border-color: #ef4c63;
@@ -897,22 +904,25 @@ export default {
 }
 .el-dropdown-menu {
   min-width: 160px;
-  background: #ffffff;
-  border: 1px solid #eff1f5;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.12);
+  background: var(--color-9);
+  border: 1px solid var(--color-11);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 6px;
+  padding: 10px 9px 0 9px;
   .el-dropdown-menu__item {
-    height: 40px;
-    font-size: 16px;
-    letter-spacing: 0;
+    height: 29px;
+    padding: 6px 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--color-16);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
   }
   .el-dropdown-menu__item:focus,
   .el-dropdown-menu__item:not(.is-disabled):hover {
-    background-color: transparent;
-  }
-  .el-dropdown-menu__item:focus,
-  .el-dropdown-menu__item:not(.is-disabled):hover {
-    background-color: transparent;
+    background-color: var(--color-27);
   }
   /deep/.popper__arrow {
     display: none;

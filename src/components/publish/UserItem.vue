@@ -42,11 +42,9 @@ export default {
 .com-user-item {
   padding: 10px 19px;
   cursor: pointer;
+  transition: 0.3s;
   &:hover {
-    background-color: #f9f9fb;
-    .info > p {
-      color: #ff536c;
-    }
+    background-color: #fff4b6;
   }
   & > img {
     width: 40px;

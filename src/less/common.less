@@ -40,7 +40,7 @@ html[data-theme='dark'] .swiper-pagination-bullet {
   src: url('../assets/fonts/SF-UI-Text-Semibold.otf') format('opentype');
 }
 @font-face {
-  font-family: 'SFUIText-Medium';
+  font-family: 'Tahoma';
   src: url('../assets/fonts/SF-UI-Text-Medium.otf') format('opentype');
 }
 
@@ -300,7 +300,7 @@ html[lang='ar'] {
 
 /** 通用的 Mssagebox弹窗，无title **/
 .el-message-box {
-  background: #ffffff;
+  background: var(--color-9);
   border: 1px solid rgba(255, 255, 255, 0.03);
   padding: 56px 40px 30px 40px !important;
   border-radius: 6px;
@@ -313,7 +313,7 @@ html[lang='ar'] {
     padding-bottom: 46px !important;
     font-family: Tahoma;
     font-size: 16px;
-    color: #333333;
+    color: var(--color-16);
     letter-spacing: 0;
     text-align: center;
   }
@@ -323,24 +323,23 @@ html[lang='ar'] {
     padding: 0 !important;
     .el-button {
       width: 140px;
-      background: #f6f6f9;
-      border-color: #f6f6f9;
-      border-radius: 17px;
-      font-family: SFUIText-Medium;
+      background: var(--color-11);
+      border-color: var(--color-11);
+      border-radius: 8px;
+      font-family: Tahoma-Bold;
       font-size: 14px;
-      color: #333333;
-      letter-spacing: 0;
-      text-align: center;
+      font-weight: 700;
+      color: var(--color-15);
       height: 34px;
+      &:active {
+        opacity: 0.7;
+      }
     }
     .el-button--primary {
-      background: #ff536c;
-      border-color: #ff536c;
-      color: #ffffff;
-      &:active {
-        background-color: #ef4c63;
-        border-color: #ef4c63;
-      }
+      background: var(--color-1);
+      border-color: var(--color-1);
+      color: var(--color-16);
+
       &:disabled {
         opacity: 0.4;
       }
@@ -387,7 +386,7 @@ html[lang='ar'] {
     padding-top: 30px;
     .el-message-box__title {
       color: #dddddd;
-      font-family: SFUIText-Semibold;
+      font-family: Tahoma;
       font-size: 16px;
       letter-spacing: 0;
       text-align: center;
@@ -418,7 +417,7 @@ html[lang='ar'] {
 
 // element - button
 .el-button.el-button--small {
-  font-family: SFUIText-Medium;
+  font-family: Tahoma;
   font-size: 14px;
   color: #dddddd;
   letter-spacing: 0;
@@ -438,28 +437,23 @@ html[lang='ar'] {
 }
 // button 样式
 .be-btn--dark {
-  background: #474b55;
-  border-color: #474b55;
-  font-family: SFUIText-Medium;
+  background: #666666;
+  border-color: #666666;
+  font-family: Tahoma;
   font-size: 14px;
   color: #dddddd;
-  &:hover {
-    background: rgba(71, 75, 85, 0.7) !important;
-    border-color: rgba(71, 75, 85, 0.7) !important;
-    color: rgba(211, 211, 211, 0.7) !important;
-  }
-  &:active,
-  &:focus {
-    background: rgba(71, 75, 85, 0.7) !important;
-    border-color: rgba(71, 75, 85, 0.7) !important;
-    color: rgba(211, 211, 211, 0.7) !important;
+  &:active {
+    opacity: 0.7;
   }
 }
-.be-btn--dark.is-disabled,
-.be-btn--dark.is-disabled:hover {
-  background: rgba(71, 75, 85, 0.2) !important;
-  border: none;
-  color: rgba(102, 102, 102, 0.4) !important;
+.be-btn--dark.is-disabled {
+  background: #666666;
+  border-color: #666666;
+  opacity: 0.5;
+}
+
+.el-loading-mask {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 // 一行省略号

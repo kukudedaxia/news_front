@@ -46,11 +46,9 @@ export default {
   cursor: pointer;
   flex-direction: column;
   align-items: flex-start;
+  transition: 0.3s;
   &:hover {
-    background-color: #f9f9fb;
-    .title {
-      color: #ff536c;
-    }
+    background-color: #fff4b6;
   }
   .title {
     font-family: Tahoma;

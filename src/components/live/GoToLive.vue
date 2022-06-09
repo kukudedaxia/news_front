@@ -19,7 +19,7 @@
           <img
             src="@/assets/images/live/icon_addcover@3x.png"
             class="avatar-uploader-icon"
-            v-else
+            v-else-if="!imgPids && !uploadLoading"
           />
           <div class="upload-loading" v-show="uploadLoading">
             <img
@@ -114,7 +114,7 @@
         type="primary"
         :loading="btnLoading"
         :disabled="btnDisabled"
-        :class="['item-btn', 'flex-align', { 'be-btn--dark': liveState !== 0 }]"
+        :class="['item-btn', 'btn-start', 'flex-align', { 'be-btn--dark': liveState !== 0 }]"
         @click="onLiveClick"
         >{{ btnText }}
       </el-button>
@@ -332,14 +332,13 @@ export default {
       position: relative;
       .item-btn {
         position: absolute;
-        position: absolute;
-        top: calc(50% - 14px);
-        right: 6px;
-        padding: 7px 9px;
+        top: calc(50% - 11px);
+        right: 9px;
+        padding: 4px 8px;
       }
     }
     .title {
-      font-family: SFUIText-Semibold;
+      font-family: Tahoma;
       font-size: 14px;
       color: #dddddd;
       margin-bottom: 8px;
@@ -357,12 +356,20 @@ export default {
     }
     .item-btn {
       margin-left: 10px;
-      border-radius: 21px;
-      font-family: SFUIText-Medium;
+      border-radius: 6px;
+      font-family: Ubuntu;
       font-size: 12px;
-      height: 28px;
-      color: #dddddd;
-      padding: 7px 15px;
+      height: 22px;
+      color: #333333;
+      padding: 4px 8px;
+      margin-bottom: 8px;
+    }
+    .btn-start {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      padding: 8px 12px;
+      height: 32px;
     }
   }
   .title_img {
@@ -480,19 +487,20 @@ html[lang='ar'] {
     text-align: center;
   }
   .el-upload:hover {
-    border-color: #ff536c;
+    border-color: #ffdc10;
   }
 }
 
 .item-input {
   input {
-    border-radius: 20px;
+    border-radius: 6px;
     font-family: Tahoma;
     font-size: 14px;
     color: #dddddd;
     &::placeholder {
-      font-family: Tahoma;
-      font-size: 14px;
+      // font-family: Tahoma;
+      // font-size: 14px;
+      color: #666666;
     }
   }
 }

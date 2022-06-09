@@ -104,7 +104,7 @@ export default {
   },
   created() {
     this.uid = Number(this.user.id);
-    // this.$store.commit('route/setLoadingState', true);
+    this.$store.commit('route/setLoadingState', true);
     this.getToken();
   },
   mounted() {},
@@ -709,7 +709,7 @@ export default {
     .el-tabs__item {
       font-family: Tahoma;
       font-size: 16px;
-      color: #dddddd;
+      color: var(--color-14);
       height: 50px;
       line-height: 50px;
       padding: 0 15px;
@@ -719,7 +719,7 @@ export default {
     }
     .el-tabs__item.is-active {
       font-family: Tahoma-Bold;
-      color: #ff536c;
+      color: var(--color-1);
     }
     .el-tabs__active-bar {
       height: 3px;

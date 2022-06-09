@@ -1,7 +1,7 @@
 <template>
   <div class="bottom com-footer">
     <div class="bottom-info">
-      <span class="power">{{ $t('desc.power') }}</span>
+      <!-- <span class="power">{{ $t('desc.power') }}</span> -->
       <div class="bottom-link">
         <a href="/about" target="_blank">{{ $t('desc.about') }}</a>
         <a href="/newsroom" target="_blank">{{ $t('newsroom') }}</a>
@@ -20,36 +20,27 @@
   background: rgba(255, 255, 255, 0.8);
 }
 .bottom-link {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-column-gap: 55px;
 }
 .bottom-info {
   height: 100px;
   display: flex;
-  width: 1130px;
+  width: 1200px;
   justify-content: space-around;
   line-height: 100px;
   a {
     font-size: 12px;
-    color: #333333;
+    color: var(--color-16);
     cursor: pointer;
     text-decoration: none;
     display: flex;
     align-items: center;
-    line-height: 12px;
+    line-height: 14px;
   }
   a:hover {
-    color: #00a1d6;
-  }
-  .power {
-    margin-right: 247px;
-    font-size: 12px;
-    color: #999;
-    cursor: default;
-    display: flex;
-    align-items: center;
-    line-height: 12px;
+    color: #346aa7;
   }
 }
 

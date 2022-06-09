@@ -195,26 +195,28 @@ export default {
 }
 </style>
 
+//
 <style lang="less">
-html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
-  width: auto;
-}
+// html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+//   width: auto;
+// }
 html[lang='ar'] #feed-tab .el-tabs .el-tabs__item {
   transform: scaleX(-1);
 }
 
-html[lang='ar'] #feed-tab .el-tabs .el-tabs__item:last-child {
-  flex: 1;
-}
+// html[lang='ar'] #feed-tab .el-tabs .el-tabs__item:last-child {
+//   flex: 1;
+// }
 html[lang='ar'] #feed-tab .el-tabs .el-tabs__header {
   transform: scaleX(-1);
+  margin-bottom: 1px;
 }
-html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-html[lang='ar'] .com-feed-tabs .el-tabs .el-tabs__header .el-tabs__nav-wrap::after {
-  height: 2px;
-}
+// html[lang='ar'] #feed-tab .el-tabs .el-tabs__nav {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+// html[lang='ar'] .com-feed-tabs .el-tabs .el-tabs__header .el-tabs__nav-wrap::after {
+//   height: 2px;
+// }
 </style>

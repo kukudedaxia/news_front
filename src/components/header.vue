@@ -303,6 +303,15 @@ html[lang='ar'] .el-message-box__headerbtn {
 .dark .menus .el-tabs__header .el-tabs__item:not(.is-active) {
   color: #dddddd;
 }
+.dark {
+  .el-tabs__item {
+    color: #999999 !important;
+  }
+  .el-tabs__item.is-active {
+    font-weight: 700;
+    color: #dddddd !important;
+  }
+}
 html[lang='ar'] {
   .menus {
     .el-tabs__item {
@@ -321,7 +330,7 @@ html[lang='ar'] {
 }
 .header {
   display: flex;
-  max-width: 1100px;
+  max-width: 1200px;
   justify-content: space-between;
   position: relative;
   // padding-top: 23px;
@@ -346,6 +355,16 @@ html[lang='ar'] {
 .logo-icon {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30utxzfusj20ci02rt8k.jpg') no-repeat;
   background-size: 100% 100%;
+}
+.dark {
+  .logo-icon {
+    background: url('https://img.bee-cdn.com/large/3b9ae203lz1h324c3rt8dj204600xjr5.jpg') no-repeat;
+    background-size: 100% 100%;
+  }
+  .ar-logo-icon {
+    background: url('https://img.bee-cdn.com/large/3b9ae203lz1h324d1t62gj2046015q2p.jpg') no-repeat;
+    background-size: 100% 100%;
+  }
 }
 
 .lanuage {

@@ -123,7 +123,7 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    font-family: PingFangSC-Regular;
+    font-family: Tahoma;
     font-size: 14px;
     color: #666666;
     text-align: center;
@@ -138,7 +138,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-family: PingFangSC-Medium;
+      font-family: Tahoma;
       font-size: 24px;
       color: #dddddd;
       p {
