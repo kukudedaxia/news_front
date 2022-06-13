@@ -13,7 +13,7 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       uicode: '30000652',
     },
   },
@@ -31,7 +31,7 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },
@@ -40,7 +40,7 @@ const routes = [
     name: 'Concat',
     component: () => import('../views/Concat.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },
@@ -49,7 +49,7 @@ const routes = [
     name: 'Community',
     component: () => import('../views/Community.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },
@@ -58,7 +58,7 @@ const routes = [
     name: 'Term',
     component: () => import('../views/Term.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },
@@ -67,7 +67,7 @@ const routes = [
     name: 'Policy',
     component: () => import('../views/Policy.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },
@@ -76,7 +76,7 @@ const routes = [
     name: 'Policy',
     component: () => import('../views/Policy.vue'),
     meta: {
-      title: 'beeto',
+      title: 'hektar',
       hideMenu: true,
     },
   },

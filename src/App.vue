@@ -1,5 +1,6 @@
 <template>
-  <div id="app" v-loading="pageLoading" :class="{ dark: $route.name === 'Live' }">
+  <div id="app" :class="{ dark: $route.name === 'Live' }">
+    <page-loading v-if="pageLoading"></page-loading>
     <div id="nav">
       <Header />
     </div>
@@ -13,12 +14,14 @@
 <script>
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import PageLoading from '@/components/common/Loadings';
 
 export default {
   name: 'APP',
   components: {
     Header,
     Footer,
+    'page-loading': PageLoading,
   },
   computed: {
     pageLoading() {

@@ -5,7 +5,7 @@ const genEntry = path.resolve(__dirname, './entry.js');
 const webDir = path.resolve(__dirname, '../beeto/');
 
 // 版本号
-const webEntry = path.resolve(webDir, `entry20220215_3.js`);
+const webEntry = path.resolve(webDir, `entry20220613_1.js`);
 const hasWebEntry = fs.existsSync(webDir);
 !hasWebEntry && fs.mkdirSync(webDir);
 
@@ -16,7 +16,7 @@ function isLoadComplete() {
     console.log('入口文件生成完毕!');
   }
 }
-module.exports = function(assetManifest) {
+module.exports = function (assetManifest) {
   fs.readFile(genEntry, 'utf8', (err, data) => {
     if (err) throw err;
     data =

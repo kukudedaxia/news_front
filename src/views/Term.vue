@@ -192,7 +192,7 @@
         agree to comply with all applicable laws, rules and regulations regarding the Live Content
         including posting Live Content that does not violate the Community Rules. The Live Content
         will constitute your content and you are solely responsible for the Live Content. Any
-        dynamic efforts provided by Hektar are Beeto’s sole intellectual property and the Hektar
+        dynamic efforts provided by Hektar are Hektar’s sole intellectual property and the Hektar
         user may utilize such dynamic effects at its sole discretion. Any gifts or offers of gifts
         by the Hektar user or acceptance of such offers or gifts is at the Hektar user’s sole
         discretion.
@@ -284,7 +284,7 @@
           Activities, or Terrorist Financing and/or threatening, harassing or intimidating any party
           to prevent it from disclosing its knowledge of matters relevant to the assessment or from
           pursuing the assessment, or (ii) acts intended to materially impede the exercise of
-          Beeto’s access to contractually required information in connection with an assessment of
+          Hektar’s access to contractually required information in connection with an assessment of
           allegations of a Corrupt Practice, Fraudulent Practice, Money Laundering Activities, or
           Terrorist Financing;
         </p>

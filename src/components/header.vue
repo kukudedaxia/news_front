@@ -350,20 +350,20 @@ html[lang='ar'] {
 }
 .ar-logo-icon {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30xh9v9elj20ci03et8k.jpg') no-repeat;
-  background-size: 100% 100%;
+  background-size: contain;
 }
 .logo-icon {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30utxzfusj20ci02rt8k.jpg') no-repeat;
-  background-size: 100% 100%;
+  background-size: contain;
 }
 .dark {
   .logo-icon {
     background: url('https://img.bee-cdn.com/large/3b9ae203lz1h324c3rt8dj204600xjr5.jpg') no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
   }
   .ar-logo-icon {
-    background: url('https://img.bee-cdn.com/large/3b9ae203lz1h324d1t62gj2046015q2p.jpg') no-repeat;
-    background-size: 100% 100%;
+    background: url('https://img.bee-cdn.com/large/3b9ae203lz1h36vefjuicj20ci03ea9w.jpg') no-repeat;
+    background-size: contain;
   }
 }
 
