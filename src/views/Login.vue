@@ -550,7 +550,7 @@ html[lang='ar'] #login .el-tabs__nav {
 
 <style lang="less" scoped>
 #login {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h37mr7ax8aj21hc0u0do7.jpg') no-repeat;
   background-size: 100% 100%;
   margin-top: -80px;
   height: 980px;

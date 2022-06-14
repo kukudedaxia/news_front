@@ -104,7 +104,7 @@ export default {
 <style lang="less" scoped>
 .swiper {
   width: 100%;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat; //webp720
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h37mr7ax8aj21hc0u0do7.jpg') no-repeat; //webp720
   // background-size: 100% 100%;
   background-size: cover;
 }
@@ -149,7 +149,7 @@ export default {
 
 // 背景
 // .slide-bg-1 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h2ycz99r0fj20e8080q5f.jpg') no-repeat; //webp720
+//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h37mr7ax8aj21hc0u0do7.jpg') no-repeat; //webp720
 //   background-size: 100% 100%;
 // }
 // .slide-bg-2 {
