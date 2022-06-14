@@ -1,7 +1,11 @@
 <template>
   <div id="login">
     <div class="tabs">
-      <el-tabs v-model="activeName" @tab-click="changeTab">
+      <el-tabs
+        v-model="activeName"
+        @tab-click="changeTab"
+        :class="{ accountTab: activeName == 'account' }"
+      >
         <el-tab-pane :label="$t('login.tab1')" name="phone" class="mt-30">
           <div class="con" v-if="!hide">
             <div class="line">
@@ -425,6 +429,9 @@ export default {
     font-size: 20px;
     color: var(--color-14);
   }
+  .el-tabs__item:nth-child(3) {
+    padding-left: 30px;
+  }
   .el-tabs__active-bar {
     bottom: -15px;
     height: 3px;
@@ -485,6 +492,7 @@ export default {
     padding: 10px;
   }
 }
+
 .warning_tip {
   background: rgba(136, 142, 152, 0.96);
   border-radius: 20px;
@@ -512,13 +520,30 @@ html[lang='ar'] #login .el-tabs__nav {
 }
 html[lang='ar'] #login .el-tabs__item {
   transform: scaleX(-1);
+  font-size: 18px;
 }
+html[lang='ar'] #login .el-tabs__active-bar {
+  // zoom: 0.8;
+}
+html[lang='ar'] #login {
+  .accountTab {
+    .el-tabs__active-bar {
+      left: 20px;
+    }
+  }
+}
+
 html[lang='ar'] #login .el-tabs__item:nth-child(2) {
   padding-right: 0;
 }
+#login .el-tabs__active-bar {
+}
 html[lang='ar'] #login .el-tabs__item:last-child {
-  flex: 1;
-  padding: 0 30px;
+  // flex: 1;
+  // padding: 0 30px;
+  // padding: 0 70px 0 0;
+  padding: 0;
+  // padding-left: 50px;
 }
 html[lang='ar'] #login .el-tabs__header {
   transform: scaleX(-1);
