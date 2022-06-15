@@ -149,6 +149,7 @@ export default {
         width: 250px;
         margin-top: 20px;
         margin-left: 0;
+        color: #333333;
       }
     }
   }
