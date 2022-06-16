@@ -210,54 +210,34 @@ export default {
   // margin-top: 30px;
 }
 .web-phone-1 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzas3c1j20wv1h742w.jpg') no-repeat; //webp720
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396hlwtirj20lx0zh0up.jpg') no-repeat; //webp720
   background-size: 100% 100%;
 }
 .web-phone-2 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzr6at4j20wv1h845o.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396jgp757j20lx0zh769.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-3 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30uzxvw3nj20wv1h778p.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396jogqkgj20lx0ziafq.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-4 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v06x41dj20wv1h8wge.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396k4a488j20lx0zhjuh.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-5 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0fq1zlj20wv1h7doa.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396khcu2uj20lx0zh754.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-6 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0opvzvj20wv1h8470.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396kq3sqwj20lx0zi0wg.jpg') no-repeat;
   background-size: 100% 100%;
 }
 .web-phone-7 {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30v0x3h3yj20wv1h70wx.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396kzu6h8j20lx0zhtau.jpg') no-repeat;
   background-size: 100% 100%;
 }
 
-// .web-phone-1 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvh0cp8j20n0183gs5.jpg') no-repeat;
-//   background-size: 100% 100%;
-// }
-// .web-phone-2 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyvyg0ryj20n0183wjr.jpg') no-repeat;
-//   background-size: 100% 100%;
-// }
-// .web-phone-3 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxafp5zj20n018379m.jpg') no-repeat;
-//   background-size: 100% 100%;
-// }
-// .web-phone-4 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmtyxmngexj20n0183dmf.jpg') no-repeat;
-//   background-size: 100% 100%;
-// }
-// .web-phone-5 {
-//   background: url('https://img.bee-cdn.com/large/3b9ae203lz1gneyd8xce1j20n0183dhf.jpg') no-repeat;
-//   background-size: 100% 100%;
-// }
 .code {
   width: 100%;
   height: 100%;
@@ -276,37 +256,37 @@ html[lang='ar'] .page-btn {
 
 html[lang='ar'] .web-phone-1 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvc1xi5j207o0epgoi.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30wzsnwy7j20wv1h7dia.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396m2zi80j20lx0zhmyc.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-2 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvmfbndj207o0epadu.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x035wfaj20wv1h7wji.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396maljxcj20lx0zhaby.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-3 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuvz791xj207o0epada.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x0iivhoj20wv1h778b.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396mo8220j20lx0zh0ws.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-4 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x0tfzhej20wv1h741f.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396ncgnwzj20lx0zhgo0.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-5 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x212oq8j20wv1h77d2.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396mzrud0j20lx0zh0tk.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-6 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x2gc76ej20wv1h7te2.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396nmx08gj20lx0zhtbc.jpg') no-repeat;
   background-size: 100% 100%;
 }
 html[lang='ar'] .web-phone-7 {
   // background: url('https://img.bee-cdn.com/large/3b9ae203lz1gmjuw72at0j207o0epaau.jpg') no-repeat;
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30x2xrbanj20wv1h7n3o.jpg') no-repeat;
+  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h396nux7n3j20lx0zhgon.jpg') no-repeat;
   background-size: 100% 100%;
 }
 

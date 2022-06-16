@@ -15,19 +15,19 @@ const message = {
     title: 'Space',
     info: 'Your space for upscale dialogue, express thoughts freely',
   },
-  slide2: {
+  slide4: {
     title: 'Nearby',
     info: 'Discover new things around and find nearby friends',
   },
-  slide3: {
+  slide2: {
     title: 'Voice Room',
     info: 'Discuss, connect, learn',
   },
-  slide4: {
+  slide5: {
     title: 'Group chat',
     info: 'Gather up and keep in touch',
   },
-  slide5: {
+  slide3: {
     title: 'Live Room',
     info: 'Talk face to face with the host as if you were in real life',
   },
