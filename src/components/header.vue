@@ -351,6 +351,7 @@ html[lang='ar'] {
 .ar-logo-icon {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30xh9v9elj20ci03et8k.jpg') no-repeat;
   height: 40px;
+  background-size: 100% 100%;
 }
 .logo-icon {
   background: url('https://img.bee-cdn.com/large/3b9ae203lz1h30utxzfusj20ci02rt8k.jpg') no-repeat;
