@@ -113,10 +113,10 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'https://bee.to/',
+        target: 'https://hektarapp.com/',
       },
       '/multimedia': {
-        target: 'https://bee.to/',
+        target: 'https://hektarapp.com/',
       },
       '/upload': {
         // target: 'https://upimg.bee.to/',

@@ -63,7 +63,7 @@ export default new Vuex.Store({
     setPageLoading() {},
     setRiyadhAcess(state, data) {
       state.access = data;
-    }
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
@@ -211,15 +211,28 @@ export default new Vuex.Store({
             method: 'get',
             url: `api/pc/login/tab/display`,
           },
+
           onSuccess: res => {
             let arr = [];
+            let userInfo = {};
+            if (Cookies.get('userInfo')) {
+              userInfo = JSON.parse(Cookies.get('userInfo'));
+            }
             for (let key in res.data.allTab) {
               let obj = {};
               obj.key = key;
               obj.name = res.data.allTab[key];
               obj.show = res.data.tab[key];
+              if (obj.name == 'live') {
+                if (userInfo.id == '1000435467') {
+                  obj.show = true;
+                } else {
+                  obj.show = false;
+                }
+              }
               arr.push(obj);
             }
+
             arr.sort((a, b) => {
               return b.key - a.key;
             });
