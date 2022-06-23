@@ -20,7 +20,7 @@ const message = {
     info: 'اكتشف الاشياء الجديدة من حولك وتعرف على الأصدقاء ',
   },
   slide3: {
-    title: 'Voice Room',
+    title: 'البث الصوتي',
     info: 'ناقش .. تعرف .. تعلم ',
   },
   slide4: {
