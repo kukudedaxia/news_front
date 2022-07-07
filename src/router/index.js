@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import store from '../store';
-import Cookies from 'js-cookie';
 import { loadLanguageAsync } from '../utils/i18n';
 import { initTheme } from '@/utils/theme';
 
@@ -13,17 +11,16 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
-      title: 'hektar',
-      uicode: '30000652',
+      title: 'bcaca',
+      keepAlive: true,
     },
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue'),
+    path: '/detail/:id',
+    name: 'Detail',
+    component: () => import('../views/Detail.vue'),
     meta: {
-      title: 'loginpage',
-      auth: true,
+      title: 'bcaca detail',
     },
   },
   {
@@ -31,93 +28,7 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/concat',
-    name: 'Concat',
-    component: () => import('../views/Concat.vue'),
-    meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/community',
-    name: 'Community',
-    component: () => import('../views/Community.vue'),
-    meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/terms',
-    name: 'Term',
-    component: () => import('../views/Term.vue'),
-    meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/policy',
-    name: 'Policy',
-    component: () => import('../views/Policy.vue'),
-    meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/en/privacy',
-    name: 'Policy',
-    component: () => import('../views/Policy.vue'),
-    meta: {
-      title: 'hektar',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/newsroom',
-    name: 'Newsroom',
-    component: () => import('../views/News.vue'),
-    meta: {
-      title: 'newsroom',
-      hideMenu: true,
-    },
-  },
-  {
-    path: '/newsroom/:id',
-    name: 'newsroomItem',
-    component: () => import('../views/NewsItem.vue'),
-    meta: {
-      title: 'newsroom',
-      hideMenu: true,
-    },
-  },
-  // ---- 直播 ---- //
-  {
-    path: '/live',
-    name: 'Live',
-    component: () => import('../views/live/Index.vue'),
-    meta: {
-      title: 'lives',
-      needLogin: true,
-      auth: true,
-      authName: 'live',
-    },
-  },
-  // ---- 发布器 ---- //
-  {
-    path: '/publisher',
-    name: 'Publisher',
-    component: () => import('../views/Publisher.vue'),
-    meta: {
-      title: 'publish',
-      needLogin: true,
+      title: 'about bcaca',
     },
   },
   {
@@ -128,11 +39,14 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/',
   routes,
   // 可以记录页面的滚动条位置
-  scrollBehavior() {
-    return { x: 0, y: 0 };
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
   },
 });
 
@@ -159,52 +73,7 @@ router.beforeEach(async (to, from, next) => {
     await loadLanguageAsync(lang);
   }
   //埋点
-  if (to.meta.uicode) {
-    store.dispatch('send', { action: '5141' });
-  }
-  store.commit('changeFromPage', from);
-  store.commit('changeToPage', to);
-  if (Cookies.get('userInfo')) {
-    console.log(Cookies.get('SUB'));
-    const userInfo = JSON.parse(Cookies.get('userInfo'));
-    if (userInfo.SUB == Cookies.get('SUB')) {
-      store.commit('setUser', JSON.parse(Cookies.get('userInfo')));
-    } else {
-      Cookies.remove('userInfo');
-    }
-  }
-  if (Cookies.get('tabs')) {
-    store.commit('setTab', JSON.parse(Cookies.get('tabs')));
-  }
-  // store.dispatch('changeUid', JSON.parse(Cookies.get('userInfo')));
-  if (to.meta.needLogin) {
-    if (Cookies.get('userInfo')) {
-      // 离开行为 如果用户此时登录成功去登录页 自动跳回首页
-      if (to.path === '/login') {
-        next('/');
-      } else {
-        if (to.meta.auth) {
-          const res = await store.dispatch('getTab');
-          const auth = res.filter(item => item.name == to.meta.authName && item.show);
-          if (auth.length > 0) {
-            next();
-          } else {
-            next(`/publisher`);
-          }
-        } else {
-          next();
-        }
-      }
-    } else {
-      if (to.path === '/login') {
-        next();
-      } else {
-        next(`/login?redirect=${to.path}`);
-      }
-    }
-  } else {
-    next();
-  }
+  next();
 });
 
 export default router;

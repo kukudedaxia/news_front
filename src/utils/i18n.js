@@ -1,34 +1,29 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import en from '@/language/en';
-import ar from '@/language/ar';
+import zh from '@/language/zh';
 import store from '../store/index';
 import request from './request';
 
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-  locale: 'en', // 设置默认语言环境
+  locale: 'zh', // 设置默认语言环境
   fallbackLocale: 'en',
   messages: {
     en,
-    ar,
+    zh,
   },
 });
 
 export default i18n;
-const loadedLanguages = ['en', 'ar'];  // 我们的默认语言
+const loadedLanguages = ['zh', 'en']; // 我们的默认语言
 
 export function setI18nLanguage(lang) {
   i18n.locale = lang;
   store.dispatch('changeLanguage', lang);
   request.defaults.headers.common['Accept-Language'] = lang;
   document.querySelector('html').setAttribute('lang', lang);
-  if (lang == 'ar') {
-    document.querySelector('html').setAttribute('dir', 'rtl');
-  } else {
-    document.querySelector('html').setAttribute('dir', 'ltr');
-  }
   appendMeta();
   return lang;
 }

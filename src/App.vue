@@ -5,9 +5,15 @@
       <Header />
     </div>
     <div :class="['main', { homepage: path == '/' }]">
-      <router-view v-wechat-title="$i18n.t($route.meta.title)" />
+      <keep-alive>
+        <router-view v-wechat-title="$i18n.t($route.meta.title)" v-if="$route.meta.keepAlive" />
+      </keep-alive>
+      <router-view v-wechat-title="$i18n.t($route.meta.title)" v-if="!$route.meta.keepAlive" />
     </div>
     <Footer v-if="footerShow" />
+    <el-backtop :bottom="80" :right="clientWidth < 769 ? 20 : 100">
+      <i class="el-icon-top back" style="font" title="回到顶部" />
+    </el-backtop>
   </div>
 </template>
 
@@ -29,6 +35,9 @@ export default {
     },
     path() {
       return this.$route.path;
+    },
+    clientWidth() {
+      return document.body.clientWidth;
     },
   },
   data() {
@@ -65,9 +74,27 @@ export default {
 <style lang="less" scoped>
 .main {
   border: 1px solid transparent;
+  background: #fafafa;
   min-height: calc(100vh - 178px);
+  // margin-top: 30px;
+  max-width: 1120px;
+  margin: 30px auto 0;
 }
-.homepage {
-  background: rgba(255, 255, 255, 0.8);
+#nav {
+  background: #fff;
+  border-bottom: 1px solid #e4e7ed;
+}
+.back {
+  font-size: 30px;
+  font-weight: bold;
+}
+/deep/.el-backtop {
+  z-index: 101;
+}
+@media screen and (max-width: 760px) {
+  .main {
+    margin-top: 0;
+    border: none;
+  }
 }
 </style>

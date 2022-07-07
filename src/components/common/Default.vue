@@ -9,14 +9,14 @@
         src="https://img.bee-cdn.com/large/3b9ae203lz1gsxmvmcom0j20e606c75m.jpg"
         class="default-img"
       />
-      <p>{{ $t('live.default') }}</p>
+      <p>无数据</p>
     </template>
     <template v-if="type === 1">
       <img
         src="https://img.bee-cdn.com/large/3b9ae203lz1gkggi9zo77j20hu08040d.jpg"
         class="default-img"
       />
-      <p>{{ $t('publisher.noResults') }}</p>
+      <p>无数据</p>
     </template>
   </div>
 </template>

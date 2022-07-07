@@ -18,7 +18,7 @@
     "core-js": "^3.6.5",
     "crc-32": "^1.2.0",
     "css-vars-ponyfill": "^2.4.2",
-    "element-ui": "^2.14.1",
+    "element-ui": "^2.15.7",
     "flv.js": "^1.6.2",
     "jquery": "^3.6.0",
     "jquery.caret": "^0.3.1",

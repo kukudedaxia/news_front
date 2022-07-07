@@ -1,98 +1,222 @@
 <i18n>
 {
 "en": {
-    "title": "About Us",
-    "title-1": "What's hektar?",
-    "paragraph-1":"Hektar is a multi-diverse content social media platform where Arabs can express themselves freely and speak their minds. Here, you can start creating, reading, sharing, discussing top trending hashtags and find the latest social media, celebrities and breaking news.",
-    "paragraph-2": "The experience on Hektar is unlike any other social media platform; it's more engaging, fun, inspiring and helps you discover what the people around you are really thinking of and doing",
-    "title-2": "On Hektar you can find:",
-    "paragraph-3":"Trendings, creative and exclusive campaigns every day, exclusive videos, top influencers and celebrities, giveaways, official accounts of different categories such as Entertainment, Fashion & Beauty, Games, Sports, Funny, Lifestyle, News & Politics. In Hektar, challenges happen everyday! You can create your daily life posts with your friends, you can express your opinions with a variety of communities sharing different interests, take part in outstanding campaigns, challenges, and activities using funny post tools, you can also create, share and download engaging content.",
-    "title-3": "What kind of native features does Hektar have?",
-    "li-1": "More localization innovation for Arabic friends.",
-    "li-2": "Download and share high quality videos to your WhatsApp, Facebook, Instagram, etc.",
-    "li-3": "Publish up to more than 15 photos and texts with a maximum of 10000 characters in one post.",
-    "li-4": "Upload videos with stickers, amazing filters, and background music.",
-    "li-5": "Switch in-app language freely.",
-    "li-6": "Explore the latest updates in movies, music, sports, fashion, etc.",
-    "li-7": "Create a social relationship with strangers, influencers and your fellow followers.",
-    "li-8": "Discover and scroll through influencers’ daily life and share yours.",
-    "li-9": "Hashtags, product design, language text input according to the Arabic user experience.",
-    "title-4": "Hektar Mission:",
-    "paragraph-4": "With our roots in the culture and Internet ecosystem of the Arab world, our goal is to connect Arabic language creators with their users; to establish a diverse and extensive community connection, so that 450 million Arabic speakers have convenient and equal access to information and connect with each other.",
-    "title-5": "Hektar Vision:",
-    "li-10": "The largest social media platform in the Arabic region",
-    "li-11": "The first choice for getting daily trending updates",
-    "li-12": "The best interest-based community"
+    "en": "Engilish",
+    "zh": "Chinese",
+    "title": "Help you to uncover the most valuable messages",
+    "li-1": "Aggregated",
+    "li-2": "Efficient",
+    "li-3": "Accurate",
+    "li-4": "Autonomous",
+    "li-5": "Perpetual",
+    "li-6": "Never ending",
+    "ph-1": "Bcaca tends to provide indexing and parsing of content, rather than just the content. As you know, most of those news release from media have been touched up, it would be easily misleading by incorrect market signals from that news. We believe that it is very vital for investors to obtain the most instructive information as an index to associate with other relevant message. By gathering all the information in a systematic way, they can finally output the most accurate market signal.",
+    "ph-2": "Bcaca use the independent developed 'intelligent content filtering driver' to automatically collect the most promising information through all online channels , and will also publish the web links and sources of those information. We do not make any information as our own product via any particular channel because we believe that only the purest content can help you find more opportunities."
   },
-  "ar": {
-    "title": "حول هكتار",
-    "title-1": "ما هو هكتار؟",
-    "paragraph-1": "هكتار هي منصة تواصل اجتماعي متعددة المحتوى، يمكن للعرب فيها التعبير براحتهم ومشاركة آرائهم. هنا يمكنك البدء في إنشاء و مشاركة الهاشتاجات الأكثر تداولاً، والإطلاع على أحدث أخبار وسائل التواصل الاجتماعي و أخبار المشاهير والترفيه والأخبار العاجلة.",
-    "paragraph-2": "التجربة في هكتار تختلف عن اي منصة تواصل اجتماعي اخرى؛ حيث انها اكثر تفاعلاً ومتعة، تساعدك على معرفة ما يدور حولك وما يفعله الآخرون." ,
-    "title-2": "ستجد في هكتار: ",
-    "paragraph-3":"الأحداث الجديدة والمتداولة، والحملات المبتكرة يومياً، ستجد ايضاً فيديوهات حصرية والعديد من المشاهير والمؤثرين المبدعين، اضافة الى امكانية الحصول على هدايا مشوقة، يمكنك أيضاً متابعة حسابات رسمية بمحتوى يشمل مختلف المجالات مثل: الفن و التليفزيون، الموضة والجمال، الألعاب، الرياضة، الكوميديا، اليوميات و الأخبار. \n في هكتار، هناك تحديات تحدث يومياً! يمكنك مشاركة يومياتك مع أصدقائك باستخدام وسائل مسلية، والتعبير عن آرائك مع مجتمعات تشاركك اهتماماتك المختلفة. اصنع، شارك وحمِّل المحتويات التي تعجبك.",
-    "title-3": "ما هي مميزات هكتار؟",
-    "li-1": "محتوى ومواضيع مخصصة للأصدقاء العرب.",
-    "li-2": "تحميل ومشاركة الفيديوهات بجودة عالية مباشرةً على المنصات المختلفة .",
-    "li-3": "نشر محتوى نصي يصل الى ١٠،٠٠٠ رمز بالاضافة الى امكانية نشر أكثر من ١٥ صورة في المنشور الواحد.",
-    "li-4": "رفع فيديوهات بإستخدام ملصقات، و مؤثرات مميزة، مع امكانية اضافة محتوى موسيقي.",
-    "li-5": "تغيير لغة العرض بسهولة.",
-    "li-6": "اكتشاف آخر المستجدات في عالم الأفلام، الموسيقى، الرياضة، الموضة والمزيد من الاهتمامات الأخرى.",
-    "li-7": "تبادل الصداقات مع المؤثرين والمتابعين في مجتمع هكتار المتنوع.",
-    "li-8": "تصفُّح واكتشاف يوميات المؤثرين والمشاهير و مشاركة جديدك.",
-    "li-9": "هاشتاجات، تصاميم ونصوص تناسب المستخدم العربي.",
-    "title-4": "مهمة هكتار:",
-    "paragraph-4": "بناءً على اهتمام مستخدمي الانترنت بالوطن العربي بالثقافة، هدفنا هو ربط صانعي محتوى اللغة العربية بمستخدميهم؛ لإنشاء اتصال مجتمعي متنوع وواسع ، لكي يتمتع 450 مليون متحدث باللغة العربية بالمعلومات والتواصل مع الآخرين.",
-    "title-5": "رؤية هكتار:",
-    "li-10": "أكبر منصة للتواصل الاجتماعي في المنطقة العربية",
-    "li-11": "الخيار الأول للحصول على الأحداث المتداولة",
-    "li-12": "أفضل مجتمع قائم على الاهتمامات المختلفة"
+  "zh": {
+    "en": "英文",
+    "zh": "中文",
+    "title": "帮助你挖掘最具价值的内容",
+    "li-1": "聚合",
+    "li-2": "高效",
+    "li-3": "精准",
+    "li-4": "自动",
+    "li-5": "永久存储",
+    "li-6": "永不停止",
+    "ph-1": "Bcaca 更倾向于提供消息的索引和解析，而不是消息本身。就像你们知道的，大多数媒体发出来的消息都是经过特殊编撰的，如果你只是看这些消息，这其中就会很容易存在市场信号的误导。我们相信投资者更需要的是将最具市场潜力的消息作为一种索引，从而发现与其相关联的其他讯息，然后将它们形成一个体系，最终成为最准确的市场信号。",
+    "ph-2": "Bcaca 采用自主研发的“智能化内容过滤驱动器”，从全网所有渠道自动化采集最有潜力的讯息，并将该条讯息的所有网络链接和来源公开。而不仅仅是去特定的渠道抓取内容，并包装成自己的产物。因为我们认为只有最存粹的内容本身才能帮助你寻找更多的机会。"
   }
 }
 </i18n>
 <template>
-  <div class="wrap docs ardocs">
-    <h1>{{ $t('title') }}</h1>
-    <h2>{{ $t('title-1') }}</h2>
-    <p>
-      {{ $t('paragraph-1') }}
-    </p>
-    <p>
-      {{ $t('paragraph-2') }}
-    </p>
-    <h2>{{ $t('title-2') }}</h2>
-    <p>
-      {{ $t('paragraph-3') }}
-    </p>
-    <h2>{{ $t('title-3') }}</h2>
-    <ul>
-      <li><span>📍</span> {{ $t('li-1') }}</li>
-      <li><span>🎥</span>{{ $t('li-2') }}</li>
-      <li><span>🔥</span>{{ $t('li-3') }}</li>
-      <li><span>🎵</span>{{ $t('li-4') }}</li>
-      <li><span>🔀</span>{{ $t('li-5') }}</li>
-      <li><span>📰</span>{{ $t('li-6') }}</li>
-      <li><span>👬</span>{{ $t('li-7') }}</li>
-      <li><span>👁‍🗨</span>{{ $t('li-8') }}</li>
-      <li><span>#️⃣</span>{{ $t('li-9') }}</li>
-    </ul>
-    <h2>{{ $t('title-4') }}</h2>
-    <p>
-      {{ $t('paragraph-4') }}
-    </p>
-    <h2>{{ $t('title-5') }}</h2>
-    <ul class="normal">
-      <li>{{ $t('li-10') }}</li>
-      <li>{{ $t('li-11') }}</li>
-      <li>{{ $t('li-12') }}</li>
-    </ul>
+  <div class="about">
+    <div class="switch">
+      <el-switch
+        @change="changeLanuage"
+        :value="lang == 'zh'"
+        :active-text="$t('zh')"
+        :inactive-text="$t('en')"
+      >
+      </el-switch>
+    </div>
+    <Section :list="list" />
+    <div class="content">
+      <div id="about_1" class="pragraph">
+        <div class="left">
+          <h3 class="title">{{ $t('title') }}</h3>
+          <ul class="list">
+            <li>{{ $t('li-1') }}</li>
+            <li>{{ $t('li-2') }}</li>
+            <li>{{ $t('li-3') }}</li>
+            <li>{{ $t('li-4') }}</li>
+            <li>{{ $t('li-5') }}</li>
+          </ul>
+        </div>
+        <div class="right center">
+          <img
+            class="image"
+            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
+          />
+        </div>
+      </div>
+      <div id="about_2" class="pragraph">
+        <div class="left center">
+          <img
+            class="image"
+            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
+          />
+        </div>
+        <div class="right">
+          <p class="desc">{{ $t('ph-1') }}</p>
+        </div>
+      </div>
+      <div id="about_3" class="pragraph">
+        <div class="left">
+          <p class="desc">{{ $t('ph-2') }}</p>
+        </div>
+        <div class="right center">
+          <img
+            class="image"
+            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+<script>
+import { loadLanguageAsync } from '@/utils/i18n.js';
+import Section from '@/components/section';
+import i18n from '@/utils/i18n';
+export default {
+  name: 'About',
+  components: {
+    Section,
+  },
+  data() {
+    return {
+      value: true,
+      refresh: false,
+      list: [],
+    };
+  },
+  computed: {
+    lang() {
+      return this.$store.state.language;
+    },
+  },
+  created() {
+    this.initList();
+  },
+  methods: {
+    initList() {
+      this.list = [];
+      this.list = [
+        {
+          name: i18n.t('about.1'),
+          link: '#about_1',
+        },
+        {
+          name: i18n.t('about.2'),
+          link: '#about_2',
+        },
+        {
+          name: i18n.t('about.3'),
+          link: '#about_3',
+        },
+      ];
+    },
+    changeLanuage() {
+      this.lang == 'en'
+        ? loadLanguageAsync('zh').then(() => {
+            localStorage.setItem('lanuage', 'zh');
+            this.initList();
+          })
+        : loadLanguageAsync('en').then(() => {
+            localStorage.setItem('lanuage', 'en');
+            this.initList();
+          });
+    },
+  },
+};
+</script>
 <style lang="less" scoped>
-h2 {
-  font-size: 20px;
-  margin: 10px 0;
-  font-family: Tahoma-Bold;
-  color: #333333;
+.about {
+  margin-bottom: 60px;
+}
+.switch {
+  margin-bottom: 20px;
+}
+.content {
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 3px 0 #f3f3f3;
+  border-radius: 6px;
+}
+.pragraph {
+  display: flex;
+  margin-bottom: 80px;
+  justify-content: center;
+  .left {
+    margin-right: 80px;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .image {
+    width: 300px;
+  }
+  .desc {
+    max-width: 400px;
+    line-height: 20px;
+    word-break: break-word;
+  }
+}
+.list {
+  margin-left: 20px;
+  li {
+    margin-top: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 20px;
+    color: #666666;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #3667a6;
+      border-radius: 50%;
+      top: 5px;
+      left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .about {
+    padding: 0 16px;
+  }
+  .content {
+    padding: 10px;
+  }
+  .switch {
+    margin: 20px 0;
+  }
+  .center {
+    text-align: center;
+  }
+  .pragraph {
+    flex-direction: column;
+    margin-bottom: 60px;
+    .left {
+      margin-right: 0;
+    }
+    .right {
+      margin-top: 20px;
+    }
+  }
 }
 </style>

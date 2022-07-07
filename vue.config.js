@@ -113,7 +113,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'https://hektarapp.com/',
+        target: 'https://console.newsdao.finance/',
       },
       '/multimedia': {
         target: 'https://hektarapp.com/',

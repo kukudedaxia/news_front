@@ -2,7 +2,9 @@
   <div class="section-nav text-right" :style="{ maxWidth: maxWidth + 'px' }">
     <ul class="section-nav-container">
       <li v-for="(item, index) in list" :key="index" @click="changeActive(index)">
-        <a :href="item.link" :class="{ active: index == active }">{{ item.name }}</a>
+        <a :href="item.link" :class="{ active: index == active }"
+          >{{ item.name }}<i v-if="active == index" class="el-icon-caret-right"
+        /></a>
       </li>
     </ul>
   </div>
@@ -116,7 +118,7 @@ body {
   position: fixed;
   z-index: 4;
   top: 50%;
-  left: 0;
+  left: 100px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -187,6 +189,9 @@ li {
   }
   a.active {
     color: #3370ff;
+    > i {
+      margin-left: 6px;
+    }
   }
 }
 html[lang='ar'] .section-nav {

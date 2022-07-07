@@ -3,7 +3,7 @@
  * @Description: loading
 -->
 <template>
-  <div class="wrap">
+  <div class="wraps">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="svg">
       <g
         fill="none"
@@ -40,14 +40,14 @@ export default {
     isEmpty: { type: Boolean, default: false },
     color: {
       type: String,
-      default: '#FFDC10',
+      default: '#3667A6',
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.wrap {
+.wraps {
   height: 34px;
   display: flex;
   align-items: center;
