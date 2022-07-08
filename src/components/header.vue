@@ -139,7 +139,8 @@ export default {
   /deep/.el-menu-item {
     font-size: 20px;
     font-weight: bold;
-    margin-right: 20px;
+    padding: 0;
+    margin: 0 20px;
   }
   /deep/.el-menu.el-menu--horizontal {
     border-bottom: none;
@@ -170,7 +171,7 @@ export default {
       height: 56px;
       line-height: 56px;
       padding: 0 10px;
-      margin-right: 0;
+      margin: 0;
     }
   }
 }

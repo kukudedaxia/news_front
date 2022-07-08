@@ -155,6 +155,7 @@ export default {
           // console.log(isReachEdge, 'isReachEdge');
         }
         console.log(isReachEdge, 'isReachEdge');
+        this.$emit('check');
         if (isReachEdge) {
           this.innerLoading = true;
           // this.$emit('input', true); //修改v-model

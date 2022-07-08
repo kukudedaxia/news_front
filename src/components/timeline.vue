@@ -22,67 +22,70 @@
         :finished="nextPage == -1"
         :length="list.length"
         @load="getData"
+        @check="check"
         :immediateCheck="false"
         :loadingCon="true"
         :maxLength="false"
       >
         <template v-slot:content v-if="list.length > 0">
-          <div class="date">
-            <div class="day">07/04</div>
-            <div class="box">
-              <span class="month">Jul.</span>
-              <span class="year">2022</span>
+          <div v-for="(object, index) in list" :key="index">
+            <div class="date">
+              <div class="day">{{ moment(object.date).format('DD/MM') }}</div>
+              <div class="box">
+                <span class="month">{{ month[object.date.substring(5, 7)] }}</span>
+                <span class="year">{{ moment(object.date).format('YYYY') }}</span>
+              </div>
             </div>
-          </div>
-          <el-timeline class="times">
-            <el-timeline-item
-              v-for="(item, index) in list"
-              :key="index"
-              :timestamp="moment(item.ctime).format('HH:mm')"
-              placement="top"
-              class="item"
-            >
-              <div @click="() => goDetail(item)">
-                <p class="desc text-overflow-4">
-                  <span class="hot" v-if="index % 3 == 0">精</span>
-                  <template v-else-if="item.raw_message_zh">
-                    <span class="bold">[译文]</span>
-                    {{ item.raw_message_zh }}
-                    <br />
-                    <br />
-                  </template>
-                  <span class="bold">[原文]</span>
-                  {{ item.raw_message }}
-                </p>
-                <div class="images" v-if="item.images && item.images.length > 0">
-                  <el-image
-                    :src="item.images[0]"
-                    lazy
-                    :preview-src-list="item.images"
-                    fit="cover"
-                  ></el-image>
-                  <span class="num" v-if="item.images.length > 1"
-                    >+{{ item.images.length - 1 }}</span
-                  >
-                </div>
-                <div class="bottom">
-                  <div>
-                    <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
+            <el-timeline class="times">
+              <el-timeline-item
+                v-for="(item, index) in object.lives"
+                :key="index"
+                :timestamp="moment(item.ctime).format('HH:mm')"
+                placement="top"
+                class="item"
+              >
+                <div @click="() => goDetail(item)">
+                  <p class="desc text-overflow-4">
+                    <span class="hot" v-if="index % 3 == 0">精</span>
+                    <template v-else-if="item.raw_message_zh">
+                      <span class="bold">[译文]</span>
+                      {{ item.raw_message_zh }}
+                      <br />
+                      <br />
+                    </template>
+                    <span class="bold">[原文]</span>
+                    {{ item.raw_message }}
+                  </p>
+                  <div class="images" v-if="item.images && item.images.length > 0">
+                    <el-image
+                      :src="item.images[0]"
+                      lazy
+                      :preview-src-list="item.images"
+                      fit="cover"
+                    ></el-image>
+                    <span class="num" v-if="item.images.length > 1"
+                      >+{{ item.images.length - 1 }}</span
+                    >
+                  </div>
+                  <div class="bottom">
+                    <div>
+                      <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
 
-                    <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
-                      <img
-                        src="https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg"
-                        alt="code"
-                        class="code"
-                        loading="lazy"
-                      />
-                      <a target="_blank" slot="reference"><i class="el-icon-share"></i>分享</a>
-                    </el-popover>
+                      <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
+                        <img
+                          src="https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg"
+                          alt="code"
+                          class="code"
+                          loading="lazy"
+                        />
+                        <a target="_blank" slot="reference"><i class="el-icon-share"></i>分享</a>
+                      </el-popover>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </el-timeline-item>
-          </el-timeline>
+              </el-timeline-item>
+            </el-timeline>
+          </div>
         </template>
       </scroll>
       <template v-if="list.length < 1 && isFirstload">
@@ -100,12 +103,27 @@ export default {
   },
   data() {
     return {
+      active: 0,
       loading: false,
       page: 1,
       pageSize: 10,
       list: [],
       isFirstload: false,
       nextPage: 1,
+      month: {
+        '01': 'Jan.',
+        '02': 'Feb.',
+        '03': 'Mar.',
+        '04': 'Apr.',
+        '05': 'May.',
+        '06': 'Jun.',
+        '07': 'July.',
+        '08': 'Aug.',
+        '09': 'Sep.',
+        '10': 'Oct.',
+        '11': 'Nov.',
+        '12': 'Dec.',
+      },
     };
   },
   components: {
@@ -114,6 +132,9 @@ export default {
   computed: {
     channelId() {
       return this.$store.state.channelId;
+    },
+    viewItem() {
+      return this.list[this.active];
     },
   },
   watch: {
@@ -130,6 +151,9 @@ export default {
   },
   methods: {
     getData(type) {
+      if (!this.channelId) {
+        return;
+      }
       this.loading = true;
       if (type == 'init') {
         this.list = [];
@@ -147,14 +171,14 @@ export default {
           this.loading = false;
           this.page += 1;
           this.nextPage = res.data.nextPage;
-          let arr = [];
-          res.data.list.forEach(item => {
-            item.lives.forEach(d => {
-              d.data = item.data;
-              arr.push(d);
-            });
-          });
-          this.list = this.list.concat(arr);
+          // let arr = [];
+          // res.data.list.forEach(item => {
+          //   item.lives.forEach(d => {
+          //     d.date = item.date;
+          //     arr.push(d);
+          //   });
+          // });
+          this.list = this.list.concat(res.data.list);
         },
         onComplete: () => {
           this.isFirstload = true;
@@ -172,6 +196,26 @@ export default {
     goDetail(item) {
       console.log(item);
       this.$router.push({ path: `/detail/${item.id}?type=1` });
+    },
+    isInViewPortOfTwo(el) {
+      const viewPortHeight =
+        window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      const top = el.getBoundingClientRect() && el.getBoundingClientRect().top;
+      console.log('top', top);
+      return top <= viewPortHeight + 100;
+    },
+    check() {
+      console.log('滚动检查');
+      // let active = 0;
+      // let items = document.getElementsByClassName('item');
+      // for (var i = 0; i < items.length; i++) {
+      //   if (!this.isInViewPortOfTwo(items[i])) {
+      //     active = i + 1;
+      //     break;
+      //   }
+      // }
+      // console.log(active);
+      // this.active = active;
     },
   },
 };
