@@ -4,20 +4,20 @@
       <div class="left">
         <TimeLine :channels="channels" />
       </div>
-      <div class="right">
+      <!-- <div class="right">
         <Top />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import Top from '../components/home/top';
+// import Top from '../components/home/top';
 import TimeLine from '../components/timeline.vue';
 export default {
   name: 'Home',
   components: {
-    Top,
+    // Top,
     TimeLine,
   },
   data() {
@@ -70,7 +70,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .home {
-  max-width: 1120px;
+  max-width: 1020px;
   margin: 0 auto;
   margin-bottom: 60px;
   border-radius: 6px;
@@ -81,7 +81,8 @@ export default {
   -ms-flex-positive: 1;
   flex-grow: 1;
   .left {
-    width: 800px;
+    // width: 800px;
+    width: 100%;
     background: #fff;
     padding: 20px;
     border: 1px solid #e7eaf2;
@@ -109,8 +110,9 @@ export default {
     .left {
       width: 100%;
       padding: 12px;
-
       min-height: calc(100vh - 160px);
+      border: none;
+      border-radius: 0;
     }
     .right {
       width: 100%;

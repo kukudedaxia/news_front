@@ -9,6 +9,7 @@ import ElementUI from 'element-ui';
 // import './theme/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
+// import './config/vantConfig.js';
 
 import './less/dark.less';
 
@@ -20,6 +21,8 @@ Vue.use(ElementUI)
   .use(VueClipboard)
   .use(VueWechatTitle);
 // 动态title库
+import './config/vantConfig.js';
+
 import VueWechatTitle from 'vue-wechat-title';
 Vue.use(VueWechatTitle);
 Vue.prototype.$moment = moment;
@@ -34,13 +37,6 @@ Vue.prototype.tools = tools;
 Vue.prototype.moment = moment;
 
 setI18nLanguage(i18n.locale);
-
-if (process.env.NODE_ENV === 'development') {
-  // document.cookie =
-  //   'SUB=_2AijwkVAKurQ7DaonC0fcS5HvzUmpXXwmZK4MtC_anawzs3Wy53M7lYbjGMyvWxwVtwwKobS5IbfPLNiDJfIsbq0_Oujz;path=/;';
-
-  Vue.config.detools = true;
-}
 
 new Vue({
   router,

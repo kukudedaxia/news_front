@@ -14,6 +14,9 @@
     <el-backtop :bottom="80" :right="clientWidth < 769 ? 20 : 100">
       <i class="el-icon-top back" style="font" title="回到顶部" />
     </el-backtop>
+    <van-overlay :show="show" class="overlay" @click="closeOverlay">
+      <img :src="require('./assets/svg/tip.svg')" />
+    </van-overlay>
   </div>
 </template>
 
@@ -39,6 +42,9 @@ export default {
     clientWidth() {
       return document.body.clientWidth;
     },
+    show() {
+      return this.$store.state.vant_overlay;
+    },
   },
   data() {
     return {
@@ -49,6 +55,11 @@ export default {
     this.$router.onReady(() => {
       this.footerShow = true;
     });
+  },
+  methods: {
+    closeOverlay() {
+      this.$store.dispatch('changeOverlay', false);
+    },
   },
   // beforeRouteEnter(to, from, next) {
   //   // 不能直接获取组件实例 `this`，需通过vm访问组件实例;
@@ -83,6 +94,10 @@ export default {
 #nav {
   background: #fff;
   border-bottom: 1px solid #e4e7ed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 200;
 }
 .back {
   font-size: 30px;

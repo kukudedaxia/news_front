@@ -44,42 +44,50 @@
                 placement="top"
                 class="item"
               >
-                <div @click="() => goDetail(item)">
-                  <p class="desc text-overflow-4">
-                    <span class="hot" v-if="index % 3 == 0">精</span>
-                    <template v-else-if="item.raw_message_zh">
-                      <span class="bold">[译文]</span>
-                      {{ item.raw_message_zh }}
-                      <br />
-                      <br />
-                    </template>
-                    <span class="bold">[原文]</span>
-                    {{ item.raw_message }}
-                  </p>
-                  <div class="images" v-if="item.images && item.images.length > 0">
-                    <el-image
-                      :src="item.images[0]"
-                      lazy
-                      :preview-src-list="item.images"
-                      fit="cover"
-                    ></el-image>
-                    <span class="num" v-if="item.images.length > 1"
-                      >+{{ item.images.length - 1 }}</span
-                    >
-                  </div>
-                  <div class="bottom">
+                <div>
+                  <template>
                     <div>
+                      <div @click="() => goDetail(item)">
+                        <div
+                          :class="[
+                            'desc',
+                            item.raw_message_zh ? 'text-overflow-6' : 'text-overflow-4',
+                          ]"
+                        >
+                          <template v-if="item.raw_message_zh">
+                            <div class="flex">
+                              <span class="bold">[译文]&nbsp;</span>
+                              <p>{{ item.raw_message_zh }}</p>
+                            </div>
+                          </template>
+                          <template v-if="item.raw_message_zh">
+                            <br />
+                            <br />
+                          </template>
+                          <div class="flex">
+                            <!-- <span class="hot" v-if="index % 3 == 0">精</span> -->
+                            <span class="bold">[原文]&nbsp;</span>
+                            <p>{{ item.raw_message }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="images" v-if="item.images && item.images.length > 0">
+                        <el-image
+                          :src="item.images[0]"
+                          lazy
+                          :preview-src-list="item.images"
+                          fit="cover"
+                        ></el-image>
+                        <span class="num" v-if="item.images.length > 1"
+                          >+{{ item.images.length - 1 }}</span
+                        >
+                      </div>
+                    </div>
+                  </template>
+                  <div class="bottom">
+                    <div class="flex">
                       <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
-
-                      <el-popover width="114" trigger="hover" placement="bottom" :close-delay="100">
-                        <img
-                          src="https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg"
-                          alt="code"
-                          class="code"
-                          loading="lazy"
-                        />
-                        <a target="_blank" slot="reference"><i class="el-icon-share"></i>分享</a>
-                      </el-popover>
+                      <Share link="https://www.baidu.com" />
                     </div>
                   </div>
                 </div>
@@ -96,38 +104,40 @@
 </template>
 <script>
 import scroll from './scroll';
+import Share from '../components/share';
 export default {
   name: 'TimeLine',
+  components: {
+    scroll: scroll,
+    Share,
+  },
   props: {
     channels: Array,
   },
   data() {
     return {
       active: 0,
-      loading: false,
+      loading: true,
       page: 1,
       pageSize: 10,
       list: [],
       isFirstload: false,
       nextPage: 1,
       month: {
-        '01': 'Jan.',
-        '02': 'Feb.',
-        '03': 'Mar.',
-        '04': 'Apr.',
-        '05': 'May.',
-        '06': 'Jun.',
-        '07': 'July.',
-        '08': 'Aug.',
-        '09': 'Sep.',
-        '10': 'Oct.',
-        '11': 'Nov.',
-        '12': 'Dec.',
+        '01': '一月.',
+        '02': '二月.',
+        '03': '三月.',
+        '04': '四月.',
+        '05': '五月.',
+        '06': '六月.',
+        '07': '七月.',
+        '08': '八月.',
+        '09': '九月.',
+        '10': '十月.',
+        '11': '十一月.',
+        '12': '十二月.',
       },
     };
-  },
-  components: {
-    scroll: scroll,
   },
   computed: {
     channelId() {
@@ -135,6 +145,9 @@ export default {
     },
     viewItem() {
       return this.list[this.active];
+    },
+    channelItem() {
+      return this.channels.find(item => item.id == this.channelId);
     },
   },
   watch: {
@@ -195,7 +208,9 @@ export default {
     },
     goDetail(item) {
       console.log(item);
-      this.$router.push({ path: `/detail/${item.id}?type=1` });
+      this.$router.push({
+        path: `/detail/${item.id}?type=1&channel=${this.channelItem.name}`,
+      });
     },
     isInViewPortOfTwo(el) {
       const viewPortHeight =
@@ -284,7 +299,7 @@ export default {
     font-size: 18px;
     color: #666666;
     white-space: nowrap;
-    margin: 0 10px;
+    // margin: 0 10px;
     position: relative;
     transition: none;
     display: block;
@@ -323,9 +338,9 @@ export default {
   margin-bottom: 20px;
   background: #fff;
   z-index: 101;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
+  // position: -webkit-sticky;
+  // position: sticky;
+  // top: 0px;
 
   .day {
     font-size: 32px;
@@ -351,19 +366,24 @@ export default {
 }
 .item {
   cursor: pointer;
+  position: relative;
 }
 
 .bottom {
   margin-top: 20px;
-  a {
-    color: #03a9f4;
-    margin-right: 20px;
-    &:hover {
-      text-decoration: underline;
+  .flex {
+    display: flex;
+    a {
+      color: #409eff;
+      cursor: pointer;
+      margin-right: 20px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
-  }
-  i {
-    margin-right: 6px;
+    i {
+      margin-right: 4px;
+    }
   }
 }
 .desc {
@@ -412,7 +432,15 @@ export default {
   font-weight: bold;
   color: #3667a6;
 }
-
+.flex {
+  p {
+    display: initial;
+  }
+  > span {
+    word-break: keep-all;
+    margin-right: 4px;
+  }
+}
 @media screen and (max-width: 1080px) {
   .menu .menu-item {
     font-size: 15px;
@@ -426,6 +454,9 @@ export default {
     .day {
       font-size: 28px;
     }
+  }
+  .times {
+    padding: 0;
   }
 }
 @media screen and (min-width: 1080px) {

@@ -3,25 +3,36 @@
     <div class="left">
       <template v-if="load">
         <div class="content no-border">
-          <div class="pos-title">详情</div>
+          <!-- <div class="pos-title">详情</div> -->
           <div class="title">
             <div class="time">
               <i class="el-icon-time" />
-              <span>07-05 09:20</span>
+              <span>{{ moment(object.ctime).format('YYYY/MM/DD HH:MM:SS') }}</span>
             </div>
             <div class="type">
-              <el-tag class="tag">GameFi</el-tag>
+              <span>来自:</span><el-tag class="tag">{{ channelName }}</el-tag>
+            </div>
+            <div class="flexs">
+              <div class="line">
+                <span class="bold">来源:</span>
+                <span>TWITTER</span>
+              </div>
+              <div class="line">
+                <span class="bold">作者:</span>
+                <span>JOE</span>
+              </div>
             </div>
           </div>
           <div class="article">
             <template v-if="type == 1">
               <div>
                 <template v-if="object.raw_message_zh">
-                  <p><span class="bold">[译文]</span>{{ object.raw_message_zh }}</p>
-                  <br />
+                  <p class="font-18">
+                    <span class="bold">[译文]&nbsp;</span>{{ object.raw_message_zh }}
+                  </p>
                   <br />
                 </template>
-                <p><span class="bold">[原文]</span>{{ object.raw_message }}</p>
+                <p class="gray"><span class="bold">[原文]&nbsp;</span>{{ object.raw_message }}</p>
               </div>
               <div
                 :class="[
@@ -38,18 +49,7 @@
                 <a class="link" :href="object.link" target="_blank"
                   ><i class="el-icon-link"></i>原文链接</a
                 >
-
-                <el-popover width="140" trigger="hover" placement="bottom" :close-delay="100">
-                  <img
-                    src="https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg"
-                    alt="code"
-                    class="code"
-                    loading="lazy"
-                  />
-                  <a class="link" target="_blank" slot="reference"
-                    ><i class="el-icon-share"></i>分享</a
-                  >
-                </el-popover>
+                <Share link="https://www.baidu.com" />
               </div>
             </template>
           </div>
@@ -65,12 +65,14 @@
                 placement="top"
                 class="item"
               >
-                <div>
+                <div class="con">
                   <template v-if="item.raw_message_zh">
-                    <p><span class="bold">[译文]</span>{{ item.raw_message_zh }}</p>
+                    <p class="font-18">
+                      <span class="bold">[译文] &nbsp;</span>{{ item.raw_message_zh }}
+                    </p>
                     <br />
                   </template>
-                  <p><span class="bold">[原文]</span>{{ item.raw_message }}</p>
+                  <p class="gray"><span class="bold">[原文]&nbsp;</span>{{ item.raw_message }}</p>
                 </div>
                 <div
                   :class="[
@@ -88,6 +90,7 @@
             </el-timeline>
           </div>
         </div>
+        <div class="tip"></div>
       </template>
       <div class="load-wrap" v-else>
         <loading>
@@ -95,19 +98,20 @@
         </loading>
       </div>
     </div>
-    <div class="right no-border sticky">
+    <!-- <div class="right no-border sticky">
       <Top type="detail" />
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import Loading from '@/components/common/Loading';
-import Top from '../components/home/top';
+import Share from '../components/share';
 import ImgBox from '@/components/ImgBox';
 export default {
   name: 'Detail',
   components: {
-    Top,
+    // Top,
+    Share,
     ImgBox,
     Loading,
   },
@@ -121,6 +125,9 @@ export default {
   computed: {
     id() {
       return this.$route.params.id;
+    },
+    channelName() {
+      return this.$route.query.channel;
     },
   },
   created() {
@@ -151,12 +158,16 @@ export default {
   -ms-flex-positive: 1;
   flex-grow: 1;
   .left {
-    width: 800px;
+    width: 100%;
+    min-height: 300px;
   }
   .right {
-    width: 300px;
+    // width: 300px;
     background: transparent;
     margin-left: 20px;
+  }
+  /deep/.el-timeline-item__tail {
+    border-left: 2px dotted #d9d9d9;
   }
 }
 .content {
@@ -225,26 +236,12 @@ export default {
   max-width: 400px;
   margin: 20px 0;
 }
-.extra {
-  .link {
-    color: #409eff;
-    margin-right: 20px;
-    i {
-      margin-right: 6px;
-    }
-  }
-}
 .timeline {
   margin: 20px 0;
   padding: 20px;
 }
-.tag {
-  margin-bottom: 10px;
-  background: #4465a1;
-  color: #fff;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  font-size: 15px;
+.article {
+  font-size: 14px;
 }
 .sticky {
   position: sticky;
@@ -263,6 +260,61 @@ export default {
   justify-content: center;
   background: #ffff;
 }
+.con {
+  margin-top: 10px;
+}
+.extra {
+  margin-top: 20px;
+  display: flex;
+  .link {
+    color: #409eff;
+    cursor: pointer;
+    margin-right: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+    i {
+      margin-right: 6px;
+    }
+  }
+}
+.font-18 {
+  font-size: 16px;
+}
+.gray {
+  color: #666;
+}
+.type {
+  color: #999;
+  > span {
+    margin-right: 10px;
+  }
+  .tag {
+    margin-bottom: 10px;
+    background: #4465a1;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+  }
+}
+.flexs {
+  display: flex;
+  /* color: #666; */
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 10px;
+  .bold {
+    font-weight: normal;
+    margin-right: 4px;
+  }
+  .line {
+    margin-right: 20px;
+  }
+}
+
 @media screen and (max-width: 1080px) {
   .wrap {
     flex-direction: column;
@@ -288,6 +340,9 @@ export default {
   .no-border {
     border-radius: 0;
     border: none;
+  }
+  .font-18 {
+    font-size: 15px;
   }
 }
 </style>

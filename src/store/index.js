@@ -17,6 +17,7 @@ export default new Vuex.Store({
     channelId: '',
     language: 'zh',
     pageLoading: false,
+    vant_overlay: false,
   },
   getters: {
     video: state => state.video.attr,
@@ -29,10 +30,16 @@ export default new Vuex.Store({
       state.channelId = val;
     },
     setPageLoading() {},
+    setoverlay(state, val) {
+      state.vant_overlay = val;
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
       commit('setLanguage', lang);
+    },
+    changeOverlay({ commit }, val) {
+      commit('setoverlay', val);
     },
     /**
      * @description: 单次ajax请求，回调方式
@@ -50,7 +57,7 @@ export default new Vuex.Store({
         return false;
       }
       let req = {
-        baseURL: '/api',
+        baseURL: '/api/',
         method: 'get',
         headers: {
           'content-type': 'application/json',
