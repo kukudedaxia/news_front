@@ -42,14 +42,15 @@ export default {
         req: {
           url: 'channels',
           params: {
-            channelId: 1,
             page: 1,
             pageSize: 100,
           },
         },
         onSuccess: res => {
           this.channels = this.channels.concat(res.data);
-          this.$store.commit('setChannel', this.channels[0].id);
+          if (res.data.length > 0) {
+            this.$store.commit('setChannel', this.channels[0].id);
+          }
         },
       });
     },

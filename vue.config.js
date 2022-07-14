@@ -1,18 +1,18 @@
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const entryGenerator = require('./generator/entryGenerator');
-const webpack = require('webpack');
+// const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+// const entryGenerator = require('./generator/entryGenerator');
+// const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   publicPath: process.env.PUBLIC_PATH,
-  outputDir: 'beeto',
+  outputDir: 'dist',
   lintOnSave: true,
   assetsDir: process.env.NODE_ENV !== 'development' ? 'assets' : 'dev-assets',
   indexPath: 'index.html',
   filenameHashing: true,
   productionSourceMap: false,
   pages: {
-    web: {
+    index: {
       entry: './src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
@@ -20,38 +20,38 @@ module.exports = {
   },
   //可以修改配置并不返回任何东西，也可以返回一个被克隆或合并过的配置版本。
   configureWebpack: config => {
-    config.plugins = config.plugins.concat(
-      new WebpackManifestPlugin({
-        fileName: 'asset-manifest.json',
-        publicPath: process.env.PUBLIC_PATH,
-        writeToFileEmit: true,
-        generate: (seed, files, entrypoints) => {
-          const manifestFiles = files.reduce((manifest, file) => {
-            manifest[file.name] = file.path;
-            return manifest;
-          }, seed);
-          const entrypointFiles = [];
-          entrypoints.web.forEach(fileName => {
-            if (!fileName.endsWith('.map')) {
-              entrypointFiles.push(process.env.PUBLIC_PATH + fileName);
-            }
-          });
-          let res = {
-            files: manifestFiles,
-            entrypoints: entrypointFiles,
-          };
-          entryGenerator(res);
-          return {
-            web: res,
-          };
-        },
-      }),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'windows.jQuery': 'jquery',
-      }),
-    );
+    // config.plugins = config.plugins.concat(
+    //   new WebpackManifestPlugin({
+    //     fileName: 'asset-manifest.json',
+    //     publicPath: process.env.PUBLIC_PATH,
+    //     writeToFileEmit: true,
+    //     generate: (seed, files, entrypoints) => {
+    //       const manifestFiles = files.reduce((manifest, file) => {
+    //         manifest[file.name] = file.path;
+    //         return manifest;
+    //       }, seed);
+    //       const entrypointFiles = [];
+    //       entrypoints.web.forEach(fileName => {
+    //         if (!fileName.endsWith('.map')) {
+    //           entrypointFiles.push(process.env.PUBLIC_PATH + fileName);
+    //         }
+    //       });
+    //       let res = {
+    //         files: manifestFiles,
+    //         entrypoints: entrypointFiles,
+    //       };
+    //       entryGenerator(res);
+    //       return {
+    //         web: res,
+    //       };
+    //     },
+    //   }),
+    //   new webpack.ProvidePlugin({
+    //     $: 'jquery',
+    //     jQuery: 'jquery',
+    //     'windows.jQuery': 'jquery',
+    //   }),
+    // );
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置
       config.plugins.push(
@@ -113,7 +113,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'https://console.newsdao.finance/',
+        target: 'http://81.68.251.185/',
       },
       '/multimedia': {
         target: 'https://hektarapp.com/',

@@ -165,6 +165,7 @@ export default {
   methods: {
     getData(type) {
       if (!this.channelId) {
+        this.loading = false;
         return;
       }
       this.loading = true;
