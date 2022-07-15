@@ -87,7 +87,7 @@
                   <div class="bottom">
                     <div class="flex">
                       <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
-                      <Share link="https://www.baidu.com" />
+                      <Share :link="item.qrcode" :data="item" />
                     </div>
                   </div>
                 </div>

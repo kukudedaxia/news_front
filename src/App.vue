@@ -17,10 +17,12 @@
     <van-overlay :show="show" class="overlay" @click="closeOverlay">
       <img :src="require('./assets/svg/tip.svg')" />
     </van-overlay>
+    <Generate :show="picture.state" :data="picture.data" />
   </div>
 </template>
 
 <script>
+import Generate from './components/Generate.vue';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PageLoading from '@/components/common/Loadings';
@@ -30,6 +32,7 @@ export default {
   components: {
     Header,
     Footer,
+    Generate,
     'page-loading': PageLoading,
   },
   computed: {
@@ -44,6 +47,9 @@ export default {
     },
     show() {
       return this.$store.state.vant_overlay;
+    },
+    picture() {
+      return this.$store.state.vant_overlay1;
     },
   },
   data() {
@@ -82,11 +88,28 @@ export default {
   // },
 };
 </script>
+<style lang="less">
+.overlay {
+  z-index: 999 !important;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  .info {
+    color: #409eff;
+    font-size: 16px;
+    p {
+      margin-bottom: 10px;
+    }
+  }
+}
+</style>
 <style lang="less" scoped>
 .main {
   border: 1px solid transparent;
   background: #fafafa;
-  min-height: calc(100vh - 178px);
+  min-height: calc(100vh - 158px);
   // margin-top: 30px;
   max-width: 1120px;
   margin: 30px auto 0;
@@ -94,8 +117,8 @@ export default {
 #nav {
   background: #fff;
   border-bottom: 1px solid #e4e7ed;
-  position: -webkit-sticky;
-  position: sticky;
+  // position: -webkit-sticky;
+  // position: sticky;
   top: 0px;
   z-index: 200;
 }

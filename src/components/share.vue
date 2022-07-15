@@ -19,45 +19,47 @@
             style="position: fixed; top: -20px; left: 0; opacity: 0; z-index: -10"
           />
         </div>
-        <div class="share-item hidden-md-and-up">
+        <div class="share-item hidden-sm-and-up">
           <span class="line" @click="showBg"><i class="icon wechat"></i>分享到微信</span>
         </div>
-        <div class="share-item hidden-md-and-down">
+        <!-- <div class="share-item hidden-md-and-down">
           <span class="line"><i class="icon qq"></i>分享到QQ</span>
         </div>
         <div class="share-item hidden-md-and-up">
           <span class="line" @click="showBg"><i class="icon qq"></i>分享到QQ</span>
-        </div>
+        </div> -->
         <div class="share-item">
           <span class="line" @click="shareToSinaWeiBo"><i class="icon sina"></i>分享到微博</span>
         </div>
-        <div class="share-item hidden-md-and-up">
+        <div class="share-item hidden-md-and-up" @click="getImg">
           <span class="line mt-0"><i class="icon image"></i>生成长图</span>
         </div>
 
-        <div class="share-item hidden-md-and-down">
-          <img
-            src="https://img.bee-cdn.com/large/3b9ae203lz1gmm6bogjkxj203v03v741.jpg"
-            alt="code"
-            class="code"
-            loading="lazy"
-          />
-          <span class="line"><i class="icon wechat"></i>微信扫一扫</span>
+        <div class="share-item codes hidden-sm-and-down">
+          <img :src="link" alt="code" class="code" loading="lazy" />
+          <span class="line mt-10"><i class="icon wechat"></i>微信扫一扫</span>
         </div>
       </div>
     </el-popover>
+    <!-- <Generate :show="show" /> -->
   </div>
 </template>
 <script>
+// import Generate from '../components/Generate.vue';
 export default {
   name: 'Share',
+  // components: {
+  //   Generate,
+  // },
   props: {
     link: String,
+    data: Object,
   },
   data() {
     return {
       loaded: false,
       pc: false,
+      show: true,
     };
   },
   created() {
@@ -76,7 +78,7 @@ export default {
       inputElement.value = this.link;
       inputElement.select();
       document.execCommand('Copy');
-      this.$message('复制成功');
+      this.$message.success('复制成功');
       this.$refs.popoverRef.doClose();
     },
     shareToSinaWeiBo(title, url, pic) {
@@ -108,26 +110,17 @@ export default {
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay', true);
     },
+    getImg() {
+      this.$refs.popoverRef.doClose();
+      this.$store.dispatch('changeOverlay1', {
+        state: true,
+        data: this.data,
+      });
+    },
   },
 };
 </script>
-<style lang="less">
-.overlay {
-  z-index: 999 !important;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  .info {
-    color: #409eff;
-    font-size: 16px;
-    p {
-      margin-bottom: 10px;
-    }
-  }
-}
-</style>
+
 <style lang="less" scoped>
 // 分享
 .code {
@@ -188,18 +181,13 @@ export default {
 .mt-0 {
   margin-bottom: 0;
 }
-.overlay {
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  .info {
-    color: #409eff;
-    font-size: 16px;
-    p {
-      margin-bottom: 10px;
-    }
+.codes {
+  .code {
+    width: 80%;
   }
+}
+.mt-10 {
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 </style>

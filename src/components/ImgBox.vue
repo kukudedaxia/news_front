@@ -67,8 +67,8 @@ export default {
       return window.innerHeight || document.documentElement.clientHeight;
     },
     renderList() {
-      if (this.imageList.length > 9) {
-        return this.imageList.slice(0, 9);
+      if (this.imageList.length > 12) {
+        return this.imageList.slice(0, 12);
       }
       return this.imageList.slice(0, this.imageList.length);
     },

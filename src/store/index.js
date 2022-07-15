@@ -18,6 +18,10 @@ export default new Vuex.Store({
     language: 'zh',
     pageLoading: false,
     vant_overlay: false,
+    vant_overlay1: {
+      state: false,
+      data: {},
+    }, //生成长图
   },
   getters: {
     video: state => state.video.attr,
@@ -33,6 +37,9 @@ export default new Vuex.Store({
     setoverlay(state, val) {
       state.vant_overlay = val;
     },
+    setoverlay1(state, val) {
+      state.vant_overlay1 = val;
+    },
   },
   actions: {
     changeLanguage({ commit }, lang) {
@@ -40,6 +47,9 @@ export default new Vuex.Store({
     },
     changeOverlay({ commit }, val) {
       commit('setoverlay', val);
+    },
+    changeOverlay1({ commit }, val) {
+      commit('setoverlay1', val);
     },
     /**
      * @description: 单次ajax请求，回调方式

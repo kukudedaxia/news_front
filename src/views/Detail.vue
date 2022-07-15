@@ -49,7 +49,7 @@
                 <a class="link" :href="object.link" target="_blank"
                   ><i class="el-icon-link"></i>原文链接</a
                 >
-                <Share link="https://www.baidu.com" />
+                <Share :link="object.qrcode" :data="object" />
               </div>
             </template>
           </div>
