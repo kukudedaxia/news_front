@@ -71,7 +71,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .home {
-  max-width: 1020px;
+  max-width: 1120px;
   margin: 0 auto;
   margin-bottom: 60px;
   border-radius: 6px;
@@ -101,6 +101,11 @@ export default {
   z-index: 99;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+@media screen and (max-width: 1440px) {
+  .home {
+    max-width: 920px;
+  }
 }
 @media screen and (max-width: 1080px) {
   .home {

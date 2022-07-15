@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { loadLanguageAsync } from '../utils/i18n';
 import { initTheme } from '@/utils/theme';
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -11,8 +12,9 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
-      title: 'bcaca',
+      title: 'Bcaca-区块链讯息聚合器',
       keepAlive: true,
+      uicode: '10000001',
     },
   },
   {
@@ -20,7 +22,8 @@ const routes = [
     name: 'Detail',
     component: () => import('../views/Detail.vue'),
     meta: {
-      title: 'bcaca detail',
+      title: 'Bcaca-消息快讯',
+      uicode: '10000002',
     },
   },
   {
@@ -28,7 +31,8 @@ const routes = [
     name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
-      title: 'about bcaca',
+      title: 'Bcaca-关于我们',
+      uicode: '10000003',
     },
   },
   {
@@ -67,12 +71,19 @@ router.beforeEach(async (to, from, next) => {
   } else {
     await initTheme('light');
   }
+
   // 持续保持语言
   if (localStorage.getItem('lanuage')) {
     const lang = localStorage.getItem('lanuage');
     await loadLanguageAsync(lang);
   }
   //埋点
+  // 离开行为
+  store.commit('changeFromPage', from);
+  store.commit('changeToPage', to);
+  if (to.meta.uicode) {
+    store.dispatch('send', { action: '1001', id: to.params.id });
+  }
   next();
 });
 

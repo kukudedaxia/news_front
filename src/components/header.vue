@@ -20,7 +20,7 @@
           ref="child"
         >
           <el-menu-item index="/">快讯</el-menu-item>
-          <el-menu-item index="/channel" @click="handleClick">定制频道</el-menu-item>
+          <!-- <el-menu-item index="/channel" @click="handleClick">定制频道</el-menu-item> -->
           <el-menu-item index="/about">关于我们</el-menu-item>
         </el-menu>
       </div>
@@ -147,6 +147,7 @@ export default {
   }
   /deep/.el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 3px solid #3667a6;
+    background: #fff !important;
   }
 }
 

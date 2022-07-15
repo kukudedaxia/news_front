@@ -28,7 +28,7 @@
         :maxLength="false"
       >
         <template v-slot:content v-if="list.length > 0">
-          <div v-for="(object, index) in list" :key="index">
+          <div v-for="(object, index) in [list[0]]" :key="index">
             <div class="date">
               <div class="day">{{ moment(object.date).format('DD/MM') }}</div>
               <div class="box">
@@ -48,28 +48,7 @@
                   <template>
                     <div>
                       <div @click="() => goDetail(item)">
-                        <div
-                          :class="[
-                            'desc',
-                            item.raw_message_zh ? 'text-overflow-6' : 'text-overflow-4',
-                          ]"
-                        >
-                          <template v-if="item.raw_message_zh">
-                            <div class="flex">
-                              <span class="bold">[译文]&nbsp;</span>
-                              <p>{{ item.raw_message_zh }}</p>
-                            </div>
-                          </template>
-                          <template v-if="item.raw_message_zh">
-                            <br />
-                            <br />
-                          </template>
-                          <div class="flex">
-                            <!-- <span class="hot" v-if="index % 3 == 0">精</span> -->
-                            <span class="bold">[原文]&nbsp;</span>
-                            <p>{{ item.raw_message }}</p>
-                          </div>
-                        </div>
+                        <Texts :data="item" />
                       </div>
                       <div class="images" v-if="item.images && item.images.length > 0">
                         <el-image
@@ -87,7 +66,7 @@
                   <div class="bottom">
                     <div class="flex">
                       <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
-                      <Share :link="item.qrcode" :data="item" />
+                      <Share :link="item.qrcode" :data="item" :channelName="channelItem.name" />
                     </div>
                   </div>
                 </div>
@@ -105,11 +84,13 @@
 <script>
 import scroll from './scroll';
 import Share from '../components/share';
+import Texts from '../components/text';
 export default {
   name: 'TimeLine',
   components: {
     scroll: scroll,
     Share,
+    Texts,
   },
   props: {
     channels: Array,
@@ -297,7 +278,7 @@ export default {
   }
   .menu-item {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     color: #666666;
     white-space: nowrap;
     // margin: 0 10px;
@@ -387,9 +368,6 @@ export default {
     }
   }
 }
-.desc {
-  font-size: 16px;
-}
 .hot {
   background: linear-gradient(138.41deg, #409eff 8.14%, #3667a6 91.81%);
   line-height: 18px;
@@ -429,19 +407,25 @@ export default {
     align-items: center;
   }
 }
-.bold {
-  font-weight: bold;
-  color: #3667a6;
-}
-.flex {
-  p {
-    display: initial;
-  }
-  > span {
-    word-break: keep-all;
-    margin-right: 4px;
-  }
-}
+// .bold {
+//   font-weight: bold;
+//   color: #3667a6;
+// }
+// .flex {
+//   p {
+//     display: initial;
+//   }
+//   > span {
+//     word-break: keep-all;
+//     margin-right: 4px;
+//   }
+// }
+// .small {
+//   p {
+//     font-size: 14px;
+//     color: #666;
+//   }
+// }
 @media screen and (max-width: 1080px) {
   .menu .menu-item {
     font-size: 15px;

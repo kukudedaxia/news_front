@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Generate from './components/Generate.vue';
+import Generate from '@/components/generate.vue';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PageLoading from '@/components/common/Loadings';
@@ -111,7 +111,7 @@ export default {
   background: #fafafa;
   min-height: calc(100vh - 158px);
   // margin-top: 30px;
-  max-width: 1120px;
+  max-width: 1020px;
   margin: 30px auto 0;
 }
 #nav {
@@ -129,10 +129,20 @@ export default {
 /deep/.el-backtop {
   z-index: 101;
 }
+@media screen and (max-width: 1880px) {
+  .main {
+    max-width: 1220px;
+  }
+}
 @media screen and (max-width: 760px) {
   .main {
     margin-top: 0;
     border: none;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .main {
+    max-width: 920px;
   }
 }
 </style>

@@ -15,11 +15,11 @@
             <div class="flexs">
               <div class="line">
                 <span class="bold">来源:</span>
-                <span>TWITTER</span>
+                <span>{{ object.source }}</span>
               </div>
               <div class="line">
                 <span class="bold">作者:</span>
-                <span>JOE</span>
+                <span>{{ object.author || object.author_text }}</span>
               </div>
             </div>
           </div>
@@ -49,7 +49,12 @@
                 <a class="link" :href="object.link" target="_blank"
                   ><i class="el-icon-link"></i>原文链接</a
                 >
-                <Share :link="object.qrcode" :data="object" />
+                <Share
+                  :link="object.qrcode"
+                  :data="object"
+                  :channelName="channelName"
+                  type="detail"
+                />
               </div>
             </template>
           </div>
@@ -279,7 +284,7 @@ export default {
   }
 }
 .font-18 {
-  font-size: 16px;
+  font-size: 18px;
 }
 .gray {
   color: #666;

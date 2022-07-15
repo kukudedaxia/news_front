@@ -12,7 +12,7 @@
         <div class="share-item">
           <span class="line" @click="copy"><i class="icon copylink"></i>复制链接</span>
           <input
-            id="copy"
+            :id="data.id + type"
             readonly
             type="text"
             value=""
@@ -54,6 +54,8 @@ export default {
   props: {
     link: String,
     data: Object,
+    channelName: String,
+    type: String,
   },
   data() {
     return {
@@ -74,14 +76,17 @@ export default {
   },
   methods: {
     copy() {
-      const inputElement = document.getElementById('copy');
-      inputElement.value = this.link;
+      this.$store.dispatch('send', { action: '2001', id: this.data.id });
+      const inputElement = document.getElementById(this.data.id + this.type);
+      inputElement.value =
+        window.location.origin + `/detail/${this.data.id}?type=1&channel=${this.channelName}`;
       inputElement.select();
       document.execCommand('Copy');
       this.$message.success('复制成功');
       this.$refs.popoverRef.doClose();
     },
     shareToSinaWeiBo(title, url, pic) {
+      this.$store.dispatch('send', { action: '2002', id: this.data.id });
       this.$refs.popoverRef.doClose();
       var param = {
         url: url || 'www.baidu.com',
@@ -107,10 +112,12 @@ export default {
       window.open(targetUrl, 'sinaweibo', 'height=800, width=800');
     },
     showBg() {
+      this.$store.dispatch('send', { action: '2003', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay', true);
     },
     getImg() {
+      this.$store.dispatch('send', { action: '2004', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay1', {
         state: true,

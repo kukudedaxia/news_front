@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import request from '../utils/request';
 import { Message } from 'element-ui';
+import { sendReport } from '../server/index';
 
 Vue.use(Vuex);
 const modulesFiles = require.context('./modules', true, /\.js$/);
@@ -22,6 +23,10 @@ export default new Vuex.Store({
       state: false,
       data: {},
     }, //生成长图
+    uicode: '',
+    luicode: '',
+    fromPage: location.pathname,
+    toPage: location.pathname,
   },
   getters: {
     video: state => state.video.attr,
@@ -39,6 +44,14 @@ export default new Vuex.Store({
     },
     setoverlay1(state, val) {
       state.vant_overlay1 = val;
+    },
+    changeFromPage(state, page) {
+      state.luicode = page.meta.uicode || '';
+      state.fromPage = page;
+    },
+    changeToPage(state, page) {
+      state.uicode = page.meta.uicode || '';
+      state.toPage = page;
     },
   },
   actions: {
@@ -114,6 +127,28 @@ export default new Vuex.Store({
           }
         });
       return true;
+    },
+
+    send(ctx, obj) {
+      const param = { uicode: ctx.state.uicode, ...obj };
+
+      sendReport(param, {
+        onSuccess: () => {
+          // console.log(res, 'res');
+        },
+        onFail: () => {
+          // console.log('error');
+        },
+        onComplete: () => {
+          // console.log('完成');
+        },
+        onNetworkError: () => {
+          if (param.retry > 1) {
+            obj.retry -= 1;
+            ctx.dispatch('send', obj);
+          }
+        },
+      });
     },
   },
   modules,

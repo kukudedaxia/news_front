@@ -69,6 +69,7 @@ export default {
     changeChannel(data) {
       this.activeChannel = data.id;
       this.$store.commit('setChannel', this.activeChannel);
+      this.$store.dispatch('send', { action: '2005', channelId: this.activeChannel });
     },
     navScrollLeft() {
       let listOffsetWidth = this.$refs.list.offsetWidth;
