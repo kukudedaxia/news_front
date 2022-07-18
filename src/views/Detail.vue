@@ -9,7 +9,7 @@
               <i class="el-icon-time" />
               <span>{{ moment(object.ctime).format('YYYY/MM/DD HH:MM:SS') }}</span>
             </div>
-            <div class="type">
+            <div class="type" v-if="channelName">
               <span>来自:</span><el-tag class="tag">{{ channelName }}</el-tag>
             </div>
             <div class="flexs">
@@ -32,7 +32,9 @@
                   </p>
                   <br />
                 </template>
-                <p class="gray"><span class="bold">[原文]&nbsp;</span>{{ object.raw_message }}</p>
+                <p :class="[{ gray: object.raw_message_zh, 'font-18': !object.raw_message_zh }]">
+                  <span class="bold">[原文]&nbsp;</span>{{ object.raw_message }}
+                </p>
               </div>
               <div
                 :class="[
@@ -132,7 +134,7 @@ export default {
       return this.$route.params.id;
     },
     channelName() {
-      return this.$route.query.channel;
+      return unescape(this.$route.query.channel || '');
     },
   },
   created() {

@@ -163,7 +163,7 @@ export default {
           border-radius: 2px;
         }
         .el-tabs__item {
-          font-family: Tahoma;
+          // font-family: Tahoma;
           font-size: 16px;
           color: #333333;
           letter-spacing: 0;
@@ -185,7 +185,7 @@ export default {
       height: 96px;
     }
     p {
-      font-family: Tahoma;
+      // font-family: Tahoma;
       font-size: 14px;
       color: #777f8e;
       text-align: center;

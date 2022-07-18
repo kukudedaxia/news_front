@@ -77,11 +77,14 @@ export default {
   methods: {
     copy() {
       this.$store.dispatch('send', { action: '2001', id: this.data.id });
+      console.log(this.channelName);
       const inputElement = document.getElementById(this.data.id + this.type);
       inputElement.value =
-        window.location.origin + `/detail/${this.data.id}?type=1&channel=${this.channelName}`;
+        window.location.origin +
+        `/detail/${this.data.id}?type=1&channel=${escape(this.channelName)}`;
       inputElement.select();
       document.execCommand('Copy');
+      // navigator.clipboard.writeText(inputElement.value);
       this.$message.success('复制成功');
       this.$refs.popoverRef.doClose();
     },

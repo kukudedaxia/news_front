@@ -166,13 +166,17 @@ export default {
     background-size: 100% 100%;
   }
   .header-right {
-    margin-left: 20px;
+    margin-left: 10px;
+    /deep/.el-menu-item:first-child {
+      margin-left: 12px;
+    }
     /deep/.el-menu-item {
-      font-size: 16px;
+      font-size: 18px;
       height: 56px;
       line-height: 56px;
-      padding: 0 10px;
-      margin: 0;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 16px;
     }
   }
 }

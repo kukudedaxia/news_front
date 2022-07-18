@@ -44,7 +44,6 @@ export default {
     height: 76px;
   }
   p {
-    font-family: PingFangSC-Regular;
     font-size: 14px;
     color: #666666;
   }

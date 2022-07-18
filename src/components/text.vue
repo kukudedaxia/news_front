@@ -2,11 +2,13 @@
   <div ref="text" :class="['desc', data.raw_message_zh ? 'text-overflow-6' : 'text-overflow-4']">
     <template v-if="data.raw_message_zh">
       <div class="flex">
-        <p><span class="bold">[译文]&nbsp;</span>{{ data.raw_message_zh }}</p>
+        <p>
+          <span class="bold">[译文]&nbsp;</span><span class="bolds">{{ data.raw_message_zh }}</span>
+        </p>
       </div>
     </template>
     <template v-if="data.raw_message_zh">
-      <br />
+      <!-- <br /> -->
     </template>
     <div :class="[{ small: data.raw_message_zh }, 'flex']">
       <!-- <span class="hot" v-if="index % 3 == 0">精</span> -->
@@ -22,14 +24,14 @@
   font-size: 16px;
   line-height: 24px;
   word-break: break-word;
-  font-family: 'Tahoma';
+  // font-family: 'Tahoma';
 }
 .text-lines {
   font-size: 16px;
   line-height: 24px;
   font-size: 16px;
   word-break: break-word;
-  font-family: 'Tahoma';
+  // font-family: 'Tahoma';
 }
 </style>
 <script>
@@ -167,5 +169,9 @@ export default {
     font-size: 14px;
     color: #666;
   }
+}
+.bolds {
+  font-weight: bold;
+  font-size: 16px;
 }
 </style>

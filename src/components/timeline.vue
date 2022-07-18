@@ -3,7 +3,7 @@
     <div class="menu">
       <el-menu
         :default-active="String(channelId)"
-        class="el-menu-demo"
+        class="fixed-nav"
         mode="horizontal"
         @select="handleSelect"
       >
@@ -28,11 +28,11 @@
         :maxLength="false"
       >
         <template v-slot:content v-if="list.length > 0">
-          <div v-for="(object, index) in [list[0]]" :key="index">
+          <div v-for="(object, index) in list" :key="index">
             <div class="date">
-              <div class="day">{{ moment(object.date).format('DD/MM') }}</div>
+              <div class="day">{{ moment(object.date).format('MM/DD') }}</div>
               <div class="box">
-                <span class="month">{{ month[object.date.substring(5, 7)] }}</span>
+                <span class="month">{{ time(object.date) }}</span>
                 <span class="year">{{ moment(object.date).format('YYYY') }}</span>
               </div>
             </div>
@@ -66,7 +66,12 @@
                   <div class="bottom">
                     <div class="flex">
                       <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
-                      <Share :link="item.qrcode" :data="item" :channelName="channelItem.name" />
+                      <Share
+                        :link="item.qrcode"
+                        :data="item"
+                        type="home"
+                        :channelName="channelItem.name"
+                      />
                     </div>
                   </div>
                 </div>
@@ -85,6 +90,7 @@
 import scroll from './scroll';
 import Share from '../components/share';
 import Texts from '../components/text';
+import moment from 'moment';
 export default {
   name: 'TimeLine',
   components: {
@@ -173,12 +179,25 @@ export default {
           //     arr.push(d);
           //   });
           // });
-          this.list = this.list.concat(res.data.list);
+          this.list = this.resetArr(this.list, res.data.list);
         },
         onComplete: () => {
           this.isFirstload = true;
         },
       });
+    },
+    // 重组数据
+    resetArr(arr1, arr2) {
+      let noCommon = [];
+      arr2.forEach(item => {
+        //最后一条和下一页相同
+        if (arr1.length > 0 && arr1[arr1.length - 1].date == item.date) {
+          arr1[arr1.length - 1].lives = arr1[arr1.length - 1].lives.concat(item.lives);
+        } else {
+          noCommon = noCommon.concat(item);
+        }
+      });
+      return arr1.concat(noCommon);
     },
     changeChannel(data) {
       console.log(1);
@@ -214,6 +233,51 @@ export default {
       // console.log(active);
       // this.active = active;
     },
+    time(timeStamp) {
+      let m2 = moment();
+      let m1 = moment(timeStamp);
+      let du = moment.duration(m2 - m1, 'ms'); //做差
+      let year1 = m1.get('year');
+      let year2 = m2.get('year');
+      if (year1 == year2) {
+        let days = du.get('days');
+        let hours = du.get('hours');
+        let mins = du.get('minutes');
+        //  输出结果为   01天08时09分40秒
+        console.log(days, hours, mins);
+        if (days == 0) {
+          return '今天';
+        }
+        if (days > 0) {
+          if (days == 1) {
+            return '昨天';
+          }
+          return this.getWeek(timeStamp);
+        }
+      } else {
+        return moment(timeStamp).format('DD/MM/YYYY');
+      }
+    },
+    getWeek(date) {
+      // 参数时间戳
+      let week = moment(date).day();
+      switch (week) {
+        case 1:
+          return '周一';
+        case 2:
+          return '周二';
+        case 3:
+          return '周三';
+        case 4:
+          return '周四';
+        case 5:
+          return '周五';
+        case 6:
+          return '周六';
+        case 0:
+          return '周日';
+      }
+    },
   },
 };
 </script>
@@ -227,6 +291,7 @@ export default {
 <style lang="less" scoped>
 .block {
   min-height: 300px;
+  padding: 0 16px;
   /deep/.el-timeline-item__tail {
     border-left: 2px dotted #d9d9d9;
   }
@@ -244,6 +309,11 @@ export default {
     top: -10px;
     z-index: 100;
   }
+  /deep/.el-timeline-item__content {
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 10px;
+  }
 }
 .menu {
   width: 100%;
@@ -253,26 +323,26 @@ export default {
   flex-wrap: nowrap;
   display: flex;
   /** 滚动条 **/
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    border-radius: 50px;
-  } /* 这是针对缺省样式 (必须的) */
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  } /* 滚动条的滑轨背景颜色 */
+  // ::-webkit-scrollbar {
+  //   width: 2px;
+  //   height: 2px;
+  //   border-radius: 50px;
+  // } /* 这是针对缺省样式 (必须的) */
+  // ::-webkit-scrollbar-track {
+  //   background-color: transparent;
+  // } /* 滚动条的滑轨背景颜色 */
 
-  ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
-  } /* 滑块颜色 */
-  ::-webkit-scrollbar-button {
-    background-color: transparent;
-  } /* 滑轨两头的监听按钮颜色 */
+  // ::-webkit-scrollbar-thumb {
+  //   background-color: #ccc;
+  //   border-radius: 1px;
+  // } /* 滑块颜色 */
+  // ::-webkit-scrollbar-button {
+  //   background-color: transparent;
+  // } /* 滑轨两头的监听按钮颜色 */
 
-  ::-webkit-scrollbar-corner {
-    background-color: #f9f9f9;
-  } /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+  // ::-webkit-scrollbar-corner {
+  //   background-color: #f9f9f9;
+  // } /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
   /deep/.el-menu.el-menu--horizontal {
     border-bottom: none;
   }
@@ -317,7 +387,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 30px 20px 20px 20px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   background: #fff;
   z-index: 101;
   // position: -webkit-sticky;
@@ -392,7 +462,7 @@ export default {
     background: rgba(0, 0, 0, 0.3);
     border: 0 solid rgba(0, 0, 0, 0.03);
     border-radius: 6px;
-    font-family: Tahoma;
+    // font-family: Tahoma;
     font-size: 28px;
     color: #fff;
     letter-spacing: 0;
@@ -407,32 +477,42 @@ export default {
     align-items: center;
   }
 }
-// .bold {
-//   font-weight: bold;
-//   color: #3667a6;
-// }
-// .flex {
-//   p {
-//     display: initial;
-//   }
-//   > span {
-//     word-break: keep-all;
-//     margin-right: 4px;
-//   }
-// }
-// .small {
-//   p {
-//     font-size: 14px;
-//     color: #666;
-//   }
-// }
+
+.menu {
+  .fixed-nav {
+    max-width: 960px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .menu {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    transition: all 0.2s;
+    transform: translateZ(0);
+    z-index: 1000;
+    left: 0;
+    height: 50px;
+    .fixed-nav {
+      width: auto;
+      overflow-x: auto;
+      margin: auto;
+    }
+  }
+}
 @media screen and (max-width: 1080px) {
   .menu .menu-item {
     font-size: 15px;
     height: 40px;
     line-height: 40px;
-    padding: 0 10px;
-    margin: 0;
+    padding: 0 12px;
   }
   .date {
     padding: 20px 10px;

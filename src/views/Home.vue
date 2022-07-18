@@ -115,7 +115,7 @@ export default {
     flex-direction: column-reverse;
     .left {
       width: 100%;
-      padding: 12px;
+      padding: 0;
       min-height: calc(100vh - 160px);
       border: none;
       border-radius: 0;
