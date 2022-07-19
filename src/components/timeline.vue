@@ -481,8 +481,28 @@ export default {
     line-height: 1;
   }
 }
+@media (max-width: 767px) {
+  .block /deep/.el-timeline-item__wrapper {
+    padding-left: 20px;
+  }
+}
 
 @media screen and (max-width: 980px) {
+  .menu .menu-item {
+    font-size: 15px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+  }
+  .date {
+    padding: 20px 10px;
+    .day {
+      font-size: 28px;
+    }
+  }
+  .times {
+    padding: 0;
+  }
   .menu {
     position: sticky;
     top: 0;
@@ -501,23 +521,7 @@ export default {
     }
   }
 }
-@media screen and (max-width: 1080px) {
-  .menu .menu-item {
-    font-size: 15px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 12px;
-  }
-  .date {
-    padding: 20px 10px;
-    .day {
-      font-size: 28px;
-    }
-  }
-  .times {
-    padding: 0;
-  }
-}
+
 @media screen and (min-width: 1080px) {
   .no-data {
     margin-top: 120px;

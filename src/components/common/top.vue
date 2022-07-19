@@ -120,19 +120,19 @@ export default {
       });
     },
     checkBottom() {
-      const contentHeight = document.getElementById('sticky').offsetHeight + 200;
-      const srcollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const clientHegiht = document.documentElement.clientHeight || document.body.offsetHeight;
-      console.log(srcollTop, contentHeight, clientHegiht, '------------');
-      if (srcollTop + clientHegiht >= contentHeight) {
-        console.log(1);
-        this.sticky = true;
-        this.top = clientHegiht - contentHeight;
-        document.getElementById('sticky').setAttribute('style', `top: ${this.top}px`);
-      } else {
-        console.log(2);
-        this.sticky = false;
-        document.getElementById('sticky').style = '';
+      if (document.getElementById('sticky')) {
+        const contentHeight = document.getElementById('sticky').offsetHeight + 200;
+        const srcollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const clientHegiht = document.documentElement.clientHeight || document.body.offsetHeight;
+        console.log(srcollTop, contentHeight, clientHegiht, '------------');
+        if (srcollTop + clientHegiht >= contentHeight) {
+          this.sticky = true;
+          this.top = clientHegiht - contentHeight;
+          document.getElementById('sticky').setAttribute('style', `top: ${this.top}px`);
+        } else {
+          this.sticky = false;
+          document.getElementById('sticky').style = '';
+        }
       }
     },
   },
