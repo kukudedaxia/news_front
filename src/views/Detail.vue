@@ -2,7 +2,33 @@
   <div class="wrap">
     <div class="left">
       <template v-if="load">
-        <div class="content no-border">
+        <div class="content no-border articles" v-if="name == 'Article'">
+          <div class="top">
+            <div class="meta">
+              <span class="author">{{ article.author }}</span>
+              <span class="time">{{ article.ctime }}</span>
+            </div>
+            <div class="tags">
+              <el-tag
+                :class="['tag']"
+                v-for="(item, index) in article.tags.data"
+                size="small"
+                :key="index"
+                >{{ item.name }}</el-tag
+              >
+            </div>
+          </div>
+          <article class="markdown-body">
+            <hr class="hr" />
+            <div v-html="article.content" />
+          </article>
+          <div class="extra">
+            <a class="link" :href="article.link" target="_blank"
+              ><i class="el-icon-link"></i>原文链接</a
+            >
+          </div>
+        </div>
+        <div class="content no-border" v-else>
           <!-- <div class="pos-title">详情</div> -->
           <div class="title">
             <div class="time">
@@ -24,7 +50,7 @@
             </div>
           </div>
           <div class="article">
-            <template v-if="type == 1">
+            <template>
               <div>
                 <template v-if="object.raw_message_zh">
                   <p class="font-18">
@@ -99,25 +125,28 @@
         </div>
         <div class="tip"></div>
       </template>
+
       <div class="load-wrap" v-else>
         <loading>
           <span class="loading-text no-flip-over">加载中...</span>
         </loading>
       </div>
     </div>
-    <!-- <div class="right no-border sticky">
-      <Top type="detail" />
-    </div> -->
+    <div class="right no-border sticky">
+      <Top type="detail" :size="5" />
+    </div>
   </div>
 </template>
 <script>
+import 'github-markdown-css';
 import Loading from '@/components/common/Loading';
 import Share from '../components/share';
 import ImgBox from '@/components/ImgBox';
+import Top from '@/components/common/top';
 export default {
   name: 'Detail',
   components: {
-    // Top,
+    Top,
     Share,
     ImgBox,
     Loading,
@@ -125,20 +154,28 @@ export default {
   data() {
     return {
       load: false,
-      type: 1,
       object: {},
+      article: {},
     };
   },
   computed: {
     id() {
       return this.$route.params.id;
     },
+    name() {
+      return this.$route.name;
+    },
     channelName() {
       return unescape(this.$route.query.channel || '');
     },
   },
   created() {
-    this.init();
+    console.log(this.name);
+    if (this.name == 'Article') {
+      this.initArticle();
+    } else {
+      this.init();
+    }
   },
   methods: {
     init() {
@@ -155,9 +192,41 @@ export default {
         },
       });
     },
+    initArticle() {
+      this.$store.dispatch('ajax', {
+        req: {
+          url: `articles/${this.id}`,
+        },
+        onSuccess: res => {
+          console.log(res);
+          this.article = res.data;
+        },
+        onComplete: () => {
+          this.load = true;
+        },
+      });
+    },
   },
 };
 </script>
+<style lang="less">
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 25px;
+  .hr {
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}
+</style>
 <style lang="less" scoped>
 .wrap {
   display: flex;
@@ -319,6 +388,40 @@ export default {
   }
   .line {
     margin-right: 20px;
+  }
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  .author {
+    color: #515767;
+    font-weight: bold;
+  }
+  .time {
+    color: #8a919f;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.tags {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  flex-wrap: wrap;
+  .tag {
+    background: #fff;
+    border: 1px solid #4265a2;
+    margin: 10px 10px 0 0;
+    color: #4265a2;
+    border-radius: 20px;
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    height: 20px;
+    box-sizing: content-box;
+    font-weight: 500;
   }
 }
 

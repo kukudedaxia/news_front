@@ -28,6 +28,7 @@ import {
   Image as VanImage,
   Cell,
   CellGroup,
+  Popup,
 } from 'vant';
 import Vue from 'vue';
 
@@ -173,6 +174,12 @@ const configList = [
   {
     name: 'CellGroup',
     source: CellGroup,
+    isFunction: false,
+    isComponent: true,
+  },
+  {
+    name: 'Popup',
+    source: Popup,
     isFunction: false,
     isComponent: true,
   },

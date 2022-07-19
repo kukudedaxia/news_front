@@ -172,13 +172,6 @@ export default {
           this.loading = false;
           this.page += 1;
           this.nextPage = res.data.nextPage;
-          // let arr = [];
-          // res.data.list.forEach(item => {
-          //   item.lives.forEach(d => {
-          //     d.date = item.date;
-          //     arr.push(d);
-          //   });
-          // });
           this.list = this.resetArr(this.list, res.data.list);
         },
         onComplete: () => {
@@ -322,6 +315,7 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
   display: flex;
+  background: #fff;
   /** 滚动条 **/
   // ::-webkit-scrollbar {
   //   width: 2px;

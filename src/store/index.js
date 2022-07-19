@@ -15,14 +15,15 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 
 export default new Vuex.Store({
   state: {
-    channelId: '',
+    slideMenuShow: false, //侧边菜单
+    channelId: '', //当前快讯频道
     language: 'zh',
-    pageLoading: false,
+    pageLoading: false, //页面loading
     vant_overlay: false,
     vant_overlay1: {
       state: false,
       data: {},
-    }, //生成长图
+    }, //生成长图弹窗
     uicode: '',
     luicode: '',
     fromPage: location.pathname,
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     video: state => state.video.attr,
   },
   mutations: {
+    setKey(state, obj) {
+      state[obj.key] = obj.val;
+    },
     setLanguage(state, lang) {
       state.language = lang;
     },

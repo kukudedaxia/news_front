@@ -1,28 +1,43 @@
 <template>
   <div :class="{ bg: path != '/login' && path != '/' }">
-    <div class="header com-header">
-      <div
-        :class="[
-          'header-icon',
-          {
-            'logo-icon': lang !== 'ar',
-          },
-        ]"
-        @click="goHome"
-      ></div>
-      <div class="header-right">
-        <el-menu
-          :default-active="path"
-          @select="index => links(index)"
-          class="el-menu-demo"
-          mode="horizontal"
-          background-color="#fff"
-          ref="child"
-        >
-          <el-menu-item index="/">快讯</el-menu-item>
-          <!-- <el-menu-item index="/channel" @click="handleClick">定制频道</el-menu-item> -->
-          <el-menu-item index="/about">关于我们</el-menu-item>
-        </el-menu>
+    <div class="box">
+      <div class="header com-header">
+        <div
+          :class="[
+            'header-icon',
+            {
+              'logo-icon': lang !== 'ar',
+            },
+          ]"
+          @click="goHome"
+        ></div>
+        <div class="header-right">
+          <el-menu
+            :default-active="path || ''"
+            @select="index => links(index)"
+            class="el-menu-demo"
+            mode="horizontal"
+            background-color="#fff"
+            ref="child"
+          >
+            <el-menu-item index="/">快讯</el-menu-item>
+            <el-menu-item index="/article">深度</el-menu-item>
+            <!-- <el-menu-item index="/channel" @click="handleClick">定制频道</el-menu-item> -->
+            <el-menu-item index="/about">关于我们</el-menu-item>
+          </el-menu>
+        </div>
+      </div>
+      <div class="extras">
+        <button class="collapse hidden-md-and-up">
+          <template>
+            <div
+              class="collapse-icon collapse-icon-open"
+              v-if="isCollapse == false"
+              @click="change"
+            ></div>
+            <div class="collapse-icon collapse-icon-close" v-else @click="change"></div>
+          </template>
+        </button>
       </div>
     </div>
   </div>
@@ -48,6 +63,9 @@ export default {
       } else {
         return this.$route.path;
       }
+    },
+    isCollapse() {
+      return this.$store.state.slideMenuShow;
     },
     uid() {
       return this.$store.state.uid;
@@ -92,6 +110,13 @@ export default {
     handleClick() {
       console.log('1');
     },
+    // 侧边菜单
+    change() {
+      this.$store.commit('setKey', {
+        key: 'slideMenuShow',
+        val: !this.isCollapse,
+      });
+    },
     renderTab($el) {
       this.$nextTick(() => {
         const activeEl = $el.querySelector('.el-tabs__item.is-active');
@@ -112,15 +137,23 @@ export default {
 .bg {
   background: #fff;
 }
+.box {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  justify-content: space-between;
+}
 .header {
   display: flex;
-  max-width: 1200px;
   position: relative;
   z-index: 99;
   // top: 23px;
-  margin: auto;
   align-items: center;
   height: 60px;
+}
+.extras {
+  padding: 0 10px;
 }
 .header-icon {
   width: 146px;
@@ -150,9 +183,33 @@ export default {
     background: #fff !important;
   }
 }
+.collapse {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+  .collapse-icon {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+  }
+  .collapse-icon-close {
+    background: url('../assets/images/menu_open.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .collapse-icon-open {
+    background: url('../assets/images/menu_open.png') no-repeat;
+    background-size: 100% 100%;
+  }
+}
 
 .devider {
   background-color: rgba(0, 0, 0, 0.6) !important;
+}
+@media screen and (max-width: 992px) {
+  .header {
+    margin: 0;
+  }
 }
 @media screen and (max-width: 760px) {
   .header {

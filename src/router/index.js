@@ -27,6 +27,24 @@ const routes = [
     },
   },
   {
+    path: '/article',
+    name: 'Article',
+    component: () => import('../views/Article.vue'),
+    meta: {
+      title: 'Bcaca-热门文章',
+      uicode: '10000004',
+    },
+  },
+  {
+    path: '/article/:id',
+    name: 'Article',
+    component: () => import('../views/Detail.vue'),
+    meta: {
+      title: 'Bcaca-文章阅读',
+      uicode: '10000005',
+    },
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),

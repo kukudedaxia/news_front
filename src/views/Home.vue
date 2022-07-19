@@ -4,20 +4,20 @@
       <div class="left">
         <TimeLine :channels="channels" />
       </div>
-      <!-- <div class="right">
+      <div class="right">
         <Top />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import Top from '../components/home/top';
+import Top from '../components/common/top';
 import TimeLine from '../components/timeline.vue';
 export default {
   name: 'Home',
   components: {
-    // Top,
+    Top,
     TimeLine,
   },
   data() {
@@ -104,7 +104,7 @@ export default {
 }
 @media screen and (max-width: 1440px) {
   .home {
-    max-width: 920px;
+    max-width: 1020px;
   }
 }
 @media screen and (max-width: 1080px) {
