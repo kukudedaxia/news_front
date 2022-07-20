@@ -2,8 +2,9 @@
   <div class="wrap">
     <div class="left">
       <template v-if="load">
-        <div class="content no-border articles" v-if="name == 'Article'">
+        <div class="content no-border articles" v-if="name == 'ArticleDetail'">
           <div class="top">
+            <h2>{{ article.title }}</h2>
             <div class="meta">
               <span class="author">{{ article.author }}</span>
               <span class="time">{{ article.ctime }}</span>
@@ -36,7 +37,7 @@
               <span>{{ moment(object.ctime).format('YYYY/MM/DD HH:MM:SS') }}</span>
             </div>
             <div class="type" v-if="channelName">
-              <span>来自:</span><el-tag class="tag">{{ channelName }}</el-tag>
+              <el-tag class="tag">{{ channelName }}</el-tag>
             </div>
             <div class="flexs">
               <div class="line">
@@ -171,7 +172,7 @@ export default {
   },
   created() {
     console.log(this.name);
-    if (this.name == 'Article') {
+    if (this.name == 'ArticleDetail') {
       this.initArticle();
     } else {
       this.init();
@@ -355,7 +356,7 @@ export default {
   }
 }
 .font-18 {
-  font-size: 18px;
+  font-size: 16px;
 }
 .gray {
   color: #666;
@@ -391,6 +392,13 @@ export default {
   }
 }
 
+.top {
+  h2 {
+    font-size: 22px;
+    padding-bottom: 20px;
+    font-weight: bold;
+  }
+}
 .meta {
   display: flex;
   flex-direction: column;

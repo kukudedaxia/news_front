@@ -44,7 +44,7 @@
                 </div>
                 <div class="source">
                   <span>{{
-                    item.author.length > 20 ? item.author.substring(0, 20) + '...' : item.author
+                    item.author.length > 18 ? item.author.substring(0, 18) + '...' : item.author
                   }}</span>
                   <span class="small">来源:{{ item.source }}</span>
                 </div>

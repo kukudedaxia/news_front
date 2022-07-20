@@ -30,11 +30,11 @@
         <template v-slot:content v-if="list.length > 0">
           <div v-for="(object, index) in list" :key="index">
             <div class="date">
-              <div class="day">{{ moment(object.date).format('MM/DD') }}</div>
               <div class="box">
                 <span class="month">{{ time(object.date) }}</span>
                 <span class="year">{{ moment(object.date).format('YYYY') }}</span>
               </div>
+              <div class="day">{{ moment(object.date).format('MM/DD') }}</div>
             </div>
             <el-timeline class="times">
               <el-timeline-item
@@ -284,7 +284,7 @@ export default {
 <style lang="less" scoped>
 .block {
   min-height: 300px;
-  padding: 0 16px;
+  padding: 20px 16px 0;
   /deep/.el-timeline-item__tail {
     border-left: 2px dotted #d9d9d9;
   }
@@ -342,8 +342,8 @@ export default {
   }
   .menu-item {
     cursor: pointer;
-    font-size: 16px;
-    color: #666666;
+    font-size: 18px;
+    color: #666;
     white-space: nowrap;
     // margin: 0 10px;
     position: relative;
@@ -370,6 +370,7 @@ export default {
   .menu-item.active {
     color: #3667a6;
     border-bottom: 0;
+    font-weight: bold;
     &::before {
       left: 25%;
       width: 50%;
@@ -380,7 +381,7 @@ export default {
 .date {
   display: flex;
   align-items: center;
-  padding: 30px 20px 20px 20px;
+  padding: 20px 20px 35px 20px;
   // margin-bottom: 20px;
   background: #fff;
   z-index: 101;
@@ -389,15 +390,15 @@ export default {
   // top: 0px;
 
   .day {
-    font-size: 32px;
+    font-size: 30px;
     color: #3667a6;
   }
   .box {
-    margin-left: 20px;
+    margin-right: 20px;
     background: #3667a6;
     color: #fff;
     display: inline-flex;
-    font-size: 15px;
+    font-size: 14px;
     flex-direction: column;
     padding: 4px 10px;
     border-radius: 10px;
@@ -409,10 +410,15 @@ export default {
 }
 .times {
   padding: 0 10px;
+  .item:last-child {
+    padding-bottom: 0;
+  }
 }
 .item {
-  cursor: pointer;
   position: relative;
+  /deep/.el-timeline-item__content {
+    cursor: pointer;
+  }
 }
 
 .bottom {
@@ -487,15 +493,18 @@ export default {
   }
 }
 
-@media screen and (max-width: 980px) {
+@media (max-width: 992px) {
+  .block {
+    padding-top: 0;
+  }
   .menu .menu-item {
-    font-size: 15px;
+    font-size: 16px;
     height: 40px;
     line-height: 40px;
     padding: 0 12px;
   }
   .date {
-    padding: 20px 10px;
+    padding: 20px 10px 30px;
     .day {
       font-size: 28px;
     }

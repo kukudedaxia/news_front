@@ -17,7 +17,6 @@
             @select="index => links(index)"
             class="el-menu-demo"
             mode="horizontal"
-            background-color="#fff"
             ref="child"
           >
             <el-menu-item index="/">快讯</el-menu-item>
@@ -112,6 +111,7 @@ export default {
     },
     // 侧边菜单
     change() {
+      console.log(1);
       this.$store.commit('setKey', {
         key: 'slideMenuShow',
         val: !this.isCollapse,
@@ -175,19 +175,23 @@ export default {
     padding: 0;
     margin: 0 20px;
   }
-  /deep/.el-menu.el-menu--horizontal {
-    border-bottom: none;
-  }
   /deep/.el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 3px solid #3667a6;
-    background: #fff !important;
   }
+  // /deep/.el-menu.el-menu--horizontal {
+  //   border-bottom: none;
+  // }
+  // /deep/.el-menu--horizontal > .el-menu-item.is-active {
+  //   border-bottom: 3px solid #3667a6;
+  //   background: #fff !important;
+  // }
 }
 .collapse {
   background: none;
   border: none;
   padding: 0;
   line-height: 0;
+  cursor: pointer;
   .collapse-icon {
     width: 26px;
     height: 26px;

@@ -37,7 +37,7 @@
           <div class="icon twitter"></div>
           <div class="icon discord"></div>
         </div>
-        <p>web3搬运工 <br />© 2022 BCACA.INC</p>
+        <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
       </div>
     </div>
   </van-popup>
@@ -106,12 +106,13 @@ export default {
 }
 .bottom {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   width: 100%;
   .icons {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
   }
   p {
     text-align: center;

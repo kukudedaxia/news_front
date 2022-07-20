@@ -32,12 +32,14 @@ const routes = [
     component: () => import('../views/Article.vue'),
     meta: {
       title: 'Bcaca-热门文章',
+      keepAlive: true,
       uicode: '10000004',
+      refresh: false,
     },
   },
   {
     path: '/article/:id',
-    name: 'Article',
+    name: 'ArticleDetail',
     component: () => import('../views/Detail.vue'),
     meta: {
       title: 'Bcaca-文章阅读',

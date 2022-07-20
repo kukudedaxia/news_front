@@ -16,7 +16,7 @@ export const lightTheme = {
   '--color-7': '#299FFF',
   '--color-8': '#346AA7',
   '--color-9': '#FFFFFF',
-  '--color-10': '#FAFAFA',
+  '--color-10': '#f4f5f5',
   '--color-11': '#F2F2F2',
   '--color-12': '#EEEEEE',
   '--color-13': '#CCCCCC',
