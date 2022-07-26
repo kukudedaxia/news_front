@@ -65,7 +65,9 @@
                   </template>
                   <div class="bottom">
                     <div class="flex">
-                      <a :href="item.link" target="_blank"><i class="el-icon-link"></i>原文链接</a>
+                      <a v-if="item.link" :href="item.link" target="_blank"
+                        ><i class="el-icon-link"></i>原文链接</a
+                      >
                       <Share
                         :link="item.qrcode"
                         :data="item"

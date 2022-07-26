@@ -43,7 +43,7 @@
                   ></el-image>
                 </div>
                 <div class="source">
-                  <span>{{
+                  <span v-if="item.author">{{
                     item.author.length > 18 ? item.author.substring(0, 18) + '...' : item.author
                   }}</span>
                   <span class="small">来源:{{ item.source }}</span>
@@ -100,7 +100,7 @@ export default {
           url: '/articles',
           params: {
             tagId: '',
-            page: 1,
+            page: Math.ceil(Math.random() * 20),
             pageSize: this.size,
           },
         },
@@ -239,8 +239,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    span {
+      word-break: break-all;
+    }
     .small {
       font-size: 12px;
+      word-break: keep-all;
     }
   }
 }

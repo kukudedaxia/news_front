@@ -9,7 +9,7 @@
           <el-divider direction="vertical" v-if="index < types.length - 1"></el-divider>
         </div>
       </ul>
-      <el-autocomplete
+      <!-- <el-autocomplete
         popper-class="my-autocomplete"
         v-model="keyword"
         :fetch-suggestions="querySearch"
@@ -24,7 +24,7 @@
         <template slot-scope="{ item }">
           <div class="name">{{ item.value }}</div>
         </template>
-      </el-autocomplete>
+      </el-autocomplete> -->
     </div>
 
     <scroll
@@ -78,7 +78,7 @@
     </scroll>
     <!-- 骨架屏 -->
 
-    <el-skeleton :loading="loading" animated :count="5">
+    <el-skeleton :loading="loading" animated :count="5" v-if="loading">
       <template slot="template">
         <div class="skeleton-wrap">
           <div class="skeleton-desc">
@@ -157,9 +157,11 @@ export default {
         onSuccess: res => {
           console.log(res);
           this.loading = false;
-          this.nextPage = res.data.nextPage || -1;
           this.list = this.list.concat(res.data);
           this.currentpage += 1;
+          if (res.meta.pagination.current_page >= res.meta.pagination.total_pages) {
+            this.nextPage = -1;
+          }
         },
         onComplete: () => {
           this.isFirstload = true;
@@ -167,11 +169,11 @@ export default {
       });
     },
     goDetail(item) {
-      this.$router.push({
-        path: `/article/${item.id}`,
-      });
-      // const link = this.$router.resolve({ path: `/article/${item.id}` });
-      // window.open(link.href, '_blank');
+      // this.$router.push({
+      //   path: `/article/${item.id}`,
+      // });
+      const link = this.$router.resolve({ path: `/article/${item.id}` });
+      window.open(link.href, '_blank');
     },
 
     // 搜索
@@ -209,19 +211,19 @@ export default {
     next();
     // ...
   },
-  beforeRouteEnter(to, from, next) {
-    console.log(to, from, next, 'beforeRouteEnter');
-    if (from.name && from.name.includes('ArticleDetail')) {
-      console.log('不刷新');
-      to.meta.refresh = false;
-      next();
-    } else {
-      // 其他页面进来需要刷新
-      console.log('刷新');
-      to.meta.refresh = true;
-      next();
-    }
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   console.log(to, from, next, 'beforeRouteEnter');
+  //   if (from.name && from.name.includes('ArticleDetail')) {
+  //     console.log('不刷新');
+  //     to.meta.refresh = false;
+  //     next();
+  //   } else {
+  //     // 其他页面进来需要刷新
+  //     console.log('刷新');
+  //     to.meta.refresh = true;
+  //     next();
+  //   }
+  // },
 };
 </script>
 <style lang="less" scoped>
@@ -413,6 +415,9 @@ export default {
   /deep/.el-input--medium .el-input__inner {
     height: 40px;
     line-height: 40px;
+  }
+  .tag {
+    margin-top: 5px;
   }
 }
 @media (max-width: 1200px) {
