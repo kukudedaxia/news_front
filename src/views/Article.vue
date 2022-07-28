@@ -45,8 +45,8 @@
           >
             <div class="meta">
               <div class="flex">
-                <div class="author">{{ item.author }}</div>
-                <el-divider direction="vertical"></el-divider>
+                <div class="author">{{ item.author || '' }}</div>
+                <el-divider v-if="item.author" direction="vertical"></el-divider>
                 <div>{{ moment(item.ctime).format('YYYY/MM/DD HH:MM') }}</div>
               </div>
               <el-divider v-if="item.tags" direction="vertical" class="divider"></el-divider>
@@ -62,13 +62,13 @@
                 <div class="title">{{ item.title }}</div>
                 <div class="desc">
                   <article
-                    class="markdown-body hidden-sm-and-down text-overflow-4 "
-                    @click.stop="() => {}"
+                    class="markdown-body hidden-sm-and-down text-overflow-4"
+                    @click="() => goDetail(item)"
                   >
                     <div v-html="item.summary" />
                   </article>
-                  <article class="markdown-body  hidden-md-and-up" @click.stop="() => {}">
-                    <div v-html="item.summary" />
+                  <article class="markdown-body  hidden-md-and-up" @click="() => goDetail(item)">
+                    <div class="text-overflow-1" v-html="item.summary" />
                   </article>
                 </div>
                 <div class="action">
@@ -274,11 +274,11 @@ export default {
     cursor: pointer;
     color: #909090;
     &:hover {
-      color: #007fff;
+      color: #4266a1;
     }
   }
   a.active {
-    color: #007fff;
+    color: #4266a1;
   }
 }
 .serach {
@@ -413,11 +413,14 @@ export default {
 }
 @media (max-width: 992px) {
   .desc {
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    // display: -webkit-box;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    // -webkit-box-orient: vertical;
+    // -webkit-line-clamp: 1;
+  }
+  .text-overflow-1 {
+    height: 24px;
   }
   .content-right {
     margin-right: 0;

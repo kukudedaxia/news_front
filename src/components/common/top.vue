@@ -28,13 +28,25 @@
                 <div class="panel" @click="() => goDetail(item)">
                   <div class="info">
                     <p class="title text-overflow-1">{{ item.title }}</p>
-                    <p class="desc text-overflow-2">
+                    <!-- <p class="desc text-overflow-2">
                       {{
                         item.summary.length > 50
                           ? item.summary.substring(0, 50) + '...'
                           : item.summary
                       }}
-                    </p>
+                    </p> -->
+                    <article
+                      class="desc markdown-body hidden-sm-and-down text-overflow-2"
+                      @click="() => goDetail(item)"
+                    >
+                      <div v-html="item.summary" />
+                    </article>
+                    <article
+                      class="desc markdown-body hidden-md-and-up"
+                      @click="() => goDetail(item)"
+                    >
+                      <div v-html="item.summary" />
+                    </article>
                   </div>
                   <el-image
                     class="img"
@@ -62,6 +74,7 @@
   </div>
 </template>
 <script>
+import 'github-markdown-css';
 export default {
   name: 'Top',
   props: {
@@ -227,6 +240,7 @@ export default {
       height: 60px;
       border-radius: 6px;
       margin-left: 10px;
+      min-width: 60px;
     }
     .info {
       flex: 1;
@@ -249,6 +263,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     span {
       word-break: break-all;
     }
@@ -283,6 +298,17 @@ export default {
   }
 }
 
+.markdown-body {
+  padding: 0;
+  /deep/h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  /deep/p {
+    margin-bottom: 0;
+  }
+}
 @media screen and (max-width: 960px) {
   .wrap {
     width: 100%;

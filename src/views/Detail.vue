@@ -246,6 +246,7 @@ export default {
     // width: 300px;
     background: transparent;
     margin-left: 20px;
+    margin-bottom: 40px;
   }
   /deep/.el-timeline-item__tail {
     border-left: 2px dotted #d9d9d9;
@@ -436,7 +437,6 @@ export default {
     font-weight: 500;
   }
 }
-
 @media screen and (max-width: 1080px) {
   .wrap {
     flex-direction: column;

@@ -21,10 +21,10 @@
           >
             <el-menu-item index="/">快讯</el-menu-item>
             <el-menu-item index="/article">深度</el-menu-item>
+            <el-menu-item index="/indicators">快速监控</el-menu-item>
             <el-menu-item index="/channel" @click="handleClick" class="hidden-md-and-down"
               >定制服务</el-menu-item
             >
-            <el-menu-item index="/about">关于我们</el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default {
   cursor: pointer;
 }
 .logo-icon {
-  background: url('https://img.bee-cdn.com/large/3b9ae203lz1h3xfkt29rvj20i8066weq.jpg') no-repeat;
+  background: url('../assets/images/logo2.jpeg') no-repeat;
 
   background-size: 100% 100%;
 }
@@ -225,7 +225,7 @@ export default {
   .logo-icon {
     height: 40px;
     width: 42px;
-    background: url('https://img.bee-cdn.com/large/3b9ae203lz1h3xg5nzxnjj205k05kq3a.jpg') no-repeat;
+    background: url('../assets/images/logo1.png') no-repeat;
     background-size: 100% 100%;
   }
   .header-right {
@@ -239,7 +239,7 @@ export default {
       line-height: 56px;
       padding: 0;
       margin-left: 0;
-      margin-right: 16px;
+      margin-right: 20px;
     }
   }
 }

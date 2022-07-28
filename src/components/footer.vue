@@ -4,8 +4,12 @@
       <!-- <span class="power">{{ $t('desc.power') }}</span> -->
       <div class="bottom-link">
         <a href="/about">关于我们</a>
-        <a href="https://twitter.com/TheNewsDao" target="_blank">twitter</a>
-        <a href="https://t.me/news_dao" target="_blank">telegram</a>
+        <a href="https://twitter.com/TheNewsDao" target="_blank"
+          ><span class="icon twitter"></span>twitter</a
+        >
+        <a href="https://t.me/news_dao" target="_blank"
+          ><span class="icon telegram"></span>telegram</a
+        >
       </div>
     </div>
   </div>
@@ -40,10 +44,18 @@
     color: #346aa7;
   }
 }
-
-html[lang='ar'] .power {
-  margin-left: 200px;
-  margin-right: 0;
+.icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 6px;
+}
+.twitter {
+  background: url('~@/assets/images/twitter.png') no-repeat;
+  background-size: 100% 100%;
+}
+.telegram {
+  background: url('~@/assets/images/telegram.png') no-repeat;
+  background-size: 100% 100%;
 }
 @media screen and (max-width: 760px) {
   .bottom-info .power {

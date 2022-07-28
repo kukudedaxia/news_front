@@ -32,6 +32,12 @@
             <span>深度</span>
           </div>
         </el-menu-item>
+        <el-menu-item index="/indicators">
+          <div class="menu-item" slot="title">
+            <span class="menu-icon menu-icon-farm"></span>
+            <span>快速监控</span>
+          </div>
+        </el-menu-item>
         <!-- <el-menu-item index="/channel">定制服务</el-menu-item> -->
         <el-menu-item index="/about">
           <div class="menu-item" slot="title">
@@ -122,6 +128,7 @@ export default {
   /deep/.el-menu-item.is-active {
     background: rgba(15, 18, 23, 0.06);
     font-weight: bold;
+    color: #3667a6;
   }
 }
 .icon {

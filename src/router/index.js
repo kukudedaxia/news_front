@@ -56,6 +56,15 @@ const routes = [
     },
   },
   {
+    path: '/indicators',
+    name: 'Indicators',
+    component: () => import('../views/Indicators.vue'),
+    meta: {
+      title: 'Bcaca-监控看板',
+      uicode: '10000006',
+    },
+  },
+  {
     path: '*',
     redirect: { name: 'Home' },
   },

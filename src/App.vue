@@ -154,7 +154,7 @@ export default {
 <style lang="less" scoped>
 .main {
   border: 1px solid transparent;
-  background: #f4f5f5;
+  background: #fafafa;
   min-height: calc(100vh - 158px);
   // margin-top: 30px;
   max-width: 1020px;

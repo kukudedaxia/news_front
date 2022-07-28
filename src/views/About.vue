@@ -64,10 +64,7 @@
       </div>
       <div id="about_2" class="pragraph">
         <div class="left center">
-          <img
-            class="image"
-            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
-          />
+          <img class="image" src="https://s2.loli.net/2022/07/28/BdIm9Rfv7srzyVT.jpg" />
         </div>
         <div class="right">
           <p class="desc">
@@ -99,10 +96,7 @@
           </p>
         </div>
         <div class="right center">
-          <img
-            class="image"
-            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
-          />
+          <img class="image" src="https://s2.loli.net/2022/07/28/3PVZvXkYQg85fBq.jpg" />
         </div>
       </div>
     </div>
@@ -191,6 +185,8 @@ export default {
   }
   .image {
     width: 300px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px 0 rgb(0 0 0 / 30%);
   }
   .desc {
     max-width: 400px;

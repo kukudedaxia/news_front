@@ -519,11 +519,10 @@ export default {
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 100;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
     transition: all 0.2s;
     transform: translateZ(0);
-    z-index: 1000;
+    z-index: 900;
     left: 0;
     height: 50px;
     .fixed-nav {
