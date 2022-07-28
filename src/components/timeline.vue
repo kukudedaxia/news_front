@@ -44,10 +44,10 @@
                 placement="top"
                 class="item"
               >
-                <div>
+                <div @click="() => goDetail(item)">
                   <template>
                     <div>
-                      <div @click="() => goDetail(item)">
+                      <div>
                         <Texts :data="item" />
                       </div>
                       <div class="images" v-if="item.images && item.images.length > 0">
@@ -56,6 +56,7 @@
                           lazy
                           :preview-src-list="item.images"
                           fit="cover"
+                          @click.stop="() => {}"
                         ></el-image>
                         <span class="num" v-if="item.images.length > 1"
                           >+{{ item.images.length - 1 }}</span
@@ -64,7 +65,7 @@
                     </div>
                   </template>
                   <div class="bottom">
-                    <div class="flex">
+                    <div class="flex" @click.stop="() => {}">
                       <a v-if="item.link" :href="item.link" target="_blank"
                         ><i class="el-icon-link"></i>原文链接</a
                       >

@@ -21,6 +21,10 @@
           </div>
           <article class="markdown-body">
             <hr class="hr" />
+            <div v-html="article.summary" />
+          </article>
+          <article class="markdown-body">
+            <hr class="hr" />
             <div v-html="article.content" />
           </article>
           <div class="extra">
@@ -133,8 +137,8 @@
         </loading>
       </div>
     </div>
-    <div class="right no-border sticky">
-      <Top type="detail" :size="5" />
+    <div class="right no-border sticky" v-if="load">
+      <Top :type="name" :size="5" :tags="article.tags ? article.tags.data : []" />
     </div>
   </div>
 </template>

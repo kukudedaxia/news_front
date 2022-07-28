@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import Generate from '@/components/generate.vue';
+import Generate from '@/components/Generate.vue';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PageLoading from '@/components/common/Loadings';

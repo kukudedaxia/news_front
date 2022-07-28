@@ -21,7 +21,9 @@
           >
             <el-menu-item index="/">快讯</el-menu-item>
             <el-menu-item index="/article">深度</el-menu-item>
-            <!-- <el-menu-item index="/channel" @click="handleClick">定制频道</el-menu-item> -->
+            <el-menu-item index="/channel" @click="handleClick" class="hidden-md-and-down"
+              >定制服务</el-menu-item
+            >
             <el-menu-item index="/about">关于我们</el-menu-item>
           </el-menu>
         </div>
@@ -98,7 +100,7 @@ export default {
     // new
     links(index) {
       if (index == '/channel') {
-        this.$refs.child.activeIndex = '/';
+        this.$refs.child.activeIndex = this.path;
         setTimeout(() => {
           window.open('https://manage.newsdao.finance/#/');
         }, 200);

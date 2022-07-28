@@ -10,8 +10,16 @@
     @click-close-icon="() => closeMenu()"
   >
     <div class="slide-content">
-      <div class="slide-logo">Bcaca</div>
-      <el-menu :default-active="path" class="vertical-menu" router @select="closeMenu">
+      <div class="slide-logo">
+        <img :src="require('../assets/images/logo1.jpg')" />
+      </div>
+      <el-menu
+        :default-active="path"
+        class="vertical-menu"
+        router
+        @select="index => links(index)"
+        ref="child"
+      >
         <el-menu-item index="/">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-home"></span>
@@ -24,6 +32,7 @@
             <span>深度</span>
           </div>
         </el-menu-item>
+        <!-- <el-menu-item index="/channel">定制服务</el-menu-item> -->
         <el-menu-item index="/about">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-draw"></span>
@@ -34,8 +43,15 @@
       <el-divider></el-divider>
       <div class="bottom">
         <div class="icons">
-          <div class="icon twitter"></div>
-          <div class="icon discord"></div>
+          <a href="https://twitter.com/TheNewsDao" target="_blank" alt="twitter"
+            ><div class="icon twitter"></div
+          ></a>
+          <a href="https://discord.gg/qQEwJAPQ" target="_blank" alt="twitter">
+            <div class="icon discord"></div>
+          </a>
+          <a href="https://t.me/news_dao" target="_blank" alt="twitter">
+            <div class="icon telegram"></div>
+          </a>
         </div>
         <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
       </div>
@@ -63,6 +79,18 @@ export default {
     closeMenu() {
       this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
     },
+    links(index) {
+      console.log(index);
+      this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
+      if (index == '/channel') {
+        this.$refs.child.activeIndex = this.path;
+        setTimeout(() => {
+          window.open('https://manage.newsdao.finance/#/');
+        }, 200);
+      } else {
+        this.$router.push({ path: index });
+      }
+    },
   },
 };
 </script>
@@ -80,6 +108,11 @@ export default {
   padding: 0 10px;
   font-weight: bold;
   font-size: 20px;
+  img {
+    width: 100px;
+    margin-top: 15px;
+    display: inline-flex;
+  }
 }
 .vertical-menu {
   /deep/.el-menu-item {
@@ -102,6 +135,10 @@ export default {
 }
 .discord {
   background: url('~@/assets/images/discord.png') no-repeat;
+  background-size: 100% 100%;
+}
+.telegram {
+  background: url('~@/assets/images/telegram.png') no-repeat;
   background-size: 100% 100%;
 }
 .bottom {

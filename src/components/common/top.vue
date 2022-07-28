@@ -38,7 +38,8 @@
                   </div>
                   <el-image
                     class="img"
-                    src="https://cdn-news.jin10.com/bcb4a014-f94d-4362-aba1-02e23ef8ccef.jpg"
+                    v-if="item.img"
+                    :src="item.images[0]"
                     fit="cover"
                   ></el-image>
                 </div>
@@ -72,11 +73,13 @@ export default {
       type: Number,
       default: 10,
     },
+    tags: Array,
   },
   data() {
     return {
       loading: false,
       list: [],
+      page: 1,
     };
   },
   created() {
@@ -93,14 +96,16 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    getData(type) {
       this.loading = true;
+      console.log(this.tags);
       this.$store.dispatch('ajax', {
         req: {
           url: '/articles',
           params: {
-            tagId: '',
-            page: Math.ceil(Math.random() * 20),
+            is_recommand: 1,
+            tags: this.tags && this.tags.map(item => item.name).join(','),
+            page: type ? this.page : 1,
             pageSize: this.size,
           },
         },
@@ -108,6 +113,11 @@ export default {
           console.log(res);
           this.loading = false;
           this.list = res.data;
+          if (this.page <= res.meta.pagination.total_pages) {
+            this.page += 1;
+          } else {
+            this.page = 1;
+          }
         },
         onComplete: () => {
           this.isFirstload = true;

@@ -3,9 +3,9 @@
     <div class="bottom-info">
       <!-- <span class="power">{{ $t('desc.power') }}</span> -->
       <div class="bottom-link">
-        <a href="/about" target="_blank">关于我们</a>
-        <a href="/newsroom" target="_blank">twitter</a>
-        <a href="/concat" target="_blank">telegram</a>
+        <a href="/about">关于我们</a>
+        <a href="https://twitter.com/TheNewsDao" target="_blank">twitter</a>
+        <a href="https://t.me/news_dao" target="_blank">telegram</a>
       </div>
     </div>
   </div>

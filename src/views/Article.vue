@@ -9,22 +9,21 @@
           <el-divider direction="vertical" v-if="index < types.length - 1"></el-divider>
         </div>
       </ul>
-      <!-- <el-autocomplete
+      <el-input
         popper-class="my-autocomplete"
-        v-model="keyword"
-        :fetch-suggestions="querySearch"
+        v-model="keywords"
         placeholder="请输入内容"
         :trigger-on-focus="false"
-        @select="handleSelect"
-        select-when-unmatched
         class="serach"
         size="medium"
+        type="search"
+        @change="Search"
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <template slot-scope="{ item }">
           <div class="name">{{ item.value }}</div>
         </template>
-      </el-autocomplete> -->
+      </el-input>
     </div>
 
     <scroll
@@ -62,14 +61,22 @@
               <div class="content-left">
                 <div class="title">{{ item.title }}</div>
                 <div class="desc">
-                  {{ item.summary }}
+                  <article
+                    class="markdown-body hidden-sm-and-down text-overflow-4 "
+                    @click.stop="() => {}"
+                  >
+                    <div v-html="item.summary" />
+                  </article>
+                  <article class="markdown-body  hidden-md-and-up" @click.stop="() => {}">
+                    <div v-html="item.summary" />
+                  </article>
                 </div>
                 <div class="action">
-                  <span><i class="el-icon-view" />2018</span>
+                  <span><i class="el-icon-view" />{{ item.view_count }}</span>
                 </div>
               </div>
-              <div class="content-right">
-                <img src="https://cdn-news.jin10.com/bcb4a014-f94d-4362-aba1-02e23ef8ccef.jpg" />
+              <div class="content-right" v-if="item.img">
+                <img :src="item.images[0]" />
               </div>
             </div>
           </div>
@@ -99,6 +106,7 @@
   </div>
 </template>
 <script>
+import 'github-markdown-css/github-markdown-light.css';
 import scroll from '../components/scroll';
 export default {
   name: 'Article',
@@ -114,7 +122,7 @@ export default {
         },
         {
           name: '全部',
-          id: 2,
+          id: 0,
         },
       ],
       type: 1,
@@ -124,7 +132,7 @@ export default {
       nextPage: 1,
       list: [],
       scrollTop: 0,
-      keyword: '', //搜索相关
+      keywords: '', //搜索相关
     };
   },
   created() {
@@ -134,6 +142,7 @@ export default {
     change(item) {
       this.type = item.id;
       this.list = [];
+      this.currentpage = 1;
       this.getData();
     },
     init() {
@@ -152,6 +161,8 @@ export default {
             tagId: '',
             page: this.currentpage,
             pageSize: 10,
+            is_recommand: this.type,
+            keywords: this.keywords,
           },
         },
         onSuccess: res => {
@@ -177,15 +188,10 @@ export default {
     },
 
     // 搜索
-    querySearch(queryString, cb) {
-      console.log(1);
-      cb([
-        {
-          value: queryString + '测试',
-        },
-      ]);
-    },
-    handleSelect() {
+    // querySearch(queryString, cb) {},
+    Search() {
+      this.list = [];
+      this.currentpage = 1;
       this.getData();
     },
     createStateFilter(queryString) {
@@ -229,7 +235,7 @@ export default {
 <style lang="less" scoped>
 .articles {
   min-height: calc(100vh - 100px);
-  background: #fff;
+  background: var(--fill-1);
   border-radius: 4px;
   // border: 1px solid #e7eaf2;
   max-width: 980px;
@@ -277,6 +283,7 @@ export default {
 }
 .serach {
   margin-right: 20px;
+  max-width: 200px;
   /deep/.el-input__inner {
     border-radius: 10px;
     border: 1px solid #4465a1;
@@ -293,7 +300,13 @@ export default {
     cursor: pointer;
     &:hover {
       background: #fafafa;
+      .markdown-body {
+        background: #fafafa;
+      }
     }
+  }
+  .markdown-body:hover {
+    background: #fafafa;
   }
 }
 .meta {
@@ -385,6 +398,16 @@ export default {
 .flex {
   display: flex;
   align-items: center;
+}
+@media only screen and (max-width: 1199px) {
+  .hidden-md-and-down1 {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 992) {
+  .hidden-md-and-down1 {
+    display: none !important;
+  }
 }
 @media (max-width: 767px) {
 }

@@ -30,7 +30,7 @@
 </i18n>
 <template>
   <div class="about">
-    <div class="switch">
+    <!-- <div class="switch">
       <el-switch
         @change="changeLanuage"
         :value="lang == 'zh'"
@@ -38,18 +38,21 @@
         :inactive-text="$t('en')"
       >
       </el-switch>
-    </div>
-    <Section :list="list" />
+    </div> -->
+    <!-- <Section :list="list" /> -->
     <div class="content">
       <div id="about_1" class="pragraph">
         <div class="left">
-          <h3 class="title">{{ $t('title') }}</h3>
+          <h3 class="title">
+            帮助你挖掘最具价值的内容 <br />Help you to uncover the most valuable messages
+          </h3>
           <ul class="list">
-            <li>{{ $t('li-1') }}</li>
-            <li>{{ $t('li-2') }}</li>
-            <li>{{ $t('li-3') }}</li>
-            <li>{{ $t('li-4') }}</li>
-            <li>{{ $t('li-5') }}</li>
+            <li>聚合 Aggregated</li>
+            <li>高效 Efficient</li>
+            <li>精准 Accurate</li>
+            <li>自动 Autonomous</li>
+            <li>永久存储 Perpetual</li>
+            <li>永不停止 Never ending</li>
           </ul>
         </div>
         <div class="right center">
@@ -67,12 +70,33 @@
           />
         </div>
         <div class="right">
-          <p class="desc">{{ $t('ph-1') }}</p>
+          <p class="desc">
+            Bcaca
+            更倾向于提供消息的索引和解析，而不是消息本身。就像你们知道的，大多数媒体发出来的消息都是经过特殊编撰的，如果你只是看这些消息，这其中就会很容易存在市场信号的误导。我们相信投资者更需要的是将最具市场潜力的消息作为一种索引，从而发现与其相关联的其他讯息，然后将它们形成一个体系，最终成为最准确的市场信号。<br /><br />
+            <span
+              >Bcaca tends to provide indexing and parsing of content, rather than just the content.
+              As you know, most of those news release from media have been touched up, it would be
+              easily misleading by incorrect market signals from that news. We believe that it is
+              very vital for investors to obtain the most instructive information as an index to
+              associate with other relevant message. By gathering all the information in a
+              systematic way, they can finally output the most accurate market signal.</span
+            >
+          </p>
         </div>
       </div>
       <div id="about_3" class="pragraph">
         <div class="left">
-          <p class="desc">{{ $t('ph-2') }}</p>
+          <p class="desc">
+            Bcaca
+            采用自主研发的“智能化内容过滤驱动器”，从全网所有渠道自动化采集最有潜力的讯息，并将该条讯息的所有网络链接和来源公开。而不仅仅是去特定的渠道抓取内容，并包装成自己的产物。因为我们认为只有最存粹的内容本身才能帮助你寻找更多的机会。<br /><br />Bcaca
+            <span
+              >use the independent developed 'intelligent content filtering driver' to automatically
+              collect the most promising information through all online channels , and will also
+              publish the web links and sources of those information. We do not make any information
+              as our own product via any particular channel because we believe that only the purest
+              content can help you find more opportunities.</span
+            >
+          </p>
         </div>
         <div class="right center">
           <img
@@ -86,12 +110,12 @@
 </template>
 <script>
 import { loadLanguageAsync } from '@/utils/i18n.js';
-import Section from '@/components/section';
+// import Section from '@/components/section';
 import i18n from '@/utils/i18n';
 export default {
   name: 'About',
   components: {
-    Section,
+    // Section,
   },
   data() {
     return {
@@ -194,7 +218,11 @@ export default {
     }
   }
 }
-
+@media screen and (max-width: 920px) {
+  .content {
+    margin-top: 20px;
+  }
+}
 @media screen and (max-width: 760px) {
   .about {
     padding: 0 16px;
