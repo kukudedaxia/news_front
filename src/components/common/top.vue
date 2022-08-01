@@ -318,6 +318,11 @@ export default {
   /deep/p {
     margin-bottom: 0;
   }
+  /deep/img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+  }
 }
 @media screen and (max-width: 992px) {
   .wrap {

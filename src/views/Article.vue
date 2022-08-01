@@ -305,6 +305,10 @@ export default {
         background: #fafafa;
       }
     }
+    /deep/img {
+      width: 100px;
+      border-radius: 6px;
+    }
   }
   .markdown-body:hover {
     background: #fafafa;

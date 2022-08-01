@@ -113,7 +113,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/api': {
-        target: 'http://81.68.251.185/',
+        target: 'https://bcaca.xyz/',
       },
       '/multimedia': {
         target: 'https://hektarapp.com/',

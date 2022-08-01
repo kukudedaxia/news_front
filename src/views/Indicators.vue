@@ -33,7 +33,9 @@
             扫描或识别二维码 <br /><span class="name">[{{ current.name }}]</span>
           </p>
           <img :src="type == 1 ? current.wechat_qrcode : current.tg_qrcode" class="code" />
-          <a :href="current.tg_link" target="_blank"><i class="el-icon-position" />电报链接</a>
+          <a :href="current.tg_link" target="_blank" v-if="type == 2"
+            ><i class="el-icon-position" />电报链接</a
+          >
         </div>
         <div class="block block1" v-if="type == 3 && loaded">
           <div class="timeline" v-if="list.length > 0">
@@ -134,6 +136,7 @@ export default {
     },
     getDetail(id) {
       this.list = [];
+      this.loaded = false;
       this.$store.dispatch('ajax', {
         req: {
           url: 'lives/timeline',
@@ -261,7 +264,7 @@ export default {
 }
 .timeline {
   .con {
-    color: #fff;
+    color: #000;
   }
   /deep/.el-timeline-item__timestamp {
     color: #aaaaaa;
