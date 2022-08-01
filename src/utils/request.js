@@ -13,7 +13,6 @@ request.interceptors.request.use(req => {
 
 request.interceptors.response.use(
   response => {
-
     if (response.data.error_code) {
       switch (response.data.error_code) {
         case 35000:
@@ -31,7 +30,7 @@ request.interceptors.response.use(
           store.commit('setTab', {});
 
           window.location.href =
-          window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
+            window.location.origin + `/login?redirect=${router.currentRoute.fullPath}`;
           // // 解决退出时候 还有权限接口仍在访问
           // if (router.currentRoute.meta.auth) {
           //   // console.log(router.currentRoute)

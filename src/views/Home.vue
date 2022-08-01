@@ -2,7 +2,8 @@
   <div class="home">
     <div class="content">
       <div class="left">
-        <TimeLine :channels="channels" />
+        <div class="menu-title hidden-sm-and-down">快讯</div>
+        <TimeLine :channels="channels" class="times" />
       </div>
       <div class="right">
         <Top />
@@ -73,8 +74,15 @@ export default {
 .home {
   max-width: 1120px;
   margin: 0 auto;
-  margin-bottom: 60px;
   border-radius: 6px;
+}
+.menu-title {
+  padding: 20px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.2);
+  color: #010102;
 }
 .content {
   display: flex;
@@ -83,24 +91,42 @@ export default {
   flex-grow: 1;
   .left {
     // width: 800px;
-    width: 100%;
+    // width: 100%;
     background: #fff;
-    padding: 20px;
-    border: 1px solid #e7eaf2;
-    border-radius: 6px;
+    // padding: 20px;
+    // border: 1px solid #e7eaf2;
+    border-right: 1px solid hsla(0, 0%, 53%, 0.2);
+    // border-top: none;
+    // border-bottom: none;
+    // border-radius: 6px;
+    padding-bottom: 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+  .times {
+    width: 100%;
+    padding: 0;
+    /deep/.block {
+      padding: 0 16px 0;
+    }
   }
   .right {
     width: 300px;
     min-height: 1000px;
     background: transparent;
-    margin-left: 20px;
+    // margin-left: 20px;
   }
 }
-.sticky {
-  position: sticky;
-  z-index: 99;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+
+@media screen and (max-width: 992px) {
+  .content .times {
+    /deep/.block {
+      padding-top: 100px;
+    }
+  }
 }
 @media screen and (max-width: 1440px) {
   .home {

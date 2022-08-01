@@ -240,12 +240,12 @@ export default {
   flex-grow: 1;
   .left {
     width: 100%;
-    min-height: 300px;
+    min-height: 260px;
+    border-right: 1px solid hsla(0, 0%, 53%, 0.2);
   }
   .right {
     // width: 300px;
     background: transparent;
-    margin-left: 20px;
     margin-bottom: 40px;
   }
   /deep/.el-timeline-item__tail {
@@ -255,15 +255,16 @@ export default {
 .content {
   background: #fff;
   border-radius: 4px;
-  border: 1px solid #e7eaf2;
+  // border: 1px solid #e7eaf2;
+  // border-right: 1px solid hsla(0, 0%, 53%, 0.2);
   // min-height: calc(100vh - 200px);
   padding: 18px;
   margin-bottom: 40px;
 }
 .more {
   background: #fff;
-  border-radius: 4px;
-  border: 1px solid #e7eaf2;
+  // border-radius: 4px;
+  border-top: 1px solid #e7eaf2;
   padding: 18px;
   margin: 30px 0 40px 0;
 }
@@ -437,7 +438,7 @@ export default {
     font-weight: 500;
   }
 }
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 992px) {
   .wrap {
     flex-direction: column;
     .left {

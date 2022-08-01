@@ -242,6 +242,7 @@ export default {
   margin: 0 auto;
   margin-bottom: 30px;
   padding-bottom: 30px;
+  border-right: 1px solid hsla(0, 0%, 53%, 0.2);
 }
 .skeleton-wrap {
   padding: 20px;

@@ -11,7 +11,7 @@
           ]"
           @click="goHome"
         ></div>
-        <div class="header-right">
+        <!-- <div class="header-right">
           <el-menu
             :default-active="path || ''"
             @select="index => links(index)"
@@ -20,13 +20,13 @@
             ref="child"
           >
             <el-menu-item index="/">快讯</el-menu-item>
+            <el-menu-item index="/indicators">指标监控</el-menu-item>
             <el-menu-item index="/article">深度</el-menu-item>
-            <el-menu-item index="/indicators">快速监控</el-menu-item>
             <el-menu-item index="/channel" @click="handleClick" class="hidden-md-and-down"
               >定制服务</el-menu-item
             >
           </el-menu>
-        </div>
+        </div> -->
       </div>
       <div class="extras">
         <button class="collapse hidden-md-and-up">
@@ -102,7 +102,7 @@ export default {
       if (index == '/channel') {
         this.$refs.child.activeIndex = this.path;
         setTimeout(() => {
-          window.open('https://manage.newsdao.finance/#/');
+          window.open('https://bcaca.xyz/user-center');
         }, 200);
       } else {
         this.$router.push({ path: index });
@@ -222,12 +222,12 @@ export default {
     height: 56px;
     padding: 0 10px;
   }
-  .logo-icon {
-    height: 40px;
-    width: 42px;
-    background: url('../assets/images/logo1.png') no-repeat;
-    background-size: 100% 100%;
-  }
+  // .logo-icon {
+  //   height: 40px;
+  //   width: 42px;
+  //   background: url('../assets/images/logo1.png') no-repeat;
+  //   background-size: 100% 100%;
+  // }
   .header-right {
     margin-left: 10px;
     /deep/.el-menu-item:first-child {

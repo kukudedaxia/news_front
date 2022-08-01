@@ -64,7 +64,10 @@
       </div>
       <div id="about_2" class="pragraph">
         <div class="left center">
-          <img class="image" src="https://s2.loli.net/2022/07/28/BdIm9Rfv7srzyVT.jpg" />
+          <img
+            class="image"
+            src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9o53m1fj21900u00xe.jpg"
+          />
         </div>
         <div class="right">
           <p class="desc">
@@ -96,7 +99,10 @@
           </p>
         </div>
         <div class="right center">
-          <img class="image" src="https://s2.loli.net/2022/07/28/3PVZvXkYQg85fBq.jpg" />
+          <img
+            class="image"
+            src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9ni7rlwj21900u0133.jpg"
+          />
         </div>
       </div>
     </div>

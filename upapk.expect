@@ -7,14 +7,15 @@ set username [lindex $argv 2]
 set password [lindex $argv 3]
 set envs [lindex $argv 4]
 
+set username1 ubuntu
 #区分线上与测试目录环境
 if {$envs == "tests"} {
   set dest_path /server/data/fe/bcaca
 } else {
-  set dest_path /data/www/weapon-master/homepage
+  set dest_path /data/fe/newsdao/bcaca
 }
 
-set remote_tmp_path /home/$username
+set remote_tmp_path /home/$username1
 set file_name [exec basename $src_file]
 
 #echo ${file_name} "filename"
@@ -22,7 +23,7 @@ set file_name [exec basename $src_file]
 set dest_file $dest_path/$file_name
 set remote_tmp_file $remote_tmp_path/$file_name
 
-spawn scp $src_file $username@$host:/home/$username
+spawn scp $src_file $username@$host:/home/$username1
 expect {
  "(yes/no"
   {

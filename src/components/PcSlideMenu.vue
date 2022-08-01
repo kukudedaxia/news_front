@@ -1,17 +1,8 @@
 <template>
-  <van-popup
-    class="slides"
-    :value="show"
-    position="right"
-    get-container="body"
-    overlay
-    closeable
-    @click-overlay="() => closeMenu()"
-    @click-close-icon="() => closeMenu()"
-  >
-    <div class="slide-content">
+  <div class="slide-content">
+    <div class="fix">
       <div class="slide-logo">
-        <img :src="require('../assets/images/logo1.jpg')" />
+        <img :src="require('../assets/images/logo2.jpeg')" />
       </div>
       <el-menu
         :default-active="path"
@@ -46,45 +37,37 @@
           </div>
         </el-menu-item>
       </el-menu>
-      <el-divider></el-divider>
-      <div class="bottom">
-        <div class="icons">
-          <a href="https://twitter.com/TheNewsDao" target="_blank" alt="twitter"
-            ><div class="icon twitter"></div
-          ></a>
-          <a href="https://discord.gg/qQEwJAPQ" target="_blank" alt="twitter">
-            <div class="icon discord"></div>
-          </a>
-          <a href="https://t.me/news_dao" target="_blank" alt="twitter">
-            <div class="icon telegram"></div>
-          </a>
-        </div>
-        <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
-      </div>
+      <el-divider class="divider"></el-divider>
     </div>
-  </van-popup>
+    <div class="bottom">
+      <div class="icons">
+        <a href="https://twitter.com/TheNewsDao" target="_blank" alt="twitter"
+          ><div class="icon twitter"></div
+        ></a>
+        <a href="https://discord.gg/qQEwJAPQ" target="_blank" alt="twitter">
+          <div class="icon discord"></div>
+        </a>
+        <a href="https://t.me/news_dao" target="_blank" alt="twitter">
+          <div class="icon telegram"></div>
+        </a>
+      </div>
+      <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-  name: 'SlideMenu',
+  name: 'PcSlideMenu',
   data() {
-    return {
-      visable: false,
-    };
+    return {};
   },
   computed: {
-    show() {
-      return this.$store.state.slideMenuShow;
-    },
     path() {
       return this.$store.state.toPage.path;
     },
   },
   created() {},
   methods: {
-    closeMenu() {
-      this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
-    },
     links(index) {
       console.log(index);
       this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
@@ -101,6 +84,16 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.slide-content {
+  position: fixed;
+  height: calc(100vh);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid hsla(0, 0%, 53%, 0.2);
+  background: #fff;
+  justify-content: space-between;
+  width: 280px;
+}
 /deep/.el-menu {
   background: transparent;
   border-right: none;
@@ -114,9 +107,10 @@ export default {
   padding: 0 10px;
   font-weight: bold;
   font-size: 20px;
+  margin-bottom: 10px;
   img {
-    width: 100px;
-    margin-top: 15px;
+    width: 130px;
+    margin-top: 10px;
     display: inline-flex;
   }
 }
@@ -124,17 +118,36 @@ export default {
   /deep/.el-menu-item {
     height: 48px;
     line-height: 48px;
+    font-size: 17px;
+    padding-left: 10px;
+    margin-bottom: 6px;
+    .menu-item {
+      padding-left: 10px;
+      &:hover {
+        background: #f6f6f6;
+        border-radius: 6px;
+        color: #4266a1;
+        font-weight: bold;
+      }
+    }
+    &:hover {
+      background: none;
+    }
   }
   /deep/.el-menu-item.is-active {
-    background: rgba(15, 18, 23, 0.06);
-    font-weight: bold;
-    color: #3667a6;
+    background: none;
+    .menu-item {
+      background: #f6f6f6;
+      border-radius: 6px;
+      color: #4266a1;
+      font-weight: bold;
+    }
   }
 }
 .icon {
-  width: 20px;
-  height: 20px;
-  margin: 0 6px;
+  width: 26px;
+  height: 26px;
+  margin: 0 10px;
 }
 .twitter {
   background: url('~@/assets/images/twitter.png') no-repeat;
@@ -149,9 +162,10 @@ export default {
   background-size: 100% 100%;
 }
 .bottom {
-  position: absolute;
+  position: relative;
   bottom: 20px;
   width: 100%;
+  margin-top: 30px;
   .icons {
     display: flex;
     align-items: center;
@@ -161,8 +175,12 @@ export default {
   p {
     text-align: center;
     color: #666;
-    font-size: 13px;
+    font-size: 14px;
   }
+}
+.divider {
+  width: 80%;
+  margin: 24px auto;
 }
 @media (max-width: 767px) {
 }

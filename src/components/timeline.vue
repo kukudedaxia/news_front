@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <div class="menu">
+    <div class="menu" v-if="type == 'home'">
       <el-menu
         :default-active="String(channelId)"
         class="fixed-nav"
@@ -32,7 +32,7 @@
             <div class="date">
               <div class="box">
                 <span class="month">{{ time(object.date) }}</span>
-                <span class="year">{{ moment(object.date).format('YYYY') }}</span>
+                <span class="year">-{{ moment(object.date).format('YYYY') }}</span>
               </div>
               <div class="day">{{ moment(object.date).format('MM/DD') }}</div>
             </div>
@@ -64,7 +64,7 @@
                       </div>
                     </div>
                   </template>
-                  <div class="bottom">
+                  <div class="bottom" v-if="type == 'home'">
                     <div class="flex" @click.stop="() => {}">
                       <a v-if="item.link" :href="item.link" target="_blank"
                         ><i class="el-icon-link"></i>原文链接</a
@@ -103,6 +103,10 @@ export default {
   },
   props: {
     channels: Array,
+    type: {
+      type: String,
+      default: 'home',
+    },
   },
   data() {
     return {
@@ -306,7 +310,7 @@ export default {
     z-index: 100;
   }
   /deep/.el-timeline-item__content {
-    background: #fafafa;
+    background: #f5f5f5;
     border-radius: 6px;
     padding: 10px;
   }
@@ -320,22 +324,22 @@ export default {
   display: flex;
   background: #fff;
   /** 滚动条 **/
-  // ::-webkit-scrollbar {
-  //   width: 2px;
-  //   height: 2px;
-  //   border-radius: 50px;
-  // } /* 这是针对缺省样式 (必须的) */
-  // ::-webkit-scrollbar-track {
-  //   background-color: transparent;
-  // } /* 滚动条的滑轨背景颜色 */
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    border-radius: 50px;
+  } /* 这是针对缺省样式 (必须的) */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  } /* 滚动条的滑轨背景颜色 */
 
-  // ::-webkit-scrollbar-thumb {
-  //   background-color: #ccc;
-  //   border-radius: 1px;
-  // } /* 滑块颜色 */
-  // ::-webkit-scrollbar-button {
-  //   background-color: transparent;
-  // } /* 滑轨两头的监听按钮颜色 */
+  ::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 1px;
+  } /* 滑块颜色 */
+  ::-webkit-scrollbar-button {
+    background-color: transparent;
+  } /* 滑轨两头的监听按钮颜色 */
 
   // ::-webkit-scrollbar-corner {
   //   background-color: #f9f9f9;
@@ -345,7 +349,7 @@ export default {
   }
   .menu-item {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 17px;
     color: #666;
     white-space: nowrap;
     // margin: 0 10px;
@@ -402,12 +406,13 @@ export default {
     color: #fff;
     display: inline-flex;
     font-size: 14px;
-    flex-direction: column;
+    flex-direction: row;
     padding: 4px 10px;
     border-radius: 10px;
-    .year {
+    align-items: center;
+    .month {
       font-weight: bold;
-      font-size: 20px;
+      // font-size: 20px;
     }
   }
 }
@@ -497,9 +502,6 @@ export default {
 }
 
 @media (max-width: 992px) {
-  .block {
-    padding-top: 0;
-  }
   .menu .menu-item {
     font-size: 16px;
     height: 40px;
@@ -516,8 +518,8 @@ export default {
     padding: 0;
   }
   .menu {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 56px;
     width: 100%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
     transition: all 0.2s;
@@ -533,9 +535,18 @@ export default {
   }
 }
 
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 993px) {
   .no-data {
     margin-top: 120px;
+  }
+  .menu {
+    padding: 0 16px;
+  }
+  .menu-item:first-child {
+    padding-left: 0;
+  }
+  .menu-item:last-child {
+    padding-right: 0;
   }
 }
 </style>

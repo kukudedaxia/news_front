@@ -84,7 +84,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 10,
+      default: 6,
     },
     tags: Array,
   },
@@ -144,11 +144,12 @@ export default {
     },
     checkBottom() {
       if (document.getElementById('sticky')) {
-        const contentHeight = document.getElementById('sticky').offsetHeight + 200;
+        const contentHeight = document.getElementById('sticky').offsetHeight + 100;
         const srcollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const clientHegiht = document.documentElement.clientHeight || document.body.offsetHeight;
         console.log(srcollTop, contentHeight, clientHegiht, '------------');
         if (srcollTop + clientHegiht >= contentHeight) {
+          console.log('锡锭');
           this.sticky = true;
           this.top = clientHegiht - contentHeight;
           document.getElementById('sticky').setAttribute('style', `top: ${this.top}px`);
@@ -162,13 +163,22 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.sticky {
+  position: sticky;
+  z-index: 99;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
 .wrap {
   width: 300px;
   background-color: #fff;
   height: 100%;
   overflow: scroll;
-  border-radius: 4px;
-  border: 1px solid #f2f2f2;
+  // border-radius: 4px;
+  // border: 1px solid #f2f2f2;
+  border: 1px solid hsla(0, 0%, 53%, 0.2);
+  border-left: none;
+  border-top: none;
   padding-bottom: 20px;
 }
 .top {
@@ -309,7 +319,7 @@ export default {
     margin-bottom: 0;
   }
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 992px) {
   .wrap {
     width: 100%;
   }

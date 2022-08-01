@@ -1,23 +1,31 @@
 <template>
   <div id="app" :class="{ dark: $route.name === 'Live' }">
     <page-loading v-if="pageLoading"></page-loading>
-    <div :class="['nav', { nav1: path !== '/' }]">
+    <div :class="['nav hidden-md-and-up', { nav1: path !== '/' }]">
       <Header v-if="footerShow" />
     </div>
-    <div :class="['main', { homepage: path == '/' }]">
-      <keep-alive>
-        <router-view v-wechat-title="$i18n.t($route.meta.title)" v-if="$route.meta.keepAlive" />
-      </keep-alive>
-      <router-view
-        v-wechat-title="$i18n.t($route.meta.title)"
-        v-if="!$route.meta.keepAlive"
-        :key="$route.fullPath"
-      />
-    </div>
+    <el-container class="page">
+      <el-aside width="280px" class="hidden-sm-and-down">
+        <PcSlideMenu />
+      </el-aside>
+      <el-main class="main-wrapper">
+        <div :class="['main', { homepage: path == '/' }]">
+          <keep-alive>
+            <router-view v-wechat-title="$i18n.t($route.meta.title)" v-if="$route.meta.keepAlive" />
+          </keep-alive>
+          <router-view
+            v-wechat-title="$i18n.t($route.meta.title)"
+            v-if="!$route.meta.keepAlive"
+            :key="$route.fullPath"
+          />
+        </div>
+      </el-main>
+    </el-container>
+
     <template>
       <SlideMenu />
     </template>
-    <Footer v-if="footerShow" />
+    <Footer class="hidden-md-and-up" v-if="footerShow" />
     <!-- 返回顶部 -->
     <el-backtop :bottom="80" :right="clientWidth < 769 ? 20 : 100">
       <svg
@@ -52,6 +60,7 @@ import Generate from '@/components/Generate.vue';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PageLoading from '@/components/common/Loadings';
+import PcSlideMenu from '@/components/PcSlideMenu';
 import SlideMenu from '@/components/SlideMenu';
 
 import Vue from 'vue';
@@ -65,6 +74,7 @@ export default {
     Header,
     Footer,
     Generate,
+    PcSlideMenu,
     'page-loading': PageLoading,
     SlideMenu,
   },
@@ -152,21 +162,33 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+.page {
+  max-width: 1430px;
+  margin: 0 auto;
+  background: #fff;
+}
+.main-wrapper {
+  padding: 0;
+  max-width: 1030px;
+  overflow: inherit;
+}
 .main {
   border: 1px solid transparent;
-  background: #fafafa;
+  // background: #fafafa;
   min-height: calc(100vh - 158px);
   // margin-top: 30px;
   max-width: 1020px;
-  margin: 30px auto 0;
+  // margin: 30px auto 0;
 }
 .nav {
   background: #fff;
   border-bottom: 1px solid #e4e7ed;
-  // position: -webkit-sticky;
+  position: -webkit-sticky;
   // position: sticky;
   top: 0px;
-  z-index: 200;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
 }
 .back {
   font-size: 30px;
