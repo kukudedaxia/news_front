@@ -5,20 +5,22 @@
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in channels" :key="index">
             <el-card class="box-card">
-              <h3 class="title">{{ item.name }}</h3>
-              <p>
-                {{ item.description }}
-              </p>
-              <div class="btns">
-                <el-button type="primary" size="mini" round @click.stop="showDialog(item, 3)"
-                  >详情</el-button
-                >
-                <el-button type="primary" size="mini" round @click.stop="showDialog(item, 1)"
-                  >微信群</el-button
-                >
-                <el-button type="primary" size="mini" round @click.stop="showDialog(item, 2)"
-                  >电报群</el-button
-                >
+              <div @click="() => goDetail(item)">
+                <h3 class="title">{{ item.name }}</h3>
+                <p>
+                  {{ item.description }}
+                </p>
+                <div class="btns">
+                  <!-- <el-button type="primary" size="mini" round @click.stop="showDialog(item, 3)"
+                    >详情</el-button
+                  > -->
+                  <el-button type="primary" size="mini" round @click.stop="showDialog(item, 1)"
+                    >微信群</el-button
+                  >
+                  <el-button type="primary" size="mini" round @click.stop="showDialog(item, 2)"
+                    >电报群</el-button
+                  >
+                </div>
               </div>
             </el-card>
           </el-col>
@@ -109,7 +111,7 @@ export default {
           text: '加载中',
           background: 'transparent',
         });
-        this.getDetail(item.id);
+        this.getDetails(item.id);
       }
       this.show = true;
     },
@@ -134,7 +136,7 @@ export default {
         },
       });
     },
-    getDetail(id) {
+    getDetails(id) {
       this.list = [];
       this.loaded = false;
       this.$store.dispatch('ajax', {
@@ -157,6 +159,13 @@ export default {
           this.loadingDetail.close();
           this.loaded = true;
         },
+      });
+    },
+    goDetail(item) {
+      console.log(1);
+
+      this.$router.push({
+        path: `/indicators/${item.id}`,
       });
     },
   },
@@ -198,6 +207,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-height: 18px;
+    height: 36px;
     font-size: 14px;
     color: rgba(3, 54, 102, 0.45);
   }

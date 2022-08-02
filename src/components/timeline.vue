@@ -26,6 +26,7 @@
         :immediateCheck="false"
         :loadingCon="true"
         :maxLength="false"
+        :finishedText="finishedText"
       >
         <template v-slot:content v-if="list.length > 0">
           <div v-for="(object, index) in list" :key="index">
@@ -38,11 +39,11 @@
             </div>
             <el-timeline class="times">
               <el-timeline-item
-                v-for="(item, index) in object.lives"
-                :key="index"
+                v-for="(item, oindex) in object.lives"
+                :key="oindex"
                 :timestamp="moment(item.ctime).format('HH:mm')"
                 placement="top"
-                class="item"
+                :class="['item', { filter: type == 'indicators' && oindex < 3 }]"
               >
                 <div @click="() => goDetail(item)">
                   <template>
@@ -107,6 +108,7 @@ export default {
       type: String,
       default: 'home',
     },
+    finishedText: String,
   },
   data() {
     return {
@@ -172,13 +174,18 @@ export default {
           params: {
             channelId: this.channelId,
             page: this.page,
-            pageSize: this.pageSize,
+            pageSize: type == 'home' ? this.pageSize : 20,
           },
         },
         onSuccess: res => {
           this.loading = false;
           this.page += 1;
-          this.nextPage = res.data.nextPage;
+          // 针对别的只加载一页
+          if (this.type !== 'home') {
+            this.nextPage = -1;
+          } else {
+            this.nextPage = res.data.nextPage;
+          }
           this.list = this.resetArr(this.list, res.data.list);
         },
         onComplete: () => {
@@ -208,10 +215,17 @@ export default {
       this.$store.commit('setChannel', key);
     },
     goDetail(item) {
-      console.log(item);
-      this.$router.push({
-        path: `/detail/${item.id}?type=1&channel=${this.channelItem.name}`,
-      });
+      if (this.type == 'indicators') {
+        this.$message('请前往群聊获取更多详情信息');
+        // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
+        // window.open(link.href, '_blank');
+      } else {
+        this.$router.push({
+          path: `/detail/${item.id}?type=1&channel=${
+            this.channelItem ? this.channelItem.name : ''
+          }`,
+        });
+      }
     },
     isInViewPortOfTwo(el) {
       const viewPortHeight =
@@ -494,6 +508,9 @@ export default {
     align-items: center;
     line-height: 1;
   }
+}
+.filter {
+  filter: blur(3px);
 }
 @media (max-width: 767px) {
   .block /deep/.el-timeline-item__wrapper {

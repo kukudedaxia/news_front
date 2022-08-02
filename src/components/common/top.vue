@@ -148,15 +148,20 @@ export default {
         const srcollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const clientHegiht = document.documentElement.clientHeight || document.body.offsetHeight;
         console.log(srcollTop, contentHeight, clientHegiht, '------------');
-        if (srcollTop + clientHegiht >= contentHeight) {
-          console.log('锡锭');
-          this.sticky = true;
-          this.top = clientHegiht - contentHeight;
-          document.getElementById('sticky').setAttribute('style', `top: ${this.top}px`);
-        } else {
-          this.sticky = false;
-          document.getElementById('sticky').style = '';
-        }
+        if (contentHeight)
+          if (srcollTop + clientHegiht >= contentHeight) {
+            console.log('锡锭');
+            if (contentHeight < clientHegiht) {
+              this.top = 0;
+            } else {
+              this.top = clientHegiht - contentHeight;
+            }
+            this.sticky = true;
+            document.getElementById('sticky').setAttribute('style', `top: ${this.top}px`);
+          } else {
+            this.sticky = false;
+            document.getElementById('sticky').style = '';
+          }
       }
     },
   },
@@ -320,7 +325,6 @@ export default {
   }
   /deep/img {
     width: 60px;
-    height: 60px;
     border-radius: 6px;
   }
 }

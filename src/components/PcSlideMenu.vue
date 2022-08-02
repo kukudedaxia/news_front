@@ -3,7 +3,9 @@
     <div class="fix">
       <div class="slide-logo">
         <img :src="require('../assets/images/logo2.jpeg')" />
+        <span class="alpha">Beta</span>
       </div>
+      <el-divider class="divider"></el-divider>
       <el-menu
         :default-active="path"
         class="vertical-menu"
@@ -13,26 +15,29 @@
       >
         <el-menu-item index="/">
           <div class="menu-item" slot="title">
-            <span class="menu-icon menu-icon-home"></span>
+            <img class="menu-icon" :src="require('../assets/images/menu_4.png')" />
             <span>快讯</span>
           </div>
         </el-menu-item>
         <el-menu-item index="/indicators">
           <div class="menu-item" slot="title">
-            <span class="menu-icon menu-icon-farm"></span>
-            <span>指标监控</span>
+            <img class="menu-icon" :src="require('../assets/svg/5.svg')" />
+
+            <span>监控</span>
           </div>
         </el-menu-item>
         <el-menu-item index="/article">
           <div class="menu-item" slot="title">
-            <span class="menu-icon menu-icon-farm"></span>
+            <img class="menu-icon" :src="require('../assets/svg/2.svg')" />
+
             <span>深度</span>
           </div>
         </el-menu-item>
         <!-- <el-menu-item index="/channel">定制服务</el-menu-item> -->
         <el-menu-item index="/about">
           <div class="menu-item" slot="title">
-            <span class="menu-icon menu-icon-draw"></span>
+            <img class="menu-icon" :src="require('../assets/svg/3.svg')" />
+
             <span>关于我们</span>
           </div>
         </el-menu-item>
@@ -107,7 +112,9 @@ export default {
   padding: 0 10px;
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-end;
   img {
     width: 130px;
     margin-top: 10px;
@@ -139,14 +146,14 @@ export default {
     .menu-item {
       background: #f6f6f6;
       border-radius: 6px;
-      color: #4266a1;
+      color: #000;
       font-weight: bold;
     }
   }
 }
 .icon {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   margin: 0 10px;
 }
 .twitter {
@@ -181,6 +188,41 @@ export default {
 .divider {
   width: 80%;
   margin: 24px auto;
+}
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.menu-icon-1 {
+  background: url('~@/assets/images/menu_1.png') no-repeat;
+  background-size: 100% 100%;
+}
+.menu-icon-2 {
+  background: url('~@/assets/images/menu_2.png') no-repeat;
+  background-size: 100% 100%;
+}
+.menu-icon-3 {
+  background: url('~@/assets/images/menu_3.png') no-repeat;
+  background-size: 100% 100%;
+}
+.menu-icon-4 {
+  background: url('~@/assets/images/menu_4.png') no-repeat;
+  background-size: 100% 100%;
+}
+.alpha {
+  font-size: 14px;
+  /* display: inline-block; */
+  padding: 2px 6px;
+  /* background: red; */
+  font-weight: lighter;
+  line-height: 14px;
+  background: linear-gradient(270deg, #2196f3 0%, #3f51b5 100%);
+  color: #fff;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-bottom: 4px;
 }
 @media (max-width: 767px) {
 }
