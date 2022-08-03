@@ -3,7 +3,7 @@
     <div class="fix">
       <div class="slide-logo">
         <img :src="require('../assets/images/logo2.jpeg')" />
-        <span class="alpha">Beta</span>
+        <span class="alpha">Alpha</span>
       </div>
       <el-divider class="divider"></el-divider>
       <el-menu

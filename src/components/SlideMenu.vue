@@ -12,6 +12,7 @@
     <div class="slide-content">
       <div class="slide-logo">
         <img :src="require('../assets/images/logo1.jpg')" />
+        <span class="alpha">Alpha</span>
       </div>
       <el-menu
         :default-active="path"
@@ -109,14 +110,15 @@ export default {
   // font-weight: bold;
 }
 .slide-logo {
+  display: flex;
+  align-items: center;
   line-height: 56px;
   height: 56px;
   padding: 0 10px;
   font-weight: bold;
   font-size: 20px;
   img {
-    width: 100px;
-    margin-top: 15px;
+    width: 80px;
     display: inline-flex;
   }
 }
@@ -163,6 +165,18 @@ export default {
     color: #666;
     font-size: 13px;
   }
+}
+.alpha {
+  font-size: 12px;
+  /* display: inline-block; */
+  padding: 2px 6px;
+  /* background: red; */
+  font-weight: lighter;
+  line-height: 14px;
+  background: linear-gradient(270deg, #2196f3 0%, #3f51b5 100%);
+  color: #fff;
+  border-radius: 4px;
+  margin-left: 10px;
 }
 @media (max-width: 767px) {
 }

@@ -88,20 +88,22 @@ export default {
       this.$message.success('复制成功');
       this.$refs.popoverRef.doClose();
     },
-    shareToSinaWeiBo(title, url, pic) {
+    shareToSinaWeiBo() {
       this.$store.dispatch('send', { action: '2002', id: this.data.id });
       this.$refs.popoverRef.doClose();
       var param = {
-        url: url || 'www.baidu.com',
+        url:
+          window.location.origin +
+            `/detail/${this.data.id}?type=1&channel=${escape(this.channelName)}` || 'www.baidu.com',
         /*分享地址(可选)*/
         type: '3',
         count: '1',
         /** 是否显示分享数，1显示(可选)*/
         appkey: '',
         /** 您申请的应用appkey,显示分享来源(可选)*/
-        title: title,
+        title: this.data.raw_message,
         /** 分享的文字内容(可选，默认为所在页面的title)*/
-        pic: pic || '',
+        pic: this.data.images.length > 0 ? this.data.images[0] : '',
         /**分享图片的路径(可选)*/
         ralateUid: '',
         /**关联用户的UID，分享微博会@该用户(可选)*/
