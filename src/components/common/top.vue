@@ -74,7 +74,7 @@
   </div>
 </template>
 <script>
-import 'github-markdown-css';
+import 'github-markdown-css/github-markdown-light.css';
 export default {
   name: 'Top',
   props: {

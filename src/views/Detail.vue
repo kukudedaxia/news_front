@@ -143,7 +143,7 @@
   </div>
 </template>
 <script>
-import 'github-markdown-css';
+import 'github-markdown-css/github-markdown-light.css';
 import Loading from '@/components/common/Loading';
 import Share from '../components/share';
 import ImgBox from '@/components/ImgBox';
@@ -322,6 +322,9 @@ export default {
 .timeline {
   margin: 20px 0;
   padding: 20px;
+  p {
+    word-break: break-word;
+  }
 }
 .article {
   font-size: 14px;

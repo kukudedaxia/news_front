@@ -171,6 +171,7 @@ export default {
   padding: 0;
   max-width: 1030px;
   overflow: inherit;
+  width: 100%;
 }
 .main {
   border: 1px solid transparent;
@@ -183,7 +184,6 @@ export default {
 .nav {
   background: #fff;
   border-bottom: 1px solid #e4e7ed;
-  position: -webkit-sticky;
   // position: sticky;
   top: 0px;
   position: fixed;
@@ -202,15 +202,16 @@ export default {
   min-width: 200px;
 }
 @media (max-width: 992px) {
-  .nav1 {
-    position: sticky;
-    top: 0;
-  }
-}
-@media screen and (max-width: 760px) {
+  // .nav1 {
+  //   position: sticky;
+  //   top: 0;
+  // }
   .main {
+    padding: 58px 0 30px;
     margin-top: 0;
     border: none;
   }
+}
+@media screen and (max-width: 760px) {
 }
 </style>

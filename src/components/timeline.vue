@@ -43,7 +43,7 @@
                 :key="oindex"
                 :timestamp="moment(item.ctime).format('HH:mm')"
                 placement="top"
-                :class="['item', { filter: type == 'indicators' && oindex < 3 }]"
+                :class="['item', { filter: type == 'indicators' && oindex < 3 && index == 0 }]"
               >
                 <div @click="() => goDetail(item)">
                   <template>
@@ -156,7 +156,9 @@ export default {
     },
   },
   created() {
-    this.getData();
+    if (!this.channelId) {
+      this.getData('init');
+    }
   },
   methods: {
     getData(type) {
@@ -255,10 +257,7 @@ export default {
       let year2 = m2.get('year');
       if (year1 == year2) {
         let days = du.get('days');
-        let hours = du.get('hours');
-        let mins = du.get('minutes');
         //  输出结果为   01天08时09分40秒
-        console.log(days, hours, mins);
         if (days == 0) {
           return '今天';
         }

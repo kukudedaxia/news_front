@@ -124,7 +124,7 @@ export default {
 @media screen and (max-width: 992px) {
   .content .times {
     /deep/.block {
-      padding-top: 100px;
+      padding-top: 40px;
     }
   }
 }
