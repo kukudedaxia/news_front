@@ -74,6 +74,15 @@ const routes = [
     },
   },
   {
+    path: '/help',
+    name: 'Help',
+    component: () => import('../views/Help.vue'),
+    meta: {
+      title: 'Bcaca-机器人指南',
+      uicode: '10000008',
+    },
+  },
+  {
     path: '*',
     redirect: { name: 'Home' },
   },

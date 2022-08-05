@@ -19,7 +19,7 @@
         </div>
       </el-card>
     </div>
-    <div class="content">
+    <div class="content" v-if="id">
       <TimeLine
         :channels="[]"
         class="times"
@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import TimeLine from '../components/timeline.vue';
+import TimeLine from '../components/timeline1.vue';
 export default {
   name: 'IndicatorsDetail',
   components: {
@@ -51,7 +51,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       list: [],
       item: {},
       type: '',
@@ -65,7 +65,6 @@ export default {
   },
   async created() {
     await this.getCard();
-    this.$store.commit('setChannel', this.id);
   },
   methods: {
     showDialog(item, type) {

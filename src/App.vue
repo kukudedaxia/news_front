@@ -4,11 +4,11 @@
     <div :class="['nav hidden-md-and-up', { nav1: path !== '/' }]">
       <Header v-if="footerShow" />
     </div>
-    <el-container class="page">
-      <el-aside width="280px" class="hidden-sm-and-down">
+    <el-container class="page" v-if="footerShow">
+      <el-aside width="280px" class="hidden-sm-and-down" v-if="path !== '/help'">
         <PcSlideMenu />
       </el-aside>
-      <el-main class="main-wrapper">
+      <el-main :class="['main-wrapper', { help: path == '/help' }]">
         <div :class="['main', { homepage: path == '/' }]">
           <keep-alive>
             <router-view v-wechat-title="$i18n.t($route.meta.title)" v-if="$route.meta.keepAlive" />
@@ -200,6 +200,9 @@ export default {
 .slides {
   height: 100%;
   min-width: 200px;
+}
+.help {
+  margin: 0 auto;
 }
 @media (max-width: 992px) {
   // .nav1 {

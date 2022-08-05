@@ -57,10 +57,14 @@ export default {
     },
   },
   activated() {
-    console.log('进入前', this.scrollTop);
-    this.$nextTick(() => {
-      document.documentElement.scrollTop = this.scrollTop;
-    });
+    if (this.$store.state.fromPage.path.includes('indicators')) {
+      this.$store.commit('setChannel', this.channels[0].id);
+    } else {
+      console.log('进入前', this.scrollTop);
+      this.$nextTick(() => {
+        document.documentElement.scrollTop = this.scrollTop;
+      });
+    }
   },
   beforeRouteLeave(to, from, next) {
     console.log(document.documentElement.scrollTop, '离开前');

@@ -1,21 +1,5 @@
 <template>
   <div class="timeline">
-    <div class="menu" v-if="type == 'home'">
-      <el-menu
-        :default-active="String(channelId)"
-        class="fixed-nav"
-        mode="horizontal"
-        @select="handleSelect"
-      >
-        <el-menu-item
-          :class="[{ active: item.id == channelId }, 'menu-item']"
-          v-for="(item, index) in channels"
-          :index="String(item.id)"
-          :key="index"
-          >{{ item.name }}</el-menu-item
-        >
-      </el-menu>
-    </div>
     <div class="block">
       <scroll
         :loading="loading"
@@ -138,7 +122,7 @@ export default {
   },
   computed: {
     channelId() {
-      return this.$store.state.channelId;
+      return this.$route.params.id;
     },
     viewItem() {
       return this.list[this.active];
@@ -147,24 +131,9 @@ export default {
       return this.channels.find(item => item.id == this.channelId);
     },
   },
-  watch: {
-    channelId() {
-      console.log(this.channelId, 2);
-      // if (this.type !== 'indicators') {
-      this.isFirstload = false;
-      this.page = 1;
-      this.nextPage = 1;
-      this.loading = false;
-      this.load = true;
-      this.getData('init');
-      // }
-    },
-  },
+  watch: {},
   created() {
-    console.log(this.channelId, 1);
-    if (!this.load) {
-      this.getData('init');
-    }
+    this.getData('init');
   },
   methods: {
     getData(type) {

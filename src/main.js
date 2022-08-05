@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
 // import './config/vantConfig.js';
 
-import './less/dark.less';
+// import './less/dark.less';
 
 import moment from 'moment';
 

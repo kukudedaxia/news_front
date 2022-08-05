@@ -162,8 +162,6 @@ export default {
       });
     },
     goDetail(item) {
-      console.log(1);
-
       this.$router.push({
         path: `/indicators/${item.id}`,
       });
