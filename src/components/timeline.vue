@@ -217,10 +217,12 @@ export default {
     changeChannel(data) {
       console.log(1);
       this.$store.commit('setChannel', data.id);
+      document.documentElement.scrollTop = 0;
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
       this.$store.commit('setChannel', key);
+      document.documentElement.scrollTop = 0;
     },
     goDetail(item) {
       if (this.type == 'indicators') {

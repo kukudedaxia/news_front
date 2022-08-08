@@ -45,6 +45,7 @@ export default {
           params: {
             page: 1,
             pageSize: 100,
+            is_indicators: 0,
           },
         },
         onSuccess: res => {
