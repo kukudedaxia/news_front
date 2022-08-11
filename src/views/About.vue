@@ -41,35 +41,34 @@
     </div> -->
     <!-- <Section :list="list" /> -->
     <div class="content">
-      <div id="about_1" class="pragraph">
+      <div id="about_1" class="pragraph mt-40">
         <div class="left">
           <h3 class="title">
             帮助你挖掘最具价值的内容 <br />Help you to uncover the most valuable messages
           </h3>
-          <ul class="list">
-            <li>聚合 Aggregated</li>
-            <li>高效 Efficient</li>
-            <li>精准 Accurate</li>
-            <li>自动 Autonomous</li>
-            <li>永久存储 Perpetual</li>
-            <li>永不停止 Never ending</li>
-          </ul>
+          <div class="box">
+            <ul class="list">
+              <li><span>聚合</span><span>Aggregated</span></li>
+              <li><span>高效</span><span>Efficient</span></li>
+              <li><span>精准</span><span>Accurate</span></li>
+            </ul>
+
+            <ul class="list">
+              <li><span>自动</span><span>Autonomous</span></li>
+              <li><span>永久存储</span><span>Perpetual</span></li>
+              <li><span>永不停止</span><span>Never ending</span></li>
+            </ul>
+          </div>
         </div>
-        <div class="right center">
+        <!-- <div class="right center">
           <img
             class="image"
             src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
           />
-        </div>
+        </div> -->
       </div>
       <div id="about_2" class="pragraph">
-        <div class="left center">
-          <img
-            class="image"
-            src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9o53m1fj21900u00xe.jpg"
-          />
-        </div>
-        <div class="right">
+        <div class="left">
           <p class="desc">
             Bcaca
             更倾向于提供消息的索引和解析，而不是消息本身。就像你们知道的，大多数媒体发出来的消息都是经过特殊编撰的，如果你只是看这些消息，这其中就会很容易存在市场信号的误导。我们相信投资者更需要的是将最具市场潜力的消息作为一种索引，从而发现与其相关联的其他讯息，然后将它们形成一个体系，最终成为最准确的市场信号。<br /><br />
@@ -82,6 +81,20 @@
               systematic way, they can finally output the most accurate market signal.</span
             >
           </p>
+        </div>
+        <div class="right mt-40 ">
+          <img
+            class="image"
+            src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9o53m1fj21900u00xe.jpg"
+          />
+          <img
+            class="image hidden-sm-and-down middle"
+            src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9ni7rlwj21900u0133.jpg"
+          />
+          <img
+            class="image hidden-sm-and-down mr-0"
+            src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
+          />
         </div>
       </div>
       <div id="about_3" class="pragraph">
@@ -98,12 +111,18 @@
             >
           </p>
         </div>
-        <div class="right center">
+        <!-- <div class="right center">
           <img
             class="image"
             src="https://img.bee-cdn.com/orj1080/3b9ae24blz1h4r9ni7rlwj21900u0133.jpg"
           />
-        </div>
+        </div> -->
+      </div>
+      <div class="pragraph hidden-md-and-up">
+        <img
+          class="image"
+          src="https://cdn-news.jin10.com/e0a25eb9-80f7-4440-a6f2-56259bbc0b43.png/lite"
+        />
       </div>
     </div>
   </div>
@@ -176,53 +195,103 @@ export default {
   background: #fff;
   box-shadow: 0 0 3px 0 #f3f3f3;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#about_1 .left {
+  width: 700px;
+}
+.box {
+  background: #f6f6f6;
+  border-radius: 10px;
+  padding: 10px 20px;
 }
 .pragraph {
   display: flex;
-  margin-bottom: 80px;
   justify-content: center;
-  .left {
-    margin-right: 80px;
-  }
+  flex-direction: column;
   .title {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 20px;
   }
   .image {
-    width: 300px;
+    width: 220px;
     border-radius: 6px;
     box-shadow: 0 4px 15px 0 rgb(0 0 0 / 30%);
+    margin: 0 20px 20px 0;
+  }
+  .mr-0 {
+    margin-right: 0;
+  }
+  .right {
+    margin-top: 40px;
+  }
+  .middle {
+    height: 136px;
   }
   .desc {
-    max-width: 400px;
+    max-width: 700px;
     line-height: 20px;
     word-break: break-word;
   }
 }
+.mt-40 {
+  margin-bottom: 40px;
+}
 .list {
-  margin-left: 20px;
+  // margin-left: 20px;
+  display: flex;
   li {
     margin-top: 10px;
-    padding-left: 20px;
     position: relative;
     line-height: 20px;
+    margin-right: 20px;
     color: #666666;
-    &::before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #3667a6;
-      border-radius: 50%;
-      top: 5px;
-      left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 3px 0;
+      border-bottom: 1px solid #ddd;
+      &:last-child {
+        border-bottom: none;
+        font-weight: bold;
+      }
     }
+
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   width: 10px;
+    //   height: 10px;
+    //   background: #3667a6;
+    //   border-radius: 50%;
+    //   top: 5px;
+    //   left: 0;
+    // }
   }
 }
 @media screen and (max-width: 920px) {
   .content {
     margin-top: 20px;
+  }
+  #about_1 .left {
+    width: 100%;
+  }
+  .box {
+    padding: 10px;
+  }
+  .pragraph {
+    .image {
+      width: 100%;
+    }
   }
 }
 @media screen and (max-width: 760px) {
@@ -240,12 +309,13 @@ export default {
   }
   .pragraph {
     flex-direction: column;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     .left {
       margin-right: 0;
     }
     .right {
       margin-top: 20px;
+      margin-bottom: 0;
     }
   }
 }

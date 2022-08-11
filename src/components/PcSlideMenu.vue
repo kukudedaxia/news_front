@@ -15,15 +15,15 @@
       >
         <el-menu-item index="/">
           <div class="menu-item" slot="title">
-            <img class="menu-icon" :src="require('../assets/images/menu_4.png')" />
-            <span>快讯</span>
-          </div>
-        </el-menu-item>
-        <el-menu-item index="/indicators">
-          <div class="menu-item" slot="title">
             <img class="menu-icon" :src="require('../assets/svg/5.svg')" />
 
             <span>监控</span>
+          </div>
+        </el-menu-item>
+        <el-menu-item index="/news">
+          <div class="menu-item" slot="title">
+            <img class="menu-icon" :src="require('../assets/images/menu_4.png')" />
+            <span>快讯</span>
           </div>
         </el-menu-item>
         <el-menu-item index="/article">

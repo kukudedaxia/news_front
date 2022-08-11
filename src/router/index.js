@@ -9,6 +9,24 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    name: 'Indicators',
+    component: () => import('../views/Indicators.vue'),
+    meta: {
+      title: 'Bcaca-监控看板',
+      uicode: '10000006',
+    },
+  },
+  {
+    path: '/indicators/:id',
+    name: 'Indicators',
+    component: () => import('../views/IndicatorsDetail.vue'),
+    meta: {
+      title: 'Bcaca-监控详情',
+      uicode: '10000007',
+    },
+  },
+  {
+    path: '/news',
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
@@ -53,24 +71,6 @@ const routes = [
     meta: {
       title: 'Bcaca-关于我们',
       uicode: '10000003',
-    },
-  },
-  {
-    path: '/indicators',
-    name: 'Indicators',
-    component: () => import('../views/Indicators.vue'),
-    meta: {
-      title: 'Bcaca-监控看板',
-      uicode: '10000006',
-    },
-  },
-  {
-    path: '/indicators/:id',
-    name: 'Indicators',
-    component: () => import('../views/IndicatorsDetail.vue'),
-    meta: {
-      title: 'Bcaca-监控详情',
-      uicode: '10000007',
     },
   },
   {

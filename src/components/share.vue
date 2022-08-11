@@ -139,7 +139,7 @@ export default {
   width: 100%;
 }
 .link {
-  color: #409eff;
+  color: #4465a2;
   cursor: pointer;
   margin-right: 20px;
   &:hover {

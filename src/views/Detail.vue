@@ -92,6 +92,9 @@
             </template>
           </div>
         </div>
+        <div class="tags1" v-if="object.channelTags">
+          <div class="tag1" v-for="item in object.channelTags" :key="item">{{ item }}</div>
+        </div>
         <div class="more no-border" v-if="object.self_threads && object.self_threads.length > 0">
           <div class="pos-title">延展</div>
           <div class="timeline">
@@ -259,7 +262,6 @@ export default {
   // border-right: 1px solid hsla(0, 0%, 53%, 0.2);
   // min-height: calc(100vh - 200px);
   padding: 18px;
-  margin-bottom: 40px;
 }
 .more {
   background: #fff;
@@ -353,7 +355,7 @@ export default {
   margin-top: 20px;
   display: flex;
   .link {
-    color: #409eff;
+    color: #4465a2;
     cursor: pointer;
     margin-right: 20px;
     &:hover {
@@ -441,6 +443,19 @@ export default {
     font-weight: 500;
   }
 }
+.tags1 {
+  display: flex;
+  padding: 0 20px;
+  .tag1 {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #4166a6;
+    background: #f5f5f5;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+}
 @media screen and (max-width: 992px) {
   .wrap {
     flex-direction: column;
@@ -455,7 +470,7 @@ export default {
     }
   }
   .content {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   .more {
     margin: 10px 0;
