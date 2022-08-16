@@ -33,16 +33,19 @@
             >
           </div>
         </div>
-        <div class="content no-border" v-else>
-          <!-- <div class="pos-title">详情</div> -->
+        <div :class="['content no-border', { 'content-1': share }]" v-else>
+          <div class="fixed hidden-md-and-up" @click="link" v-if="share">
+            <i class="zhi"></i>
+            一键监控更多指标！
+          </div>
           <div class="title">
             <div class="time">
               <i class="el-icon-time" />
               <span>{{ moment(object.ctime).format('YYYY/MM/DD HH:MM:SS') }}</span>
             </div>
-            <div class="type" v-if="channelName">
+            <!-- <div class="type" v-if="channelName">
               <el-tag class="tag">{{ channelName }}</el-tag>
-            </div>
+            </div> -->
             <div class="flexs">
               <div class="line">
                 <span class="bold">来源:</span>
@@ -92,8 +95,10 @@
             </template>
           </div>
         </div>
-        <div class="tags1" v-if="object.channelTags">
-          <div class="tag1" v-for="item in object.channelTags" :key="item">{{ item }}</div>
+        <div class="tags1" v-if="object.channelTags && object.channelTags.data">
+          <div class="tag1" v-for="item in object.channelTags.data" :key="item">
+            {{ item.name }}
+          </div>
         </div>
         <div class="more no-border" v-if="object.self_threads && object.self_threads.length > 0">
           <div class="pos-title">延展</div>
@@ -176,6 +181,9 @@ export default {
     channelName() {
       return unescape(this.$route.query.channel || '');
     },
+    share() {
+      return this.$route.query.from == 'qrcode';
+    },
   },
   created() {
     console.log(this.name);
@@ -190,6 +198,9 @@ export default {
       this.$store.dispatch('ajax', {
         req: {
           url: `lives/${this.id}`,
+          params: {
+            include: 'channelTags',
+          },
         },
         onSuccess: res => {
           console.log(res);
@@ -199,6 +210,9 @@ export default {
           this.load = true;
         },
       });
+    },
+    link() {
+      this.$router.push({ path: '/' });
     },
     initArticle() {
       this.$store.dispatch('ajax', {
@@ -456,6 +470,27 @@ export default {
     margin-top: 10px;
   }
 }
+.fixed {
+  background: #f5f5f5;
+  position: fixed;
+  top: 57px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  color: #4166a6;
+  z-index: 100;
+  a {
+    color: #4166a6;
+  }
+}
+.zhi {
+  background: url('../assets/images/zhi.png') no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-size: 100% 100%;
+}
 @media screen and (max-width: 992px) {
   .wrap {
     flex-direction: column;
@@ -472,11 +507,17 @@ export default {
   .content {
     margin-bottom: 0;
   }
+  .content-1 {
+    padding-top: 40px;
+  }
   .more {
     margin: 10px 0;
   }
   .img-wrap {
     width: 100%;
+  }
+  .title .time {
+    margin: 10px 0 20px;
   }
   .no-border {
     border-radius: 0;

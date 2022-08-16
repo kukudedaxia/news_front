@@ -83,6 +83,15 @@ const routes = [
     },
   },
   {
+    path: '/example',
+    name: 'Example',
+    component: () => import('../views/Example.vue'),
+    meta: {
+      title: 'Bcaca-Example',
+      uicode: '10000008',
+    },
+  },
+  {
     path: '*',
     redirect: { name: 'Home' },
   },

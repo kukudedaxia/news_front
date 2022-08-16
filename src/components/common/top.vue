@@ -326,6 +326,7 @@ export default {
   /deep/img {
     width: 60px;
     border-radius: 6px;
+    display: none;
   }
 }
 @media screen and (max-width: 992px) {
