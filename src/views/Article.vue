@@ -59,6 +59,8 @@
             </div>
             <div class="content">
               <div class="content-left">
+                <div class="title" v-if="item.title_zh">{{ item.title_zh }}</div>
+
                 <div class="title">{{ item.title }}</div>
                 <div class="desc">
                   <article
@@ -75,9 +77,9 @@
                   <span><i class="el-icon-view" />{{ item.view_count }}</span>
                 </div>
               </div>
-              <div class="content-right" v-if="item.img">
+              <!-- <div class="content-right" v-if="item.img">
                 <img :src="item.images[0]" />
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -183,6 +185,7 @@ export default {
       // this.$router.push({
       //   path: `/article/${item.id}`,
       // });
+      window._czc.push(['_trackEvent', '页面文章', '点击跳转', item.id, 5143]);
       const link = this.$router.resolve({ path: `/article/${item.id}` });
       window.open(link.href, '_blank');
     },
@@ -307,6 +310,8 @@ export default {
     }
     /deep/img {
       width: 100px;
+      height: 80px;
+      object-fit: cover;
       border-radius: 6px;
     }
   }
@@ -415,6 +420,17 @@ export default {
   }
 }
 @media (max-width: 767px) {
+  .article {
+    /deep/img {
+      display: none;
+    }
+  }
+  .markdown-body p {
+    margin-bottom: 0;
+  }
+  /deep/.markdown-body:hover {
+    background: #fafafa;
+  }
 }
 @media (max-width: 992px) {
   .desc {
@@ -454,5 +470,12 @@ export default {
 @media (max-width: 1200px) {
 }
 @media (min-width: 768px) {
+}
+</style>
+<style lang="less">
+@media (max-width: 767px) {
+  .markdown-body p {
+    margin-bottom: 0;
+  }
 }
 </style>

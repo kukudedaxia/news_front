@@ -146,7 +146,7 @@ export default {
 </script>
 <style lang="less">
 .overlay {
-  z-index: 999 !important;
+  z-index: 103 !important;
   position: fixed;
   display: flex;
   align-items: center;
@@ -187,7 +187,7 @@ export default {
   // position: sticky;
   top: 0px;
   position: fixed;
-  z-index: 999;
+  z-index: 102;
   width: 100%;
 }
 .back {

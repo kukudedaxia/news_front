@@ -46,6 +46,12 @@
             <span>关于我们</span>
           </div>
         </el-menu-item>
+        <el-menu-item index="/example">
+          <div class="menu-item" slot="title">
+            <span class="menu-icon menu-icon-draw"></span>
+            <span>使用示范</span>
+          </div>
+        </el-menu-item>
       </el-menu>
       <el-divider></el-divider>
       <div class="bottom">
@@ -60,6 +66,18 @@
             <div class="icon telegram"></div>
           </a>
         </div>
+        <div class="flex" @click="copy">
+          <span class="icon wechat"></span>
+          <span>: richyour001</span>
+          <input
+            id="copywechat"
+            readonly
+            type="text"
+            value=""
+            style="position: fixed; top: -20px; left: 0; opacity: 0; z-index: -10"
+          />
+        </div>
+
         <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
       </div>
     </div>
@@ -98,9 +116,31 @@ export default {
         this.$router.push({ path: index });
       }
     },
+    copy() {
+      const inputElement = document.getElementById('copywechat');
+      inputElement.value = 'richyour001';
+      inputElement.select();
+      document.execCommand('Copy');
+      // navigator.clipboard.writeText(inputElement.value);
+      this.$message({
+        dangerouslyUseHTMLString: true,
+        message: '<div class="copy-tip">复制微信号成功，请前往微信添加微好友</div>',
+        type: 'success',
+        duration: 1000,
+        customClass: 'zui',
+      });
+    },
   },
 };
 </script>
+<style lang="less">
+.zui {
+  z-index: 2500 !important;
+}
+.copy-tip {
+  white-space: nowrap;
+}
+</style>
 <style lang="less" scoped>
 /deep/.el-menu {
   background: transparent;
@@ -150,6 +190,10 @@ export default {
   background: url('~@/assets/images/telegram.png') no-repeat;
   background-size: 100% 100%;
 }
+.wechat {
+  background: url('~@/assets/images/wechat1.png') no-repeat;
+  background-size: 100% 100%;
+}
 .bottom {
   position: absolute;
   bottom: 20px;
@@ -177,6 +221,17 @@ export default {
   color: #fff;
   border-radius: 4px;
   margin-left: 10px;
+}
+.flex {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  span {
+    display: inline-block;
+    margin-right: 2px;
+  }
 }
 @media (max-width: 767px) {
 }

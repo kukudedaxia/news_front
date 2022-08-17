@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     copy() {
+      window._czc.push(['_trackEvent', '快讯', '分享链接', this.data.id, 5150]);
       this.$store.dispatch('send', { action: '2001', id: this.data.id });
       console.log(this.channelName);
       const inputElement = document.getElementById(this.data.id + this.type);
@@ -89,6 +90,7 @@ export default {
       this.$refs.popoverRef.doClose();
     },
     shareToSinaWeiBo() {
+      window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5149]);
       this.$store.dispatch('send', { action: '2002', id: this.data.id });
       this.$refs.popoverRef.doClose();
       var param = {
@@ -117,11 +119,13 @@ export default {
       window.open(targetUrl, 'sinaweibo', 'height=800, width=800');
     },
     showBg() {
+      window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5147]);
       this.$store.dispatch('send', { action: '2003', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay', true);
     },
     getImg() {
+      window._czc.push(['_trackEvent', '快讯', '分享长图', this.data.id, 5148]);
       this.$store.dispatch('send', { action: '2004', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay1', {

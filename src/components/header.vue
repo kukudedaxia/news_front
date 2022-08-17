@@ -98,19 +98,19 @@ export default {
       this.$router.push({ name: 'Home' });
     },
     // new
-    links(index) {
-      if (index == '/channel') {
-        this.$refs.child.activeIndex = this.path;
-        setTimeout(() => {
-          window.open('https://bcaca.xyz/user-center');
-        }, 200);
-      } else {
-        this.$router.push({ path: index });
-      }
-    },
-    handleClick() {
-      console.log('1');
-    },
+    // links(index) {
+    //   if (index == '/channel') {
+    //     this.$refs.child.activeIndex = this.path;
+    //     setTimeout(() => {
+    //       window.open('https://bcaca.xyz/user-center');
+    //     }, 200);
+    //   } else {
+    //     this.$router.push({ path: index });
+    //   }
+    // },
+    // handleClick() {
+    //   console.log('1');
+    // },
     // 侧边菜单
     change() {
       console.log(1);

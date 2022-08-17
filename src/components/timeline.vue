@@ -53,12 +53,19 @@
                       </div>
                       <div class="images" v-if="item.images && item.images.length > 0">
                         <el-image
+                          class="hidden-sm-and-down"
                           :src="item.images[0]"
                           lazy
                           :preview-src-list="item.images"
                           fit="cover"
                           @click.stop="() => {}"
                         ></el-image>
+                        <van-image
+                          class="hidden-md-and-up"
+                          fit="cover"
+                          :src="item.images[0]"
+                          @click.stop="sceneImg(item.images, 0)"
+                        />
                         <span class="num" v-if="item.images.length > 1"
                           >+{{ item.images.length - 1 }}</span
                         >
@@ -91,10 +98,15 @@
   </div>
 </template>
 <script>
+import Vue from 'vue';
+import { ImagePreview } from 'vant';
 import scroll from './scroll';
 import Share from '../components/share';
 import Texts from '../components/text';
 import moment from 'moment';
+
+Vue.use(ImagePreview);
+
 export default {
   name: 'TimeLine',
   components: {
@@ -230,6 +242,7 @@ export default {
         // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
         // window.open(link.href, '_blank');
       } else {
+        window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
         this.$router.push({
           path: `/detail/${item.id}?type=1&channel=${
             this.channelItem ? this.channelItem.name : ''
@@ -298,6 +311,16 @@ export default {
         case 0:
           return '周日';
       }
+    },
+
+    sceneImg(images, index) {
+      ImagePreview({
+        images: images, //需要预览的图片 URL 数组
+        showIndex: true, //是否显示页码
+        loop: false, //是否开启循环播放
+        startPosition: index, //图片预览起始位置索引
+        closeable: true,
+      });
     },
   },
 };
@@ -548,7 +571,7 @@ export default {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
     transition: all 0.2s;
     transform: translateZ(0);
-    z-index: 900;
+    z-index: 102;
     left: 0;
     height: 50px;
     .fixed-nav {

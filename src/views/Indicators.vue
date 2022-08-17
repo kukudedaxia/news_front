@@ -28,7 +28,7 @@
       </div>
       <div class="tips" v-if="!loading">敬请期待后续会更新监控群组...</div>
     </div>
-    <van-overlay :show="show" @click="show = false" z-index="1000">
+    <van-overlay :show="show" @click="show = false" z-index="102">
       <div class="wrapper" @click.stop>
         <div class="block" v-if="type == 1 || type == 2">
           <p>
@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     showDialog(item, type) {
+      window._czc.push(['_trackEvent', '页面快讯', '点击弹窗二维码', type, 5145]);
       this.type = type;
       if (type == 1) {
         this.current = item;
@@ -162,6 +163,7 @@ export default {
       });
     },
     goDetail(item) {
+      window._czc.push(['_trackEvent', '页面指标', '路由跳转', item.id, 5142]);
       this.$router.push({
         path: `/indicators/${item.id}`,
       });

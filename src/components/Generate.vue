@@ -4,7 +4,7 @@
 -->
 
 <template>
-  <van-overlay :show="show" z-index="9999" @click="closeOverlay">
+  <van-overlay :show="show" z-index="1000" @click="closeOverlay">
     <div class="model">
       <div class="top-tips">请长按图片保存，将本条快讯推荐给好友</div>
       <!-- <img class="picture" src="snapshot" alt="" /> -->

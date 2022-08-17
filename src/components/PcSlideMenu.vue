@@ -33,7 +33,7 @@
             <span>深度</span>
           </div>
         </el-menu-item>
-        <!-- <el-menu-item index="/channel">定制服务</el-menu-item> -->
+
         <el-menu-item index="/about">
           <div class="menu-item" slot="title">
             <img class="menu-icon" :src="require('../assets/svg/3.svg')" />
@@ -41,6 +41,18 @@
             <span>关于我们</span>
           </div>
         </el-menu-item>
+        <el-menu-item index="/example">
+          <div class="menu-item" slot="title">
+            <img class="menu-icon" :src="require('../assets/svg/6.svg')" />
+            <span>使用示范</span>
+          </div>
+        </el-menu-item>
+        <el-menu-item index="/channel">
+          <div class="menu-item" slot="title">
+            <img class="menu-icon" :src="require('../assets/svg/7.svg')" />
+            <span>定制服务</span>
+          </div></el-menu-item
+        >
       </el-menu>
       <el-divider class="divider"></el-divider>
     </div>
@@ -56,7 +68,18 @@
           <div class="icon telegram"></div>
         </a>
       </div>
-      <p>web3搬运工 <br /><br />© 2022 BCACA.INC</p>
+      <div>
+        <el-popover trigger="hover" placement="top" :close-delay="100" ref="popoverRef">
+          <div class="flex" slot="reference">
+            <span class="icon wechat"></span>
+            <span>: richyour001</span>
+          </div>
+          <div class="code-box">
+            <img class="code" :src="require('../assets/images/qrcode.jpg')" />
+          </div>
+        </el-popover>
+      </div>
+      <p>web3搬运工 <br />© 2022 BCACA.INC</p>
     </div>
   </div>
 </template>
@@ -64,22 +87,33 @@
 export default {
   name: 'PcSlideMenu',
   data() {
-    return {};
+    return {
+      pc: true,
+    };
   },
   computed: {
     path() {
       return this.$store.state.toPage.path;
     },
   },
-  created() {},
+  created() {
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      this.pc = false;
+      // 移动端操作
+    } else {
+      this.pc = true;
+      // PC端操作
+    }
+  },
   methods: {
     links(index) {
       console.log(index);
       this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
       if (index == '/channel') {
         this.$refs.child.activeIndex = this.path;
+        window._czc.push(['_trackEvent', '页面', '跳转后台', this.path, 5151]);
         setTimeout(() => {
-          window.open('https://manage.newsdao.finance/#/');
+          window.open('https://bcaca.xyz/user-center/');
         }, 200);
       } else {
         this.$router.push({ path: index });
@@ -168,6 +202,10 @@ export default {
   background: url('~@/assets/images/telegram.png') no-repeat;
   background-size: 100% 100%;
 }
+.wechat {
+  background: url('~@/assets/images/wechat1.png') no-repeat;
+  background-size: 100% 100%;
+}
 .bottom {
   position: relative;
   bottom: 20px;
@@ -223,6 +261,23 @@ export default {
   border-radius: 4px;
   margin-left: 10px;
   margin-bottom: 4px;
+}
+.flex {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  span {
+    display: inline-block;
+    margin-right: 2px;
+  }
+}
+.code-box {
+  width: 160px;
+  .code {
+    width: 100%;
+  }
 }
 @media (max-width: 767px) {
 }

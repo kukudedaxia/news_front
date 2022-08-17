@@ -40,6 +40,7 @@
       </el-switch>
     </div> -->
     <!-- <Section :list="list" /> -->
+    <div class="menu-title hidden-sm-and-down">关于我们</div>
     <div class="content">
       <div id="about_1" class="pragraph mt-40">
         <div class="left">
@@ -184,6 +185,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.menu-title {
+  padding: 20px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.2);
+  color: #010102;
+}
 .about {
   margin-bottom: 60px;
 }
@@ -317,6 +326,12 @@ export default {
       margin-top: 20px;
       margin-bottom: 0;
     }
+  }
+}
+@media screen and (min-width: 921px) {
+  .about {
+    border-right: 1px solid hsla(0, 0%, 53%, 0.2);
+    min-height: 100vh;
   }
 }
 </style>

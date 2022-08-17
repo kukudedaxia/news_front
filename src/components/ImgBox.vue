@@ -16,14 +16,29 @@
         ]"
       >
         <div :class="['blob-img-box']">
-          <el-image
+          <!-- <el-image
             :src="item"
             :key="index"
             :preview-src-list="renderList"
             lazy
             class="blob-img"
             fit="cover"
+          ></el-image> -->
+          <el-image
+            class="hidden-sm-and-down blob-img"
+            :src="item"
+            :key="index"
+            :preview-src-list="renderList"
+            fit="cover"
+            @click.stop="() => {}"
           ></el-image>
+          <van-image
+            class="hidden-md-and-up blob-img"
+            fit="cover"
+            :src="item"
+            :key="'vant' + index"
+            @click.stop="sceneImg(renderList, index)"
+          />
         </div>
       </li>
     </ul>
@@ -31,6 +46,10 @@
 </template>
 <script>
 import i18n from '@/utils/i18n';
+import Vue from 'vue';
+import { ImagePreview } from 'vant';
+
+Vue.use(ImagePreview);
 
 export default {
   name: 'ImgBox',
@@ -77,7 +96,17 @@ export default {
     this.imageList = JSON.parse(JSON.stringify(this.images));
   },
   mounted() {},
-  methods: {},
+  methods: {
+    sceneImg(images, index) {
+      ImagePreview({
+        images: images, //需要预览的图片 URL 数组
+        showIndex: true, //是否显示页码
+        loop: false, //是否开启循环播放
+        startPosition: index, //图片预览起始位置索引
+        closeable: true,
+      });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

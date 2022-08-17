@@ -249,6 +249,9 @@ export default {
     cursor: pointer;
     &:hover {
       background: rgb(54 103 166/0.08);
+      .desc {
+        background: rgb(239 243 249);
+      }
     }
     .img {
       width: 60px;

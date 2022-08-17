@@ -4,6 +4,7 @@
       <template v-if="load">
         <div class="content no-border articles" v-if="name == 'ArticleDetail'">
           <div class="top">
+            <h2 v-if="article.title_zh">{{ article.title_zh }}</h2>
             <h2>{{ article.title }}</h2>
             <div class="meta">
               <span class="author">{{ article.author }}</span>
@@ -96,7 +97,7 @@
           </div>
         </div>
         <div class="tags1" v-if="object.channelTags && object.channelTags.data">
-          <div class="tag1" v-for="item in object.channelTags.data" :key="item">
+          <div class="tag1" v-for="item in object.channelTags.data" :key="item.name">
             {{ item.name }}
           </div>
         </div>
@@ -460,6 +461,7 @@ export default {
 .tags1 {
   display: flex;
   padding: 0 20px;
+  flex-wrap: wrap;
   .tag1 {
     padding: 6px 12px;
     font-size: 14px;

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="box">
+    <div class="menu-title hidden-sm-and-down">使用示范</div>
     <div class="item">
       <div class="title">BCACA智能机器人</div>
       <div class="sub_title">快速查价、一键跟踪、群友共享、提升市场敏锐力、超越99%的韭菜</div>
@@ -19,7 +20,7 @@
             <img :src="require('../assets/images/example/3.png')" />
           </div>
         </div>
-        <div class="button">进入使用详细教程</div>
+        <div class="button" @click="go(1)">进入使用详细教程</div>
       </div>
     </div>
     <div class="item">
@@ -39,7 +40,7 @@
             <img :src="require('../assets/images/example/5.jpeg')" />
           </div>
         </div>
-        <div class="button">进入使用详细教程</div>
+        <div class="button" @click="go(2)">进入使用详细教程</div>
       </div>
     </div>
   </div>
@@ -47,7 +48,18 @@
 <script>
 export default {
   name: 'Example',
-  data() {},
+  data() {
+    return {};
+  },
+  methods: {
+    go(num) {
+      if (num == 1) {
+        this.$router.push({ path: `/help` });
+      } else {
+        window.open('https://bcaca.xyz/user-center#/example/demo', '_blank');
+      }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -108,11 +120,12 @@ export default {
     align-items: center;
     justify-content: center;
     width: 60%;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 6px;
     background: #4465a2;
     border-radius: 20px;
     color: #fff;
+    cursor: pointer;
   }
   .arrow {
     display: inline-block;
@@ -121,6 +134,35 @@ export default {
     background: url('../assets/images/example/arrow.png') no-repeat;
     background-size: 100% 100%;
     margin-left: 6px;
+  }
+}
+.menu-title {
+  padding: 20px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.2);
+  color: #010102;
+}
+@media screen and (min-width: 992px) {
+  .box {
+    margin-bottom: 60px;
+    border-right: 1px solid hsla(0, 0%, 53%, 0.2);
+  }
+  .item {
+    .title {
+      font-size: 24px;
+    }
+    .content {
+      max-width: 420px;
+      margin: 20px auto;
+      img {
+        width: 360px;
+      }
+    }
+    .button {
+      margin: 10px auto;
+    }
   }
 }
 </style>
