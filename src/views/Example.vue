@@ -54,8 +54,10 @@ export default {
   methods: {
     go(num) {
       if (num == 1) {
+        window._czc.push(['_trackEvent', '页面', '跳转机器人help', 1, 5152]);
         this.$router.push({ path: `/help` });
       } else {
+        window._czc.push(['_trackEvent', '页面', '跳转后台', 2, 5153]);
         window.open('https://bcaca.xyz/user-center#/example/demo', '_blank');
       }
     },
@@ -108,8 +110,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 16px 0;
   }
-  img {
+  .el-image {
     width: 300px;
     min-height: 120px;
     margin: 10px 0;
@@ -121,7 +124,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 60%;
-    margin: 10px auto;
+    margin: 20px auto 0;
     padding: 6px;
     background: #4465a2;
     border-radius: 20px;
@@ -162,7 +165,10 @@ export default {
       }
     }
     .button {
-      margin: 10px auto;
+      margin: 30px auto 10px;
+    }
+    .el-image {
+      width: 96%;
     }
   }
 }

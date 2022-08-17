@@ -44,15 +44,9 @@
         <el-menu-item index="/example">
           <div class="menu-item" slot="title">
             <img class="menu-icon" :src="require('../assets/svg/6.svg')" />
-            <span>使用示范</span>
+            <span>工具详情</span>
           </div>
         </el-menu-item>
-        <el-menu-item index="/channel">
-          <div class="menu-item" slot="title">
-            <img class="menu-icon" :src="require('../assets/svg/7.svg')" />
-            <span>定制服务</span>
-          </div></el-menu-item
-        >
       </el-menu>
       <el-divider class="divider"></el-divider>
     </div>

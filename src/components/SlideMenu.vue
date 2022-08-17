@@ -49,7 +49,7 @@
         <el-menu-item index="/example">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-draw"></span>
-            <span>使用示范</span>
+            <span>工具详情</span>
           </div>
         </el-menu-item>
       </el-menu>
