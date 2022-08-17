@@ -9,15 +9,15 @@
         <div class="imgs">
           <div>
             <div class="img-title">发出监控<span class="arrow" /></div>
-            <img :src="require('../assets/images/example/1.png')" />
+            <el-image :src="require('../assets/images/example/1.png')" />
           </div>
           <div>
             <div class="img-title">被动喂投<span class="arrow" /></div>
-            <img :src="require('../assets/images/example/2.png')" />
+            <el-image :src="require('../assets/images/example/2.png')" />
           </div>
           <div>
             <div class="img-title">迅速查价<span class="arrow" /></div>
-            <img :src="require('../assets/images/example/3.png')" />
+            <el-image :src="require('../assets/images/example/3.png')" />
           </div>
         </div>
         <div class="button" @click="go(1)">进入使用详细教程</div>
@@ -33,11 +33,11 @@
         <div class="imgs">
           <div>
             <div class="img-title">灵活配置监控<span class="arrow" /></div>
-            <img :src="require('../assets/images/example/4.jpeg')" />
+            <el-image :src="require('../assets/images/example/4.jpeg')" />
           </div>
           <div>
             <div class="img-title">极速信息喂投<span class="arrow" /></div>
-            <img :src="require('../assets/images/example/5.jpeg')" />
+            <el-image :src="require('../assets/images/example/5.jpeg')" />
           </div>
         </div>
         <div class="button" @click="go(2)">进入使用详细教程</div>
@@ -111,6 +111,7 @@ export default {
   }
   img {
     width: 300px;
+    min-height: 120px;
     margin: 10px 0;
     border-radius: 6px;
     border: 1px solid #ddd;
