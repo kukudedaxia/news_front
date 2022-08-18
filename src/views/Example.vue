@@ -1,7 +1,15 @@
 <template>
   <div class="box">
     <div class="menu-title hidden-sm-and-down">使用示范</div>
-    <div class="item">
+    <!-- <el-button-group class="group">
+      <el-button @click="type = 1">智能机器人</el-button>
+      <el-button @click="type = 2">超级定制化</el-button>
+    </el-button-group> -->
+    <el-radio-group v-model="type" class="group">
+      <el-radio-button label="1">智能机器人</el-radio-button>
+      <el-radio-button label="2">超级定制化</el-radio-button>
+    </el-radio-group>
+    <div class="item" v-if="type == 1">
       <div class="title">BCACA智能机器人</div>
       <div class="sub_title">快速查价、一键跟踪、群友共享、提升市场敏锐力、超越99%的韭菜</div>
       <div class="content">
@@ -9,21 +17,21 @@
         <div class="imgs">
           <div>
             <div class="img-title">发出监控<span class="arrow" /></div>
-            <el-image :src="require('../assets/images/example/1.png')" />
+            <el-image :src="require('../assets/images/example/3.png')" />
           </div>
           <div>
             <div class="img-title">被动喂投<span class="arrow" /></div>
-            <el-image :src="require('../assets/images/example/2.png')" />
+            <el-image :src="require('../assets/images/example/1.png')" />
           </div>
           <div>
             <div class="img-title">迅速查价<span class="arrow" /></div>
-            <el-image :src="require('../assets/images/example/3.png')" />
+            <el-image :src="require('../assets/images/example/2.png')" />
           </div>
         </div>
         <div class="button" @click="go(1)">进入使用详细教程</div>
       </div>
     </div>
-    <div class="item">
+    <div class="item" v-if="type == 2">
       <div class="title">BCACA自定义监控系统</div>
       <div class="sub_title">
         迅速跟踪监控discord、twitter、medium……以及各种圈内媒体的作者与特定内容
@@ -49,7 +57,9 @@
 export default {
   name: 'Example',
   data() {
-    return {};
+    return {
+      type: 1,
+    };
   },
   methods: {
     go(num) {
@@ -64,6 +74,14 @@ export default {
   },
 };
 </script>
+<style lang="less">
+.box {
+  .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+    background-color: #4465a2;
+    border-color: #4465a2;
+  }
+}
+</style>
 <style lang="less" scoped>
 .item {
   .title {
@@ -147,6 +165,9 @@ export default {
   line-height: 20px;
   border-bottom: 1px solid hsla(0, 0%, 53%, 0.2);
   color: #010102;
+}
+.group {
+  margin: 20px 0 0 20px;
 }
 @media screen and (min-width: 992px) {
   .box {

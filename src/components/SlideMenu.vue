@@ -27,12 +27,12 @@
             <span>指标监控</span>
           </div>
         </el-menu-item>
-        <el-menu-item index="/news">
+        <!-- <el-menu-item index="/news">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-home"></span>
             <span>快讯</span>
           </div>
-        </el-menu-item>
+        </el-menu-item> -->
         <el-menu-item index="/article">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-farm"></span>

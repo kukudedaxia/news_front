@@ -137,3 +137,44 @@ module.exports = {
     },
   },
 };
+
+const routes = [
+  {
+    title: 'Bcaca-监控看板',
+    uicode: '10000006',
+  },
+  {
+    title: 'Bcaca-监控详情',
+    uicode: '10000007',
+  },
+  {
+    title: 'Bcaca-快讯',
+
+    uicode: '10000001',
+  },
+  {
+    title: 'Bcaca-消息快讯详情',
+    uicode: '10000002',
+  },
+  {
+    title: 'Bcaca-热门文章list',
+
+    uicode: '10000004',
+  },
+  {
+    title: 'Bcaca-文章详情',
+    uicode: '10000005',
+  },
+  {
+    title: 'Bcaca-关于我们',
+    uicode: '10000003',
+  },
+  {
+    title: 'Bcaca-机器人help指南',
+    uicode: '10000008',
+  },
+  {
+    title: 'Bcaca-工具',
+    uicode: '10000009',
+  },
+];

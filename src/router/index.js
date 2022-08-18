@@ -25,16 +25,16 @@ const routes = [
       uicode: '10000007',
     },
   },
-  {
-    path: '/news',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
-    meta: {
-      title: 'Bcaca-区块链讯息聚合器',
-      keepAlive: true,
-      uicode: '10000001',
-    },
-  },
+  // {
+  //   path: '/news',
+  //   name: 'Home',
+  //   component: () => import('../views/Home.vue'),
+  //   meta: {
+  //     title: 'Bcaca-区块链讯息聚合器',
+  //     keepAlive: true,
+  //     uicode: '10000001',
+  //   },
+  // },
   {
     path: '/detail/:id',
     name: 'Detail',
@@ -88,7 +88,7 @@ const routes = [
     component: () => import('../views/Example.vue'),
     meta: {
       title: 'Bcaca-Example',
-      uicode: '10000008',
+      uicode: '10000009',
     },
   },
   {
