@@ -140,7 +140,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.uicode) {
     store.dispatch('send', { action: '1001', id: to.params.id });
   }
-  window._czc.push(['_trackEvent', '页面', '路由打开', to.meta.uicode, 5141]);
+  window._czc && window._czc.push(['_trackEvent', '页面', '路由打开', to.meta.uicode, 5141]);
   next();
 });
 

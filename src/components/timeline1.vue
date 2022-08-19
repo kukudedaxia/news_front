@@ -196,12 +196,12 @@ export default {
       return arr1.concat(noCommon);
     },
     changeChannel(data) {
-      window._czc.push(['_trackEvent', '页面快讯', '点击频道', data.id, 5146]);
+      window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击频道', data.id, 5146]);
       console.log(1);
       this.$store.commit('setChannel', data.id);
     },
     handleSelect(key, keyPath) {
-      window._czc.push(['_trackEvent', '页面快讯', '点击频道', key, 5146]);
+      window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击频道', key, 5146]);
       console.log(key, keyPath);
       this.$store.commit('setChannel', key);
     },
@@ -211,7 +211,7 @@ export default {
         // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
         // window.open(link.href, '_blank');
       } else {
-        window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
+        window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
         this.$router.push({
           path: `/detail/${item.id}?type=1&channel=${
             this.channelItem ? this.channelItem.name : ''

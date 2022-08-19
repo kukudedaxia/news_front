@@ -185,7 +185,7 @@ export default {
       // this.$router.push({
       //   path: `/article/${item.id}`,
       // });
-      window._czc.push(['_trackEvent', '页面文章', '点击跳转', item.id, 5143]);
+      window._czc && window._czc.push(['_trackEvent', '页面文章', '点击跳转', item.id, 5143]);
       const link = this.$router.resolve({ path: `/article/${item.id}` });
       window.open(link.href, '_blank');
     },

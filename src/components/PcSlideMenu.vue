@@ -105,7 +105,7 @@ export default {
       this.$store.commit('setKey', { key: 'slideMenuShow', val: false });
       if (index == '/channel') {
         this.$refs.child.activeIndex = this.path;
-        window._czc.push(['_trackEvent', '页面', '跳转后台', this.path, 5151]);
+        window._czc && window._czc.push(['_trackEvent', '页面', '跳转后台', this.path, 5151]);
         setTimeout(() => {
           window.open('https://bcaca.xyz/user-center/');
         }, 200);

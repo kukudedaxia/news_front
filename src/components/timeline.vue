@@ -242,7 +242,7 @@ export default {
         // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
         // window.open(link.href, '_blank');
       } else {
-        window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
+        window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
         this.$router.push({
           path: `/detail/${item.id}?type=1&channel=${
             this.channelItem ? this.channelItem.name : ''

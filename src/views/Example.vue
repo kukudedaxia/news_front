@@ -64,10 +64,10 @@ export default {
   methods: {
     go(num) {
       if (num == 1) {
-        window._czc.push(['_trackEvent', '页面', '跳转机器人help', 1, 5152]);
+        window._czc && window._czc.push(['_trackEvent', '页面', '跳转机器人help', 1, 5152]);
         this.$router.push({ path: `/help` });
       } else {
-        window._czc.push(['_trackEvent', '页面', '跳转后台', 2, 5153]);
+        window._czc && window._czc.push(['_trackEvent', '页面', '跳转后台', 2, 5153]);
         window.open('https://bcaca.xyz/user-center#/example/demo', '_blank');
       }
     },

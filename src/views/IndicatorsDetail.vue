@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     showDialog(item, type) {
-      window._czc.push(['_trackEvent', '页面快讯', '点击弹窗二维码', type, 5145]);
+      window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击弹窗二维码', type, 5145]);
       this.type = type;
       this.show = true;
     },

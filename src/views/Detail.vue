@@ -82,6 +82,7 @@
               >
                 <ImgBox :images="object.images" />
               </div>
+              <div id="container"></div>
               <div class="extra">
                 <a class="link" :href="object.link" target="_blank"
                   ><i class="el-icon-link"></i>原文链接</a
@@ -157,6 +158,8 @@ import Loading from '@/components/common/Loading';
 import Share from '../components/share';
 import ImgBox from '@/components/ImgBox';
 import Top from '@/components/common/top';
+// import { proxy, hook } from 'ajax-hook';
+
 export default {
   name: 'Detail',
   components: {
@@ -186,8 +189,7 @@ export default {
       return this.$route.query.from == 'qrcode';
     },
   },
-  created() {
-    console.log(this.name);
+  mounted() {
     if (this.name == 'ArticleDetail') {
       this.initArticle();
     } else {
@@ -204,12 +206,22 @@ export default {
           },
         },
         onSuccess: res => {
+          this.load = true;
           console.log(res);
           this.object = res.data;
+          console.log(res.data.remote_id, '222');
+          this.$nextTick(() => {
+            console.log(document.getElementById('container'));
+            try {
+              window.twttr.widgets
+                .createTweet(res.data.remote_id, document.getElementById('container'))
+                .then(() => {});
+            } catch {
+              this.loadTwitter = false;
+            }
+          });
         },
-        onComplete: () => {
-          this.load = true;
-        },
+        onComplete: () => {},
       });
     },
     link() {
@@ -345,6 +357,7 @@ export default {
 }
 .article {
   font-size: 14px;
+  white-space: break-spaces;
 }
 .sticky {
   position: sticky;
@@ -383,6 +396,9 @@ export default {
 }
 .font-18 {
   font-size: 16px;
+  white-space: break-spaces;
+  border-bottom: 2px dashed #ddd;
+  padding-bottom: 18px;
 }
 .gray {
   color: #666;
@@ -493,6 +509,12 @@ export default {
   display: inline-block;
   background-size: 100% 100%;
 }
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
 @media screen and (max-width: 992px) {
   .wrap {
     flex-direction: column;
@@ -502,7 +524,7 @@ export default {
     .right {
       width: 100%;
       margin-left: 0;
-      max-height: 1000px;
+      // max-height: 1000px;
       margin-bottom: 40px;
     }
   }

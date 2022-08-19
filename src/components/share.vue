@@ -6,11 +6,12 @@
       placement="bottom"
       :close-delay="100"
       ref="popoverRef"
+      @click.stop="() => {}"
     >
       <a class="link" target="_blank" slot="reference"><i class="el-icon-share"></i>分享</a>
       <div class="shares">
         <div class="share-item">
-          <span class="line" @click="copy"><i class="icon copylink"></i>复制链接</span>
+          <span class="line" @click.stop="copy"><i class="icon copylink"></i>复制链接</span>
           <input
             :id="data.id + type"
             readonly
@@ -20,7 +21,7 @@
           />
         </div>
         <div class="share-item hidden-sm-and-up">
-          <span class="line" @click="showBg"><i class="icon wechat"></i>分享到微信</span>
+          <span class="line" @click.stop="showBg"><i class="icon wechat"></i>分享到微信</span>
         </div>
         <!-- <div class="share-item hidden-md-and-down">
           <span class="line"><i class="icon qq"></i>分享到QQ</span>
@@ -29,9 +30,11 @@
           <span class="line" @click="showBg"><i class="icon qq"></i>分享到QQ</span>
         </div> -->
         <div class="share-item">
-          <span class="line" @click="shareToSinaWeiBo"><i class="icon sina"></i>分享到微博</span>
+          <span class="line" @click.stop="shareToSinaWeiBo"
+            ><i class="icon sina"></i>分享到微博</span
+          >
         </div>
-        <div class="share-item hidden-md-and-up" @click="getImg">
+        <div class="share-item hidden-md-and-up" @click.stop="getImg">
           <span class="line mt-0"><i class="icon image"></i>生成长图</span>
         </div>
 
@@ -76,7 +79,7 @@ export default {
   },
   methods: {
     copy() {
-      window._czc.push(['_trackEvent', '快讯', '分享链接', this.data.id, 5150]);
+      window._czc && window._czc.push(['_trackEvent', '快讯', '分享链接', this.data.id, 5150]);
       this.$store.dispatch('send', { action: '2001', id: this.data.id });
       console.log(this.channelName);
       const inputElement = document.getElementById(this.data.id + this.type);
@@ -90,7 +93,7 @@ export default {
       this.$refs.popoverRef.doClose();
     },
     shareToSinaWeiBo() {
-      window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5149]);
+      window._czc && window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5149]);
       this.$store.dispatch('send', { action: '2002', id: this.data.id });
       this.$refs.popoverRef.doClose();
       var param = {
@@ -119,13 +122,13 @@ export default {
       window.open(targetUrl, 'sinaweibo', 'height=800, width=800');
     },
     showBg() {
-      window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5147]);
+      window._czc && window._czc.push(['_trackEvent', '快讯', '分享微博', this.data.id, 5147]);
       this.$store.dispatch('send', { action: '2003', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay', true);
     },
     getImg() {
-      window._czc.push(['_trackEvent', '快讯', '分享长图', this.data.id, 5148]);
+      window._czc && window._czc.push(['_trackEvent', '快讯', '分享长图', this.data.id, 5148]);
       this.$store.dispatch('send', { action: '2004', id: this.data.id });
       this.$refs.popoverRef.doClose();
       this.$store.dispatch('changeOverlay1', {

@@ -13,6 +13,7 @@ request.interceptors.request.use(req => {
 
 request.interceptors.response.use(
   response => {
+    console.log(response, '1111');
     if (response.data.error_code) {
       switch (response.data.error_code) {
         case 35000:
