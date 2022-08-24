@@ -3,6 +3,24 @@
     <div class="content" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0)">
       <div class="list">
         <el-row :gutter="16">
+          <el-col :xs="24" :sm="12" :md="8" :lg="8" v-show="channels.length > 0">
+            <el-card class="box-card">
+              <div>
+                <h3 class="title">Bcaca官方精选</h3>
+                <p>
+                  官方精选内容+工具内测资格+疑难解答
+                </p>
+                <div class="btns">
+                  <!-- <el-button type="primary" size="mini" round @click.stop="showDialog(item, 3)"
+                    >详情</el-button
+                  > -->
+                  <el-button type="primary" size="mini" round @click.stop="showDialog(item, 1)"
+                    >微信</el-button
+                  >
+                </div>
+              </div>
+            </el-card>
+          </el-col>
           <el-col :xs="24" :sm="12" :md="8" :lg="8" v-for="(item, index) in channels" :key="index">
             <el-card class="box-card">
               <div @click="() => goDetail(item)">
@@ -14,10 +32,21 @@
                   <!-- <el-button type="primary" size="mini" round @click.stop="showDialog(item, 3)"
                     >详情</el-button
                   > -->
-                  <el-button type="primary" size="mini" round @click.stop="showDialog(item, 1)"
+
+                  <el-button
+                    v-show="false"
+                    type="primary"
+                    size="mini"
+                    round
+                    @click.stop="showDialog(item, 1)"
                     >微信群</el-button
                   >
-                  <el-button type="primary" size="mini" round @click.stop="showDialog(item, 2)"
+                  <el-button
+                    v-show="false"
+                    type="primary"
+                    size="mini"
+                    round
+                    @click.stop="showDialog(item, 2)"
                     >电报群</el-button
                   >
                 </div>
@@ -31,9 +60,8 @@
     <van-overlay :show="show" @click="show = false" z-index="102">
       <div class="wrapper" @click.stop>
         <div class="block" v-if="type == 1 || type == 2">
-          <p>
-            扫描或识别二维码 <br /><span class="name">[{{ current.name }}]</span>
-          </p>
+          <p>扫描或识别二维码 <br /></p>
+          <p>请添加管理员为好友备注"入群"</p>
           <img :src="type == 1 ? current.wechat_qrcode : current.tg_qrcode" class="code" />
           <a :href="current.tg_link" target="_blank" v-if="type == 2"
             ><i class="el-icon-position" />电报链接</a
@@ -103,7 +131,11 @@ export default {
       window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击弹窗二维码', type, 5145]);
       this.type = type;
       if (type == 1) {
-        this.current = item;
+        // this.current = item;
+        this.current = {
+          name: '官方精选',
+          wechat_qrcode: require('../assets/images/qrcode.jpg'),
+        };
       } else if (type == 2) {
         this.current = item;
       } else if (type == 3) {
@@ -207,7 +239,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-height: 18px;
-    height: 36px;
+    max-height: 36px;
     font-size: 14px;
     color: rgba(3, 54, 102, 0.45);
   }
@@ -217,6 +249,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  height: 28px;
   /deep/.el-button--primary {
     background-color: #4266a1;
     border-color: #4266a1;
@@ -238,7 +271,7 @@ export default {
   min-height: 200px;
   > p {
     color: #008cfc;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 10px;
@@ -251,6 +284,8 @@ export default {
   .code {
     max-width: 300px;
     min-width: 280px;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
   }
   a {
     color: #2196f3;

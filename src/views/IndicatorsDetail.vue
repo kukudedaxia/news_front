@@ -8,14 +8,14 @@
           <p>
             {{ item.description }}
           </p>
-          <div class="btns" v-show="!loading">
+          <!-- <div class="btns" v-show="!loading">
             <el-button type="primary" size="mini" round @click.stop="showDialog(item, 1)"
               >微信群</el-button
             >
             <el-button type="primary" size="mini" round @click.stop="showDialog(item, 2)"
               >电报群</el-button
             >
-          </div>
+          </div> -->
         </div>
       </el-card>
     </div>

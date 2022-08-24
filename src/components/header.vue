@@ -95,7 +95,7 @@ export default {
           });
     },
     goHome() {
-      this.$router.push({ name: 'Home' });
+      this.$router.push({ path: '/' });
     },
     // new
     // links(index) {

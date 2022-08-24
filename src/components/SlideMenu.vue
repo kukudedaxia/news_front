@@ -116,6 +116,10 @@ export default {
         this.$router.push({ path: index });
       }
     },
+    goHome() {
+      console.log(1);
+      this.$router.push({ path: '/' });
+    },
     copy() {
       const inputElement = document.getElementById('copywechat');
       inputElement.value = 'richyour001';

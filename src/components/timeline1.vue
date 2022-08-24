@@ -27,7 +27,7 @@
                 :key="oindex"
                 :timestamp="moment(item.ctime).format('HH:mm')"
                 placement="top"
-                :class="['item', { filter: type == 'indicators' && oindex < 3 && index == 0 }]"
+                :class="['item']"
               >
                 <div @click="() => goDetail(item)">
                   <template>
@@ -170,11 +170,11 @@ export default {
           this.loading = false;
           this.page += 1;
           // 针对别的只加载一页
-          if (this.type !== 'home') {
-            this.nextPage = -1;
-          } else {
-            this.nextPage = res.data.nextPage;
-          }
+          // if (this.type !== 'home') {
+          //   this.nextPage = -1;
+          // } else {
+          this.nextPage = res.data.nextPage;
+          // }
           this.list = this.resetArr(this.list, res.data.list);
         },
         onComplete: () => {
@@ -206,18 +206,16 @@ export default {
       this.$store.commit('setChannel', key);
     },
     goDetail(item) {
-      if (this.type == 'indicators') {
-        this.$message('请前往群聊获取更多详情信息');
-        // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
-        // window.open(link.href, '_blank');
-      } else {
-        window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
-        this.$router.push({
-          path: `/detail/${item.id}?type=1&channel=${
-            this.channelItem ? this.channelItem.name : ''
-          }`,
-        });
-      }
+      // if (this.type == 'indicators') {
+      //   this.$message('请前往群聊获取更多详情信息');
+      //   // const link = this.$router.resolve({ path: `/detail/${item.id}?type=1` });
+      //   // window.open(link.href, '_blank');
+      // } else {
+      window._czc && window._czc.push(['_trackEvent', '页面快讯', '点击跳转', item.id, 5144]);
+      this.$router.push({
+        path: `/detail/${item.id}?type=1&channel=${this.channelItem ? this.channelItem.name : ''}`,
+      });
+      // }
     },
     isInViewPortOfTwo(el) {
       const viewPortHeight =

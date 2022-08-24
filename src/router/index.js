@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Indicators',
+    name: 'Home',
     component: () => import('../views/Indicators.vue'),
     meta: {
       title: 'Bcaca-监控看板',
@@ -89,6 +89,15 @@ const routes = [
     meta: {
       title: 'Bcaca-Example',
       uicode: '10000009',
+    },
+  },
+  {
+    path: '/drop',
+    name: 'Drop',
+    component: () => import('../views/Drop.vue'),
+    meta: {
+      title: 'Bcaca-空投讯息',
+      uicode: '100000010',
     },
   },
   {
