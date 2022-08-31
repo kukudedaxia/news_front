@@ -4,11 +4,14 @@
       <div class="list">
         <el-row :gutter="16">
           <el-col :xs="24" :sm="12" :md="8" :lg="8" v-show="channels.length > 0">
-            <el-card class="box-card">
+            <el-card class="box-card box-card1">
               <div>
-                <h3 class="title">Bcaca官方精选</h3>
+                <h3 class="title" style="color: red">
+                  特级监控 <img :src="require('../assets/images/head.png')" />
+                </h3>
                 <p>
-                  官方精选内容+工具内测资格+疑难解答
+                  前600名早期支持者免费席位<br />
+                  (剩余: 56)
                 </p>
                 <div class="btns">
                   <!-- <el-button type="primary" size="mini" round @click.stop="showDialog(item, 3)"
@@ -230,6 +233,13 @@ export default {
   .title {
     font-size: 16px;
     color: rgb(3, 54, 102);
+    display: flex;
+    align-items: center;
+    img {
+      width: 30px;
+      height: 30px;
+      margin-top: -10px;
+    }
   }
   p {
     display: -webkit-box;
@@ -239,7 +249,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-height: 18px;
-    max-height: 36px;
+    height: 36px;
     font-size: 14px;
     color: rgba(3, 54, 102, 0.45);
   }
@@ -251,8 +261,9 @@ export default {
   justify-content: flex-end;
   height: 28px;
   /deep/.el-button--primary {
-    background-color: #4266a1;
-    border-color: #4266a1;
+    background-color: #ffc207;
+    border-color: #ffeb3b;
+    color: #000;
   }
 }
 .tips {
@@ -348,6 +359,15 @@ export default {
   }
 }
 
+.box-card1 {
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, #fff, #fff), linear-gradient(90deg, #ffc107, #ff9800);
+  border: 2px solid transparent;
+  /deep/.el-card__body {
+    padding: 18px 20px;
+  }
+}
 @media (max-width: 1200px) {
 }
 @media (min-width: 768px) {

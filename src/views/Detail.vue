@@ -358,6 +358,7 @@ export default {
 .article {
   font-size: 14px;
   white-space: break-spaces;
+  word-break: break-word;
 }
 .sticky {
   position: sticky;

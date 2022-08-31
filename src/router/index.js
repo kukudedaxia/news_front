@@ -100,6 +100,15 @@ const routes = [
       uicode: '100000010',
     },
   },
+  // {
+  //   path: '/finance',
+  //   name: 'Finance',
+  //   component: () => import('../views/Finance.vue'),
+  //   meta: {
+  //     title: 'Bcaca-融资频道',
+  //     uicode: '100000011',
+  //   },
+  // },
   {
     path: '*',
     redirect: { name: 'Home' },

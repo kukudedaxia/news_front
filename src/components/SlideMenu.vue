@@ -27,6 +27,12 @@
             <span>指标监控</span>
           </div>
         </el-menu-item>
+        <el-menu-item index="/drop">
+          <div class="menu-item" slot="title">
+            <span class="menu-icon menu-icon-draw"></span>
+            <span>空投</span>
+          </div>
+        </el-menu-item>
         <!-- <el-menu-item index="/news">
           <div class="menu-item" slot="title">
             <span class="menu-icon menu-icon-home"></span>

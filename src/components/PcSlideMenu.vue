@@ -33,7 +33,12 @@
             <span>深度</span>
           </div>
         </el-menu-item>
-
+        <el-menu-item index="/drop">
+          <div class="menu-item" slot="title">
+            <img class="menu-icon" :src="require('../assets/svg/8.svg')" />
+            <span>空投</span>
+          </div>
+        </el-menu-item>
         <el-menu-item index="/about">
           <div class="menu-item" slot="title">
             <img class="menu-icon" :src="require('../assets/svg/3.svg')" />
@@ -47,6 +52,12 @@
             <span>工具详情</span>
           </div>
         </el-menu-item>
+        <!-- <el-menu-item index="/finance">
+          <div class="menu-item" slot="title">
+            <img class="menu-icon" :src="require('../assets/svg/6.svg')" />
+            <span>融资</span>
+          </div>
+        </el-menu-item> -->
       </el-menu>
       <el-divider class="divider"></el-divider>
     </div>
